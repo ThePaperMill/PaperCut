@@ -1,0 +1,52 @@
+/*
+
+ExitRoomController handles how a player leaves a room.
+1) it sends out a "Save your data" script to objects
+    All objects that hear it save their data. 
+2) it loads the next level as a HUD 
+3) The player and camera move to the entrance from the original switch room call. 
+
+
+
+
+
+If I load in a bunch of stuff, I can NEVER save. I NEED to switch levels so level stuff changes. 
+Unless "Load all stuff in"  can have "Is game currently in burn mode" code. 
+
+How would "Is currently in burn mode" work?
+each level, on initialized, checks the "Burn state", and 
+When I unload an object, it sends a save value to a gamesession array, with it's name.
+When I load an object, it looks through gamesession for an object with it's name, deletes itself, and creates that (if there is one)
+
+I need to save an object. Firstly, I could save an object as an Archetype. This fails because I can't update an Archetype at runtime 
+
+
+
+
+a) player leaves through an alleyway into a nother alleyway
+-
+
+b) player leaves through a room into another room 
+
+c) player leaves from outside into a building 
+
+d) player leaves from a building into outside 
+
+*/
+class ExitRoomController : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.PageDown))
+        {
+            Trace("Hello");
+            this.Space.AddObjectsFromLevel(Level.Credits);
+        }
+    }
+}
+

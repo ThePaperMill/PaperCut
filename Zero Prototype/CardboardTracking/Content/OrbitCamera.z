@@ -1,0 +1,201 @@
+// A camera that orbits around a focal point. Rotates with right mouse or on
+// left mouse when 'q' is held. Pans with left mouse when 'e' is held. zooms
+// in and out towards the focal point with the scroll wheel.
+class OrbitCamera : ZilchComponent
+{
+    [Property]
+    var RotationSensitivity : Real = 0.01;
+    
+    [Property]
+    var TranslationSensitivity : Real = 0.1;
+    
+    [Property]
+    var PanSensitivity : Real = 3.0;
+    
+    // The minimum radius on the sphere. This controls the max that the camera can zoom in.
+    [Property]
+    var MinDistance : Real = 1.0;
+    // The maximum radius on the sphere. This controls the max that the camera can zoom out.
+    [Property]
+    var MaxDistance : Real = 100.0;
+    
+    [Dependency]
+    var Camera : Camera = null;
+    
+    // Where the camera is looking at.
+    [Property]
+    var Target : Real3 = Real3(0.0, 0.0, 0.0);
+    // The radius of the sphere that we are orbiting about. Controls the current zoom level.
+    [Property]
+    var Radius : Real = 5.0;
+    
+    // Spherical coordinates. These control our position on the sphere we're rotating about.
+    var Phi : Real = Math.Pi * 0.5;
+    var Theta : Real = Math.Pi * 0.5;
+    // Used to store mouse state so we can use it during logic update.
+    var LeftMouseDown : Boolean = false;
+    var RightMouseDown : Boolean = false;
+    var MouseDelta : Real2 = Real2(0.0, 0.0);
+    
+    // We avoid being able to flip the camera upside-down by controlling the
+    // maximum angle we can travel towards the poles on the rotation sphere.
+    var RotationDeadZone : Real = 0.01;
+    
+    function Initialize(initializer : CogInitializer)
+    {
+        // We do all of our transform update logic during logic update
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        var viewport = this.Camera.Viewport;
+        // Connect on the viewport for all the mouse events we need
+        Zero.Connect(viewport, Events.MouseDown, this.OnMouseDown);
+        Zero.Connect(viewport, Events.MouseUp, this.OnMouseUp);
+        Zero.Connect(viewport, Events.RightMouseDown, this.OnRightMouseDown);
+        Zero.Connect(viewport, Events.RightMouseUp, this.OnRightMouseUp);
+        Zero.Connect(viewport, Events.MouseMove, this.OnMouseMove);
+        Zero.Connect(viewport, Events.MouseScroll, this.OnMouseScroll);
+    }
+    
+    function OnLogicUpdate(updateEvent : UpdateEvent)
+    {
+        // If the right mouse is down or q is down then we update our position on the
+        // rotation sphere. This is controlled by the movement of the mouse.
+        if(this.RightMouseDown || (Zero.Keyboard.KeyIsDown(Keys.Q) && (this.LeftMouseDown || this.RightMouseDown)))
+        {
+            this.Phi -= this.MouseDelta.Y * this.RotationSensitivity;
+            // Clamp the pole angle so that we don't flip the camera upside-down
+            this.Phi = Math.Clamp(this.Phi, this.RotationDeadZone, Math.Pi - this.RotationDeadZone);
+            this.Theta += this.MouseDelta.X * this.RotationSensitivity;
+        }
+        
+        // Calculate the position of the camera using spherical coordinates
+        var cameraDir = Real3();
+        cameraDir.X = this.Radius * Math.Cos(this.Theta) * Math.Sin(this.Phi);
+        cameraDir.Y = this.Radius * Math.Cos(this.Phi);
+        cameraDir.Z = this.Radius * Math.Sin(this.Theta) * Math.Sin(this.Phi);
+        
+        // Since we're looking at our target, the forward vector is just the
+        // opposite of our position vector on the unit sphere
+        var forward = -cameraDir;
+        forward = Math.Normalize(forward);
+        
+        // Compute the forward and right vector of the camera in world space
+        var movementForward = forward;
+        var movementRight = Real3(-forward.Z, 0.0, forward.X);
+        
+        // Build up the total world space movement of the camera
+        var movementW = Real3();
+        // Move the target point along the camera's forward and right projected onto the camera's x-z plane 
+        if(Zero.Keyboard.KeyIsDown(Keys.W))
+        {
+            movementW += movementForward;
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.S))
+        {
+            movementW -= movementForward;
+        }
+        if(Zero.Keyboard.KeyIsDown(Keys.A))
+        {
+            movementW -= movementRight;
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.D))
+        {
+            movementW += movementRight;
+        }
+        // Scale the movement by sensitivity
+        movementW = movementW * this.PanSensitivity;
+        
+        // Compute the basis of the camera
+        var up = Real3(0.0, 1.0, 0.0);
+        // Use the world up and camera's forward to get the right vector
+        var right = Math.Cross(forward, up);
+        right = Math.Normalize(right);
+        // Now use the camera forward and right to get the camera's actual up vector
+        up = Math.Cross(right, forward);
+        up = Math.Normalize(up);
+        
+        // If e is pressed and the left mouse is down, then we'll use the mouse
+        // movement to pan along the camera's x and y vector
+        if(Zero.Keyboard.KeyIsDown(Keys.E) && this.LeftMouseDown)
+        {
+            movementForward = up;
+            movementRight = right;
+            
+            movementW += movementForward * this.MouseDelta.Y;
+            // We negate the x mouse delta because we want to move the mouse
+            // left and have the camera move to the right
+            // (dragging the background to the left is the same as moving the camera to the right)
+            movementW += movementRight * -this.MouseDelta.X;
+        }
+        
+        // Compute the sensitivity for tranlational movement, this is based upon
+        // how far zoomed out we are (so we move faster when we're more zoomed out)
+        var moveSensitivity = 2.0 + this.TranslationSensitivity * this.Radius;
+        // When translating, we move our target position (which implicitly moves our position)
+        this.Target += movementW * updateEvent.Dt * moveSensitivity;
+        // Set our position to be focused on our target, but back along our
+        // view vector based upon the sphere's current radius
+        var transform = this.Owner.Transform;
+        transform.Translation = this.Target + cameraDir;
+        
+        // Set the rotation bases for our camera
+        transform.SetRotationBases(forward, up, right);
+        
+        // Make sure to clear out the translational delta of the mouse
+        this.MouseDelta = Real2(0.0, 0.0);
+        
+        // Draw where our origin is so we can see what's going on
+        this.DebugDrawOrigin();
+    }
+    
+    function OnMouseDown(viewportMouseEvent : ViewportMouseEvent)
+    {
+        this.LeftMouseDown = true;
+    }
+    
+    function OnMouseUp(viewportMouseEvent : ViewportMouseEvent)
+    {
+        this.LeftMouseDown = false;
+    }
+    
+    function OnRightMouseDown(viewportMouseEvent : ViewportMouseEvent)
+    {
+        this.RightMouseDown = true;
+    }
+    
+    function OnRightMouseUp(viewportMouseEvent : ViewportMouseEvent)
+    {
+        this.RightMouseDown = false;
+    }
+    
+    function OnMouseMove(viewportMouseEvent : ViewportMouseEvent)
+    {
+        this.MouseDelta = viewportMouseEvent.Movement;
+    }
+    
+    function OnMouseScroll(viewportMouseEvent : ViewportMouseEvent)
+    {
+        // Just adjust the radius by the scroll wheel (this could be
+        // modified to be an exponential zoom which tends to feel nicer)
+        this.Radius -= viewportMouseEvent.Scroll.Y;
+        this.Radius = Math.Clamp(this.Radius, this.MinDistance, this.MaxDistance);
+    }
+    
+    function DebugDrawOrigin()
+    {
+        // Draw a rotation sphere at our target if we're going to rotate the camera
+        if(this.RightMouseDown || Zero.Keyboard.KeyIsDown(Keys.Q))
+        {
+            var sphere = DebugSphere();
+            sphere.Position(this.Target).BackShade(true).Colored(true);
+            sphere.Draw();
+        }
+        // Draw a transform 'plus' if we're going to transform the camera
+        else if(Zero.Keyboard.KeyIsDown(Keys.E))
+        {
+            var box = DebugLineCross();
+            box.Position(this.Target);
+            box.Draw();
+        }
+    }
+}

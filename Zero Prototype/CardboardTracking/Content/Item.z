@@ -1,0 +1,60 @@
+class Item : ZilchComponent
+{
+    
+    
+    //Name is the name of the Item. This string will be used whenever text needs to display the item's name. 
+    [Property]
+    var Name : String = "[InsertItemName]";
+    [Property]
+    var Description : String = "[InsertItemDescription]";
+    
+    
+    /*
+    Cardboard bodies (materials, meshes, physics/convex meshes, textures Do these have their own archetypes? who knows)
+    Real World bodies (materials, meshes, physics/convex meshes, textures Do these have their own archetypes? who knows)
+    Names 
+    Text descriptors. 
+    Sprites in the item toolbar 
+    
+    
+    
+    
+    List of items (THINGS THAT CAN BE SWITCHED BETWEEN CARDBOARD AND REAL OBJETS):
+    
+    
+    Story Objects: 
+        Running Shoes (obtained on track, right outside of house ) 
+        Bucket of water (Obtained by using an empty bucket on either the well, the garden faucet(pleasantStreet), or the ocean(docks) 
+        Key (Obtained by putting out NPC in plaza with bucket of water)
+    
+    IMPORTANT OBJECTS:
+        Fishing rod
+        running shoes 
+        bucket 
+        bucket of water 
+        Hose 
+        mop 
+        scissors 
+        Fireproof vest 
+        key 
+        malfunctioning appliance
+        BIKE
+    
+    GAG OBJECTS: 
+        fish 
+        diploma 
+        greek Fire:
+        You, the player 
+        treasure chest (Is opened by the key if they're both 3D) 
+    
+    */
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+}

@@ -1,0 +1,366 @@
+/*
+
+There are several ways to use GameControlledCamera 
+-Position Lock Mode 
+-Orientation Lock Mode 
+-True Lock Mode 
+-One Target Mode
+-Two Target Mode 
+
+-Position Lock Mode 
+Position lock mode is when the Camera is locked in place and only moves by looking at a particular target. That target can move but doesn't have to.
+Use this mode when you want the player character to move around unhindered (or helped) by the camera. 
+to use Position Lock Mode, set the  StartingAimingFocus to the object that you would like the camera to focus on. Leave the StartingPositionalFocus null.
+
+-Orientation Lock Mode 
+Orientation lock mode is when the Camera's orientation is locked in place, but moves around (probably with the main character, or a point of interest that moves.
+Use this mode when you want the camera to follow the player character, but stay in a certain perspective. (Like Pokemon) 
+To use orientation lock mode, set the StartingPositionalFocus to the object you want the camera to follow, and leave the StartingAimingFocus null. 
+
+-True Lock Mode 
+True lock mode is when the camera neither moves nor rotates, ever. 
+Use this mode when you want static screens in every room. 
+To use true lock mode, leave both StartingPositionalFocus and StartingAimingFocus null. 
+
+-One Target Mode 
+One Target Mode both aims at and follows around one particular character or object. 
+USe this mode when you want to follow around one character (probably the main character), but want some wiggle room in how the camera behaves, orients, and moves. 
+To use one target mode, make sure both StartingAimingFocus and StartingPositionalFocus are the same object. 
+
+-Two Target Mode 
+Two target mode aims at one object, and follows around another object.
+Use this mode when you want the camera to rotate and focus around one thing, but follow and care about the position of another (Like a room where the camera always focuses on the center, but the player walks around freely)
+To use two target mode, set StartingAimingFocus and StartingPositionalFocus to seperate objects. 
+*/
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GameControlledCamera is a class that allows a camera to follow one object and track another.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class GameControlledCamera : ZilchComponent
+{
+    //The camera needs these three components before it can be attached
+    [Dependency]
+    var Transform : Transform = null;
+    [Dependency]
+    var Camera : Camera = null;
+    [Dependency]
+    var Orientation : Orientation = null;
+    //Objects is an array (for use with multiple targets. CURRENTLY NOT IN USE)
+    var Objects : Array[Cog] = Array[Cog]();
+    
+    //If false, Camera will focus on where it was looking in the editor
+    [Property]
+    var StartFocused : Boolean = true;
+    //If false, camera will start where it is located in the editor.
+    [Property]
+    var StartInPlace : Boolean = true;
+    
+    //TargetPosition is the position the camera will be interpolating towards every frame
+    var TargetPosition : Real3 = Real3(1,1,1);
+    //PositionOffset is how far the camera can be from it's proper position before it starts interpolating.
+    [Property]
+    var PositionOffset : Real = Real(5);
+    
+    //StartingAimingFocus is a cogpath to the object this camera should focus on
+    [Property]
+    var StartingAimingFocus : CogPath = null;
+    //Aiming Focus is the current object the camera is focusing on, using the orientation component
+    var AimingFocus : Cog = null;
+    //Starting PositionalFocus is a cogpath to the object the camera is hovering around
+    [Property]
+    var StartingPositionalFocus : CogPath = null;
+    //PositionalFocus is the current object the camera should be hovering around, based on this.DistFromTarget
+    var PositionalFocus : Cog = null;
+    
+    //OriginalAimFocus is used for storing the current aim if the user wants the aim to switch temporarily (like in a cutscene or scripted event)
+    var OriginalAimFocus : Cog = null;
+    //OriginalPosFocus is used for storing the current aim if the user wants the aim to switch temporarily (like in a cutscene or scripted event)
+    var OriginalPosFocus : Cog = null;
+    
+    //DistFromTarget is a vector from whatever object the camera is hovering over.
+    [Property]
+    var DistFromTarget : Real3 = Real3(0, 7, 20);
+    //OriginalTarget is the last stored distancefromtarget value. It's used to return to original camera position.
+    var OriginalDistVector : Real3 = Real3(0,0,0);
+    //EaseSpeed is the time that the camera will take to interpolate to a position. 
+    [Property]
+    var EaseSpeed : Real = Real(1.5);
+    var DefaultDist : Real3 = Real3(0,0,0);
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Initialize moves the camera into position if requested, resets orientation component settings, and then applies to logic update
+    function Initialize(init : CogInitializer)
+    {
+        this.DefaultDist = this.DistFromTarget;
+        //Make sure the orientation component is being used properly. If it is not, display an error message and fix the issue.
+        if(this.Orientation.DefaultOrientationBases != 1) //1 is ForwardNegativeZUpY
+        {
+            //Display a warning in the console window. 
+            Trace("User is improperly using Orientation");
+            //Change the faulty value
+            this.Orientation.DefaultOrientationBases = 1;
+        }
+        //If there is an object has been selected to focus on, focus on it
+        if(this.StartingPositionalFocus != null)
+        {
+            //set the current posFocus into the one selected by the editor
+            this.PositionalFocus = this.StartingPositionalFocus.Cog;
+            //If the user wants the camera to start hovering around the player
+            if(this.StartInPlace == true)
+            {
+                //Set the camera to the player's position plus the vector away from them. 
+                this.Transform.Translation = this.PositionalFocus.Transform.Translation + this.DistFromTarget;
+            }
+        }
+        //If there is an object that has been selected to aim at, aim at it
+        if(this.StartingAimingFocus != null)
+        {
+            //Set the current aimfocus to the one selected by the editor
+            this.AimingFocus = this.StartingAimingFocus.Cog;
+            //if the user wants the camera to begin the game looking at the aimfocus
+            if(this.StartFocused == true)
+            {
+                if(this.AimingFocus != null)
+                {
+                    //Rotate to look directly at it. 
+                    this.Orientation.LookAtPoint(this.AimingFocus.Transform.Translation);
+                }
+                
+            }
+        }
+        //Connect to logic update
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //OnLogic update updates the camera's position and aim every frame. 
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.PositionalFocus != null)
+        {
+            //Update target position to be the vector away from the player
+            this.TargetPosition = this.PositionalFocus.Transform.Translation + this.DistFromTarget;
+        }
+        else
+        {
+            Trace("ERROR. Camera posesses no target.");
+        }
+        if(this.AimingFocus != null)
+        {
+            //this.Owner.Orientation.LookAtPoint(this.AimingFocus.Transform.Translation);
+            
+            var blah = this.Owner.Orientation.GetLookAtPointRotation(this.AimingFocus.Transform.Translation); 
+            var berlop = this.Owner.Transform.Rotation;
+            var berlap = Math.RotateTowards(berlop, blah, Math.ToRadians(180)*event.Dt);
+            this.Owner.Transform.Rotation = berlap;
+            
+        }
+        var grp = Action.Group(this.Owner.Actions as ActionSet);
+        Action.Property(grp, @this.Owner.Transform.Translation, this.TargetPosition, this.EaseSpeed, Ease.Linear);
+
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Switch the positional target (permanently or temporarily, if you choose)
+    function SwitchPositionalTarget(newTarget : Cog, isPermanent : Boolean, durationOfChange : Real)
+    {
+        //If the user wants the change to be permanent,
+        if(isPermanent == true)
+        {
+            //Permanently set the new target.
+            this.PositionalFocus = newTarget;
+            this.OriginalPosFocus = newTarget;
+        }
+        //If the user wants the switch to be temporary, 
+        else
+        {
+            //Store the original focus, and make the new target the current focus.
+            this.OriginalPosFocus = this.PositionalFocus;
+            this.PositionalFocus = newTarget;
+            
+            //declare an action sequence
+            var seq = Action.Sequence(this.Owner.Actions as ActionSet);
+            //Delay for the duration given by the user
+            Action.Delay(seq, durationOfChange);
+            //After the wait, change the current target back to the old target
+            Action.Call(seq, this.PosSwitch);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Returns the positional focus to a stored focus
+    function PosSwitch()
+    {
+        //return to the original positional focus
+        this.PositionalFocus = this.OriginalPosFocus;
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Switch the aiming target (permanently or temporarily, if you choose)
+    function SwitchAimingTarget(newTarget : Cog, isPermanent : Boolean, durationOfChange : Real)
+    {
+        //If the user wants the change to be permanent,
+        if(isPermanent == true)
+        {
+            //Permanently set the new target.
+            this.AimingFocus = newTarget;
+            this.OriginalAimFocus = newTarget;
+        }
+        //If the user wants the switch to be temporary, 
+        else
+        {
+            //Store the original focus, and make the new target the current focus.
+            this.OriginalAimFocus = this.PositionalFocus;
+            this.AimingFocus = newTarget;
+            
+            //declare an action sequence
+            var seq = Action.Sequence(this.Owner.Actions as ActionSet);
+            //Delay for the duration given by the user
+            Action.Delay(seq, durationOfChange);
+            //After the wait, change the current target back to the old target
+            Action.Call(seq, this.AimSwitch);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Returns the aiming focus to a stored focus
+    function AimSwitch()
+    {
+        //Return to the original aiming focus
+        this.AimingFocus = this.OriginalAimFocus;
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //RemovePositionalTarget removes the given object from the camera's Movement tracking system. Permenently or temporarily if requested.
+    function RemovePositionalTarget(isPermanent : Boolean, durationOfChange : Real)
+    {
+        //If the user wants to delete the current focus permenently,
+        if(isPermanent == true)
+        {
+            //Null the original focus and the current focus
+            this.OriginalPosFocus = null;
+            this.PositionalFocus = null;
+        }
+        //if the user does not want to delete the current focus permanently, 
+        else
+        {
+            //store the original focus and null the current one so the camera no longer tracks. 
+            this.OriginalPosFocus = this.PositionalFocus;
+            this.PositionalFocus = null;
+            //declare an action sequence
+            var seq = Action.Sequence(this.Owner.Actions as ActionSet);
+            //Delay for the duration given by the user
+            Action.Delay(seq, durationOfChange);
+            //After the wait, change the current target back to the old target
+            Action.Call(seq, this.PosSwitch);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //RemoveAimingTarget removes the given object from the camera's Aiming tracking system. Permenently or temporarily if requested.
+    function RemoveAimingTarget(isPermanent : Boolean, durationOfChange : Real)
+    {
+        //If the user wants to delete the current aim focus permanetly
+        if(isPermanent == true)
+        {
+            //null original and current focus.
+            this.OriginalAimFocus = null;
+            this.AimingFocus = null;
+        }
+        //if the user wants to return to the current aim after a period of time,
+        else
+        {
+            //store the current focus, then null the old location so the camera doesn't track.
+            this.OriginalAimFocus = this.PositionalFocus;
+            this.AimingFocus = null;
+            //declare an action sequence
+            var seq = Action.Sequence(this.Owner.Actions as ActionSet);
+            //Delay for the duration given by the user
+            Action.Delay(seq, durationOfChange);
+            //After the wait, change the current target back to the old target
+            Action.Call(seq, this.AimSwitch);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //RemoveAimingTarget removes the given object from the camera's Aiming tracking system. Permenently or temporarily if requested.
+    function ChangeDistanceVector(newVector : Real3, isPermanent : Boolean, durationOfChange : Real)
+    {
+        if(isPermanent == true)
+        {
+            this.OriginalDistVector = newVector;
+            //this.DistFromTarget = newVector;
+            
+            var seq = Action.Sequence(this.Owner.Actions);
+            Action.Property(seq, @this.DistFromTarget, newVector, 0.5, Ease.Linear);
+            
+        }
+        //if the user wants to return to the current aim after a period of time,
+        else
+        {
+            
+            //store the current focus, then null the old location so the camera doesn't track.
+            this.OriginalDistVector = this.DistFromTarget;
+            this.DistFromTarget = newVector;
+            //declare an action sequence
+            var seq = Action.Sequence(this.Owner.Actions as ActionSet);
+            //Delay for the duration given by the user
+            Action.Delay(seq, durationOfChange);
+            //After the wait, change the current target back to the old target
+            Action.Call(seq, this.ReturnToOriginalDistVector);
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Returns the original vector focus to a stored focus
+    function ReturnToOriginalDistVector()
+    {
+        
+        //Return to the originalvector
+        this.DistFromTarget = this.OriginalDistVector;
+        
+    }
+
+
+//The following functions are not used in any way. They are for tracking multiple camera objects. 
+    function AddObject(cog : Cog)
+    {
+        this.Objects.Add(cog);
+    }
+    function RemoveObject(cog : Cog)
+    {
+        for(var i = 0; i < this.Objects.Count; ++i)
+        {
+            var obj = this.Objects.Get(i);
+            if(obj == cog)
+            {
+                this.Objects.Set(i, this.Objects.Get(this.Objects.LastIndex));
+                this.Objects.RemoveAt(this.Objects.LastIndex);
+                return;
+            }
+        }
+    }
+    function RemoveAllObjects()
+    {
+        this.Objects.Clear();
+    }
+    function ValidateCogs()
+    {
+        var i = 0;
+        while(i < this.Objects.Count)
+        {
+            var cog = this.Objects.Get(i);
+            // If this cog is not valid, remove it
+            if(cog == null)
+            {
+                this.Objects.Set(i, this.Objects.Get(this.Objects.LastIndex));
+                this.Objects.RemoveAt(this.Objects.LastIndex);
+            }
+            ++i;
+        }
+    }
+}

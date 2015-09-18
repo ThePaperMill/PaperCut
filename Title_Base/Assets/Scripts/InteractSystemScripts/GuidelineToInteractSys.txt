@@ -1,0 +1,140 @@
+/*
+
+~Ian's Guidelines To Systems of Interact~
+
+When an interact event happens, the highlight MUST always disappear. 
+one of two events occur:
+-the object can no longer be interacted with,
+-the object can be interacted with again.
+
+Objects will disconnect from Interact during the middle of talking. They will
+still be in the array, and highlighted, but will not be able to receive the
+events.  If the object is destroyed (especially while being or after being
+interacted with), it must be destroyed or otherwise set to null, for cleanup.
+
+When you walk next to an object, display a exclamation mark to the closest
+object, or a small text bubble nearest the closest character instead.  These
+should be above that object, not have collision, and not extend past them. 
+
+When you press the interact button, You send an interact event to the object
+closest to you.  If that object has not created a text box yet, then delete the
+current exclamation/text bubble and create a new instance of Textbox at top of
+screen.  If that object HAS created a text box, then pass on the interact event
+to the textbox, which should have it's strings and such stored.
+
+When you walk past a certain distance, send a "Delete self" call to the textbox
+at the top of the screen. 
+
+If a player is within a certain distance, a character can "Shout Out" which
+causes a small text bubble (facing the camera) to appear with words on it.  It
+will shrink when the player gets close enough to scale 0, then delete. it will
+also shrink after a period of time and can be yelled again.
+
+
+
+GOALS:
+
+-Conversations work 
+-When I press enter, new text scrolls on the cardboard 
+-when I press enter, new text appears full on the cardboard 
+-when I press enter, new text appears on the console. 
+
+-conversation manager has an array of ..."Conversations"
+-Each conversation is a COG with an integer that tells when to execute it's
+ code, and a "DO THIS" thing it does when it's number comes up.
+-these cogs are children of the ConversationManager object. 
+-Conversation "Just Text", on do, traces out it's text. 
+-Item-Give, on do, puts an item in teh player's inventory 
+-item-take, on do, prompts the player to give an item from the player's
+ inventory.
+-destroy owner, on do, deletes the owner that was running the conversation and
+ ends the conversation.
+-end conversation, on do, deletes the space and ends the conversation, then
+ resets the conversation.
+
+
+
+Types of conversations: 
+
+-Some conversations want to repeat the last thing they said if you walk away.
+-Some conversations want to start from the beginning (No conversations want to
+ restart from the beginning).
+
+Each conversation:
+
+-Talk to someone, they stop talking. Talking to them again has new information
+ (they only have multi convo attached)
+-Talk to someone, they stop talking. Talking to them again has the same
+ information. -they only have one convo
+-Talking to someone, player leaves in the middle of talking. Talking to them
+ again prompts a "Why you do that" response ~ manager has this. (don't do this)
+-Talking to Someone, player leaves AFTER they ask you for something and don't
+ have it- "Do you have the thing" is repeated until player has the thing.
+
+*/
+
+/*!! Beyond this point is Ziltch prototype code we haven't needed yet !!*/
+
+/*
+class InteractTestPleaseDelete : ZilchComponent
+{
+	[Property]
+	var HudLevel: Level = null; // Level that has our HUD in it
+	var HudSpace: Space = null;
+	
+	void Initialize(init : CogInitializer)
+	{
+		Zero.Connect(this.Owner, "InteractEvent", this.OnInteract);
+		Zero.Connect(this.Owner, "DeInteractEvent", this.OnDeInteract);
+	}
+	void OnInteract(event : InteractEvent)
+	{
+		
+		// Create a new Space to load our HUD level into
+		this.HudSpace = this.GameSession.CreateNamedSpace("HudSpace", Archetype.Find("Space"));
+		// Load the HUD level set in the property
+		this.HudSpace.LoadLevel(this.HudLevel);
+	}
+	void OnDeInteract(event : DeInteractEvent)
+	{
+		if(this.HudSpace != null)
+		{
+			this.HudSpace.Destroy();
+		}
+	}
+	void Destroyed()
+	{
+		
+		//When should the space be destroyed? When this object is deleted, or the text bubble vanishes. 
+		//When does the text bubble vanish? When the player walks outside the reach of the bubble.
+		// Make sure to clean up the extra Space we created
+		if(this.HudSpace != null)
+		{
+			this.HudSpace.Destroy();
+		}
+		
+	}
+}
+*/
+
+// Should we need events, here's the framework.  isInInteraction should have it covered though...
+
+/*
+class InteractEvent : Event
+{
+}
+class DeInteractEvent : Event
+{
+}
+*/
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/*
+class ItemHUDCloseEvent : ZilchEvent
+{
+	var Arctype : Archetype = null;
+}
+class OpenHUDInConversationsEvent : ZilchEvent
+{
+}
+*/
