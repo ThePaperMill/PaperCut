@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace ActionSystem
 {
-    class ActionGroup : ActionBase
+    public class ActionGroup : ActionBase
     {
         //A looping group does not clear 
         //itself when it completes
