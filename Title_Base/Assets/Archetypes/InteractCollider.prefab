@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelSettings: {fileID: 0}
+  LevelSettings: {fileID: 111812, guid: 38304d8d51e34f04f9db23c31d750f9b, type: 2}
   Parent: {fileID: 0}
 --- !u!135 &13521584
 SphereCollider:
@@ -76,7 +76,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: LevelSettings
+      value: 
+      objectReference: {fileID: 111812, guid: 38304d8d51e34f04f9db23c31d750f9b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170170}

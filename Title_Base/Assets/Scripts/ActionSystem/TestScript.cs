@@ -3,7 +3,7 @@ using System.Collections;
 using ActionSystem.Internal;
 using ActionSystem; //You either must say "using ActionSystem" or put "ActionSystem." in front of anything having to do with actions.
 using System.Reflection;
-using System; //If you are usung System, you will need to put "ActionSystem." in front of any calls on the "Action" class.
+using System; //If you are using System, you will need to put "ActionSystem." in front of any calls on the "Action" class.
 
 public class TestScript : MonoBehaviour
 {

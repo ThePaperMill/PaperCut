@@ -8,6 +8,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ActionSystem;
 
 public class InteractManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class InteractManager : MonoBehaviour
 	GameObject Player;
 	public Object HighlightArchetype;
 	GameObject Highlight;
-	public float HeightOfHighlight = 1.5f;
+	//public float HeightOfHighlight = 1.5f;
 	public float EaseSpeed = 0.5f;
 	GameObject CurrentlyInteractedObject;
 	
@@ -27,15 +28,18 @@ public class InteractManager : MonoBehaviour
 	
 	void Update()
 	{
+		//grab the position of the closest object
+		GameObject closestobj = FindClosestObjectToPlayer();
+
 		//If there are objects in the array and there is no highlight object,
 		if(AllInteractableObjects.Count > 0 && Highlight == null)
 		{
-			//grab the position of the closest object
-			GameObject player = FindClosestObjectToPlayer();
-			Vector3 pos = player.transform.position;
-			pos += new Vector3(0, HeightOfHighlight, 0);
+			Vector3 pos = closestobj.transform.position;
+			//pos += new Vector3(0, HeightOfHighlight, 0);
 			//create one. 
 			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
+			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;
+			Action.Property(getAG.Grp, Highlight.transform.GetProperty(o => o.position), pos, this.EaseSpeed, Ease.SinOut);
 		}
 		
 		//otherwise, If there are no objects in the array and the highlight object exists,
@@ -46,16 +50,20 @@ public class InteractManager : MonoBehaviour
 		//otherwise, interpolate the highlight to it's proper position. 
 		else if(AllInteractableObjects.Count > 0)
 		{
-			GameObject player = FindClosestObjectToPlayer();
-			Vector3 pos = player.transform.position;
-			pos += new Vector3(0, HeightOfHighlight, 0);
+			Vector3 pos = closestobj.transform.position;
+			//pos += new Vector3(0, HeightOfHighlight, 0);
+			print (closestobj.name + " is king of team");
+
+			// Remake the Highlight, because action system ate the ability to move it
+			Destroy(Highlight);
+			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
 
 			// Use Josh's Action replacement system here
-			/*var grp = Action.Group(this.Owner.Actions as ActionSet);
-			Action.Property(grp, @this.Highlight.HighlightController.Position, pos, this.EaseSpeed, Ease.SinOut);*/
+			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;
+			Action.Property(getAG.Grp, Highlight.transform.GetProperty(o => o.position), pos, this.EaseSpeed, Ease.SinOut);
 		}
-		//if the currently closest object is being interacted with, then hide the icon. 
-		GameObject closestobj = FindClosestObjectToPlayer();
+
+		//if the currently closest object is being interacted with, then hide the icon
 		if(closestobj != null)
 		{
 			Interactable toCheck = closestobj.GetComponent("Interactable") as Interactable;
@@ -98,7 +106,7 @@ public class InteractManager : MonoBehaviour
 		}
 		
 		//then make the last dispatched object the new currently interacted
-		this.CurrentlyInteractedObject = closest;
+		CurrentlyInteractedObject = closest;
 	}
 
 	GameObject FindClosestObjectToPlayer()
@@ -117,13 +125,14 @@ public class InteractManager : MonoBehaviour
 				closest = obj;
 			}
 		}
-
+		if(closest != null){print(closest.name);}
 		return closest;
 	}
 	
 	public void AddInteractableObject(GameObject cog)
 	{
 		AllInteractableObjects.Add(cog);
+		print("Added Object!");
 	}
 	public void RemoveInteractableObject(GameObject cog)
 	{
@@ -137,6 +146,7 @@ public class InteractManager : MonoBehaviour
 			if(obj == cog)
 			{
 				AllInteractableObjects.RemoveAt(i);
+				print("Removed Object!");
 				return;
 			}
 		}

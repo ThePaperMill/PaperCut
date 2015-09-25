@@ -7,18 +7,22 @@
 
 using UnityEngine;
 using System.Collections;
+using ActionSystem;
 
 public class HighlightController : MonoBehaviour
 {
-	public float Height = 1.5f;
+	public float Height = 1.0f;
+	public float HeightGet { get; set;}
 	public float EaseSpeed = 1f;
-	/*public float EaseType : Ease = Ease.Linear;*/ /* For Actions once those are ready */
+	public Ease EaseType = Ease.Linear;
 	public float RotateSpeedDegrees = 40.0f;
+	public ActionGroup Grp = new ActionGroup();
 	
 	Vector3 Position = new Vector3(0,0,0);
 	
 	void Start()
 	{
+		HeightGet = Height;
 		//It appears below the position it's supposed to.
 		Position = gameObject.transform.position;
 		gameObject.transform.position += new Vector3(0, Height, 0);
@@ -33,17 +37,17 @@ public class HighlightController : MonoBehaviour
 		gameObject.transform.position = Position + new Vector3(0, Height, 0);
 		
 		gameObject.transform.Rotate(new Vector3(0, RotateSpeedDegrees * Time.deltaTime, 0));
-		//this.Owner.Transform.Rotation = Math.ToQuaternion(this.Owner.Transform.EulerAngles);
+		//old code --> this.Owner.Transform.Rotation = Math.ToQuaternion(this.Owner.Transform.EulerAngles);
 	}
 	void UpdateHeight()
 	{
 		// Use Josh's Action replacement system here   
 		
-		float altHeight = -this.Height;
+		float altHeight = -HeightGet;
 
-		/*var seq = Action.Sequence(this.Owner.Actions);
+		ActionSequence seq = ActionSystem.Action.Sequence(Grp);
 		
-		Action.Property(seq, @this.Height, height2, this.EaseSpeed, this.EaseType);
-		Action.Call(seq, this.UpdateHeight);*/
+		Action.Property(seq, this.GetProperty(o => o.HeightGet), altHeight, this.EaseSpeed, this.EaseType);
+		Action.Call(seq, this.UpdateHeight);
 	}
 }
