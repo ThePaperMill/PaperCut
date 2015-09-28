@@ -16,8 +16,7 @@ public class InteractManager : MonoBehaviour
 	GameObject Player;
 	public Object HighlightArchetype;
 	GameObject Highlight;
-	GameObject Closest = null;
-	public float HighlightHeight = 1.0f;
+	//public float HeightOfHighlight = 1.5f;
 	public float EaseSpeed = 0.5f;
 	GameObject CurrentlyInteractedObject;
 	
@@ -31,38 +30,37 @@ public class InteractManager : MonoBehaviour
 	{
 		//grab the position of the closest object
 		GameObject closestobj = FindClosestObjectToPlayer();
-		//if(closestobj){print (closestobj.name + " is closest");}
 
 		//If there are objects in the array and there is no highlight object,
 		if(AllInteractableObjects.Count > 0 && Highlight == null)
 		{
-			Closest = closestobj;
 			Vector3 pos = closestobj.transform.position;
-			pos += new Vector3(0, HighlightHeight, 0);
-			// We'll need a new highlight 
+			//pos += new Vector3(0, HeightOfHighlight, 0);
+			//create one. 
 			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
+			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;
+			Action.Property(getAG.Grp, Highlight.transform.GetProperty(o => o.position), pos, this.EaseSpeed, Ease.SinOut);
 		}
 		
 		//otherwise, If there are no objects in the array and the highlight object exists,
 		else if(AllInteractableObjects.Count <= 0 && Highlight != null)
 		{
 			Destroy(Highlight);
-			closestobj = null;
-			Closest = null;
-			//print ("ded.");
 		}
 		//otherwise, interpolate the highlight to it's proper position. 
-		else if(AllInteractableObjects.Count > 0 && closestobj != Closest && closestobj != null)
+		else if(AllInteractableObjects.Count > 0)
 		{
-			Closest = closestobj;
 			Vector3 pos = closestobj.transform.position;
-			pos += new Vector3(0, HighlightHeight, 0);
-			//print (closestobj.name + " is king of team");
+			//pos += new Vector3(0, HeightOfHighlight, 0);
+			print (closestobj.name + " is king of team");
 
-			// Setup the interpolation
+			// Remake the Highlight, because action system ate the ability to move it
+			Destroy(Highlight);
+			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
+
+			// Use Josh's Action replacement system here
 			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;
-			getAG.setUp(true);
-			getAG.GoToPos = pos;
+			Action.Property(getAG.Grp, Highlight.transform.GetProperty(o => o.position), pos, this.EaseSpeed, Ease.SinOut);
 		}
 
 		//if the currently closest object is being interacted with, then hide the icon
@@ -81,51 +79,40 @@ public class InteractManager : MonoBehaviour
 			}
 		}
 		
-		// Remove all of the null objects (done here in case objects are destroyed in level)
+		//remove all of the null objects
 		AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
-		//print ("Can talk with " + AllInteractableObjects.Count + " people.");
 	}
 
 	public void OnInteractEvent()
 	{
-		// Find the nearest object
+		//find the nearest object
 		GameObject closest = FindClosestObjectToPlayer();
 		
-		// If the currently interacted object is not the closest object anymore,
+		//If the currently interacted object is not the closest object anymore,
 		if(CurrentlyInteractedObject != closest && CurrentlyInteractedObject != null)
 		{
-			// Then we can tell it to go away
+			//then we can tell it to go away
 			Interactable deInteract = CurrentlyInteractedObject.GetComponent("Interactable") as Interactable;
 			deInteract.SetIsInInteraction(false);
 		}
 		
-		// Bring the actual closest object in
+		//Bring the actual closest object in
 		
 		if(closest != null)
 		{
-			// Create a ScriptEvent
+			//Create a ScriptEvent
 			Interactable inter = closest.GetComponent("Interactable") as Interactable;
 			inter.SetIsInInteraction(true);
 		}
 		
-		// Then make the last dispatched object the new currently interacted
+		//then make the last dispatched object the new currently interacted
 		CurrentlyInteractedObject = closest;
 	}
 
 	GameObject FindClosestObjectToPlayer()
 	{
 		GameObject closest = null;
-		float bestDist;
-		if(Closest != null)
-		{
-			bestDist = Vector3.Distance(Closest.transform.position, Player.transform.position);
-			closest = Closest;
-		}
-
-		else
-		{
-			bestDist = float.MaxValue;
-		}
+		float bestDist = float.MaxValue;
 
 		for(int i = 0; i < AllInteractableObjects.Count; ++i)
 		{
@@ -138,19 +125,14 @@ public class InteractManager : MonoBehaviour
 				closest = obj;
 			}
 		}
-		//if(closest != null){print(closest.name);}
+		if(closest != null){print(closest.name);}
 		return closest;
 	}
 	
 	public void AddInteractableObject(GameObject cog)
 	{
-		//print("Add? " + AllInteractableObjects.Contains(cog));
-		// Only add unique objects
-		if(!AllInteractableObjects.Contains(cog))
-		{
-			AllInteractableObjects.Add(cog);
-			//print("Added " + cog.name + " at " + cog.transform.position);
-		}
+		AllInteractableObjects.Add(cog);
+		print("Added Object!");
 	}
 	public void RemoveInteractableObject(GameObject cog)
 	{
@@ -164,7 +146,7 @@ public class InteractManager : MonoBehaviour
 			if(obj == cog)
 			{
 				AllInteractableObjects.RemoveAt(i);
-				//print("Removed Object!");
+				print("Removed Object!");
 				return;
 			}
 		}
