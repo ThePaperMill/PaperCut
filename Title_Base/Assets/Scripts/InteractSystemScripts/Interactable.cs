@@ -2,7 +2,7 @@
  * Interactable.cs
  * Troy
  * Created 9/11/2015
- * Copyright Â© 2015 DigiPen Institute of Technology, All Rights Reserved
+ * Copyright © 2015 DigiPen Institute of Technology, All Rights Reserved
  *********************************/
 
 using UnityEngine;
@@ -48,7 +48,7 @@ public class Interactable : MonoBehaviour
 	{
 		isInInteraction = toSet;
 
-		// A true value is indictive of the old event system for "InteractEvent" which InteractManager still uses
+		// If the player presses the action button, send an interaction event
 		if (toSet == true)
 		{
 			InteractManager sendAvent = LevelSettings.GetComponent("InteractManager") as InteractManager;

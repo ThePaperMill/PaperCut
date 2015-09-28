@@ -43,7 +43,7 @@ namespace ActionSystem
             Restart();
         }
 
-
+        
         public override void Update(double dt)
         {
             if (IsPaused() || IsCompleted())
@@ -93,25 +93,9 @@ namespace ActionSystem
 
 
         public double CurrentTime { get; set; }
-        public double EndTime
-        {
-            get { return endTime; }
-            set
-            {
-                if (value <= 0)
-                {
-                    endTime = 0.000001;
-                }
-                else
-                {
-                    endTime = value;
-                }
-            }
-        }
-        private double endTime;
+        public double EndTime { get; set; }
 
         SampleCurve<T> EasingCurve;
-        
-    }
+    };
 }
 

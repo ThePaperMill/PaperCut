@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using UnityEngine;
 
 namespace ActionSystem
 {
@@ -27,20 +26,6 @@ namespace ActionSystem
         public static ActionProperty<T> Property<T>(ActionGroup grp, Property<T> startVal, T endVal, double duration, Ease ease = Ease.Linear)
         {
             var property = new ActionProperty<T>(startVal, endVal, duration, ease);
-            grp.AddAction(property);
-            return property;
-        }
-
-        public static ActionProperty<T> Property<T>(ActionSequence seq, Property<T> startVal, T endVal, double duration, AnimationCurve curve)
-        {
-            var property = new ActionProperty<T>(startVal, endVal, duration, new CustomCurve<T>(curve));
-            seq.AddAction(property);
-            return property;
-        }
-
-        public static ActionProperty<T> Property<T>(ActionGroup grp, Property<T> startVal, T endVal, double duration, AnimationCurve curve)
-        {
-            var property = new ActionProperty<T>(startVal, endVal, duration, new CustomCurve<T>(curve));
             grp.AddAction(property);
             return property;
         }

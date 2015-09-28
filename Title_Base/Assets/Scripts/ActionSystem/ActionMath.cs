@@ -235,8 +235,6 @@ namespace ActionSystem
             currentTime -= 2;
             return (change / 2 * (currentTime * currentTime * currentTime * currentTime * currentTime + 2) + startValue);
         }
-
-        
     }//namespace Math
 
     //All the various ease types.
