@@ -95,7 +95,6 @@ public class MainMenuLogic : MonoBehaviour {
 	
 	public void StartGame()
 	{
-		// lel placeholder
 		Application.LoadLevel("Player_House");
 	}
 
