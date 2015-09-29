@@ -22,7 +22,7 @@ Level =
 		{
 			bool Active = true,
 			bool WakeUpOnChange = false,
-			float Drag = 0.7,
+			float Drag = 0.699999988,
 		},
 		CameraViewport = 
 		{
@@ -76,8 +76,8 @@ Level =
 			bool DrawAxisOrigins = true,
 			bool AlwaysDrawInEditor = true,
 			bool DrawInGame = false,
-			Vec4 GridColor = [0.5, 0.5, 0.5, 0.4],
-			Vec4 GridHiLight = [0, 0, 0, 0.4],
+			Vec4 GridColor = [0.5, 0.5, 0.5, 0.400000006],
+			Vec4 GridHiLight = [0, 0, 0, 0.400000006],
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
@@ -118,9 +118,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [24.3095, 30.7246, 26.8231],
+			Vec3 Translation = [25.948843, 28.8280697, 37.827282],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.276115, 0.383181, 0.121184, 0.873068],
+			Quat Rotation = [-0.217905998, 0.291079193, 0.0682719797, 0.929047227],
 		},
 		Camera = 
 		{
@@ -135,15 +135,15 @@ Level =
 		EditorCameraController = 
 		{
 			ControlMode ControlMode = Orbit,
-			float LookDistance = 41.0434,
-			float VerticalAngle = 0.61261,
-			float HorizontalAngle = -7.11034,
-			Vec3 LookTarget = [-0.405401, 7.1245, 4.0906],
+			float LookDistance = 55.4027824,
+			float VerticalAngle = 0.460766762,
+			float HorizontalAngle = -6.8904295,
+			Vec3 LookTarget = [-2.36746144, 4.19405222, -2.92588067],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
 		{
-			Vec4 ClearColor = [0.155, 0.155, 0.155, 1],
+			Vec4 ClearColor = [0.155000001, 0.155000001, 0.155000001, 1],
 			bool DrawNonVisible = true,
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
@@ -162,9 +162,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [6.27842, 22.1349, 40],
+			Vec3 Translation = [6.27841997, 22.1348991, 40],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.244678, 0.314906, 0.0843787, 0.913152],
+			Quat Rotation = [-0.244678006, 0.314906001, 0.084378697, 0.913151979],
 		},
 		Camera = 
 		{
@@ -238,9 +238,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [18.9699, 45.5263, 47.7878],
+			Vec3 Translation = [18.9699001, 45.5262985, 47.7877998],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.448675, 0.0411075, -0.397043, 0.799598],
+			Quat Rotation = [-0.448675007, 0.0411075018, -0.39704299, 0.799597979],
 		},
 		Light = 
 		{
@@ -251,10 +251,10 @@ Level =
 			LightType LightType = Directional,
 			Vec4 Color = [1, 1, 1, 1],
 			float Intensity = 1,
-			float Range = 106.897,
+			float Range = 106.897003,
 			float Falloff = 1,
 			float Angle = 61,
-			float Size = 128.38,
+			float Size = 128.380005,
 		},
 		Shadow = 
 		{
@@ -262,10 +262,10 @@ Level =
 			Quality Quality = UltraHighQuality,
 			ShadowMapping ShadowMapping = Standard,
 			ShadowSoftening ShadowSoftening = Pcf3x3,
-			Vec4 Color = [0.59, 0.59, 0.59, 1],
-			float NormalOffsetBias = 0.07,
+			Vec4 Color = [0.589999974, 0.589999974, 0.589999974, 1],
+			float NormalOffsetBias = 0.0700000003,
 			float MinFrustumDepth = 1000,
-			float SplitPlaneDistribution = 0.8,
+			float SplitPlaneDistribution = 0.800000012,
 			bool ShowCascadeColors = false,
 		},
 	},
@@ -281,8 +281,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-9.89474, 13.0279, 10.5067],
-			Vec3 Scale = [2.38721, 4.28513, 0.276466],
+			Vec3 Translation = [-9.8947401, 13.0278997, 10.5066996],
+			Vec3 Scale = [2.38720989, 4.28513002, 0.276466012],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -331,8 +331,8 @@ Level =
 			bool ForwardEvents = true,
 			float Gravity = 25,
 			float JumpSpeed = 15,
-			float JumpCancelFactor = 0.55,
-			float MaxMoveSpeed = 20,
+			float JumpCancelFactor = 0.550000012,
+			float MaxMoveSpeed = 10,
 			float MaxFallSpeed = 50,
 			float GroundAcceleration = 500,
 			float AirAcceleration = 15,
@@ -343,7 +343,7 @@ Level =
 			float GroundSnapDistance = 1,
 			Vec3 ControllerVelocity = [0, 0, 0],
 			bool Grounded = true,
-			float JumpLagTimer = 0.1,
+			float JumpLagTimer = 0.100000001,
 			bool Jumping = false,
 			float GroundTraction = 1,
 			float AirTraction = 1,
@@ -366,8 +366,8 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [-0.0551772, -0.502138, 1.07026],
-					Vec3 Scale = [0.145147, 0.08086, 3.24656],
+					Vec3 Translation = [-0.0551772006, -0.502138019, 1.07026005],
+					Vec3 Scale = [0.145146996, 0.0808599964, 3.2465601],
 					Quat Rotation = [0, 0, 0, 1],
 				},
 				Model = 
@@ -398,9 +398,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-25.3656, 43.1582, 53.8274],
+			Vec3 Translation = [-25.3656006, 43.1581993, 53.8274002],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.0629903, -0.509447, -0.595806, 0.617666],
+			Quat Rotation = [-0.0629903004, -0.509446979, -0.595806003, 0.617666006],
 		},
 		Light = 
 		{
@@ -411,10 +411,10 @@ Level =
 			LightType LightType = Directional,
 			Vec4 Color = [1, 1, 1, 1],
 			float Intensity = 1,
-			float Range = 106.897,
+			float Range = 106.897003,
 			float Falloff = 1,
 			float Angle = 61,
-			float Size = 128.38,
+			float Size = 128.380005,
 		},
 		Shadow = 
 		{
@@ -422,10 +422,10 @@ Level =
 			Quality Quality = UltraHighQuality,
 			ShadowMapping ShadowMapping = Standard,
 			ShadowSoftening ShadowSoftening = Pcf3x3,
-			Vec4 Color = [0.59, 0.59, 0.59, 1],
-			float NormalOffsetBias = 0.07,
+			Vec4 Color = [0.589999974, 0.589999974, 0.589999974, 1],
+			float NormalOffsetBias = 0.0700000003,
 			float MinFrustumDepth = 1000,
-			float SplitPlaneDistribution = 0.8,
+			float SplitPlaneDistribution = 0.800000012,
 			bool ShowCascadeColors = false,
 		},
 	},
@@ -441,8 +441,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-10.2803, 1.47809, 7.11821],
-			Vec3 Scale = [0.713031, 2, 7],
+			Vec3 Translation = [-10.2803001, 1.47809005, 7.11820984],
+			Vec3 Scale = [0.713030994, 2, 7],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -480,10 +480,6 @@ Level =
 		Interactible = 
 		{
 			float InteractibleSizeScalar = 1.5,
-		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
 		},
 		Hierarchy = 
 		{
@@ -538,14 +534,9 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [0, 0, 0.179882],
+					Vec3 Translation = [0, 0, 0.179882005],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -592,14 +583,9 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [11.0441, 5, -10.9743],
+					Vec3 Translation = [10.7733059, 5, -10.9743004],
 					Vec3 Scale = [7.5, 1, 7.5],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -646,16 +632,11 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [1.37804, 7.52907, -10.9743],
+					Vec3 Translation = [1.37803996, 7.47216225, -10.9743004],
 					Vec3 Scale = [12.5, 1, 7.5],
-					Quat Rotation = [0, 0, -0.205668, 0.978622],
+					Quat Rotation = [0, 0, -0.205668002, 0.978622019],
 				},
 				Model = 
 				{
@@ -700,14 +681,9 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [3.42204, 0, 16.4106],
+					Vec3 Translation = [3.42203999, 0, 16.4106007],
 					Vec3 Scale = [5, 1, 2.5],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -754,14 +730,9 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [-10.4948, 10, 0.179882],
+					Vec3 Translation = [-10.4947996, 10, 0.179882005],
 					Vec3 Scale = [13, 1, 30],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -808,16 +779,11 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [11.078, 2.49447, -1.7531],
+					Vec3 Translation = [11.0780001, 2.44095159, -1.75310004],
 					Vec3 Scale = [12.5, 1, 7.5],
-					Quat Rotation = [0.147016, -0.691655, -0.147016, 0.691655],
+					Quat Rotation = [0.147016004, -0.69165498, -0.147016004, 0.69165498],
 				},
 				Model = 
 				{
@@ -862,14 +828,9 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [-15.3738, 14.9962, 0.179882],
+					Vec3 Translation = [-15.3738003, 14.9961996, 0.179882005],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [-0.5, 0.5, 0.5, 0.5],
 				},
@@ -916,16 +877,11 @@ Level =
 				{
 					string Name = "Ground",
 				},
-				EditorFlags = 
-				{
-					bool Locked = true,
-					bool Hidden = false,
-				},
 				Transform = 
 				{
-					Vec3 Translation = [-0.00289536, 14.9962, -15.5079],
+					Vec3 Translation = [-0.00289536011, 14.9961996, -15.5079002],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-3.09086e-008, 0.707107, -0.707107, -3.09086e-008],
+					Quat Rotation = [-3.09085983e-008, 0.707107008, -0.707107008, -3.09085983e-008],
 				},
 				Model = 
 				{
@@ -977,7 +933,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [14.364, -9.52278, -22.325],
+					Vec3 Translation = [14.3640003, -9.52278042, -22.3250008],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [-0.5, 0.5, 0.5, 0.5],
 				},
@@ -1031,9 +987,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [14.364, -14.4446, 0.174479],
+					Vec3 Translation = [14.3640003, -14.4446001, 0.174478993],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-0.383856, 0.383856, 0.593847, 0.593847],
+					Quat Rotation = [-0.383855999, 0.383855999, 0.593846977, 0.593846977],
 				},
 				Model = 
 				{
@@ -1085,9 +1041,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [3.73819, -9.52271, -7.82411],
+					Vec3 Translation = [3.73818994, -9.52270985, -7.82411003],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-0.146368, -0.691792, 0.691792, 0.146368],
+					Quat Rotation = [-0.146367997, -0.691792011, 0.691792011, 0.146367997],
 				},
 				Model = 
 				{
@@ -1139,9 +1095,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [-19.204, -4.75959, -7.77794],
+					Vec3 Translation = [-19.2040005, -4.75959015, -7.7779398],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-3.09086e-008, 0.707107, -0.707107, -3.09086e-008],
+					Quat Rotation = [-3.09085983e-008, 0.707107008, -0.707107008, -3.09085983e-008],
 				},
 				Model = 
 				{
@@ -1193,9 +1149,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [-14.0249, 14.9962, 15.4976],
+					Vec3 Translation = [-14.0249004, 14.9961996, 15.4975996],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-3.09086e-008, 0.707107, -0.707107, -3.09086e-008],
+					Quat Rotation = [-3.09085983e-008, 0.707107008, -0.707107008, -3.09085983e-008],
 				},
 				Model = 
 				{
@@ -1247,9 +1203,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [21.0511, 14.9962, 15.4976],
+					Vec3 Translation = [21.0510998, 14.9961996, 15.4975996],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-3.09086e-008, 0.707107, -0.707107, -3.09086e-008],
+					Quat Rotation = [-3.09085983e-008, 0.707107008, -0.707107008, -3.09085983e-008],
 				},
 				Model = 
 				{
@@ -1301,9 +1257,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [8.63606, 14.9962, 18.2336],
+					Vec3 Translation = [8.63605976, 14.9961996, 18.2336006],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-3.09086e-008, 0.707107, -0.707107, -3.09086e-008],
+					Quat Rotation = [-3.09085983e-008, 0.707107008, -0.707107008, -3.09085983e-008],
 				},
 				Model = 
 				{
@@ -1355,7 +1311,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [0.50099, 14.9962, 30.3444],
+					Vec3 Translation = [0.500989974, 14.9961996, 30.3444004],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [-0.5, 0.5, 0.5, 0.5],
 				},
@@ -1409,7 +1365,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [6.52427, 14.9962, 30.3444],
+					Vec3 Translation = [6.52427006, 14.9961996, 30.3444004],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [-0.5, 0.5, 0.5, 0.5],
 				},
@@ -1463,7 +1419,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [15.2667, 14.9962, 0.179882],
+					Vec3 Translation = [15.2666998, 14.9961996, 0.179882005],
 					Vec3 Scale = [30, 1, 30],
 					Quat Rotation = [-0.5, 0.5, 0.5, 0.5],
 				},
@@ -1517,9 +1473,9 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [7.93043, -14.4446, 0.174479],
+					Vec3 Translation = [7.93042994, -14.4446001, 0.174478993],
 					Vec3 Scale = [30, 1, 30],
-					Quat Rotation = [-0.383856, 0.383856, 0.593847, 0.593847],
+					Quat Rotation = [-0.383855999, 0.383855999, 0.593846977, 0.593846977],
 				},
 				Model = 
 				{
@@ -1568,8 +1524,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-10.508, 0.769801, -6.98444],
-			Vec3 Scale = [12.3082, 5.23288, 1],
+			Vec3 Translation = [-10.5080004, 0.769801021, -6.98443985],
+			Vec3 Scale = [12.3081999, 5.23288012, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -1608,13 +1564,6 @@ Level =
 		{
 			float InteractibleSizeScalar = 1.5,
 		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
-		},
-		ExitRoomController = 
-		{
-		},
 		Hierarchy = 
 		{
 			Cog = 
@@ -1647,8 +1596,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [10.9847, 6.53155, -14.575],
-			Vec3 Scale = [2.68758, 2.49263, 1],
+			Vec3 Translation = [10.9847002, 6.53154993, -14.5749998],
+			Vec3 Scale = [2.68758011, 2.49263, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -1699,8 +1648,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [10.9847, 8.66828, -14.575],
-			Vec3 Scale = [1.83144, 1.77308, 1],
+			Vec3 Translation = [10.9847002, 8.66827965, -14.5749998],
+			Vec3 Scale = [1.83143997, 1.77307999, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -1760,27 +1709,66 @@ Level =
 				},
 				TalkAction = 
 				{
-					string TalkText = "My flowers are doing nicely.",
+					string TalkText = "I should probably water my flowers.",
 					int PlaceInConversation = 0,
 				},
 			},
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 35,
-				},
-				Named = 
-				{
-					string Name = "Transform",
-				},
-				GiveAction = 
-				{
-					string Arctype = "553ce2bad920d281:CardboardBox",
-					string TalkText = "Error, report to playtester: No text assigned",
-					int PlaceInConversation = 1,
-				},
-			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 35,
+		},
+		Named = 
+		{
+			string Name = "Armchair",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [2.42744994, 2.29649997, -2.32288003],
+			Vec3 Scale = [3.36756992, 3.49004006, 0.476249993],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Model = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = true,
+			string MaterialName = "4de020863e85bb61:DefaultMaterial",
+			string MeshName = "4de0354322b345ae:Cube",
+			Vec4 Color = [1, 1, 1, 1],
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = false,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		Interactible = 
+		{
+			float InteractibleSizeScalar = 1.5,
+		},
+		Hierarchy = 
+		{
 		},
 	},
 	Cog = 
@@ -1795,9 +1783,65 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [2.42745, 2.2965, -2.32288],
-			Vec3 Scale = [3.36757, 3.49004, 0.47625],
-			Quat Rotation = [0, 0, 0, 1],
+			Vec3 Translation = [-2.7458899, 2.29649997, 0.745256007],
+			Vec3 Scale = [3.36756992, 3.49004006, 0.476249993],
+			Quat Rotation = [0, 0.489973009, 0, 0.871738017],
+		},
+		Model = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = true,
+			string MaterialName = "4de020863e85bb61:DefaultMaterial",
+			string MeshName = "4de0354322b345ae:Cube",
+			Vec4 Color = [1, 1, 1, 1],
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = false,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		Interactible = 
+		{
+			float InteractibleSizeScalar = 1.5,
+		},
+		Hierarchy = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 37,
+		},
+		Named = 
+		{
+			string Name = "Coffee Table",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [1.83563006, 1.38752997, 2.04303002],
+			Vec3 Scale = [0.417908013, 1.72179997, 2.69710994],
+			Quat Rotation = [0, -0.458965003, 0, 0.88845402],
 		},
 		Model = 
 		{
@@ -1839,27 +1883,8 @@ Level =
 		{
 			string HudLevel = "550d1a8d95bab18c:HUDConversations",
 		},
-		ExitRoomController = 
-		{
-		},
 		Hierarchy = 
 		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 37,
-				},
-				Named = 
-				{
-					string Name = "Transform",
-				},
-				TalkAction = 
-				{
-					string TalkText = "My favorite chair!",
-					int PlaceInConversation = 0,
-				},
-			},
 		},
 	},
 	Cog = 
@@ -1870,13 +1895,69 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "Armchair",
+			string Name = "WindowSil",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-2.74589, 2.2965, 0.745256],
-			Vec3 Scale = [3.36757, 3.49004, 0.47625],
-			Quat Rotation = [0, 0.489973, 0, 0.871738],
+			Vec3 Translation = [-14.5743999, 2.78073001, 4.09325981],
+			Vec3 Scale = [0.713030994, 9.88426018, 7],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Model = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = true,
+			string MaterialName = "4de020863e85bb61:DefaultMaterial",
+			string MeshName = "4de0354322b345ae:Cube",
+			Vec4 Color = [1, 1, 1, 1],
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = false,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		Interactible = 
+		{
+			float InteractibleSizeScalar = 1.5,
+		},
+		Hierarchy = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 39,
+		},
+		Named = 
+		{
+			string Name = "WindowSil",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-14.7468004, 15.4663, 4.09325981],
+			Vec3 Scale = [0.713030994, 9.88426018, 7],
+			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
 		{
@@ -1918,27 +1999,8 @@ Level =
 		{
 			string HudLevel = "550d1a8d95bab18c:HUDConversations",
 		},
-		ExitRoomController = 
-		{
-		},
 		Hierarchy = 
 		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 39,
-				},
-				Named = 
-				{
-					string Name = "Transform",
-				},
-				TalkAction = 
-				{
-					string TalkText = "This is where guests sit when I have people over.",
-					int PlaceInConversation = 0,
-				},
-			},
 		},
 	},
 	Cog = 
@@ -1949,89 +2011,13 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "Coffee Table",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [1.83563, 1.38753, 2.04303],
-			Vec3 Scale = [0.417908, 1.7218, 2.69711],
-			Quat Rotation = [0, -0.458965, 0, 0.888454],
-		},
-		Model = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = true,
-			string MaterialName = "4de020863e85bb61:DefaultMaterial",
-			string MeshName = "4de0354322b345ae:Cube",
-			Vec4 Color = [1, 1, 1, 1],
-		},
-		RigidBody = 
-		{
-			bool Static = true,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = false,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-		Interactible = 
-		{
-			float InteractibleSizeScalar = 1.5,
-		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
-		},
-		Hierarchy = 
-		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 41,
-				},
-				Named = 
-				{
-					string Name = "Coffee Table",
-				},
-				TalkAction = 
-				{
-					string TalkText = "I'm a table",
-					int PlaceInConversation = 0,
-				},
-			},
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 42,
-		},
-		Named = 
-		{
 			string Name = "WindowSil",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-14.5744, 2.78073, 4.09326],
-			Vec3 Scale = [0.713031, 9.88426, 7],
-			Quat Rotation = [0, 0, 0, 1],
+			Vec3 Translation = [-8.49228001, 15.4663, -14.6313],
+			Vec3 Scale = [0.713030994, 9.88426018, 7],
+			Quat Rotation = [0, 0.707107008, 0, 0.707107008],
 		},
 		Model = 
 		{
@@ -2075,181 +2061,13 @@ Level =
 		},
 		Hierarchy = 
 		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 43,
-				},
-				Named = 
-				{
-					string Name = "WindowSil",
-				},
-				TalkAction = 
-				{
-					string TalkText = "Outside is looking nice today.",
-					int PlaceInConversation = 0,
-				},
-			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 44,
-		},
-		Named = 
-		{
-			string Name = "WindowSil",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-14.7468, 15.4663, 4.09326],
-			Vec3 Scale = [0.713031, 9.88426, 7],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Model = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = true,
-			string MaterialName = "4de020863e85bb61:DefaultMaterial",
-			string MeshName = "4de0354322b345ae:Cube",
-			Vec4 Color = [1, 1, 1, 1],
-		},
-		RigidBody = 
-		{
-			bool Static = true,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = false,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-		Interactible = 
-		{
-			float InteractibleSizeScalar = 1.5,
-		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
-		},
-		Hierarchy = 
-		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 45,
-				},
-				Named = 
-				{
-					string Name = "WindowSil",
-				},
-				TalkAction = 
-				{
-					string TalkText = "Outside is looking nice today.",
-					int PlaceInConversation = 0,
-				},
-			},
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 46,
-		},
-		Named = 
-		{
-			string Name = "WindowSil",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-8.49228, 15.4663, -14.6313],
-			Vec3 Scale = [0.713031, 9.88426, 7],
-			Quat Rotation = [0, 0.707107, 0, 0.707107],
-		},
-		Model = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = true,
-			string MaterialName = "4de020863e85bb61:DefaultMaterial",
-			string MeshName = "4de0354322b345ae:Cube",
-			Vec4 Color = [1, 1, 1, 1],
-		},
-		RigidBody = 
-		{
-			bool Static = true,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = false,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-		Interactible = 
-		{
-			float InteractibleSizeScalar = 1.5,
-		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
-		},
-		Hierarchy = 
-		{
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 47,
-				},
-				Named = 
-				{
-					string Name = "WindowSil",
-				},
-				TalkAction = 
-				{
-					string TalkText = "Outside is looking nice today.",
-					int PlaceInConversation = 0,
-				},
-			},
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 48,
+			uint Id = 41,
 		},
 		Named = 
 		{
@@ -2257,8 +2075,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-14.7468, 13.8825, -9.2564],
-			Vec3 Scale = [0.713031, 6.9046, 3.91817],
+			Vec3 Translation = [-14.7468004, 13.8824997, -9.25640011],
+			Vec3 Scale = [0.713030994, 6.90460014, 3.91816998],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -2307,7 +2125,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 49,
+					uint Id = 42,
 				},
 				Named = 
 				{
@@ -2315,7 +2133,7 @@ Level =
 				},
 				TalkAction = 
 				{
-					string TalkText = "Clean Clothing! I should probably put that on.",
+					string TalkText = "This is my closet. It is mine.",
 					int PlaceInConversation = 0,
 				},
 			},
@@ -2325,7 +2143,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 50,
+			uint Id = 43,
 		},
 		Named = 
 		{
@@ -2333,8 +2151,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-8.61237, 11.2449, 10.2224],
-			Vec3 Scale = [0.713031, 1.72086, 5.2646],
+			Vec3 Translation = [-8.61236954, 11.2448997, 10.2223997],
+			Vec3 Scale = [0.713030994, 1.72086, 5.2645998],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -2383,7 +2201,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 51,
+					uint Id = 44,
 				},
 				Named = 
 				{
@@ -2391,7 +2209,7 @@ Level =
 				},
 				TalkAction = 
 				{
-					string TalkText = "I shouldn't get back in bed... I have things to do today!",
+					string TalkText = "A bed is for sleeping... Which Im not doing right now!",
 					int PlaceInConversation = 0,
 				},
 			},
@@ -2401,7 +2219,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 52,
+			uint Id = 45,
 		},
 		Named = 
 		{
@@ -2409,7 +2227,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [3.38941, 0.769801, 16.8002],
+			Vec3 Translation = [3.38941002, 0.769801021, 16.8001995],
 			Vec3 Scale = [3, 3, 3],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -2450,7 +2268,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 53,
+					uint Id = 46,
 				},
 				Named = 
 				{
@@ -2468,16 +2286,16 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 54,
+			uint Id = 47,
 		},
 		Named = 
 		{
-			string Name = "FlowerPot",
+			string Name = "rightCube",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [10.9847, 8.66828, -12.4116],
-			Vec3 Scale = [1.83144, 1.77308, 1],
+			Vec3 Translation = [-1.05121326, 1.52027702, 6.04664612],
+			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Model = 
@@ -2487,7 +2305,7 @@ Level =
 			bool VisibilityEvents = true,
 			bool CastShadows = true,
 			string MaterialName = "4de020863e85bb61:DefaultMaterial",
-			string MeshName = "4de0354322b345ae:Cube",
+			string MeshName = "4de0354322b376ae:Sphere",
 			Vec4 Color = [1, 1, 1, 1],
 		},
 		RigidBody = 
@@ -2520,8 +2338,164 @@ Level =
 		{
 			string HudLevel = "550d1a8d95bab18c:HUDConversations",
 		},
-		ExitRoomController = 
+		Hierarchy = 
 		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 48,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				TalkAction = 
+				{
+					string TalkText = "I am an example of an NPC. Look at Me!",
+					int PlaceInConversation = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 49,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				TalkAction = 
+				{
+					string TalkText = "Did you know that if an NPC is talking a REAAALLLY long time, that you can skip most of what they say? It is true! Simply press the talk button again, and the text will scroll to the end.",
+					int PlaceInConversation = 1,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 50,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				GiveAction = 
+				{
+					string Arctype = "553ce2bad920d281:CardboardBox",
+					string TalkText = "Im now going to simulate an NPC giving you an item!",
+					int PlaceInConversation = 2,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 51,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				GiveAction = 
+				{
+					string Arctype = "553ce2bad920d281:CardboardBox",
+					string TalkText = "Here, Have another!",
+					int PlaceInConversation = 3,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 52,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				GiveAction = 
+				{
+					string Arctype = "553ce2bad920d281:CardboardBox",
+					string TalkText = "I can give you a third one, they are free!",
+					int PlaceInConversation = 3,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 53,
+				},
+				Named = 
+				{
+					string Name = "Transform",
+				},
+				TalkAction = 
+				{
+					string TalkText = "This conversation is over, so the text HUD will close!",
+					int PlaceInConversation = 3,
+				},
+			},
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 54,
+		},
+		Named = 
+		{
+			string Name = "rightCube",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [9.02608109, 1.52027702, 6.04664612],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Model = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = true,
+			string MaterialName = "4de020863e85bb61:DefaultMaterial",
+			string MeshName = "4de0354322b376ae:Sphere",
+			Vec4 Color = [1, 1, 1, 1],
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = false,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		Interactible = 
+		{
+			float InteractibleSizeScalar = 1.5,
+		},
+		Conversation = 
+		{
+			string HudLevel = "550d1a8d95bab18c:HUDConversations",
 		},
 		Hierarchy = 
 		{
@@ -2537,7 +2511,7 @@ Level =
 				},
 				TalkAction = 
 				{
-					string TalkText = "My flowers are doing nicely.",
+					string TalkText = "I am an NPC looking for a box!",
 					int PlaceInConversation = 0,
 				},
 			},
@@ -2551,81 +2525,19 @@ Level =
 				{
 					string Name = "Transform",
 				},
-				GiveAction = 
+				TakeAction = 
 				{
 					string Arctype = "553ce2bad920d281:CardboardBox",
-					string TalkText = "Error, report to playtester: No text assigned",
+					string TalkText = "You wouldnt happen to know where to find a box, would you?",
+					string RejectText = "You dont own a box at all! How rude.",
 					int PlaceInConversation = 1,
 				},
 			},
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 57,
-		},
-		Named = 
-		{
-			string Name = "FlowerPot",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [10.9847, 8.66828, -9.46307],
-			Vec3 Scale = [1.83144, 1.77308, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Model = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = true,
-			string MaterialName = "4de020863e85bb61:DefaultMaterial",
-			string MeshName = "4de0354322b345ae:Cube",
-			Vec4 Color = [1, 1, 1, 1],
-		},
-		RigidBody = 
-		{
-			bool Static = true,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = false,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-		Interactible = 
-		{
-			float InteractibleSizeScalar = 1.5,
-		},
-		Conversation = 
-		{
-			string HudLevel = "550d1a8d95bab18c:HUDConversations",
-		},
-		ExitRoomController = 
-		{
-		},
-		Hierarchy = 
-		{
 			Cog = 
 			{
 				LinkId = 
 				{
-					uint Id = 58,
+					uint Id = 57,
 				},
 				Named = 
 				{
@@ -2633,25 +2545,8 @@ Level =
 				},
 				TalkAction = 
 				{
-					string TalkText = "My flowers are doing nicely.",
-					int PlaceInConversation = 0,
-				},
-			},
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 59,
-				},
-				Named = 
-				{
-					string Name = "Transform",
-				},
-				GiveAction = 
-				{
-					string Arctype = "553ce2bad920d281:CardboardBox",
-					string TalkText = "Error, report to playtester: No text assigned",
-					int PlaceInConversation = 1,
+					string TalkText = "Yay! A Box!",
+					int PlaceInConversation = 2,
 				},
 			},
 		},
