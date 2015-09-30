@@ -123,7 +123,8 @@ class ListOfItems : ZilchComponent
         if((this.GameController.IsButtonPressed(Buttons.B) || 
         this.GameController.IsButtonPressed(Buttons.X) || 
         this.GameController.IsButtonPressed(Buttons.Start) || 
-        this.GameController.IsButtonPressed(Buttons.Back))
+        this.GameController.IsButtonPressed(Buttons.Back) ||
+        Zero.Keyboard.KeyIsPressed(Keys.Space))
         && this.SelectCloses == true)
         {
             //send out a close HUDevent
@@ -134,7 +135,11 @@ class ListOfItems : ZilchComponent
             //Create a ScriptEvent
             var myCloseHUDEvent = new ItemHUDCloseEvent();
             //Attach all available data
-            myCloseHUDEvent.Arctype = Archetype.Find(this.FindClosest().Name);
+            if(this.ListOfItems.Count > 1)
+            {
+                myCloseHUDEvent.Arctype = Archetype.Find(this.FindClosest().Name);
+            }
+            
             //Dispatch it to owner
             this.GameSession.DispatchEvent("ItemHUDCloseEvent", myCloseHUDEvent);
         }
