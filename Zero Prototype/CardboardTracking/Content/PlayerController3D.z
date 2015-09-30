@@ -30,11 +30,11 @@ class PlayerController3D : ZilchComponent
         Trace("delete the next couple of lines after testing ");
         var box = Archetype.Find("CardboardBox");
         var box2 = Archetype.Find("RealBox");
-        this.AddItem(box);
-        this.AddItem(box2);
-        this.AddItem(box);
-        this.AddItem(box2);
-        this.AddItem(box);
+        //this.AddItem(box);
+        //this.AddItem(box2);
+        //this.AddItem(box);
+        //this.AddItem(box2);
+        //this.AddItem(box);
     }
 
     function OnItemHUDCloseEvent(event : ItemHUDCloseEvent)
