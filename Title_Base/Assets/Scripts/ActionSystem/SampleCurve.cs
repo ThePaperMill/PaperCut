@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace ActionSystem
 {
@@ -119,6 +120,27 @@ namespace ActionSystem
         //This is the delegate to the easing equation.
         //It is public because it doesn't really matter if the user changes it.
         public Func<Number<double>, Number<T>, Number<T>, Number<double>, T> Sample;
-    };
+    }
+
+    public class CustomCurve<T> : SampleCurve<T>
+    {
+
+        public CustomCurve(AnimationCurve animationCurve) : base()
+        {
+            Curve = animationCurve;
+            Sample = UpdateCurve;
+        }
+
+        private T UpdateCurve(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        {
+            Number<T> change = (endValue - startValue);
+            
+            return change * Curve.Evaluate((float)(currentTime / duration)) + startValue;
+        }
+
+        public AnimationCurve Curve { get; private set;}
+    }
+
 }
+
 

@@ -28,6 +28,14 @@ namespace ActionSystem
             EndTime = duration;
             EasingCurve = ease;
         }
+        public ActionProperty(Property<T> startVal, T endVal, double duration, AnimationCurve curve) : base()
+        {
+            StartVal = startVal.Get();
+            CurrentVal = startVal;
+            EndVal = endVal;
+            EndTime = duration;
+            EasingCurve = new CustomCurve<T>(curve);
+        }
 
         //Restarts the action, using the same memory location and the current starting value.
         public override void Restart()
