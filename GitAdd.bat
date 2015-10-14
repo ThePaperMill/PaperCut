@@ -1,0 +1,1 @@
+git add --force --all "Art Assets"/* GameDocuments/* "Zero Prototype"/* Title_Base/Assets/*
