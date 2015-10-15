@@ -37,10 +37,10 @@ public class CharacterController3d : MonoBehaviour
 
     public float MoveSpeed = 2.5f;
 
-    Rigidbody RBody;
+    //Rigidbody RBody;
 
     MySweptController SController;
-    CustomDynamicController DController;  
+    //CustomDynamicController DController;  
 
     GameObject Cam = null;
 
@@ -60,9 +60,9 @@ public class CharacterController3d : MonoBehaviour
         MoveRight   = false;
         MenuActive  = false;
 
-        DController = (CustomDynamicController)GetComponent<CustomDynamicController>();
+        
         SController = (MySweptController)GetComponent<MySweptController>();
-        RBody       = (Rigidbody)GetComponent<Rigidbody>();
+        //RBody       = (Rigidbody)GetComponent<Rigidbody>();
         Cam         = (GameObject)GameObject.FindGameObjectWithTag("MainCamera");
     }
 
@@ -122,10 +122,7 @@ public class CharacterController3d : MonoBehaviour
           {
             SController.Jump();
           }
-          else if (DController != null)
-          {
-            DController.Jump();
-          }
+          
       }
 
       if (MoveForward || LeftStickPosition.YPos > 0.3)
@@ -152,11 +149,7 @@ public class CharacterController3d : MonoBehaviour
       {
         SController.SweepUpdate(movement, Time.fixedDeltaTime);
       }
-      else if(DController != null)
-      {
-        DController.MoveDirection = movement.normalized;
-        DController.CustomFixedUpdate();
-      }
+      
     }
 
   /****************************************************************************/

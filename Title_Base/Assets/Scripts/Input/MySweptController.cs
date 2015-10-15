@@ -112,7 +112,7 @@ public class MySweptController : MonoBehaviour
     // owners rigid body
     private Rigidbody RBody = null;
 
-    private CapsuleCollider CCollider = null;
+    //private CapsuleCollider CCollider = null;
 
     // Scalars for changing the amount of acceleration/deceleration
     // at run time without losing the base values set in the properties.
@@ -150,7 +150,7 @@ public class MySweptController : MonoBehaviour
         // Set ourselves to kinematic
         RBody.isKinematic = true;
 
-        CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
+        //CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
 
         RayLayer = 1 << 8;
 

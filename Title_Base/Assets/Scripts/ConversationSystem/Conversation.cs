@@ -11,36 +11,79 @@ namespace Assets.Scripts.ConversationSystem
     {
         
         public List<ConversationAction> Actions = new List<ConversationAction>();
-
-        private int CurrentIndex = 0;
+        private bool Engaged = false;
+        private List<ConversationAction>.Enumerator CurrentNode;
+        
         // Use this for initialization
         void Start()
         {
             
         }
 
-        void Engage()
+        public void Engage()
         {
-            CurrentIndex = 0;
-            Actions[CurrentIndex].StartAction();
+            if(Actions.Count == 0)
+            {
+                return;
+            }
+            CurrentNode = Actions.GetEnumerator();
+            CurrentNode.MoveNext();
+            UITextManager.ConversationText.Appear();
+            Engaged = true;
+            CurrentNode.Current.StartAction();
         }
 
-        void NextAction()
+        public void NextAction()
         {
-            ++CurrentIndex;
-
+            if (Actions.Count == 0)
+            {
+                return;
+            }
+            CurrentNode.Current.StopAction();
+            if (!CurrentNode.MoveNext())
+            {
+                Disengage();
+                return;
+            }
+            CurrentNode.Current.StartAction();
         }
 
-        void PreviousAction()
+        public void Disengage()
         {
+            if (Actions.Count == 0)
+            {
+                return;
+            }
+            UITextManager.ConversationText.Hide();
+            Engaged = false;
+            CurrentNode = Actions.GetEnumerator();
+            CurrentNode.MoveNext();
+        }
 
+        public void PreviousAction()
+        {
+            if (Actions.Count == 0)
+            {
+                return;
+            }
         }
 
 
         // Update is called once per frame
         void Update()
         {
-            
+            if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.P))
+            {
+                if(!Engaged)
+                {
+                    Engage();
+                }
+                else
+                {
+                    NextAction();
+                }
+                
+            }
         }
     }
 }

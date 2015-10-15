@@ -50,7 +50,7 @@ public class SimpleCharacterController : MonoBehaviour
 
   int CastFilter = 0;
 
-  private Vector3 Movement = new Vector3(0, 0, 0);
+  //private Vector3 Movement = new Vector3(0, 0, 0);
 
   /*************************************************************************/
   /*!
