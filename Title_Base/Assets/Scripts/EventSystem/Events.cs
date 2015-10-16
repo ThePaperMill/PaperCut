@@ -10,6 +10,8 @@ public static class Events
     public static readonly String UpdateEvent = "UpdateEvent";
     public static readonly String KeyEvent = "KeyEvent";
     public static readonly String MouseEvent = "MouseEvent";
-    public static readonly String ActivateWindow = "ActivateWindowEvent";
+    public static readonly String ActivateTextWindow = "ActivateTextWindowEvent";
+    public static readonly String DeactivateTextWindow = "DeactivateTextWindowEvent";
+    public static readonly String UpdateText = "UpdateTextEvent";
 }
 

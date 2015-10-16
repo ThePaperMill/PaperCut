@@ -10,7 +10,7 @@ namespace Assets.Scripts.ConversationSystem
     public class TalkAction : ConversationAction
     {
         public String Text;
-
+        private StringEvent StringEventData = new StringEvent();
         public override void Start()
         {
             base.Start();
@@ -18,12 +18,15 @@ namespace Assets.Scripts.ConversationSystem
             EventSystem.EventConnect(this, Events.DefaultEvent, SayHi);
             EventSystem.EventSend(this, Events.DefaultEvent, new StringEvent("I DID NAZI THIS COMING!"));
             EventSystem.EventDisconnect(this, Events.DefaultEvent, SayHi);
+            //this.DispatchEvent(Events.DefaultEvent);
+            
             
         }
 
         public override void StartAction()
         {
-            UITextManager.ConversationText.UpdateText(Text);
+            StringEventData.Message = Text;
+            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
 
         }
 
@@ -45,6 +48,7 @@ namespace Assets.Scripts.ConversationSystem
         void SayHi(EventData eventData)
         {
             Debug.Log((eventData as StringEvent).Message);
+            this.gameObject.Destroy();
         }
 
     }
@@ -57,4 +61,6 @@ namespace Assets.Scripts.ConversationSystem
             Message = message;
         }
     }
+
+    
 }

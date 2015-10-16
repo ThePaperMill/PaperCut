@@ -28,7 +28,7 @@ namespace Assets.Scripts.ConversationSystem
             }
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
-            UITextManager.ConversationText.Appear();
+            EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
             Engaged = true;
             CurrentNode.Current.StartAction();
         }
@@ -54,7 +54,7 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
-            UITextManager.ConversationText.Hide();
+            EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateTextWindow);
             Engaged = false;
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
@@ -84,6 +84,7 @@ namespace Assets.Scripts.ConversationSystem
                 }
                 
             }
+
         }
     }
 }

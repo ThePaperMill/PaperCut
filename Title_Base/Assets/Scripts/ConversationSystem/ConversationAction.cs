@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 namespace Assets.Scripts.ConversationSystem
 {
-    public class ConversationAction : MonoBehaviour
+    public class ConversationAction : EventHandler
     {
         protected Conversation Convo;
         protected bool Active = false;
