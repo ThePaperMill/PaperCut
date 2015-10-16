@@ -17,22 +17,41 @@ namespace Assets.Scripts.ConversationSystem
 
         private string NextPhrase = "sadassdasd";
         private ActionGroup grp = new ActionGroup();
+        private Vector3 InitialPos = new Vector3();
         // Use this for initialization
-        void Start()
+        public UITextManager()
         {
             UITextManager.ConversationText = this;
+        }
+
+        void Start()
+        {
+            InitialPos = this.gameObject.transform.localPosition;
             SpriteText = this.gameObject.transform.FindChild("SpriteText").gameObject.GetComponent<TextMesh>();
             //TextBackground = (GameObject)Instantiate(TextBackground, this.gameObject.transform.position + InitialTextOffsett, new Quaternion());
             //TextBackground.transform.localScale = InitialTextScale;
 
-            var seq = ActionSystem.Action.Sequence(grp);
-            var finalPos = new Vector3();
-            finalPos.z = this.transform.localPosition.z;
-            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+            
             //Action.Delay(seq, 0.3);
             //Action.Call(seq, UpdateText);
             
         }
+        public void Appear()
+        {
+            var seq = ActionSystem.Action.Sequence(grp);
+            var finalPos = new Vector3();
+            finalPos.z = this.transform.localPosition.z;
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+        }
+
+        public void Hide()
+        {
+            var seq = ActionSystem.Action.Sequence(grp);
+            var finalPos = InitialPos;
+            
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+        }
+
         public void UpdateText(string newText)
         {
             NextPhrase = newText;

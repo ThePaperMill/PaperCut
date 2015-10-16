@@ -30,7 +30,7 @@ public class PhysicsCharacterController : MonoBehaviour
 
     // boolean for checking if we are grounded or not
     private bool Grounded = true;
-    private bool Jumping;
+    //private bool Jumping;
 
     // how strong of a jump do we want.
     float JumpPower = 275.0f;
@@ -108,7 +108,7 @@ public class PhysicsCharacterController : MonoBehaviour
             if (Grounded)
             {
                 RBody.AddForce(0, this.JumpPower, 0);
-                Jumping = true;
+                //Jumping = true;
                 Grounded = false;
             }
         }
@@ -141,7 +141,7 @@ public class PhysicsCharacterController : MonoBehaviour
 
         //bool SweepResults = RBody.SweepTest(movement, out RayHit, movement.magnitude * MoveSpeed * Time.fixedDeltaTime);
 
-        var SweepResults = Physics.CapsuleCast(transform.position - transform.up * 0.5f * CCollider.height, transform.position + transform.up * 0.5f * CCollider.height, CCollider.radius, movement, movement.magnitude * MoveSpeed * Time.fixedDeltaTime, CastFilter);
+        //var SweepResults = Physics.CapsuleCast(transform.position - transform.up * 0.5f * CCollider.height, transform.position + transform.up * 0.5f * CCollider.height, CCollider.radius, movement, movement.magnitude * MoveSpeed * Time.fixedDeltaTime, CastFilter);
 
         //var hitColliders = Physics.OverlapSphere(CCollider.center, CCollider.height, CastFilter);
 
@@ -200,7 +200,7 @@ public class PhysicsCharacterController : MonoBehaviour
         if (GroundCheck)
         {
             Grounded = true;
-            Jumping = false;
+            //Jumping = false;
         }
         else
         {

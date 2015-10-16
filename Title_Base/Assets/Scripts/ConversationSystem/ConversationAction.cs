@@ -7,23 +7,30 @@ namespace Assets.Scripts.ConversationSystem
 {
     public class ConversationAction : MonoBehaviour
     {
-        Conversation Convo;
-        void Start()
+        protected Conversation Convo;
+        protected bool Active = false;
+
+        public GameObject Next;
+        public virtual void Start()
         {
-            Convo = this.gameObject.GetComponent<Conversation>();
+            Convo = this.gameObject.transform.parent.GetComponent<Conversation>();
             if(!Convo)
             {
-                Debug.Log("Conversation on object " + this.gameObject.name + "must have a 'Conversation' Component.");
+                Debug.Log("Conversation on object " + this.gameObject.transform.parent.name + " must have a 'Conversation' Component.");
                 return;
             }
-            Convo.Actions.Add(this);
+            
         }
 
         public virtual void StartAction()
         {
-
+            Active = true;
         }
 
+        public virtual void StopAction()
+        {
+            Active = false;
+        }
         // Update is called once per frame
         void Update()
         {
@@ -31,23 +38,5 @@ namespace Assets.Scripts.ConversationSystem
         }
     }
 
-    public class TalkAction : ConversationAction
-    {
-        public String Text;
-        void Start()
-        {
-
-        }
-
-        public override void StartAction()
-        {
-            UITextManager.ConversationText.UpdateText(Text);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-    }
+    
 }
