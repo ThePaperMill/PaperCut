@@ -25,6 +25,11 @@ public class InteractManager : MonoBehaviour
 	{
 		//Store the player object
 		Player = GameObject.Find("Player");
+
+        if(Player == null)
+        {
+            Debug.Log("If we have no player, then how can we have a game?");
+        }
 	}
 	
 	void Update()
