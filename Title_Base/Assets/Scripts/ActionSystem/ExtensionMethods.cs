@@ -155,5 +155,10 @@ public static class ExtensionMethods
     //{
     //    return Delegate.CreateDelegate(typeof(Function<ReturnType>), typeof(This).GetMethod(functionName));
     //}
+
+    static public void Destroy(this GameObject obj)
+    {
+        GameObject.Destroy(obj);
+    }
 }
 

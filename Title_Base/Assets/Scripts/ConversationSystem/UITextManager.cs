@@ -8,7 +8,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     class UITextManager : MonoBehaviour
     {
-        static public UITextManager ConversationText;
+        //static public UITextManager ConversationText;
 
         private TextMesh SpriteText;
         public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -21,7 +21,7 @@ namespace Assets.Scripts.ConversationSystem
         // Use this for initialization
         public UITextManager()
         {
-            UITextManager.ConversationText = this;
+            //UITextManager.ConversationText = this;
         }
 
         void Start()
@@ -32,9 +32,10 @@ namespace Assets.Scripts.ConversationSystem
             //TextBackground.transform.localScale = InitialTextScale;
 
             
-            //Action.Delay(seq, 0.3);
-            //Action.Call(seq, UpdateText);
-            
+            EventSystem.GlobalHandler.Connect(Events.UpdateText, OnUpdateText);
+            EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
+            EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+
         }
         public void Appear()
         {
@@ -44,7 +45,7 @@ namespace Assets.Scripts.ConversationSystem
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
         }
 
-        public void Hide()
+        public void Disappear()
         {
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
@@ -56,6 +57,22 @@ namespace Assets.Scripts.ConversationSystem
         {
             NextPhrase = newText;
             UpdateText();
+        }
+
+        //Recieves a StringEvent
+        public void OnUpdateText(EventData eventData)
+        {
+            var data = eventData as StringEvent;
+            UpdateText(data.Message);
+        }
+
+        public void OnActivateWindowEvent(EventData eventData)
+        {
+            Appear();
+        }
+        public void OnDeactivateWindowEvent(EventData eventData)
+        {
+            Disappear();
         }
 
         void UpdateText()
