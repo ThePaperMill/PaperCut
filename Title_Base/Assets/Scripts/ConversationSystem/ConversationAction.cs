@@ -7,18 +7,26 @@ namespace Assets.Scripts.ConversationSystem
 {
     public class ConversationAction : EventHandler
     {
-        protected Conversation Convo;
-        protected bool Active = false;
 
-        public GameObject Next;
+        protected bool Active = false;
+        
+        public ConversationAction Next {get; protected set; }
+
+        static public bool MoveNextInputRecieved()
+        {
+            var input = InputManager.GetSingleton;
+
+            return input.IsKeyTriggered(KeyCode.Space) || input.IsKeyTriggered(KeyCode.P) || input.IsButtonDown(XINPUT_BUTTONS.BUTTON_A);
+        }
+
         public virtual void Start()
         {
-            Convo = this.gameObject.transform.parent.GetComponent<Conversation>();
-            if(!Convo)
-            {
-                Debug.Log("Conversation on object " + this.gameObject.transform.parent.name + " must have a 'Conversation' Component.");
-                return;
-            }
+            //Convo = this.gameObject.transform.parent.GetComponent<Conversation>();
+            //if(!Convo)
+            //{
+            //    Debug.Log("Conversation on object " + this.gameObject.transform.parent.name + " must have a 'Conversation' Component.");
+            //    return;
+            //}
             
         }
 

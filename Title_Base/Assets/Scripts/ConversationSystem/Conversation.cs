@@ -13,11 +13,23 @@ namespace Assets.Scripts.ConversationSystem
         public List<ConversationAction> Actions = new List<ConversationAction>();
         private bool Engaged = false;
         private List<ConversationAction>.Enumerator CurrentNode;
+        private ConversationAction CurrentAction;
+        public System.Action Test;
         
         // Use this for initialization
         void Start()
         {
-            
+            this.Connect(Events.EngageConversation, OnEngageConversation);
+            this.Connect(Events.DisengageConversation, OnDisengageConversation);
+        }
+
+        public void OnEngageConversation(EventData eventData)
+        {
+            Engage();
+        }
+        public void OnDisengageConversation(EventData eventData)
+        {
+            Disengage();
         }
 
         public void Engage()
@@ -30,7 +42,14 @@ namespace Assets.Scripts.ConversationSystem
             CurrentNode.MoveNext();
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
             Engaged = true;
-            CurrentNode.Current.StartAction();
+            CurrentAction = CurrentNode.Current;
+            CurrentAction.Connect(Events.NextAction, OnNextAction);
+            CurrentAction.StartAction();
+        }
+
+        void OnNextAction(EventData data)
+        {
+            NextAction();
         }
 
         public void NextAction()
@@ -39,13 +58,37 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
-            CurrentNode.Current.StopAction();
-            if (!CurrentNode.MoveNext())
+            if (CurrentAction != null)
             {
-                Disengage();
-                return;
+                CurrentAction.StopAction();
+                CurrentAction.Disconnect(Events.NextAction, OnNextAction);
+                if (CurrentAction.Next != null)
+                {
+                    CurrentAction = CurrentAction.Next;
+                }
+                else
+                {
+                    if (!CurrentNode.MoveNext())
+                    {
+                        Disengage();
+                        return;
+                    }
+                    CurrentAction = CurrentNode.Current;
+                }
             }
-            CurrentNode.Current.StartAction();
+            else
+            {
+                if (!CurrentNode.MoveNext())
+                {
+                    Disengage();
+                    return;
+                }
+                CurrentAction = CurrentNode.Current;
+            }
+
+            CurrentAction.Connect(Events.NextAction, OnNextAction);
+            CurrentAction.StartAction();
+
         }
 
         public void Disengage()
@@ -58,6 +101,7 @@ namespace Assets.Scripts.ConversationSystem
             Engaged = false;
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
+            CurrentAction = CurrentNode.Current;
         }
 
         public void PreviousAction()
@@ -72,17 +116,14 @@ namespace Assets.Scripts.ConversationSystem
         // Update is called once per frame
         void Update()
         {
-            if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.P))
+            if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.P) && !Engaged)
             {
-                if(!Engaged)
-                {
-                    Engage();
-                }
-                else
-                {
-                    NextAction();
-                }
-                
+                Engage();
+
+            }
+            else if (ConversationAction.MoveNextInputRecieved() && Engaged)
+            {
+                this.NextAction();
             }
 
         }

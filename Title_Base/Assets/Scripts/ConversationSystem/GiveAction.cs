@@ -8,13 +8,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.ConversationSystem
 {
-    public class TalkAction : ConversationAction
+    public class GiveAction : ConversationAction
     {
         public String Text;
         private StringEvent StringEventData = new StringEvent();
-
-        public ConversationAction NextAction;
-
         public override void Start()
         {
             base.Start();
@@ -25,13 +22,13 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
-            base.StartAction();
-            Next = NextAction;
             StringEventData.Message = Text;
-            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
+            EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, StringEventData);
             
             
         }
+
+        
 
         // Update is called once per frame
         void Update()
@@ -41,20 +38,6 @@ namespace Assets.Scripts.ConversationSystem
 
         
 
-    }
-
-    public class StringEvent : EventData
-    {
-        public String Message;
-        public StringEvent(String message = "")
-        {
-            Message = message;
-        }
-
-        public static implicit operator String (StringEvent eventData)
-        {
-            return eventData.Message;
-        }
     }
 
     

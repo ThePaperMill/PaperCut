@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -118,6 +117,19 @@ public static class ExtensionMethods
 
         }
 
+        return null;
+    }
+
+    public static MethodInfo FindFunctionByName<T>(this T me, String name)
+    {
+        var infoArray = typeof(T).GetMethods();
+        foreach(var i in infoArray)
+        {
+            if(i.Name == name)
+            {
+                return i;
+            }
+        }
         return null;
     }
 
