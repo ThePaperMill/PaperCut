@@ -16,7 +16,7 @@ namespace Assets.Scripts.ConversationSystem
             base.Start();
             
             EventSystem.EventConnect(this, Events.DefaultEvent, SayHi);
-            EventSystem.EventSend(this, Events.DefaultEvent, new StringEvent("I DID NAZI THIS COMING!"));
+            EventSystem.EventSend(this, Events.DefaultEvent, new StringEvent("No one saw it coming, Josh."));
             EventSystem.EventDisconnect(this, Events.DefaultEvent, SayHi);
             //this.DispatchEvent(Events.DefaultEvent);
             
