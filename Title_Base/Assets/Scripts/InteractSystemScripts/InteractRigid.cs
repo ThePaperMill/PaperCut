@@ -65,7 +65,7 @@ public class InteractRigid : MonoBehaviour
 		foreach(Collider collision in past)
 		{
 			// If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
-			if(collision.gameObject.GetComponent("CharacterController3D") != null && !delay)
+			if(collision.gameObject.name == "Player" && !delay)
 			{
 				if(this.LevelSettings != null)
 				{
@@ -80,7 +80,7 @@ public class InteractRigid : MonoBehaviour
 	void OnTriggerEnter(Collider collision)
 	{
 		// If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
-		if(collision.gameObject.GetComponent("CharacterController3D") != null && !delay)
+		if(collision.gameObject.name == "Player" && !delay)
 		{
 			if(this.LevelSettings != null)
 			{
@@ -101,7 +101,7 @@ public class InteractRigid : MonoBehaviour
 	void OnTriggerExit(Collider collision)
 	{
 		//If the object no longer colliding is the player, then remove the parent object from the interact mnager's array of currently colliding objects.
-		if(collision.gameObject.GetComponent("CharacterController3D") != null && !delay)
+		if(collision.gameObject.name == "Player" && !delay)
 		{
 			if(this.LevelSettings != null)
 			{
