@@ -7,6 +7,9 @@
  * controller.  This was devised when the sweptcontrller, ran into tunneling
  * issues.
  
+ * Always Lerp camera to be behind the player*
+ * 
+ * 
   © 2015 DigiPen, All Rights Reserved.
 */
 /****************************************************************************/
@@ -30,11 +33,15 @@ public class PhysicsCharacterController : MonoBehaviour
 
     // boolean for checking if we are grounded or not
     private bool Grounded = true;
-    //private bool Jumping;
+    private bool Jumping  = false;
+
+    // vector 3 to represent the current ground normal, needed for slopes.
+    Vector3 GroundNormal = new Vector3(0,0,0);
 
     // how strong of a jump do we want.
     float JumpPower = 275.0f;
 
+    // how fast we can move
     public float MoveSpeed = 10.0f;
 
     public float maxspeed = 15.5f;
@@ -51,6 +58,14 @@ public class PhysicsCharacterController : MonoBehaviour
 
     int CastFilter = 0;
 
+    public float MaxGroundSlopeDegreeAngle = 45.0f;
+
+    public float MaxCeilingSlope = 45.0f;
+
+    float Epsilon = 0.001f;
+
+    Vector3 DesiredVelocity = new Vector3();
+
     /*************************************************************************/
     /*!
       \brief
@@ -62,7 +77,41 @@ public class PhysicsCharacterController : MonoBehaviour
         return Grounded;
     }
 
-    // Use this for initialization
+    /*************************************************************************/
+    /*!
+      \brief
+       returns true if the player is grounded
+    */
+    /*************************************************************************/
+    void UpdateVelocity(Vector3 movement)
+    {
+      // remove any upward velocity and normalize the movement vector
+      movement = movement - Vector3.Project(movement, WorldUp);
+
+      // we also want to project our movement onto slopes, so we can climb ramps
+      movement = Vector3.ProjectOnPlane(movement, GroundNormal);
+
+      // normalize the move vector.
+      movement.Normalize();
+
+      // calculate the force we want to move at.
+      Vector3 newVel = (MoveSpeed * movement * Time.deltaTime);
+
+      // apply the force as an impulse
+      RBody.AddForce(newVel, ForceMode.Impulse);
+
+
+      DesiredVelocity = MoveSpeed * movement * Time.fixedDeltaTime;
+      DesiredVelocity.Normalize();      
+    }
+
+
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
     void Start()
     {
         // initialize booleans to false
@@ -77,10 +126,16 @@ public class PhysicsCharacterController : MonoBehaviour
         CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
         
       
-        CastFilter = 1 << 8;
+        CastFilter = 1 << 9;
         CastFilter = ~CastFilter;
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
     void FixedUpdate()
     {
         // this checks what input has been given this frame
@@ -96,22 +151,19 @@ public class PhysicsCharacterController : MonoBehaviour
         }
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
     void MovementUpdate()
     {
+        CheckGround();
+
         Vector3 movement = new Vector3(0, 0, 0);
 
         var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
-
-        // check interact / jump first
-        if (InteractPressed)
-        {
-            if (Grounded)
-            {
-                RBody.AddForce(0, this.JumpPower, 0);
-                //Jumping = true;
-                Grounded = false;
-            }
-        }
 
         if (MoveForward || LeftStickPosition.YPos > 0.3)
         {
@@ -133,51 +185,94 @@ public class PhysicsCharacterController : MonoBehaviour
             movement += Cam.transform.right;
         }
 
-        // remove any upward velocity and normalize the movement vector
-        movement = movement - Vector3.Project(movement, WorldUp);
-        movement.Normalize();
+        UpdateVelocity(movement);
 
-        //RaycastHit RayHit = new RaycastHit();
 
-        //bool SweepResults = RBody.SweepTest(movement, out RayHit, movement.magnitude * MoveSpeed * Time.fixedDeltaTime);
-
-        //var SweepResults = Physics.CapsuleCast(transform.position - transform.up * 0.5f * CCollider.height, transform.position + transform.up * 0.5f * CCollider.height, CCollider.radius, movement, movement.magnitude * MoveSpeed * Time.fixedDeltaTime, CastFilter);
-
-        //var hitColliders = Physics.OverlapSphere(CCollider.center, CCollider.height, CastFilter);
-
-        //foreach(var test in hitColliders)
-        //{
-        //  print(test.gameObject.name);
-        //}
-
-        Vector3 curVel = RBody.velocity;
-
-        Vector3 newVel = (MoveSpeed * movement * Time.fixedDeltaTime) + curVel;
-
-        newVel *= 0.99f;
-
-        RBody.velocity = newVel;
-
-        print("Starting vel" + RBody.velocity);
+        if (Grounded)
+        {
+          // check interact / jump first
+          if (InteractPressed)
+          {
+              RBody.AddForce(0, this.JumpPower, 0);
+              Jumping = true;
+              Grounded = false;
+            }
+        }
 
         // we have to check if we are colliding against a wall in the air, if so cancel our x velocity, i.e. don't stick to wall
-        if (!Grounded)
+        else 
         {
-          //var hitColliders = Physics.OverlapSphere(CCollider.center, CCollider.radius, CastFilter);
+          SnapToGround();
+          var hitColliders = Physics.OverlapSphere(transform.position, CCollider.radius * 1.01f, CastFilter);
 
-          //foreach (var test in hitColliders)
-          //{
-          //  RBody.velocity = new Vector3(0.0f, RBody.velocity.y, 0.0f);
-          //  break;
-          //}
+          RBody.AddForce(0.05f * -WorldUp, ForceMode.Impulse);
+
+          if(hitColliders.Length == 0)
+          {
+            if(PenetratingCollisionCheck(movement))
+            {
+              print("penetrated something.  ^_^");
+            }
+          }
+
+          foreach (var test in hitColliders)
+          {
+            //print(test.name);
+            Vector3 Normal = transform.position - test.transform.position;
+            Normal.Normalize();
+          }
         }  
 
         // clamp velocity
-        //ClampVelocity();
+        ClampVelocity();
+    }
 
-        print(RBody.velocity);
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
+    void OnCollisionEnter(Collision collision)
+    {
+      if (!Grounded)
+        foreach (var contact in collision.contacts)
+        {
+          bool ground = IsGroundSurface(contact.normal);
+          bool ceiling = IsCeilingSurface(contact.normal);
 
-        CheckGround();
+          // we are colliding against a wall
+          if (!ground && !ceiling)
+          {
+            RBody.velocity = new Vector3(0, 0, 0);
+            RBody.AddForce(contact.normal, ForceMode.Impulse);
+          }
+        }
+
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
+    bool PenetratingCollisionCheck(Vector3 movement)
+    {
+        Ray DepthTest = new Ray();
+
+        DepthTest.origin = transform.position;
+        DepthTest.direction = movement.normalized;
+        RaycastHit RayInfo;
+
+        var DepthCheck = Physics.Raycast(DepthTest, out RayInfo, movement.magnitude * MoveSpeed * Time.fixedDeltaTime + CCollider.radius, CastFilter);
+
+        if (DepthCheck)
+        {
+          //print(Mathf.Abs(RayInfo.distance - CCollider.radius));
+        }
+
+        return DepthCheck;
     }
 
     /****************************************************************************/
@@ -188,24 +283,28 @@ public class PhysicsCharacterController : MonoBehaviour
     /****************************************************************************/
     void CheckGround()
     {
-        Ray GroundRay = new Ray();
+      Ray GroundRay = new Ray();
 
-        GroundRay.direction = -WorldUp;
-        GroundRay.origin = transform.position; // +(-WorldUp * CCollider.height);
+      GroundRay.direction = -WorldUp;
+      GroundRay.origin = transform.position; // +(-WorldUp * CCollider.height);
 
-        RaycastHit Hitinfo = new RaycastHit();
+      RaycastHit Hitinfo = new RaycastHit();
 
-        bool GroundCheck = Physics.SphereCast(GroundRay, CCollider.radius, out Hitinfo, GroundContactDistance + CCollider.height * 0.5f);
+      bool GroundCheck = Physics.SphereCast(GroundRay, CCollider.radius, out Hitinfo, GroundContactDistance + CCollider.height * 0.49f);
 
-        if (GroundCheck)
-        {
-            Grounded = true;
-            //Jumping = false;
-        }
-        else
-        {
-            Grounded = false;
-        }
+      if (GroundCheck)
+      {
+        GroundNormal = Hitinfo.normal;
+
+        Grounded = true;
+        Jumping = false;
+      }
+      else
+      {
+        GroundNormal = WorldUp;
+
+        Grounded = false;
+      }
     }
 
     /*************************************************************************/
@@ -258,5 +357,67 @@ public class PhysicsCharacterController : MonoBehaviour
         MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
         MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
         InteractPressed = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+       Called each frame to get the updated input for the player
+    */
+    /****************************************************************************/
+    private void SnapToGround()
+    {
+      RaycastHit hitInfo;
+
+      if (Physics.SphereCast(transform.position, CCollider.radius, Vector3.down, out hitInfo, ((CCollider.height / 2f) - CCollider.radius) + 0.5f))
+      {
+        if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
+        {
+          RBody.velocity = Vector3.ProjectOnPlane(RBody.velocity, hitInfo.normal);
+        }
+      }
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Converts Radians to Degrees
+    */
+    /****************************************************************************/
+    float ToDegrees(float Rads)
+    {
+      return (Rads * 180.0f) / Mathf.PI;
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+         Determines if a given normal is a ground surface relative to the player
+      
+      \param normal
+         A vector3 representing the normal.
+    */
+    /****************************************************************************/
+    bool IsGroundSurface(Vector3 normal)
+    {
+      float cosineOfAngle = Vector3.Dot(normal, WorldUp);
+      cosineOfAngle = Mathf.Clamp(cosineOfAngle, -1.0f, 1.0f);
+      float angle = Mathf.Acos(cosineOfAngle);
+
+      return ToDegrees(angle - Epsilon) <= MaxGroundSlopeDegreeAngle;
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+       Determines if a given normal is a ceiling surface relative to the player
+    */
+    /****************************************************************************/
+    bool IsCeilingSurface(Vector3 normal)
+    {
+      float cosineOfAngle = Vector3.Dot(normal, -WorldUp);
+      cosineOfAngle = Mathf.Clamp(cosineOfAngle, -1.0f, 1.0f);
+      float angle = Mathf.Acos(cosineOfAngle);
+      return ToDegrees(angle - this.Epsilon) <= this.MaxCeilingSlope;
     }
 }

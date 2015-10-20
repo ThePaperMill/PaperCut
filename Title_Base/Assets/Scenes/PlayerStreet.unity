@@ -1265,7 +1265,7 @@ Transform:
   - {fileID: 1719436766}
   - {fileID: 1898598385}
   m_Father: {fileID: 0}
-  m_RootOrder: 114
+  m_RootOrder: 22
 --- !u!65 &48761273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3666,7 +3666,7 @@ Transform:
   - {fileID: 1794935542}
   - {fileID: 362370452}
   m_Father: {fileID: 0}
-  m_RootOrder: 116
+  m_RootOrder: 24
 --- !u!65 &154188856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6093,6 +6093,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6dceeffe664badf4f895dac75e6ad7c2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &243237701 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 187006, guid: 6dceeffe664badf4f895dac75e6ad7c2, type: 2}
+  m_PrefabInternal: {fileID: 243237700}
+--- !u!114 &243237702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 243237701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375e15ebf9a90084e907184b4e7c8a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForwardEvents: 0
+  Gravity: 10
+  JumpPower: 5
+  JumpDelayTime: .150000006
+  JumpCancelFactor: .5
+  MaxMoveSpeed: 10
+  MaxFallSpeed: 50
+  GroundAcceleration: 50
+  AirAcceleration: 10
+  GroundDeceleration: 50
+  AirDeceleration: 10
+  MaxGroundSlopeDegreeAngle: 45
+  MaxCeilingSlope: 45
+  GroundContactDistance: .100000001
+--- !u!136 &243237703
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 243237701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .0114242062
+  m_Height: .0474571586
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &243237704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 243237701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1119082e999feeb41b817df4a16c8076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpPower: 200
+  MoveSpeed: 2.5
+--- !u!54 &243237705
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 243237701}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &246797520
 GameObject:
   m_ObjectHideFlags: 0
@@ -6185,7 +6255,7 @@ Transform:
   - {fileID: 468257173}
   - {fileID: 198420227}
   m_Father: {fileID: 0}
-  m_RootOrder: 118
+  m_RootOrder: 35
 --- !u!65 &246797522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7148,7 +7218,7 @@ Transform:
   - {fileID: 743978108}
   - {fileID: 1232630619}
   m_Father: {fileID: 0}
-  m_RootOrder: 112
+  m_RootOrder: 19
 --- !u!65 &279126697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19931,7 +20001,6 @@ GameObject:
   - 92: {fileID: 897741037}
   - 124: {fileID: 897741036}
   - 81: {fileID: 897741035}
-  - 114: {fileID: 897741040}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -20001,24 +20070,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 897741034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.41599989, y: 6.4369998, z: -8.30300045}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 121
---- !u!114 &897741040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 897741034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916704a20ab57244ca3121d821cec1b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AimTarget: {fileID: 1412619039}
-  PosTarget: {fileID: 1412619039}
+  m_RootOrder: 122
 --- !u!1001 &900589998
 Prefab:
   m_ObjectHideFlags: 0
@@ -24551,7 +24607,7 @@ Transform:
   - {fileID: 1032593078}
   - {fileID: 1075575147}
   m_Father: {fileID: 0}
-  m_RootOrder: 119
+  m_RootOrder: 50
 --- !u!65 &1084543920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26878,7 +26934,7 @@ Transform:
   - {fileID: 418176301}
   - {fileID: 855366000}
   m_Father: {fileID: 0}
-  m_RootOrder: 109
+  m_RootOrder: 21
 --- !u!65 &1177147606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31701,52 +31757,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 461972, guid: 852e8de186552ef44b73753b2353d76f, type: 2}
   m_PrefabInternal: {fileID: 1411587140}
---- !u!1 &1412619039 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 187006, guid: 6dceeffe664badf4f895dac75e6ad7c2, type: 2}
-  m_PrefabInternal: {fileID: 243237700}
---- !u!114 &1412619040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1412619039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7926213b5447f445a8bff13bf5effe3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  maxspeed: 15.5
-  WorldUp: {x: 0, y: 1, z: 0}
---- !u!136 &1412619041
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1412619039}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .0114242062
-  m_Height: .0474571586
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1412619042
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1412619039}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1001 &1415456894
 Prefab:
   m_ObjectHideFlags: 0
