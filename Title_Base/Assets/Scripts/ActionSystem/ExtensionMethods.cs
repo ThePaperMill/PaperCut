@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -156,5 +155,10 @@ public static class ExtensionMethods
     //{
     //    return Delegate.CreateDelegate(typeof(Function<ReturnType>), typeof(This).GetMethod(functionName));
     //}
+
+    static public void Destroy(this GameObject obj)
+    {
+        GameObject.Destroy(obj);
+    }
 }
 
