@@ -1136,8 +1136,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508152163}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0149311768, y: .0185000002, z: -.461726576}
+  m_LocalRotation: {x: .339956969, y: 0, z: 0, w: .940441012}
+  m_LocalPosition: {x: .0149312019, y: .202000007, z: -.263999999}
   m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
   m_Children: []
   m_Father: {fileID: 174712443}
@@ -2397,6 +2397,63 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33fa851b79119084abad1eacdc693847, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1034026256 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 187006, guid: 6dceeffe664badf4f895dac75e6ad7c2, type: 2}
+  m_PrefabInternal: {fileID: 640703740}
+--- !u!114 &1034026257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034026256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27917e4d2c7713f499034fb190ede6c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  StickToSlope: 1
+  MaxSpeed: 5
+  MoveSpeed: 5
+  MovePower: 3
+  AirControl: .150000006
+  WalkableSlopeAngle: 80
+  InitialJumpVelocity: 6
+  AdditiveJumpVelocity: 2
+  AdditiveJumpTime: 0
+  JumpLagTimer: .230000004
+  GroundContactDistance: .00999999978
+  AdditionalGravity: 0
+  MoveDirection: {x: 0, y: 0, z: 0}
+--- !u!136 &1034026258
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034026256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .0114242062
+  m_Height: .0474571586
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1034026259
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034026256}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!4 &1065268202 stripped
 Transform:
   m_PrefabParentObject: {fileID: 442104, guid: 50a3af1f42adfdf44ac32eceb123a219, type: 2}
