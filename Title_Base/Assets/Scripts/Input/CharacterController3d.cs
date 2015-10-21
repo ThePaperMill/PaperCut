@@ -73,7 +73,7 @@ public class CharacterController3d : MonoBehaviour
       issues.  
     */
     /****************************************************************************/
-	  void LateUpdate ()
+	void LateUpdate ()
     {
       // this checks what input has been given this frame
       UpdateInput();

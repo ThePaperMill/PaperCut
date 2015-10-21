@@ -26,7 +26,7 @@ public class PlayerAnimation : MonoBehaviour
       in for the player to animate.
   */
   /****************************************************************************/
-	void Start () 
+  void Start () 
   {
     MRenderer = GetComponent<MeshRenderer>();
 
@@ -36,7 +36,7 @@ public class PlayerAnimation : MonoBehaviour
     // create a new gameobject that only has a model and 
     PlayerModel = new GameObject();
 
-    PlayerModel.transform.localScale = gameObject.transform.localScale;
+    PlayerModel.transform.localScale = gameObject.transform.lossyScale;
 
     var tempMRender = PlayerModel.AddComponent<MeshRenderer>();
     var tempModel   = PlayerModel.AddComponent<MeshFilter>();

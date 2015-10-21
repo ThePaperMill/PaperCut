@@ -42,7 +42,9 @@ public class MySweptController : MonoBehaviour
     
     // You should know what gravity is.
     public float Gravity = 10.0f;
-    
+
+    public float PushForce = 2.0f;
+
     // Instantanious velocity in the WorldUp direction when jump is activated.
     public float JumpPower = 5.0f;
 
@@ -112,7 +114,7 @@ public class MySweptController : MonoBehaviour
     // owners rigid body
     private Rigidbody RBody = null;
 
-    //private CapsuleCollider CCollider = null;
+    private CapsuleCollider CCollider = null;
 
     // Scalars for changing the amount of acceleration/deceleration
     // at run time without losing the base values set in the properties.
@@ -150,7 +152,7 @@ public class MySweptController : MonoBehaviour
         // Set ourselves to kinematic
         RBody.isKinematic = true;
 
-        //CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
+        CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
 
         RayLayer = 1 << 8;
 
@@ -321,10 +323,12 @@ public class MySweptController : MonoBehaviour
         {
             Jumping = false;
         }
-        
+
         // Does a "collide and slide" like behavior, starting with move direction
         SweptCollision(MoveDIR, dt, false);
-        
+
+        PenetratingCollisionCheck(dir, MoveDIR.magnitude * dt);
+
         // Do a sweep for every kinematic object the character is in contact with
         // using the velocity of that object. (for moving platforms and such)
         foreach (GameObject GB in this.KinematicContacts)
@@ -416,6 +420,21 @@ public class MySweptController : MonoBehaviour
                     test.ChangeLevel();
                 }
              }
+             else
+            {
+                    Rigidbody temp = result.collider.gameObject.GetComponent<Rigidbody>();
+
+                    if(temp != null)
+                    {
+                        Vector3 force = sweepVelocity * PushForce;
+
+                        //project out upward force 
+                        force = force - Vector3.Project(force, WorldUp);
+
+                        temp.AddForceAtPosition(force, result.point,ForceMode.Impulse);
+                    }
+            }
+
 
               // calculate time of collision
               float sweepTime = 0.0f;
@@ -473,7 +492,7 @@ public class MySweptController : MonoBehaviour
                 horizontalNormal = horizontalNormal.normalized;
                 sweepVelocity -= Vector3.Project(sweepVelocity, horizontalNormal);
                 sweepVelocity += verticalSweep;
-              }
+             }
 
               // Jumping upward into the ceiling.
               else if (!Grounded && ceiling && Vector3.Dot(sweepVelocity, WorldUp) > 0.0)
@@ -585,19 +604,48 @@ public class MySweptController : MonoBehaviour
               collision = true;
               break;
             }
-            
+
             // If we aren't colliding, move unhindered
             if (!collision)
             {
                 // Move by the remaining sweep amount.
                 transform.position += sweepVelocity * timeLeft;
-                
+
                 // No more interations to do, sweep is completed.
                 break;
             }
         }
     }
     
+    private bool PenetratingCollisionCheck(Vector3 movement, float distance)
+    {
+        movement = movement - Vector3.Project(movement, WorldUp);
+
+        float actualRadius = CCollider.bounds.extents.x;
+
+        Ray DepthTest = new Ray();
+
+        DepthTest.origin = transform.position;
+        DepthTest.direction = movement.normalized;
+        RaycastHit RayInfo;
+
+        Debug.DrawRay(DepthTest.origin, DepthTest.direction);
+
+        var DepthCheck = Physics.Raycast(DepthTest, out RayInfo, CCollider.radius, RayLayer);
+
+        if (DepthCheck)
+        {
+            float ActualDistance = RayInfo.distance - actualRadius;
+
+            if (ActualDistance < 0)
+            {
+                transform.position -= movement.normalized * Mathf.Abs(ActualDistance);
+            }
+        }
+
+        return DepthCheck;
+    }
+
     // A downward cast for snapping the character to the ground, only done when
     // grounded to stay in contact with the ground, unless moving too fast.
     private void SnapToGround()

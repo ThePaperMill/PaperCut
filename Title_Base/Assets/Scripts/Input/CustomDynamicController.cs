@@ -39,23 +39,23 @@ public class CustomDynamicController : MonoBehaviour
 
     //The up vector of the character
     Vector3 WorldUp = new Vector3(0.0f, 1.0f, 0.0f);
-    
-    // The maximum speed the character can achieve on its own
-    public float MaxSpeed = 5.0f;
 
-    public float MoveSpeed = 5.0f;
+    public float moveSpeed = 5.0f;
+
+    // The maximum speed the character can achieve on its own
+    public float MaxSpeed = 1.5f;
 
     // the speed the player accelerates at.
-    public float MovePower = 3.0f;
+    public float MovePower = 3.5f;
     
     // the amount of control the player has in the air.
     public float AirControl = 0.15f;
     
     // the angle the player can walk up
-    public float WalkableSlopeAngle = 80.0F;
+    public float WalkableSlopeAngle = 45.0F;
 
     // the starting jump value applied when jump is pressed
-    public float InitialJumpVelocity = 6.0f;
+    public float InitialJumpVelocity = 4.0f;
 
     // Extra velocity upward that is applied after a jump is initiated, every frame
     // for a specified amount of time (AdditiveJumpTime)
@@ -144,7 +144,7 @@ public class CustomDynamicController : MonoBehaviour
     void LateUpdate()
     {
         // if the character controller is not active, do nothing
-        if (this.Active == false)
+        if (Active == false)
         {
             return;
         }
@@ -219,7 +219,6 @@ public class CustomDynamicController : MonoBehaviour
 
         if(StickToSlope && !Jumping && State == PlayerState.Idle)
         {
-          //print(RBody.velocity);
           if (GroundNormal != WorldUp)
           {
             RBody.velocity = new Vector3(0, RBody.velocity.y, 0);
@@ -229,8 +228,6 @@ public class CustomDynamicController : MonoBehaviour
         ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
-
-        print(RBody.velocity);
     }
 
     /****************************************************************************/
@@ -306,7 +303,7 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     float GetMaxSpeed()
     {
-        float speed = MoveSpeed;
+        float speed = moveSpeed;
         
         // If we are grounded return the max speed
         if(OnGround)
@@ -383,19 +380,24 @@ public class CustomDynamicController : MonoBehaviour
         TimeSinceLastDirectContact += dt;
         
         // We want to iterate through all objects we're in contact with in order
-        // to determine whether or not we have any objects under us (ground)
+        // to determine whether or not we are in contact with the ground
         Ray GroundRay = new Ray();
 
+        // cast downward
         GroundRay.direction = -WorldUp;
-        GroundRay.origin = transform.position;
+
+        //start at the center of the collider
+        GroundRay.origin = CCollider.bounds.center;
 
         RaycastHit Hitinfo = new RaycastHit();
 
-        float RayDistance = GroundContactDistance + CCollider.height * 0.5f - CCollider.radius;
+        // use bounds to get the correct height of the collider.
+        float RayDistance = GroundContactDistance + CCollider.bounds.extents.y - (CCollider.bounds.extents.x);
 
-        var GroundCheck = Physics.SphereCast(GroundRay, 0.95f * CCollider.radius, out Hitinfo, RayDistance, CastFilter);
+        // use sphere cast to 
+        var GroundCheck = Physics.SphereCast(GroundRay, 0.95f * CCollider.bounds.extents.x, out Hitinfo, RayDistance, CastFilter);
 
-        Debug.DrawRay(GroundRay.origin, GroundRay.direction);
+        Debug.DrawLine(GroundRay.origin, GroundRay.origin + new Vector3(0, RayDistance, 0));
 
         if(GroundCheck)
         {
@@ -418,7 +420,7 @@ public class CustomDynamicController : MonoBehaviour
             if (IsGround(surfaceNormal))
             {
                 // Contact is valid ground
-                this.OnGround = true;
+                OnGround = true;
 
                 if (Jumping == false)
                 {
@@ -493,8 +495,6 @@ public class CustomDynamicController : MonoBehaviour
       {
         Jump();
       }
-      else
-        print("Can't Jump");
     }
 
     /****************************************************************************/
@@ -617,16 +617,27 @@ public class CustomDynamicController : MonoBehaviour
       {
         ClampSpeed.x = MaxSpeed;
       }
-      if (RBody.velocity.y > MaxSpeed)
-      {
-        ClampSpeed.y = MaxSpeed;
-      }
+      //if (RBody.velocity.y > MaxSpeed)
+      //{
+      //  ClampSpeed.y = MaxSpeed;
+      //}
       if (RBody.velocity.z > MaxSpeed)
       {
         ClampSpeed.z = MaxSpeed;
       }
 
-      print(ClampSpeed);
+      if (RBody.velocity.x < -MaxSpeed)
+      {
+          ClampSpeed.x = -MaxSpeed;
+      }
+      //if (RBody.velocity.y < -MaxSpeed)
+      //{
+      //    ClampSpeed.y = -MaxSpeed;
+      //}
+      if (RBody.velocity.z < -MaxSpeed)
+      {
+          ClampSpeed.z = -MaxSpeed;
+      }
 
       RBody.velocity = ClampSpeed;
     }
