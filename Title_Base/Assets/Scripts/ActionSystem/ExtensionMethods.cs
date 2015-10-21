@@ -120,6 +120,19 @@ public static class ExtensionMethods
         return null;
     }
 
+    public static MethodInfo FindFunctionByName<T>(this T me, String name)
+    {
+        var infoArray = typeof(T).GetMethods();
+        foreach(var i in infoArray)
+        {
+            if(i.Name == name)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
     //public static Delegate GetDelegate<This>(this This me, System.Action function)
     //{
     //    return Delegate.CreateDelegate(typeof(System.Action), function.Method);

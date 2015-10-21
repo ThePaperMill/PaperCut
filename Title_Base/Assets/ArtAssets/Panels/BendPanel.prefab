@@ -11,8 +11,7 @@ GameObject:
   - 33: {fileID: 3375094}
   - 23: {fileID: 2312784}
   - 54: {fileID: 5471358}
-  - 65: {fileID: 6585350}
-  - 114: {fileID: 11494404}
+  - 114: {fileID: 11423330}
   m_Layer: 0
   m_Name: BendPanel
   m_TagString: Untagged
@@ -30,6 +29,7 @@ GameObject:
   - 4: {fileID: 401470}
   - 33: {fileID: 3315082}
   - 23: {fileID: 2327390}
+  - 65: {fileID: 6507688}
   m_Layer: 0
   m_Name: 10xSide (2)
   m_TagString: Untagged
@@ -43,9 +43,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173560}
-  m_LocalRotation: {x: -.707105994, y: 0, z: 0, w: .707107604}
-  m_LocalPosition: {x: 0, y: 2.20537186e-06, z: -8.33333397}
-  m_LocalScale: {x: 333.333374, y: 333.333374, z: 40}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 1.37090683e-06}
+  m_LocalPosition: {x: -0, y: 0, z: -10}
+  m_LocalScale: {x: 400, y: 40, z: 400}
   m_Children: []
   m_Father: {fileID: 474734}
   m_RootOrder: 0
@@ -55,9 +55,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157050}
-  m_LocalRotation: {x: .707105994, y: 0, z: 0, w: .707107604}
-  m_LocalPosition: {x: 3.5, y: 0, z: -3}
-  m_LocalScale: {x: .0599999987, y: .5, z: .0599999987}
+  m_LocalRotation: {x: .707106113, y: 3.15437944e-07, z: 2.92766543e-07, w: .707107484}
+  m_LocalPosition: {x: -3.3499999, y: -.0348749757, z: 3.42975259}
+  m_LocalScale: {x: .0500000007, y: .5, z: .0500000007}
   m_Children:
   - {fileID: 401470}
   m_Father: {fileID: 0}
@@ -139,19 +139,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 94
   m_CollisionDetection: 0
---- !u!65 &6585350
+--- !u!65 &6507688
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157050}
+  m_GameObject: {fileID: 173560}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 20}
-  m_Center: {x: 5.96046448e-08, y: 0, z: -10.5}
---- !u!114 &11494404
+  m_Size: {x: .00249999994, y: .049999997, z: .0500000007}
+  m_Center: {x: 0, y: 7.4505806e-09, z: 1.86264515e-09}
+--- !u!114 &11423330
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 157050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30931aabaad835047978edd214db878a, type: 3}
+  m_Script: {fileID: 11500000, guid: d2356ec2d3e179e43b077c3097d4c75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using UnityEngine;
 
 
@@ -11,45 +12,34 @@ namespace Assets.Scripts.ConversationSystem
     {
         public String Text;
         private StringEvent StringEventData = new StringEvent();
+
+        public ConversationAction NextAction;
+
         public override void Start()
         {
             base.Start();
             
-            EventSystem.EventConnect(this, Events.DefaultEvent, SayHi);
-            EventSystem.EventSend(this, Events.DefaultEvent, new StringEvent("No one saw it coming, Josh."));
-            EventSystem.EventDisconnect(this, Events.DefaultEvent, SayHi);
-            //this.DispatchEvent(Events.DefaultEvent);
             
             
         }
 
         public override void StartAction()
         {
+            base.StartAction();
+            Next = NextAction;
             StringEventData.Message = Text;
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
-
+            
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (!Active)
-            {
-                return;
-            }
-            if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space))
-            {
-                Convo.NextAction();
-
-            }
+            
         }
 
-
-        void SayHi(EventData eventData)
-        {
-            Debug.Log((eventData as StringEvent).Message);
-            this.gameObject.Destroy();
-        }
+        
 
     }
 
@@ -59,6 +49,11 @@ namespace Assets.Scripts.ConversationSystem
         public StringEvent(String message = "")
         {
             Message = message;
+        }
+
+        public static implicit operator String (StringEvent eventData)
+        {
+            return eventData.Message;
         }
     }
 
