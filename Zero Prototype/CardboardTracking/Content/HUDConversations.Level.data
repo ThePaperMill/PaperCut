@@ -22,7 +22,7 @@ Level =
 		{
 			bool Active = true,
 			bool WakeUpOnChange = false,
-			float Drag = 0.7,
+			float Drag = 0.699999988,
 		},
 		CameraViewport = 
 		{
@@ -76,8 +76,8 @@ Level =
 			bool DrawAxisOrigins = true,
 			bool AlwaysDrawInEditor = true,
 			bool DrawInGame = false,
-			Vec4 GridColor = [0.5, 0.5, 0.5, 0.4],
-			Vec4 GridHiLight = [0, 0, 0, 0.4],
+			Vec4 GridColor = [0.5, 0.5, 0.5, 0.400000006],
+			Vec4 GridHiLight = [0, 0, 0, 0.400000006],
 			int HilightInterval = 10,
 			bool FollowEditorCamera = false,
 		},
@@ -112,9 +112,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-1.51042, 24.7209, 0.242583],
+			Vec3 Translation = [16.0731258, 30.1296978, 11.2069702],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0.11229, -0.0286031, 0.00323363, 0.993259],
+			Quat Rotation = [-0.0726424679, 0.376684189, 0.029645592, 0.923013151],
 		},
 		Camera = 
 		{
@@ -129,15 +129,15 @@ Level =
 		EditorCameraController = 
 		{
 			ControlMode ControlMode = Orbit,
-			float LookDistance = 6.78429,
-			float VerticalAngle = -0.225148,
-			float HorizontalAngle = 0.0575785,
-			Vec3 LookTarget = [-1.12986, 26.2355, -6.35952],
+			float LookDistance = 24.8935547,
+			float VerticalAngle = 0.157079116,
+			float HorizontalAngle = -0.774943888,
+			Vec3 LookTarget = [-1.12986004, 26.2355003, -6.35951996],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
 		{
-			Vec4 ClearColor = [0.155, 0.155, 0.155, 1],
+			Vec4 ClearColor = [0.155000001, 0.155000001, 0.155000001, 1],
 			bool DrawNonVisible = true,
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
@@ -158,7 +158,7 @@ Level =
 		{
 			Vec3 Translation = [0, 24, 0],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.156434, 0, 0, 0.987688],
+			Quat Rotation = [-0.156434, 0, 0, 0.987688005],
 		},
 		Camera = 
 		{
@@ -170,7 +170,7 @@ Level =
 			float FarPlane = 500,
 			float Size = 20,
 		},
-		Microphone = 
+		SoundListener = 
 		{
 			bool Active = true,
 		},
@@ -187,9 +187,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 25.4233, -8.12129],
-			Vec3 Scale = [4, 4, 4.49054],
-			Quat Rotation = [0.125831, 0, 0, 0.992052],
+			Vec3 Translation = [0, 25.4232998, -8.12129021],
+			Vec3 Scale = [4, 4, 4.49054003],
+			Quat Rotation = [0.125830993, 0, 0, 0.992052019],
 		},
 		Model = 
 		{
@@ -203,8 +203,8 @@ Level =
 		},
 		SampleCurveTest = 
 		{
-			Vec3 DistanceFromStartingPosition = [0, 1.95, 0],
-			float RandomicityValue = 0.1,
+			Vec3 DistanceFromStartingPosition = [0, 1.95000005, 0],
+			float RandomicityValue = 0.100000001,
 		},
 		Hierarchy = 
 		{
@@ -220,8 +220,8 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [0, -0.217032, 0.05],
-					Vec3 Scale = [0.806046, 0.794236, 1.23408],
+					Vec3 Translation = [0, -0.217032, 0.0500000007],
+					Vec3 Scale = [0.806046009, 0.794236004, 1.23407996],
 					Quat Rotation = [0, 0, 0, 1],
 				},
 				Model = 
@@ -236,7 +236,7 @@ Level =
 				},
 				HighlightController = 
 				{
-					float Height = 0.01,
+					float Height = 0.00999999978,
 					float EaseSpeed = 3,
 					Enum EaseType = QuadInOut,
 					float RotateSpeedDegrees = 0,
@@ -254,8 +254,8 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [0, 0.0120756, 0.026567],
-					Vec3 Scale = [0.11, 0.108388, 1.01817],
+					Vec3 Translation = [0, 0.0120756002, 0.0265670009],
+					Vec3 Scale = [0.109999999, 0.108387999, 1.01817],
 					Quat Rotation = [0, 0, 0, 1],
 				},
 				SpriteText = 
@@ -295,9 +295,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-0.0588951, 28.6674, -1.75781],
+			Vec3 Translation = [-0.0588950999, 28.6674004, -1.75781],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.149063, -0.147754, -0.688704, 0.693999],
+			Quat Rotation = [-0.149063006, -0.147753999, -0.688704014, 0.693998992],
 		},
 		Light = 
 		{
@@ -308,10 +308,45 @@ Level =
 			LightType LightType = Box,
 			Vec4 Color = [1, 1, 1, 1],
 			float Intensity = 1,
-			float Range = 106.897,
+			float Range = 106.897003,
 			float Falloff = 1,
 			float Angle = 61,
-			float Size = 128.38,
+			float Size = 128.380005,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 8,
+		},
+		Named = 
+		{
+			string Name = "Sprite",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-1.12986004, 26.2355003, -9.588974],
+			Vec3 Scale = [259.514923, 259.514923, 259.514923],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 0.25],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
 		},
 	},
 },
