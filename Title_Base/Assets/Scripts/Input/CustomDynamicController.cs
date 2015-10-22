@@ -347,7 +347,7 @@ public class CustomDynamicController : MonoBehaviour
           
           if (Jumping == false)
           {
-            this.InAirFromJump = false;
+            InAirFromJump = false;
           }
 
           GroundNormal = surfaceNormal;

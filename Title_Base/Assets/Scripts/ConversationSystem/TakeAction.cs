@@ -46,8 +46,8 @@ namespace Assets.Scripts.ConversationSystem
         {
             StringEventData.Message = ItemName;
             //Ask the inventory to give me an item.
-            this.Connect(Events.RecievedItem, OnRecievedItem);
-
+            //this.Connect(Events.RecievedItem, OnRecievedItem);
+            EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
             //If they have the item
             if (!false)
             {
@@ -58,30 +58,34 @@ namespace Assets.Scripts.ConversationSystem
             //    Next = NextIfNone;
             //}
             
-            this.DispatchEvent(Events.RecievedItem);
+            //this.DispatchEvent(Events.RecievedItem);
         }
 
         void OnRecievedItem(EventData eventData)
         {
+            
             //If we recieved the proper item.
-            if(true)
+            var data = eventData as RecievedItemEvent;
+            //if the item is null
+            if (data.Info.ItemName == "")
             {
-                BoolEventData.IsTrue = true;
-                Next = NextIfTrue;
+                Next = NextIfNone;
             }
-            //else
-            //{
-            //    BoolEventData.IsTrue = false;
-            //    //if the item is null
-            //    if (false != null)
-            //    {
-            //        Next = NextIfFalse;
-            //    }
-            //    else
-            //    {
-            //        Next = NextIfNone;
-            //    }
-            //}
+            else
+            {
+                
+                if (data.Info.ItemName == this.ItemName)
+                {
+                    BoolEventData.IsTrue = true;
+                    Next = NextIfTrue;
+                }
+                else
+                {
+                    BoolEventData.IsTrue = false;
+                    Next = NextIfFalse;
+                }
+            }
+            
 
             this.Disconnect(Events.RecievedItem, OnRecievedItem);
             //Dispatching whether or not the correct item was recieved.

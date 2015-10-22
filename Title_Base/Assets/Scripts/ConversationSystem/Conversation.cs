@@ -8,8 +8,7 @@ namespace Assets.Scripts.ConversationSystem
 {
 
     public class Conversation : MonoBehaviour
-    {
-        
+    { 
         public List<ConversationAction> Actions = new List<ConversationAction>();
         private bool Engaged = false;
         private List<ConversationAction>.Enumerator CurrentNode;
