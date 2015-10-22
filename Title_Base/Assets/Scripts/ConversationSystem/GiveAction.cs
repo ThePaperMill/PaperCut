@@ -11,6 +11,9 @@ namespace Assets.Scripts.ConversationSystem
     public class GiveAction : ConversationAction
     {
         public String Text;
+
+        public ItemInfo ItemToGive = new ItemInfo();
+
         private StringEvent StringEventData = new StringEvent();
         public override void Start()
         {

@@ -23,8 +23,12 @@ public static class Events
     public static readonly String NextAction = "NextActionEvent";
 
     //Inventory Events
-    public static readonly String RequestItem = "RequestItemEvent";
+    public static readonly String RequestItem        = "RequestItemEvent";
     public static readonly String RecievedProperItem = "RecievedProperItemEvent";
-    public static readonly String RecievedItem = "RecievedItemEvent";
+    public static readonly String RecievedItem       = "RecievedItemEvent";
+    public static readonly String MoveItem           = "MoveItem";
+    public static readonly String ActivateSelector   = "ActivateSelector";
+    public static readonly String DeactivateSelector = "DeactivateSelector";
+    public static readonly String UpdateItemText     = "UpdateItemText";
 }
 
