@@ -71,9 +71,9 @@ public class InventorySystem : Singleton<InventorySystem>
   {
     Inventory       = new List<ItemInfo>();
     Inventory_Items = new List<GameObject>();
-        EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
-        EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
-    }
+    EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
+    EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
+  }
 
     void OnRequestItem(EventData data)
     {
