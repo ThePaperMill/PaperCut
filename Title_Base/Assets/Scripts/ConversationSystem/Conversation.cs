@@ -37,6 +37,7 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
+
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);

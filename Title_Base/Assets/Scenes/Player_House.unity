@@ -7398,6 +7398,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 917b701c699a32b4f902fceeadd69db3, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &587328652 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 140210, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
+  m_PrefabInternal: {fileID: 1789303727}
+--- !u!114 &587328656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 587328652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 1148943365}
+  InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
+  InteractSizeScalar: 1.5
 --- !u!1001 &589148828
 Prefab:
   m_ObjectHideFlags: 0
@@ -7825,7 +7843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Ur a faget....
+  Text: You are (not) a sausage.
   NextAction: {fileID: 0}
 --- !u!1001 &611541521
 Prefab:
@@ -8968,7 +8986,7 @@ GameObject:
   - 23: {fileID: 700909192}
   - 114: {fileID: 700909191}
   m_Layer: 0
-  m_Name: Capsule (1)
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14546,7 +14564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8873c9afb64629041a175c263a66f5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HighlightArchetype: {fileID: 111812, guid: 38304d8d51e34f04f9db23c31d750f9b, type: 2}
+  HighlightArchetype: {fileID: 195702, guid: 1eec2eb9ed111304e92877791e45a6ec, type: 2}
   HighlightHeight: 1
   EaseSpeed: .5
 --- !u!4 &1148943367
@@ -16091,7 +16109,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 472588, guid: 0f4eca448d0d45f4db6e4c3ba6e944bd, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f4eca448d0d45f4db6e4c3ba6e944bd, type: 2}
@@ -19623,7 +19641,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 429382, guid: e7f8487af6a2abe48be65c9f891c77df, type: 2}
       propertyPath: m_RootOrder
-      value: 78
+      value: 81
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7f8487af6a2abe48be65c9f891c77df, type: 2}
@@ -23301,6 +23319,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 94
       objectReference: {fileID: 0}
+    - target: {fileID: 11478386, guid: 072add2db055d614188e2288f664ae1c, type: 2}
+      propertyPath: HighlightArchetype
+      value: 
+      objectReference: {fileID: 195702, guid: 1eec2eb9ed111304e92877791e45a6ec, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 072add2db055d614188e2288f664ae1c, type: 2}
   m_IsPrefabParent: 0
@@ -26846,7 +26868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Ur NOT a faget....
+  Text: You are NOT a sausage.
   NextAction: {fileID: 0}
 --- !u!1001 &2119378642
 Prefab:

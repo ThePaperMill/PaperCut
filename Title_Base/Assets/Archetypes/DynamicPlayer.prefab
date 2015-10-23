@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3342306}
   - 23: {fileID: 2307676}
   - 95: {fileID: 9549700}
+  - 114: {fileID: 11407658}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -157,6 +158,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11407658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2201b5a068f480445a88e7571ed20bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11494760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,6 +217,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
       value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
