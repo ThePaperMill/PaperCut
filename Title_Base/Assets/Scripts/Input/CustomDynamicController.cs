@@ -32,6 +32,8 @@ public class CustomDynamicController : MonoBehaviour
     private bool MoveRight;
     private bool InteractPressed;
     private bool InteractReleased;
+    private bool OpenInventory;
+
 
     public bool Active = true;
 
@@ -149,6 +151,18 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
+        if(OpenInventory)
+        {
+          bool InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
+
+          if (!InventoryStatus)
+            InventorySystem.GetSingleton.OpenInventory(InventoryState.INVENTORY_VIEW);
+          
+          else
+            InventorySystem.GetSingleton.CloseInventory();
+        }
+
+
         // Check jump first 
         if (InteractPressed)
         {
@@ -182,9 +196,10 @@ public class CustomDynamicController : MonoBehaviour
           movement += Cam.transform.right;
         }
 
+
         MoveDirection = movement;
 
-        print(MoveDirection);
+        //print(MoveDirection);
 
         MoveDirection.Normalize();
 
@@ -569,7 +584,8 @@ public class CustomDynamicController : MonoBehaviour
       MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
       MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
       InteractPressed = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
-      InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IskeyReleased(KeyCode.Space);
+      InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyReleased(KeyCode.Space);
+      OpenInventory = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_BACK) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.E);
     }
 
     /****************************************************************************/

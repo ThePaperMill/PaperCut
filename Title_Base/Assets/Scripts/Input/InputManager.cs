@@ -34,20 +34,16 @@ public enum XINPUT_BUTTONS
 
 public struct Gamepad_Stick_Values
 {
-    public 
-    float XPos;
+    public float XPos;
 
-    public
-    float YPos;
+    public float YPos;
 }
 
 public struct Gamepad_Trigger_Values
 {
-    public
-    float LeftTrigger;
+    public float LeftTrigger;
 
-    public
-    float RightTrigger;
+    public float RightTrigger;
 }
 
 
@@ -82,18 +78,21 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
       {
         ButtonsPast.Add(new ButtonState());
         ButtonsPresent.Add(new ButtonState());
+
+        // set default values for the button states, so nothing gets triggered by default
+        ButtonsPast[i] = ButtonState.Released;
+        ButtonsPresent[i] = ButtonState.Released;
       }
     }
 
     /*************************************************************************/
     /*!
       \brief
-        Initializes the class nothing to initialize 
+        nothing to initialize 
     */
     /*************************************************************************/
     void Start ()
     {
-        InventorySystem.GetSingleton.ClearInventory();
     }
 
     /*************************************************************************/
@@ -318,11 +317,57 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
       return state.Triggers.Right > TriggerValue;
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsLeftStickTriggered()
+    {
+      return (prevState.ThumbSticks.Left.X == 0.0f && prevState.ThumbSticks.Left.Y == 0.0f && (state.ThumbSticks.Left.X != 0.0f || state.ThumbSticks.Left.Y != 0.0f));
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsRightStickTriggered()
+    {
+      return (prevState.ThumbSticks.Left.X == 0.0f && prevState.ThumbSticks.Left.Y == 0.0f && (state.ThumbSticks.Left.X != 0.0f || state.ThumbSticks.Left.Y != 0.0f));
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsRightStickReleased()
+    {
+      return (state.ThumbSticks.Right.X == 0 && state.ThumbSticks.Right.Y == 0) && (prevState.ThumbSticks.Right.X != 0 || prevState.ThumbSticks.Right.Y != 0);
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsLeftStickReleased()
+    {
+      return (state.ThumbSticks.Left.X == 0 && state.ThumbSticks.Left.Y == 0) && (prevState.ThumbSticks.Left.X != 0 || prevState.ThumbSticks.Left.Y != 0);
+    }
+
     /*********************************************************************
      Keyboard wrappers 
-     *********************************************************************/
-
-    
+     *********************************************************************/    
     public bool IsKeyTriggered(KeyCode Key)
     {
       return Input.GetKeyDown(Key);
@@ -333,7 +378,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
       return Input.GetKey(Key);
     }
 
-    public bool IskeyReleased(KeyCode Key)
+    public bool IsKeyReleased(KeyCode Key)
     {
       return Input.GetKeyUp(Key);
     }

@@ -109,7 +109,7 @@ public class PlayerSpawner : EventHandler
 
         GameStateControlledCamera temp = cam.GetComponent<GameStateControlledCamera>();
 
-        if(temp)
+        if(temp && temp.enabled)
         {
           temp.AimTarget = spawnedPlayer;
           temp.PosTarget = spawnedPlayer;
