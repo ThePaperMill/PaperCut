@@ -184,6 +184,10 @@ public class CustomDynamicController : MonoBehaviour
 
         MoveDirection = movement;
 
+        print(MoveDirection);
+
+        MoveDirection.Normalize();
+
         // Update whether or not we are on ground, as well as getting 
         // the traction (slipperyness) of the surface we're on
         UpdateGroundState(Time.fixedDeltaTime);

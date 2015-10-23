@@ -20,8 +20,8 @@ public class PlayerSpawnPoint : MonoBehaviour
 
   public PlayerSpawnPoint()
   {
-  }
 
+  }
 
 	void Start () 
   {

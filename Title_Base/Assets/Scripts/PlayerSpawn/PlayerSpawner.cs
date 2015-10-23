@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerSpawner : MonoBehaviour
+public class PlayerSpawner : EventHandler
 {
   // list of all spawnpoints in the level 
   List<PlayerSpawnPoint> SpawnPoints = new List<PlayerSpawnPoint>();
@@ -36,6 +36,8 @@ public class PlayerSpawner : MonoBehaviour
 
   public PlayerSpawner()
   {
+    //Camera.main.transform.position = gameObject.transform.position + new Vector3(0,0,5);
+      
     EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
   }
 
@@ -109,8 +111,6 @@ public class PlayerSpawner : MonoBehaviour
 
         if(temp)
         {
-          print("Spawn Player");
-
           temp.AimTarget = spawnedPlayer;
           temp.PosTarget = spawnedPlayer;
           temp.SwitchAim(spawnedPlayer, float.Epsilon);

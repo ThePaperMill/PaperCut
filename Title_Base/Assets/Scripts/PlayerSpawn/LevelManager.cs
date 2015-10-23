@@ -13,9 +13,9 @@ using System.Collections;
 
 public class LevelManager : Singleton<LevelManager>
 {
-  public string PrevLevel = "";
+  public string PrevLevel = "DefaultPrev";
 
-  public string CurLevel = "";
+  public string CurLevel = "DefaultCur";
 
   void OnLevelWasLoaded(int level)
   {
@@ -39,6 +39,6 @@ public class LevelManager : Singleton<LevelManager>
 	// Update is called once per frame
 	void Update () 
   {
-	
+    CurLevel = Application.loadedLevelName;
 	}
 }
