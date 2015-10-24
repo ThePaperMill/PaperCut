@@ -26,7 +26,7 @@ public class NewMeshInstantiate : MonoBehaviour
     private List<Vector4> tangentList = new List<Vector4>();
     private bool isTriangles;
 
-    // I guess this is how classes within classwa works?
+    // I guess this is how classes within classes works?
     #region Nested type: MeshInstance
 
     public class MeshInstance
