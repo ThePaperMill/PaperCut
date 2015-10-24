@@ -2,7 +2,7 @@
 using System.Collections;
 using ActionSystem;
 
-public class SelectorLogic : MonoBehaviour
+public class SelectorLogic : EventHandler
 {
     private ActionGroup Seq   = new ActionGroup();
     public  AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);

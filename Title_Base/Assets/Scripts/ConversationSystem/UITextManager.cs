@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ConversationSystem
 {
-    class UITextManager : MonoBehaviour
+    class UITextManager : EventHandler
     {
         //static public UITextManager ConversationText;
 
@@ -18,6 +18,8 @@ namespace Assets.Scripts.ConversationSystem
         private string NextPhrase = "sadassdasd";
         private ActionGroup grp = new ActionGroup();
         private Vector3 InitialPos = new Vector3();
+
+        public Vector3 FinalPos;
         // Use this for initialization
         public UITextManager()
         {
@@ -40,9 +42,9 @@ namespace Assets.Scripts.ConversationSystem
         public void Appear()
         {
             var seq = ActionSystem.Action.Sequence(grp);
-            var finalPos = new Vector3();
-            finalPos.z = this.transform.localPosition.z;
-            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+            
+            
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, 1.5, Curve);
         }
 
         public void Disappear()
@@ -216,5 +218,13 @@ namespace Assets.Scripts.ConversationSystem
         {
             grp.Update(Time.smoothDeltaTime);
         }
+
+        void OnDestroy()
+        {
+            EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
+            EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
+            EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+        }
+
     }
 }

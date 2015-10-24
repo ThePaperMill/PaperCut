@@ -34,5 +34,7 @@ public static class Events
     // PlayerSpawnerEvent
     public static readonly String AddSpawnPoint      = "AddSpawnPoint";
 
+    public static readonly String Interact = "InteractEvent";
+
 }
 
