@@ -85,11 +85,15 @@ namespace ActionSystem
         {
             Completed = false;
             Index = 0;
-            CurrentAction = ActionQueue.First();
-            while (Index < ActionQueue.Count)
+            
+            if (ActionQueue.Count > 0)
             {
+              CurrentAction = ActionQueue.First();
+              while (Index < ActionQueue.Count)
+              {
                 ActionQueue[Index].Restart();
                 ++Index;
+              }
             }
             Index = 0;
         }

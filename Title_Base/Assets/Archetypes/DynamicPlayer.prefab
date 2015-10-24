@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3342306}
   - 23: {fileID: 2307676}
   - 95: {fileID: 9549700}
+  - 114: {fileID: 11407658}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -45,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.1999998, y: .805999994, z: -3.03999996}
+  m_LocalPosition: {x: 22.3082085, y: -1.30000007, z: 3.9069376}
   m_LocalScale: {x: .400000006, y: .5, z: .400000006}
   m_Children:
   - {fileID: 459752}
@@ -73,7 +74,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: de0a764d714e7334a88b2bb047255b09, type: 2}
+  - {fileID: 2100000, guid: a243240bb9c787149a66e43d39aa0d12, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -97,7 +98,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eb29292c7ef06ed44a3de074b74699e0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -157,6 +158,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11407658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2201b5a068f480445a88e7571ed20bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11494760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,6 +217,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
       value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -18,8 +18,8 @@ namespace Assets.Scripts.ConversationSystem
         // Use this for initialization
         void Start()
         {
-            this.Connect(Events.EngageConversation, OnEngageConversation);
-            this.Connect(Events.DisengageConversation, OnDisengageConversation);
+            this.gameObject.Connect(Events.EngageConversation, OnEngageConversation);
+            this.gameObject.Connect(Events.DisengageConversation, OnDisengageConversation);
         }
 
         public void OnEngageConversation(EventData eventData)
@@ -37,6 +37,7 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
+
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
@@ -115,12 +116,7 @@ namespace Assets.Scripts.ConversationSystem
         // Update is called once per frame
         void Update()
         {
-            if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.P) && !Engaged)
-            {
-                Engage();
-
-            }
-            else if (ConversationAction.MoveNextInputRecieved() && Engaged)
+            if (ConversationAction.MoveNextInputRecieved() && Engaged)
             {
                 this.NextAction();
             }

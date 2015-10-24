@@ -2,7 +2,7 @@
 using System.Collections;
 using ActionSystem;
 
-public class SelectorLogic : MonoBehaviour
+public class SelectorLogic : EventHandler
 {
     private ActionGroup Seq   = new ActionGroup();
     public  AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -20,6 +20,7 @@ public class SelectorLogic : MonoBehaviour
         var test = ActionSystem.Action.Sequence(Seq);
         var finalPos = new Vector3(0.0f,-1.0f,0.0f);
         finalPos.z = transform.localPosition.z;
+        
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
     }
 
@@ -29,6 +30,7 @@ public class SelectorLogic : MonoBehaviour
         var test = ActionSystem.Action.Sequence(Seq);
         var finalPos = new Vector3(0.0f, 5.0f, 0.0f);
         finalPos.z = transform.localPosition.z;
+        
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
     }
 
