@@ -38,7 +38,7 @@ public class OnCollidePush : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (hasTriggered == false)
+        if (hasTriggered == false && other.gameObject.tag == "Player")
         {
             //print("Wat");
             hasTriggered = true;
