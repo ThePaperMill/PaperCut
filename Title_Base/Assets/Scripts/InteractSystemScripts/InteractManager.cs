@@ -68,6 +68,9 @@ public class InteractManager : MonoBehaviour
 			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;
 			getAG.setUp(true);
 			getAG.GoToPos = pos;
+
+      
+
 		}
 
 		//if the currently closest object is being interacted with, then hide the icon
@@ -88,8 +91,20 @@ public class InteractManager : MonoBehaviour
 		
 		// Remove all of the null objects (done here in case objects are destroyed in level)
 		AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
-		//print ("Can talk with " + AllInteractableObjects.Count + " people.");
-	}
+    //print ("Can talk with " + AllInteractableObjects.Count + " people.");
+
+    
+    if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.I))
+    {
+      
+      if(Closest)
+      {
+        
+        Closest.DispatchEvent(Events.Interact);
+      }
+    }
+
+  }
 
 	public void OnInteractEvent()
 	{

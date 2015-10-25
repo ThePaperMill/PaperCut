@@ -30,5 +30,11 @@ public static class Events
     public static readonly String ActivateSelector   = "ActivateSelector";
     public static readonly String DeactivateSelector = "DeactivateSelector";
     public static readonly String UpdateItemText     = "UpdateItemText";
+    
+    // PlayerSpawnerEvent
+    public static readonly String AddSpawnPoint      = "AddSpawnPoint";
+
+    public static readonly String Interact = "InteractEvent";
+
 }
 

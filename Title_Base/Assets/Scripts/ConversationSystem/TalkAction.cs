@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using UnityEngine;
 
 
@@ -10,6 +9,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     public class TalkAction : ConversationAction
     {
+        [Multiline]
         public String Text;
         private StringEvent StringEventData = new StringEvent();
 
@@ -27,7 +27,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             base.StartAction();
             Next = NextAction;
-            StringEventData.Message = Text;
+            StringEventData.Message = Text.ToString();
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
             
             
@@ -56,6 +56,11 @@ namespace Assets.Scripts.ConversationSystem
             return eventData.Message;
         }
     }
+  public class TextAreaScript : MonoBehaviour
+  {
 
-    
+    public string longString;
+  }
 }
+
+

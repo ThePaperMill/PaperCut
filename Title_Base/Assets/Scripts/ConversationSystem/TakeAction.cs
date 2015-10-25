@@ -24,19 +24,19 @@ namespace Assets.Scripts.ConversationSystem
             if (NextIfTrue == null)
             {
                 var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-                next.Text = "Thanks for the \n<b>" + ItemName + "</b>!";
+                //next.Text = "Thanks for the \n<b>" + ItemName + "</b>!";
                 NextIfTrue = next;
             }
             if (NextIfFalse == null)
             {
                 var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-                next.Text = "This isn't an \n<b>" + ItemName + "</b>...";
+                //next.Text = "This isn't an \n<b>" + ItemName + "</b>...";
                 NextIfFalse = next;
             }
             if (NextIfNone == null)
             {
                 var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-                next.Text = "Come back when you have \na <b>" + ItemName + "</b>.";
+                //next.Text = "Come back when you have \na <b>" + ItemName + "</b>.";
                 NextIfNone = next;
             }
             

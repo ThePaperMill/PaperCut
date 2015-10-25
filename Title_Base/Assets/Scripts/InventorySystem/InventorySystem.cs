@@ -71,12 +71,14 @@ public class InventorySystem : Singleton<InventorySystem>
   {
     Inventory       = new List<ItemInfo>();
     Inventory_Items = new List<GameObject>();
-        EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
-        EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
-    }
+    EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
+    EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
+    print("INVIN START");
+  }
 
     void OnRequestItem(EventData data)
     {
+    print("ITEM REQUEST");
         StringEvent eventData = data as StringEvent;
         print(eventData.Message);
         var info = new ItemInfo();
@@ -212,7 +214,7 @@ public class InventorySystem : Singleton<InventorySystem>
    *  The Basic structure representing each item in our inventory
   */
   /****************************************************************************/
-  bool isInventoryOpen()
+  public bool isInventoryOpen()
   {
     return InventoryOpen;
   }
@@ -225,6 +227,11 @@ public class InventorySystem : Singleton<InventorySystem>
   /****************************************************************************/
   public void OpenInventory(InventoryState state)
   {
+    if(InventoryOpen)
+    {
+      return;
+    }
+
     // choose which state to open the menu in
     CurState = state;
 
@@ -264,7 +271,10 @@ public class InventorySystem : Singleton<InventorySystem>
     }
 
     Inventory_Items.Clear();
-   
+
+    // send a activate selector event, we don't use message data, so null is okay
+    EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateSelector);
+
     CurPosition = 0;
     CurItem = null;
     InventoryOpen = false;
@@ -349,6 +359,16 @@ public class InventorySystem : Singleton<InventorySystem>
   /****************************************************************************/
   void UpdateCurrentItem()
   {
+    if(Inventory.Count == 0)
+    {
+      if (Activate)
+      {
+        ActivateButton();
+      }
+
+      return;
+    }
+
     // move the items left
     if (MoveLeft)
     {

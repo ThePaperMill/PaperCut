@@ -2,9 +2,9 @@
 using System.Collections;
 using ActionSystem;
 
-public class SelectorLogic : MonoBehaviour
+public class SelectorLogic : EventHandler
 {
-    private ActionSequence Seq   = new ActionSequence();
+    private ActionGroup Seq   = new ActionGroup();
     public  AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     // Use this for initialization
@@ -18,8 +18,9 @@ public class SelectorLogic : MonoBehaviour
     {
         // lerp down to the camera
         var test = ActionSystem.Action.Sequence(Seq);
-        var finalPos = new Vector3(0.0f,0.0f,0.0f);
+        var finalPos = new Vector3(0.0f,-1.0f,0.0f);
         finalPos.z = transform.localPosition.z;
+        
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
     }
 
@@ -27,8 +28,9 @@ public class SelectorLogic : MonoBehaviour
     {
         // lerp up away from the camera
         var test = ActionSystem.Action.Sequence(Seq);
-        var finalPos = new Vector3(0.0f, 0.0f, 0.0f);
+        var finalPos = new Vector3(0.0f, 5.0f, 0.0f);
         finalPos.z = transform.localPosition.z;
+        
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
     }
 

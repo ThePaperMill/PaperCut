@@ -27,7 +27,7 @@ public class RotaterTest : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        print(this.gameObject.transform.localEulerAngles);
+        //print(this.gameObject.transform.localEulerAngles);
         Grp.Update(Time.smoothDeltaTime);
     }
 

@@ -94,6 +94,7 @@ public class GameStateControlledCamera : MonoBehaviour
     //Interpolate the X position of the AimTracker so that it approaches zero over the course of Timer
     ActionSystem.Action.Property(seq, AimTracker.transform.GetProperty(x => x.localPosition), Vector3.zero, timer, Ease.QuadInOut);
   }
+
   public void SwitchPosition()
   {
     //Calculate how fast the camera should move to it's target
@@ -102,6 +103,11 @@ public class GameStateControlledCamera : MonoBehaviour
     float fracJourney = distCovered / journeyLength + 100;
     //Slerp to the target position
     transform.position = Vector3.Slerp(transform.position, PosTarget.transform.position + PositionVector, Time.smoothDeltaTime);
+  }
+
+  public void UpdatePositionVector()
+  {
+    PositionVector = transform.position - PosTarget.transform.position;
   }
 
   public void ChangeHover(GameObject newHover)
