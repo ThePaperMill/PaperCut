@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class MakeInvisable : MonoBehaviour
+public class MakeInvisible : MonoBehaviour
 {
 
   MeshRenderer MRenderer = null;

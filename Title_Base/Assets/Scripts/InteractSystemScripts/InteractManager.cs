@@ -69,8 +69,6 @@ public class InteractManager : MonoBehaviour
 			getAG.setUp(true);
 			getAG.GoToPos = pos;
 
-      
-
 		}
 
 		//if the currently closest object is being interacted with, then hide the icon
@@ -95,16 +93,19 @@ public class InteractManager : MonoBehaviour
 
     
     if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.I))
-    {
-      
+    {     
       if(Closest)
       {
-        
         Closest.DispatchEvent(Events.Interact);
       }
     }
 
   }
+
+    public GameObject GetClosestObj()
+    {
+        return Closest;
+    }
 
 	public void OnInteractEvent()
 	{
@@ -119,8 +120,7 @@ public class InteractManager : MonoBehaviour
 			deInteract.SetIsInInteraction(false);
 		}
 		
-		// Bring the actual closest object in
-		
+		// Bring the actual closest object in		
 		if(closest != null)
 		{
 			// Create a ScriptEvent

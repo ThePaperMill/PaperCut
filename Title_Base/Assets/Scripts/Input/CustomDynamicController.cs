@@ -34,7 +34,6 @@ public class CustomDynamicController : MonoBehaviour
     private bool InteractReleased;
     private bool OpenInventory;
 
-
     public bool Active = true;
 
     public bool StickToSlope = true;
@@ -100,7 +99,8 @@ public class CustomDynamicController : MonoBehaviour
 
     // used for variable height jumping
     float JumpTimer = 0.0f;
-    
+
+    float JumpDelayTimer = 0.0f;
 
     // store our rigid body and capsule collider and the camera
     Rigidbody RBody = null;
@@ -109,11 +109,47 @@ public class CustomDynamicController : MonoBehaviour
 
     GameObject Cam = null;
 
+    GameObject LSettings = null;
+
+    InteractManager IManager = null;
+
     public Vector3 MoveDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
     int CastFilter = 0;
 
     Vector3 GroundNormal = Vector3.up;
+
+    bool MenuActive = false;
+
+    bool InventoryStatus = false;
+
+    public CustomDynamicController()
+    {
+        EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
+        EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+    }
+
+    /****************************************************************************/
+    /*!
+        \brief
+            initalize the class
+    */
+    /****************************************************************************/
+    public void OnActivateWindowEvent(EventData eventData)
+    {
+        MenuActive = true;
+    }
+
+    /****************************************************************************/
+    /*!
+        \brief
+            initalize the class
+    */
+    /****************************************************************************/
+    public void OnDeactivateWindowEvent(EventData eventData)
+    {
+        MenuActive = false;
+    }
 
     /****************************************************************************/
     /*!
@@ -126,15 +162,28 @@ public class CustomDynamicController : MonoBehaviour
         RBody     = (Rigidbody)GetComponent<Rigidbody>();
         CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
         Cam = GameObject.FindGameObjectWithTag("MainCamera");
+        LSettings = GameObject.FindGameObjectWithTag("LevelSettings");
+
+        if(LSettings)
+        {
+            IManager = LSettings.GetComponent<InteractManager>();
+        }
 
         // we want to ignore the player layer
         CastFilter = 1 << 9;
         CastFilter = ~CastFilter;
     }
 
+    /****************************************************************************/
+    /*!
+        \brief
+            Update at the start to get input and update our delay timer.
+    */
+    /****************************************************************************/
     void Update()
     {
       UpdateInput();
+      JumpDelayTimer += Time.deltaTime;
     }
 
     /****************************************************************************/
@@ -151,71 +200,75 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
-        if(OpenInventory)
-        {
-          bool InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
+        InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
 
-          if (!InventoryStatus)
-            InventorySystem.GetSingleton.OpenInventory(InventoryState.INVENTORY_VIEW);
-          
-          else
-            InventorySystem.GetSingleton.CloseInventory();
+        // if the inventory is open and we press the inventory button, close it
+        if (InventoryStatus)
+        {
+            if (OpenInventory)
+            {
+                InventorySystem.GetSingleton.CloseInventory();
+            }
+
+            return;
         }
 
+        if (MenuActive)
+        {
+            if(InteractPressed == true)
+            {
+                EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
+            }
 
-        // Check jump first 
+            return;
+        }
+
+        if (OpenInventory)
+        {
+            if (!InventoryStatus)
+                InventorySystem.GetSingleton.OpenInventory(InventoryState.INVENTORY_VIEW);
+
+            return;
+        }
+
+        // Check jump/interact first 
         if (InteractPressed)
         {
-          BeginJump();
+            // if the interact manager exists, check to see if we are colliding with an interactable object.
+            if (IManager)
+            {
+                GameObject test = IManager.GetClosestObj();
+
+                // if there is an object, dispatch the interact event to them.
+                if (test)
+                {
+                    test.DispatchEvent(Events.Interact);
+                    return;
+                }
+            }
+
+            BeginJump();
         }
+
+        // when jump is released, update our jump state.
         else if (InteractReleased)
         {
           EndJump();
         }
 
-        var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
-        Vector3 movement = new Vector3();
+        // update the direction we want to move in
+        UpdateMoveVector();
 
-        if (MoveForward || LeftStickPosition.YPos > 0.3)
-        {
-          movement += Cam.transform.forward;
-        }
-
-        else if (MoveBack || LeftStickPosition.YPos < -0.3)
-        {
-          movement -= Cam.transform.forward;
-        }
-
-        if (MoveLeft || LeftStickPosition.XPos < -0.3)
-        {
-          movement -= Cam.transform.right;
-        }
-
-        else if (MoveRight || LeftStickPosition.XPos > 0.3)
-        {
-          movement += Cam.transform.right;
-        }
-
-
-        MoveDirection = movement;
-
-        //print(MoveDirection);
-
-        MoveDirection.Normalize();
-
-        // Update whether or not we are on ground, as well as getting 
-        // the traction (slipperyness) of the surface we're on
+        // Update whether or not we are on ground
         UpdateGroundState(Time.fixedDeltaTime);
 
-        // All logic for jumping is contained in this function
+        // update our jumping state, i.e. falling
         UpdateJumpState(Time.fixedDeltaTime);
 
         // Get our current control (value between 0-1)
-        var controlScalar = this.GetCurrentControlScalar();
+        var controlScalar = GetCurrentControlScalar();
 
-        // We want to set the amount of force we can apply to reach our desired maximum speed
-        // We're multiplying by the object's mass so that the character can easily be scaled
-        // without having to re-adjust MovePower
+        // We want to set the amount of force we can apply to reach our desired maximum speed based on our mass
         float moveForce = MovePower * RBody.mass;
         
         // Apply the control scalar (air control / traction / etc...)
@@ -224,9 +277,14 @@ public class CustomDynamicController : MonoBehaviour
         // Get our current max speed
         var maxSpeed = GetMaxSpeed();
 
+        // Remove any upward forces in our move direction
         MoveDirection = Vector3.ProjectOnPlane(MoveDirection, GroundNormal).normalized;
 
-        if(State == PlayerState.Idle)
+        // we'll try to round the movement values here, so we don't drift so much.
+       // RoundMovement();
+
+        // if we are idle, add force otherwise,
+        if (State == PlayerState.Idle)
         {
           RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
         }
@@ -247,6 +305,69 @@ public class CustomDynamicController : MonoBehaviour
         ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
+    }
+
+    /****************************************************************************/
+    /*!
+        \brief
+            Rounds the movement values, attempting to mitigate drift
+    */
+    /****************************************************************************/
+    void RoundMovement()
+    {
+        if (MoveDirection.x < 0.0f && MoveDirection.x > -0.3)
+        {
+            MoveDirection.x = 0.0f;
+        }
+
+        else if (MoveDirection.x > 0.0f && MoveDirection.x < 0.3)
+        {
+            MoveDirection.x = 0.0f;
+        }
+
+        if (MoveDirection.z < 0.0f && MoveDirection.z > -0.3)
+        {
+            MoveDirection.z = 0.0f;
+        }
+
+        else if (MoveDirection.z > 0.0f && MoveDirection.z < 0.3)
+        {
+            MoveDirection.x = 0.0f;
+        }
+    }
+
+    /****************************************************************************/
+    /*!
+        \brief
+           Updates the player state, 
+    */
+    /****************************************************************************/
+    void UpdateMoveVector()
+    {
+        var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
+        Vector3 movement = new Vector3();
+
+        if (MoveForward || LeftStickPosition.YPos > 0.2)
+        {
+            movement += Cam.transform.forward;
+        }
+
+        else if (MoveBack || LeftStickPosition.YPos < -0.2)
+        {
+            movement -= Cam.transform.forward;
+        }
+
+        if (MoveLeft || LeftStickPosition.XPos < -0.2)
+        {
+            movement -= Cam.transform.right;
+        }
+
+        else if (MoveRight || LeftStickPosition.XPos > 0.2)
+        {
+            movement += Cam.transform.right;
+        }
+
+        MoveDirection = movement;
     }
 
     /****************************************************************************/
@@ -416,8 +537,6 @@ public class CustomDynamicController : MonoBehaviour
         // use sphere cast to 
         var GroundCheck = Physics.SphereCast(GroundRay, 0.95f * CCollider.bounds.extents.x, out Hitinfo, RayDistance, CastFilter);
 
-        Debug.DrawLine(GroundRay.origin, GroundRay.origin + new Vector3(0, RayDistance, 0));
-
         if(GroundCheck)
         {
             var contactHolder = Hitinfo;
@@ -510,9 +629,10 @@ public class CustomDynamicController : MonoBehaviour
     void BeginJump()
     {
         // Start jumping if we can
-      if (OnGround)
+      if (OnGround && JumpDelayTimer > 0.23f)
       {
         Jump();
+        JumpDelayTimer = 0.0f;
       }
     }
 
@@ -596,21 +716,21 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     private void Jump()
     {
-        //// Get only horizontal element of our velocity (none in the direction of our Up vector)
-        //var currVelocity = RBody.velocity;
-        //var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
+        // Get only horizontal element of our velocity (none in the direction of our Up vector)
+        var currVelocity = RBody.velocity;
+        var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
 
-        //// Add velocity upward by the initial jump strength
-        //newVelocity += WorldUp * InitialJumpVelocity;
+        // Add velocity upward by the initial jump strength
+        newVelocity += WorldUp * InitialJumpVelocity;
 
-        //// We want to add the velocity of the surface we're currently on
-        //// This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
-        //newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
+        // We want to add the velocity of the surface we're currently on
+        // This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
+        newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
 
-        //// Set the velocity
-        //RBody.velocity = newVelocity;
+        // Set the velocity
+        RBody.velocity = newVelocity;
 
-        RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
+        //RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
 
         // We're no longer on the ground
         OnGround = false;

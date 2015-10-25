@@ -12,12 +12,16 @@ public static class Events
     public static readonly String MouseEvent = "MouseEvent";
     //EventData : Brings down the dialogue window.
     public static readonly String ActivateTextWindow = "ActivateTextWindowEvent";
+    
     //EventData : Puts up the dialogue window.
     public static readonly String DeactivateTextWindow = "DeactivateTextWindowEvent";
+    
     //StringEvent : Updates the text in the dialogue window.
     public static readonly String UpdateText = "UpdateTextEvent";
+    
     //EventData : Engage in conversation with someone.
     public static readonly String EngageConversation = "EngageConversationEvent";
+    
     //EventData : Disengage from conversation with someone.
     public static readonly String DisengageConversation = "DisengageConversationEvent";
     public static readonly String NextAction = "NextActionEvent";

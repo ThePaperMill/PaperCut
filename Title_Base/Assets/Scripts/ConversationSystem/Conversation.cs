@@ -20,6 +20,8 @@ namespace Assets.Scripts.ConversationSystem
         {
             this.gameObject.Connect(Events.EngageConversation, OnEngageConversation);
             this.gameObject.Connect(Events.DisengageConversation, OnDisengageConversation);
+
+            EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
 
         public void OnEngageConversation(EventData eventData)
@@ -49,7 +51,8 @@ namespace Assets.Scripts.ConversationSystem
 
         void OnNextAction(EventData data)
         {
-            NextAction();
+            if(Engaged)
+                NextAction();
         }
 
         public void NextAction()
@@ -120,7 +123,6 @@ namespace Assets.Scripts.ConversationSystem
             {
                 this.NextAction();
             }
-
         }
     }
 }

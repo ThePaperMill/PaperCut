@@ -42,7 +42,7 @@ public class GameStateControlledCamera : MonoBehaviour
     //Print out an error if there is no camera target
     if (AimTarget == null)
     {
-      print("ERROR: Camera does not posess an AimTarget");
+      //print("ERROR: Camera does not posess an AimTarget");
     }
     //otherwise, move the TargetTracker to the new target instantly
     else
@@ -53,7 +53,7 @@ public class GameStateControlledCamera : MonoBehaviour
     //print out an error if there is no pos target
     if (PosTarget == null)
     {
-      print("ERROR: Camera does not posess a PosTarget");
+      //print("ERROR: Camera does not posess a PosTarget");
     }
     //Otherwise, save the vector from the object the camera should be hovering.
     else
@@ -76,8 +76,8 @@ public class GameStateControlledCamera : MonoBehaviour
     SwitchPosition();
 
     //You MUST call update on the master group every rame and pase in the desired for of Delta Time
-    AimGrp.Update(Time.smoothDeltaTime);
-    PosGrp.Update(Time.smoothDeltaTime);
+    AimGrp.Update(Time.deltaTime);
+    PosGrp.Update(Time.deltaTime);
 
     //Look at the targetAimingBlock everyFrame
     transform.LookAt(AimTracker.transform);

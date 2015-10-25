@@ -29,56 +29,62 @@ public enum InventoryState
 /****************************************************************************/
 public class InventorySystem : Singleton<InventorySystem> 
 {
-  // the vector of iteminfo structs
-  List<ItemInfo> Inventory;
+    // the vector of iteminfo structs
+    List<ItemInfo> Inventory;
 
-  // Vector of actual item objects
-  List<GameObject> Inventory_Items;
+    // Vector of actual item objects
+    List<GameObject> Inventory_Items;
 
-  // the state of our inventory viewing or giving items
-  InventoryState CurState = InventoryState.INVENTORY_VIEW;
+    // the state of our inventory viewing or giving items
+    InventoryState CurState = InventoryState.INVENTORY_VIEW;
 
-  // Boolean to check if the inventory is open
-  private bool InventoryOpen = false;
+    // Boolean to check if the inventory is open
+    private bool InventoryOpen = false;
 
-  // our current position in the inventory array 
-  private int CurPosition = 0;
+    // our current position in the inventory array 
+    private int CurPosition = 0;
 
-  // the current item we have selected
-  GameObject CurItem = null;
+    // the current item we have selected
+    GameObject CurItem = null;
 
-  // the speed at which the selected item rotates
-  float RotationSpeed = 10.0f;
+    // the speed at which the selected item rotates
+    float RotationSpeed = 10.0f;
 
-  // boolean values for input
-  bool MoveLeft  = false;
-  bool MoveRight = false;
-  bool Activate  = false;
+    // boolean values for input
+    bool MoveLeft  = false;
+    bool MoveRight = false;
+    bool Activate  = false;
 
-  // this is where we want the hud to go by default
-  Vector3 InventoryLand = new Vector3();
+    // this is where we want the hud to go by default
+    Vector3 InventoryLand = new Vector3();
 
-  // this represents the space between items when they are laid out in the world.
-  Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
+    // this represents the space between items when they are laid out in the world.
+    Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
 
-  /****************************************************************************/
-  /*!
+    /****************************************************************************/
+    /*!
     \brief
-   *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  InventorySystem()
-  {
-    Inventory       = new List<ItemInfo>();
-    Inventory_Items = new List<GameObject>();
-    EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
-    EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
-    print("INVIN START");
-  }
+    *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    InventorySystem()
+    {
+        Inventory       = new List<ItemInfo>();
+        Inventory_Items = new List<GameObject>();
+        EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
+        EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
+        EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
+    }
 
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
     void OnRequestItem(EventData data)
     {
-    print("ITEM REQUEST");
+        print("ITEM REQUEST");
         StringEvent eventData = data as StringEvent;
         print(eventData.Message);
         var info = new ItemInfo();
@@ -86,6 +92,12 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, new RecievedItemEvent(info));
     }
 
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
     void OnRecievedProperItem(EventData eventData)
     {
         var data = eventData as BoolEvent;
@@ -96,13 +108,31 @@ public class InventorySystem : Singleton<InventorySystem>
         }
     }
 
-  /****************************************************************************/
-  /*!
-    \brief
-    *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  bool HasItem(ItemInfo item)
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    void OnRecievedItem(EventData eventData)
+    {
+        // check for null just in case
+        if (eventData != null)
+        {
+            // add the item to the vector
+            var data = eventData as RecievedItemEvent;
+
+            Inventory.Add(data.Info);
+        }
+   }
+
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    bool HasItem(ItemInfo item)
   {
     foreach(var i in Inventory)
     {

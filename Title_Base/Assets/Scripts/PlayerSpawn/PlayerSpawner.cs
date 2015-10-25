@@ -14,114 +14,123 @@ using System.Collections.Generic;
 
 public class PlayerSpawner : EventHandler
 {
-  // list of all spawnpoints in the level 
-  List<PlayerSpawnPoint> SpawnPoints = new List<PlayerSpawnPoint>();
+    // list of all spawnpoints in the level 
+    List<PlayerSpawnPoint> SpawnPoints = new List<PlayerSpawnPoint>();
 
-  // the position to spawn the player if they don't exist
-  public Vector3 DefaultPosition = new Vector3();
+    // the position to spawn the player if they don't exist
+    public Vector3 DefaultPosition = new Vector3();
 
-  // if we want to overide the spawn points for some reason
-  public bool UseDefaultPosition;
+    // if we want to overide the spawn points for some reason
+    public bool UseDefaultPosition;
 
-  public bool SetCameraTarget = true;
+    public bool SetCameraTarget = true;
 
-  // bool to check if we spawned the player
-  bool PlayerWasSpawned = false;
+    // bool to check if we spawned the player
+    bool PlayerWasSpawned = false;
 
-  // the player archetype to spawn
-  public GameObject PlayerPrefab = null;
+    // the player archetype to spawn
+    public GameObject PlayerPrefab = null;
 
-  // the last level that was loaded
-  string PreviousLevel = "";
+    GameObject Cam = null;
+    GameStateControlledCamera CamController = null;
 
-  public PlayerSpawner()
-  {
-    //Camera.main.transform.position = gameObject.transform.position + new Vector3(0,0,5);
-      
-    EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
-  }
+    // the last level that was loaded
+    string PreviousLevel = "";
 
-  void OnAddSpawnPointEvent(EventData eventData)
-  {
-    var data = eventData as PlayerSpawnEvent;
+    public PlayerSpawner()
+    {     
+        EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
+    }
 
-    AddSpawnPoint(data.SpawnPoint);
-  }
+    void OnAddSpawnPointEvent(EventData eventData)
+    {
+        var data = eventData as PlayerSpawnEvent;
 
-  void AddSpawnPoint(PlayerSpawnPoint Pt)
-  {
-    SpawnPoints.Add(Pt);
-  }
+        AddSpawnPoint(data.SpawnPoint);
+    }
 
-  void ClearSpawnPoints()
-  {
-    SpawnPoints.Clear();
-  }
+    void AddSpawnPoint(PlayerSpawnPoint Pt)
+    {
+        SpawnPoints.Add(Pt);
+    }
 
-	void Start () 
-  {
-    PreviousLevel = LevelManager.GetSingleton.PrevLevel;
-	}
+    void ClearSpawnPoints()
+    {
+        SpawnPoints.Clear();
+    }
+
+    void Start () 
+    {
+        PreviousLevel = LevelManager.GetSingleton.PrevLevel;
+
+        Cam = GameObject.FindGameObjectWithTag("MainCamera");
+       
+        if(Cam)
+        {
+            CamController = Cam.GetComponent<GameStateControlledCamera>();
+        }
+    }
 	
-  Vector3 ChoosePosition()
-  {
-    if (SpawnPoints.Count == 0 || UseDefaultPosition)
+    Vector3 ChoosePosition()
     {
-      return DefaultPosition;
-    }
-
-    // position to spawn the player
-    Vector3 pos = DefaultPosition;
-
-    // iterate over all spawn points 
-    foreach (var SP in SpawnPoints)
-    {
-      // iterate through all level is each spawn point
-      foreach (var lvl in SP.PreviousLevel)
-      {
-        // if the spawn point has the previous level, use that spawn positon
-        if (lvl == PreviousLevel)
+        if (SpawnPoints.Count == 0 || UseDefaultPosition)
         {
-          pos = SP.Position;
-          return pos;
+            return DefaultPosition;
         }
-      }
+
+        // position to spawn the player
+        Vector3 pos = DefaultPosition;
+
+        // iterate over all spawn points 
+        foreach (var SP in SpawnPoints)
+        {
+            // iterate through all level is each spawn point
+            foreach (var lvl in SP.PreviousLevel)
+            {
+            // if the spawn point has the previous level, use that spawn positon
+            if (lvl == PreviousLevel)
+            {
+                pos = SP.Position;
+                return pos;
+            }
+            }
+        }
+
+        return pos;
     }
 
-    return pos;
-  }
 
-
-  void Update ()
-  {
-    // if we haven't spawned the player yet, spawn them
-    if (false == PlayerWasSpawned)
+    void Update ()
     {
-      Vector3 spawnPos = ChoosePosition();
+        // if we haven't spawned the player yet, spawn them
+        if (false == PlayerWasSpawned)
+        {
+          Vector3 spawnPos = ChoosePosition();
 
-      GameObject spawnedPlayer = new GameObject();
+          GameObject spawnedPlayer = new GameObject();
       
-      spawnedPlayer = (GameObject)GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
+          spawnedPlayer = (GameObject)GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
 
-      if(SetCameraTarget)
-      {
-        GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+          if(SetCameraTarget)
+          {
+            if(CamController && CamController.enabled)
+            {
+                CamController.AimTarget = spawnedPlayer;
+                CamController.PosTarget = spawnedPlayer;
+                CamController.SwitchAim(spawnedPlayer, float.Epsilon);
+                CamController.UpdatePositionVector();
+            }
 
-        GameStateControlledCamera temp = cam.GetComponent<GameStateControlledCamera>();
+          }
 
-        if(temp && temp.enabled)
-        {
-          temp.AimTarget = spawnedPlayer;
-          temp.PosTarget = spawnedPlayer;
-          temp.SwitchAim(spawnedPlayer, float.Epsilon);
-          temp.UpdatePositionVector();
+          PlayerWasSpawned = true;
         }
-
-      }
-
-      PlayerWasSpawned = true;
     }
-	}
+
+    void OnDestroy()
+    {
+        EventSystem.GlobalHandler.Disconnect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
+    }
 }
 
 /****************************************************************************/

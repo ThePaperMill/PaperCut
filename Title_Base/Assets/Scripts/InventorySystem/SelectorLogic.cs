@@ -34,9 +34,15 @@ public class SelectorLogic : EventHandler
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
     }
 
-	void Update ()
-  {
+    void Update ()
+    {
         // update our sequence
         Seq.Update(Time.deltaTime);
-	}
+    }
+
+    void OnDestroy()
+    {
+        EventSystem.GlobalHandler.Disconnect(Events.ActivateSelector, OnActivateSelector);
+        EventSystem.GlobalHandler.Disconnect(Events.DeactivateSelector, OnDeactivateSelector);
+    }
 }

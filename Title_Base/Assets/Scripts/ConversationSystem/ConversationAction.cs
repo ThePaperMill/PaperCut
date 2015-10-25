@@ -16,7 +16,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             var input = InputManager.GetSingleton;
 
-            return input.IsKeyTriggered(KeyCode.Space) || input.IsKeyTriggered(KeyCode.P) || input.IsButtonDown(XINPUT_BUTTONS.BUTTON_A);
+            return input.IsKeyTriggered(KeyCode.P);
         }
 
         public virtual void Start()
