@@ -281,7 +281,7 @@ public class CustomDynamicController : MonoBehaviour
         MoveDirection = Vector3.ProjectOnPlane(MoveDirection, GroundNormal).normalized;
 
         // we'll try to round the movement values here, so we don't drift so much.
-        RoundMovement();
+       // RoundMovement();
 
         // if we are idle, add force otherwise,
         if (State == PlayerState.Idle)
