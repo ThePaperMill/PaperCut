@@ -73,7 +73,6 @@ public class InventorySystem : Singleton<InventorySystem>
     Inventory_Items = new List<GameObject>();
     EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
     EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
-    print("INVIN START");
   }
 
     void OnRequestItem(EventData data)

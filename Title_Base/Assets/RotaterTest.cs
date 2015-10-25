@@ -40,7 +40,5 @@ public class RotaterTest : MonoBehaviour
         //Interpolate the X position of the AimTracker so that it approaches zero over the course of Timer
         //ActionSystem.Action.Property(seq, this.gameObject.transform.GetProperty(x => x.localPosition), Vector3.zero, 5.0f, Ease.QuadInOut);
         ActionSystem.Action.Property(seq, this.gameObject.transform.GetProperty(x => x.localEulerAngles), ChangePos+StartingPos, 2.0f, Ease.QuadIn);
-
-
     }
 }

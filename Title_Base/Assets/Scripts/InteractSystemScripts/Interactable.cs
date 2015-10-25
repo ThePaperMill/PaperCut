@@ -24,7 +24,7 @@ public class Interactable : MonoBehaviour
 	{
 		//If the levelsettings does not have an interactable manager, add one and print an error message.
 		InteractManager initial = LevelSettings.GetComponent("InteractManager") as InteractManager;
-    this.gameObject.Connect(Events.Interact, OnInteractEvent);
+        this.gameObject.Connect(Events.Interact, OnInteractEvent);
 		if(initial == null)
 		{
 			LevelSettings.AddComponent<InteractManager>();
@@ -41,11 +41,10 @@ public class Interactable : MonoBehaviour
 		par.SetParent(gameObject);
 	}
 
-  public void OnInteractEvent(EventData eventData)
-  {
-    
-    this.gameObject.DispatchEvent(Events.EngageConversation);
-  }
+      public void OnInteractEvent(EventData eventData)
+      {
+        this.gameObject.DispatchEvent(Events.EngageConversation);
+      }
 
 	public bool GetIsInInteraction()
 	{

@@ -10,37 +10,43 @@
 /****************************************************************************/
 using UnityEngine;
 using System.Collections;
-//using UnityEditor;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [ExecuteInEditMode] 
 public class EditorScripts : MonoBehaviour
 {
-	//void Start () 
- // {
-	
-	//}
+#if UNITY_EDITOR
+    void Start()
+    {
 
- // // Update is called once per frame
- // void OnRenderObject()
- // {
- //   if (Application.isPlaying)
- //   {
- //     if (Input.GetKey(KeyCode.Escape))
- //     {
- //       if (Application.isPlaying == true)
- //       {
- //         EditorApplication.isPlaying = false;
- //         return;
- //       }
- //     }
- //   }
- //   else
- //   {
- //     if(Input.GetKey(KeyCode.Space))
- //     {
- //       print("Literally anything");
- //     }
+    }
 
- //   }
- // }
+    // Update is called once per frame
+    void OnRenderObject()
+    {
+        if (Application.isPlaying)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                if (Application.isPlaying == true)
+                {
+                    EditorApplication.isPlaying = false;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                print("Literally anything");
+            }
+
+        }
+    }
+#endif
+
 }
