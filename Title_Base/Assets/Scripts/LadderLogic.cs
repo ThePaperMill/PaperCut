@@ -90,6 +90,6 @@ public class LadderLogic : MonoBehaviour
         MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
         MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
         InteractPressed = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
-        InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IskeyReleased(KeyCode.Space);
+        InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyReleased(KeyCode.Space);
     }
 }
