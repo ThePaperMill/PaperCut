@@ -9,6 +9,9 @@ using System; //If you are usung System, you will need to put "ActionSystem." in
 
 public class RotaterTest : MonoBehaviour
 {
+    public GameObject FlipSwitch = null;
+    bool isTriggered = false;
+
     //PosGrp is an actiongroup covering the hover of the camera in every frame
     ActionGroup Grp = new ActionGroup();
 
@@ -20,13 +23,23 @@ public class RotaterTest : MonoBehaviour
     {
         StartingPos = this.gameObject.transform.localEulerAngles;
         
-        RotateOnce();
+        //RotateOnce();
 
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        if(FlipSwitch != null)
+        {
+            OnCollideSwapBool dink = FlipSwitch.GetComponent<OnCollideSwapBool>();
+            if(dink.IsOn == true && isTriggered == false)
+            {
+                isTriggered = true;
+                RotateOnce();
+            }
+        }
+
         //print(this.gameObject.transform.localEulerAngles);
         Grp.Update(Time.smoothDeltaTime);
     }
