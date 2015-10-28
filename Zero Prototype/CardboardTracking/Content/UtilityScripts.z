@@ -1,0 +1,43 @@
+/*class UtilityScripts : ZilchComponent
+{
+}*/
+
+//Trace allows iteration speed to be faster by replacing the console.WriteLine with the infinitely superior trace command
+struct Trace
+{
+    constructor(test : any)
+    {
+        Console.WriteLine(test);
+    }
+}
+
+struct ValidateCogArray
+{
+    constructor(array : Array[Cog])
+    {
+        var i = 0;
+        while(i < array.Count)
+        {
+            var cog = array.Get(i);
+            // If this cog is not valid, remove it
+            if(cog == null)
+            {
+                array.Set(i, array.Get(array.LastIndex));
+                array.RemoveAt(array.LastIndex);
+            }
+            ++i;
+        }
+    }
+}
+
+struct Sort
+{
+    constructor(arrayToSort : Array[Integer])
+    {
+        arrayToSort.Sort(this.SmallestFirst);
+    }
+    function SmallestFirst(left : Integer, right : Integer) : Boolean
+    {
+        return left < right;
+    }
+}

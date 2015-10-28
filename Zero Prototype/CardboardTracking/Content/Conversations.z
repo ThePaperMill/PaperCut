@@ -1,0 +1,619 @@
+/*
+
+in the scrolling text I need to make larger sections scroll down when they're too big, erasing the top line every so often. 
+In the scrolling text I need to make it scroll back up. if the player inputs that.
+    
+
+*/
+
+class Conversation : ZilchComponent
+{
+    //Allow us to create HUD levels
+    [Property]
+    var HudLevel: Level = null; // Level that has our HUD in it
+    var HudSpace: Space = null;
+    //Keep track of what part of the conversation we're on
+    var InteractIndex : Integer = 0;
+    //Am I currently interacting with the player?
+    var HasBeenInteracting : Boolean = false;
+    //Have every part of the conversation
+    var ActionArray : Array[ConversationAction] = Array[ConversationAction]();
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Connect to interact and deinteract events
+        Zero.Connect(this.Owner, "InteractEvent", this.OnInteract);
+    }
+
+    function OnInteract(event : InteractEvent)
+    {
+        //If this object isn't in the middle of a conversation, open the hudspace and mark that we're in the middle of a conversation
+        if(this.HasBeenInteracting == false)
+        {
+            // Create a new Space to load our HUD level into
+            this.HudSpace = this.GameSession.CreateNamedSpace("HudSpace", Archetype.Find("Space"));
+            // Load the HUD level set in the property
+            this.HudSpace.LoadLevel(this.HudLevel);
+            //Mark that we are in the middle of a conversation
+            this.HasBeenInteracting = true;
+            //Prevent the player from moving
+            var player = this.Space.FindObjectByName("Player");
+            player.PlayerController3D.InHUDSpace2 = true;
+        }
+        //find an object called StringSpin
+        var scrollobject = this.HudSpace.FindObjectByName("StringSpin");
+        //If it doesn't exist,
+        if(scrollobject.TextScroller == null)
+        {
+            //if the index is higher than the length of the array, 
+            if(this.InteractIndex >= this.ActionArray.Count)
+            {
+                //go back to zero
+                this.InteractIndex = 0;
+                //Then END the conversation
+                this.EndConversation();
+            }
+            else
+            {
+                //do whatever function that conversation action is supposed to do (call the action function)
+                this.ActionArray.Get(this.InteractIndex).Action();
+                
+                //Then increment the index...?
+                this.InteractIndex += 1;
+            }
+        }
+        //otherwise if it does,
+        else
+        {
+            //End the stringspin
+            scrollobject.TextScroller.SetFinal();
+        }
+    }
+
+    function EndConversation()
+    {
+        //mark the conversation back to the beginning
+        this.InteractIndex = 0;
+        //mark so that we can tell we arentin the middle of a conversation
+        this.HasBeenInteracting = false;
+        //destroy the hudspace with our conversation in it.
+        if(this.HudSpace != null)
+        {
+            this.HudSpace.Destroy();
+        }
+        //This lets the highlight model spawn again
+        var closestObj = this.LevelSettings.InteractibleManager.FindClosestObjectToPlayer();
+        closestObj.Interactible.IsCurrentlyInteracting = false;
+        //allow the player to move
+        var player = this.Space.FindObjectByName("Player");
+        player.PlayerController3D.InHUDSpace2 = false;
+    }
+
+    function Destroyed()
+    {
+        // Make sure to clean up the extra Space we created
+        if(this.HudSpace != null)
+        {
+            this.HudSpace.Destroy();
+        }
+    }
+
+    function AddConversation(action : ConversationAction)
+    {
+        if(this.ActionArray == null)
+        {
+            Trace("NULL");
+        }
+        this.ActionArray.Add(action);
+        //I need to sort
+        this.SortConversations();
+    }
+
+    function SortConversations()
+    {
+        this.ActionArray.Sort(this.SmallestFirst);
+    }
+
+    function SmallestFirst(left : ConversationAction, right : ConversationAction) : Boolean
+    {
+        return left.PlaceInConversation < right.PlaceInConversation;
+    }
+}
+
+class ConversationAction : ZilchComponent
+{
+    //this is a function that takes in a string and returns a boolean. It's useable in all children functions
+    //var Action:delegate(anything:String): Boolean;
+    //This allows me to set my actiondelegate function in the child objects
+    var Action:delegate() = null;
+    
+    [Property]
+    var PlaceInConversation :Integer = 0;
+
+    constructor():base()
+    {
+    }
+
+    function ActionDelegate()
+    {
+        Trace("This should not be traced");
+    }
+}
+
+class TalkAction:ConversationAction
+{
+    [Property]
+    var TalkText : String = "Error, report to playtester: No text assigned";
+
+    constructor():base()
+    {
+        this.Action = this.ActionDelegate;
+    }
+
+    function Initialize(init : CogInitializer)
+    {
+        //Find the parent object and store it
+        var parent = this.Owner.FindRoot();
+        //I need to check if my owner has the manager before attaching to it
+        if(parent.Conversation == null)
+        {
+            Trace("Error, there is no conversation manager attached to the parent of this object. Attaching one");
+            parent.AddComponentByName("Conversation");
+        }
+        //I need to add myself to the manager. 
+        parent.Conversation.AddConversation(this);
+    }
+
+    function ActionDelegate()
+    {
+        //start up a new scrolling text object.
+        //find the stringspin object
+        var scrollspace = this.Owner.FindRoot().Conversation.HudSpace;
+        var scrollobject = scrollspace.FindObjectByName("StringSpin");
+        //delete all old texts, 
+        foreach (var child in scrollobject.Children)
+        {
+            child.Destroy();
+        }
+        //unnatach the last stringspin, 
+        if(scrollobject.TextScroller != null)
+        {
+            scrollobject.RemoveComponentByName("TextScroller");
+        }
+        //attach the new stringspin
+        scrollobject.AddComponentByName("TextScroller");
+        scrollobject.TextScroller.FullString = this.TalkText;
+        scrollobject.TextScroller.Initialize(null);
+        //find and set the "end of text" icon to invisible
+        var textIcon = scrollspace.FindObjectByName("TextIcon");
+        textIcon.Model.Visible = false;
+    }
+}
+
+class GiveAction:ConversationAction
+{
+    [Property]
+    var Arctype : Archetype = null;
+    [Property]
+    var TalkText : String = "Error, report to playtester: No text assigned";
+
+    constructor():base()
+    {
+        this.Action = this.ActionDelegate;
+    }
+
+    function Initialize(init : CogInitializer)
+    {
+        //Find the parent object and store it
+        var parent = this.Owner.FindRoot();
+        //I need to check if my owner has the manager before attaching to it
+        if(parent.Conversation == null)
+        {
+            Trace("Error, there is no conversation manager attached to the parent of this object. Attaching one");
+            parent.AddComponentByName("Conversation");
+            
+        }
+        //I need to add myself to the manager. 
+        parent.Conversation.AddConversation(this);
+    }
+
+    function ActionDelegate()
+    {
+        //start up a new scrolling text object.
+        //find the stringspin object
+        var scrollspace = this.Owner.FindRoot().Conversation.HudSpace;
+        var scrollobject = scrollspace.FindObjectByName("StringSpin");
+        //delete all old texts, 
+        foreach (var child in scrollobject.Children)
+        {
+            child.Destroy();
+        }
+        //unnatach the last stringspin, 
+        if(scrollobject.TextScroller != null)
+        {
+            scrollobject.RemoveComponentByName("TextScroller");
+        }
+        //attach the new stringspin
+        scrollobject.AddComponentByName("TextScroller");
+        scrollobject.TextScroller.FullString = this.TalkText;
+        scrollobject.TextScroller.Initialize(null);
+        //find and set the "end of text" icon to invisible
+        var textIcon = scrollspace.FindObjectByName("TextIcon");
+        textIcon.Model.Visible = false;
+        
+        Trace("I need to open a new window, give the player an item, and scroll down to it.");
+        
+        //UNIQUE TO ACTIONGIVE \/
+        
+        //I need to remove myself and all previous texts from the array then delete all of the actions up to and including this one so they're never repeated.
+        //I need to set the index to 0, and remove everything up to this conversation action(including this one)
+                //Find the conversationmanager where everything is stored.
+        var manager = this.Owner.FindRoot().Conversation;
+        for (var i = 0; i < manager.InteractIndex ; manager.InteractIndex -= 1)
+        {
+            //destroy the object to free up space
+            manager.ActionArray.Get(0).Owner.Destroy();
+            //Remove it from the array
+            manager.ActionArray.RemoveAt(0); 
+        }
+        //listen for the hud opening event (when a new hud will open)
+        Zero.Connect(this.GameSession, "OpenHUDInConversationsEvent", this.OnOpenHUDInConversationsEvent);
+    }
+
+    function OnOpenHUDInConversationsEvent(event : OpenHUDInConversationsEvent)
+    {
+        //find the player
+        var player = this.Space.FindObjectByName("Player");
+        //Add the new arctype into the player's array
+        player.PlayerController3D.AddItem(this.Arctype);
+        //I want to open the HUDspace like the player.
+        player.PlayerController3D.OpenItemHUD();
+        //I want to scroll to the most recent item when hud is opened
+        var itemlist = player.PlayerController3D.HudSpace.LevelSettings.ListOfItems;
+        itemlist.ItemIndex = itemlist.ListOfItems.Count - 1;
+        foreach (var item in itemlist.ListOfItems)
+        {
+            if(item.ActionMovement == null)
+            {
+                item.AddComponentByName("ActionMovement");
+                item.ActionMovement.Initialize(null);
+            }
+            item.ActionMovement.Interpolate(Real3(-3 * (itemlist.ListOfItems.Count - 1), 0, 0));
+        }
+        //listen for the hud closing event, then disconnect this event.
+        Zero.Connect(this.GameSession, "ItemHUDCloseEvent", this.OnItemHUDCloseEvent);
+        Zero.Disconnect(this.GameSession, "OpenHUDInConversationsEvent", this);
+    }
+
+    function OnItemHUDCloseEvent(event : ItemHUDCloseEvent)
+    {
+        
+        var manager = this.Owner.FindRoot().Conversation;
+        for (var i = 0; i < manager.InteractIndex ; manager.InteractIndex -= 1)
+        {
+            //destroy the object to free up space
+            manager.ActionArray.Get(0).Owner.Destroy();
+            //Remove it from the array
+            manager.ActionArray.RemoveAt(0); 
+        }
+        //Create a ScriptEvent
+        var myInteractEvent = new InteractEvent();
+        //Dispatch it to owner
+        this.Owner.FindRoot().DispatchEvent("InteractEvent", myInteractEvent);
+        //disconnect from itemhudcloseevent
+        Zero.Disconnect(this.GameSession, "ItemHUDCloseEvent", this);
+    }
+}
+
+class TakeAction:ConversationAction
+{
+    [Property]
+    var Arctype : Archetype = null;
+    [Property]
+    var TalkText : String = "Error, report to playtester: No text assigned";
+    [Property]
+    var RejectText : String = "Error, report to playtester: Item RejectionText not assigned; 'Eww, no, that is not what I wanted'";
+
+    constructor():base()
+    {
+        this.Action = this.ActionDelegate;
+    }
+
+    function Initialize(init : CogInitializer)
+    {
+        //Find the parent object and store it
+        var parent = this.Owner.FindRoot();
+        //I need to check if my owner has the manager before attaching to it
+        if(parent.Conversation == null)
+        {
+            Trace("Error, there is no conversation manager attached to the parent of this object. Attaching one");
+            parent.AddComponentByName("Conversation");
+            
+        }
+        //I need to add myself to the manager. 
+        parent.Conversation.AddConversation(this);
+    }
+
+    function ActionDelegate()
+    {
+        //start up a new scrolling text object.
+        //find the stringspin object
+        var scrollspace = this.Owner.FindRoot().Conversation.HudSpace;
+        var scrollobject = scrollspace.FindObjectByName("StringSpin");
+        //delete all old texts, 
+        foreach (var child in scrollobject.Children)
+        {
+            child.Destroy();
+        }
+        //unnatach the last stringspin, 
+        if(scrollobject.TextScroller != null)
+        {
+            scrollobject.RemoveComponentByName("TextScroller");
+        }
+        //attach the new stringspin
+        scrollobject.AddComponentByName("TextScroller");
+        scrollobject.TextScroller.FullString = this.TalkText;
+        scrollobject.TextScroller.Initialize(null);
+        //find and set the "end of text" icon to invisible
+        var textIcon = scrollspace.FindObjectByName("TextIcon");
+        textIcon.Model.Visible = false;
+        //listen for the hud opening event (when a new hud will open)
+        Zero.Connect(this.GameSession, "OpenHUDInConversationsEvent", this.OnOpenHUDInConversationsEvent);
+    }
+
+    function OnOpenHUDInConversationsEvent(event : OpenHUDInConversationsEvent)
+    {
+        //I want to open the HUDspace like the player.
+        var player = this.Space.FindObjectByName("Player");
+        player.PlayerController3D.OpenItemHUD();
+        //listen for the hud closing event, then disconnect this event.
+        Zero.Connect(this.GameSession, "ItemHUDCloseEvent", this.OnItemHUDCloseEvent);
+        Zero.Disconnect(this.GameSession, "OpenHUDInConversationsEvent", this);
+    }
+
+    function OnItemHUDCloseEvent(event : ItemHUDCloseEvent)
+    {
+        //Find the conversationmanager where everything is stored.
+        var manager = this.Owner.FindRoot().Conversation;
+        //When the player chooses the arctype that this character wants, 
+        if(event.Arctype == this.Arctype)
+        {
+            //then delete all of the actions up to and including this one so they're never repeated.
+            
+            //I need to set the index to 0, and remove everything up to this conversation action(including this one)
+            for (var i = 0; i < manager.InteractIndex;manager.InteractIndex -= 1)
+            {
+                //destroy the object to free up space
+                manager.ActionArray.Get(0).Owner.Destroy();
+                //Remove it from the array
+                manager.ActionArray.RemoveAt(0); 
+            }
+            //Remove an instance of that arctype from the player's array of items.
+            var player = this.Space.FindObjectByName("Player");
+            player.PlayerController3D.RemoveItem(event.Arctype);
+        }
+        //When  the player chooses the wrong arctype that his character wants, 
+        else
+        {
+            //Then erase all the actions in the conversation before this one
+            for (var i = 0; i < manager.InteractIndex - 1;manager.InteractIndex -= 1)
+            {
+                //destroy the object to free up space
+                manager.ActionArray.Get(0).Owner.Destroy();
+                //Remove it from the array
+                manager.ActionArray.RemoveAt(0); 
+            }
+            //create a new rejectconversation action with the same index operater as this talk action 
+            var reject = this.Space.CreateAtPosition(Archetype.Find("Transform"), Real3(0,0,0));
+            //Add or remove properties
+            reject.RemoveComponentByName("Transform");
+            reject.AddComponentByName("RejectItemAction");
+            reject.RejectItemAction.TalkText = this.RejectText;
+            reject.RejectItemAction.PlaceInConversation = this.PlaceInConversation;
+            reject.AttachTo(this.Owner.FindRoot());
+            reject.RejectItemAction.Initialize(null);
+        }
+        //Create a ScriptEvent
+        var myInteractEvent = new InteractEvent();
+        //Dispatch it to owner
+        this.Owner.FindRoot().DispatchEvent("InteractEvent", myInteractEvent);
+        //disconnect from itemhudcloseevent
+        Zero.Disconnect(this.GameSession, "ItemHUDCloseEvent", this);
+    }
+}
+class RejectItemAction:ConversationAction
+{
+    [Property]
+    var TalkText : String = "Error, report to playtester: No text assigned";
+
+    constructor():base()
+    {
+        this.Action = this.ActionDelegate;
+    }
+
+    function Initialize(init : CogInitializer)
+    {
+        //Find the parent object and store it
+        var parent = this.Owner.FindRoot();
+        //I need to check if my owner has the manager before attaching to it
+        if(parent.Conversation == null)
+        {
+            parent.AddComponentByName("Conversation");
+        }
+        //I need to add myself to the manager. 
+        parent.Conversation.AddConversation(this);
+    }
+
+    function ActionDelegate()
+    {
+        //start up a new scrolling text object.
+        //find the stringspin object
+        var scrollspace = this.Owner.FindRoot().Conversation.HudSpace;
+        var scrollobject = scrollspace.FindObjectByName("StringSpin");
+        //delete all old texts, 
+        foreach (var child in scrollobject.Children)
+        {
+            child.Destroy();
+        }
+        //unnatach the last stringspin, 
+        if(scrollobject.TextScroller != null)
+        {
+            scrollobject.RemoveComponentByName("TextScroller");
+        }
+        //attach the new stringspin
+        scrollobject.AddComponentByName("TextScroller");
+        scrollobject.TextScroller.FullString = this.TalkText;
+        scrollobject.TextScroller.Initialize(null);
+        //find and set the "end of text" icon to invisible
+        var textIcon = scrollspace.FindObjectByName("TextIcon");
+        textIcon.Model.Visible = false;
+        
+        //UNIQUE TO THIS CLASS \/
+        
+        //Find the conversationmanager where everything is stored.
+        var manager = this.Owner.FindRoot().Conversation;
+        //Then I delete myself from the array,
+        manager.ActionArray.RemoveFirst(this); 
+        //set my managerindex to max
+        manager.InteractIndex = manager.ActionArray.Count - 1;
+        //and destroy my parent to free up space
+        this.Owner.Destroy();
+    }
+}
+
+class TextScroller : ZilchComponent
+{
+    var FullString : String = "";
+    var MaxLineLength : Integer = 40;
+    var IndividualLines : Array[String] = Array[String]();
+    var Timer : Real = 0.0;
+    var SecondsPerLine : Real = 1.5;
+    var LineIndex : Real = 0.0;
+    var MathCalc : Real = 0.0;
+
+    function Initialize(init : CogInitializer)
+    {
+        //as long as fullstring is greater than the maxlinelength, continue doing this
+        while(this.FullString.Count > this.MaxLineLength)
+        {
+            //Skip to the end of the current line
+            var index = this.MaxLineLength;
+            //As long as the last character in the string is not a space, continue moving the index backwards
+            while(this.FullString.SubString(index, 1) != " ")
+            {
+                index -= 1;
+                
+                if(index <= 0)
+                {
+                    index = this.MaxLineLength -1;
+                    break;
+                }
+            }
+            //Make a new string representing a whole line
+            var nextline = this.FullString.SubString(0, index + 1);
+            //set the fullstring to the whole string minus the the string we cut out to make nextline
+            this.FullString = this.FullString.SubString(index +1, this.FullString.Count - index -1);
+            //I need to make a new string and shove it into an array
+            this.IndividualLines.Add(nextline);
+            //Create a new SpritetextObject for each new line
+            this.CreateSpriteText(nextline);
+        }
+        //If there is any remaining characters in the fullstring, set them to the last line in the array
+        if(this.FullString.Count > 0)
+        {
+            this.IndividualLines.Add(this.FullString);
+            //Create a new SpritetextObject for each new line
+            this.CreateSpriteText(this.FullString);
+        }
+        //Apply to logic update
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        //Calculate how many characters per second need to be updated
+        this.MathCalc = this.SecondsPerLine / this.MaxLineLength;
+    }
+
+    function CreateSpriteText(text: String)
+    {
+        var newSpriteText = this.Space.CreateAtPosition(Archetype.Find("SpriteText"), Real3(0,0,0));
+        var sText = newSpriteText.SpriteText;
+        
+        sText.Color = Real4(0,0,0,1);
+        sText.Text = "";
+        sText.FontSize = 43;
+        sText.Font = Font.Find("pastel crayon");
+        
+        newSpriteText.Name = text;
+        newSpriteText.Transform.Translation += Real3(-6.5, (2.75 - this.IndividualLines.Count*0.75), 0);
+        newSpriteText.AttachTo(this.Owner);
+    }
+
+    function OnLogicUpdate(event :UpdateEvent)
+    {
+        //If there are no objects left inthe array,
+        if(this.IndividualLines.Count <= 0)
+        {
+            this.SetFinal();
+        }
+        //otherwise, if there are objects still in the array 
+        else
+        {
+            //I need to find the child object whose name matches the first string in the array of strings
+            var cog = this.Owner.FindChildByName(this.IndividualLines.Get(0));
+            
+            if(cog != null)
+            {
+                //if the child object's spritetext.text component matches it's name, 
+                if(cog.Name == cog.SpriteText.Text)
+                {
+                    this.Timer = 0;
+                    //remove that string from the array of strings 
+                    this.IndividualLines.RemoveAt(0);
+                }
+                //if the child object's spritetext.text component does not match the name,
+                else
+                {
+                    //I need the timer to increment by dt. Timer is now the total elapsed time since the line started scrolling
+                    this.Timer += event.Dt;
+                    //the index we need it equal to the time divided by the number of seconds per character
+                    this.LineIndex = this.Timer/this.MathCalc;
+                    //If the linindex is greater than the number of chars in the line,
+                    if(this.LineIndex > cog.Name.Count -1)
+                    {
+                        //then set it so it doesn't go out of bounds
+                        this.LineIndex = cog.Name.Count;
+                    }
+                    //Set the actual text on screen
+                    cog.SpriteText.Text = cog.Name.SubString(0, this.LineIndex as Integer);
+                }
+            }
+        }
+    }
+
+    function SetFinal()
+    {
+        //set all the texts to their correct version
+        foreach (var child in this.Owner.Children)
+        {
+            if(child.SpriteText != null)
+            {
+                child.SpriteText.Text = child.Name;
+                // sign off from logic update 
+            }
+        }
+        //make the icon visible
+        var textIcon = this.Owner.FindRoot().FindChildByName("TextIcon");
+        textIcon.Model.Visible = true;
+        
+        //Create a ScriptEvent
+        var myOpenHUDInConversationsEvent = new OpenHUDInConversationsEvent();
+        //Dispatch it to owner
+        this.GameSession.DispatchEvent("OpenHUDInConversationsEvent", myOpenHUDInConversationsEvent);
+        
+        //remove everything from the array
+        this.IndividualLines.Clear();
+        //stop logic update from running and remove this component
+        Zero.Disconnect(this.Space, Events.LogicUpdate, this);
+        this.Owner.RemoveComponentByName("TextScroller");
+        
+
+    }
+}

@@ -1,0 +1,396 @@
+// Text Focuser v0.875
+//
+//   by Douglas Zwick
+//     8 Sep 2014
+//     douglas.zwick@digipen.edu
+//
+//   The TextFocuser component can be attached to any Cog that uses the SpriteText
+// component. It allows the text to be "focused" and "unfocused," which looks hella
+// dope. This can be done via the Focus and Unfocus functions.
+//
+//   TextFocuser duplicates a ton of code from Outliner (also by me). Initially I
+// hesitated to do this, thinking that instead maybe I should make them just one
+// component that can do it all. However, the functionality of the two and their
+// intended effects seem potentially somewhat disparate, and this way, they can
+// both be attached to the same Cog to allow for outlined or shadowed text to be
+// focused or unfocused. While I am personally not completely sold on this effect,
+// I can nevertheless see how it might be desired by a user.
+
+
+class TextFocuser : ZilchComponent
+{
+    [Dependency]    // This will only work with something that has a SpriteText
+    var SpriteText : SpriteText = null;
+    
+    
+    [Property]      // The number of fragments to make
+    var FragmentCount       : Integer   = 8;
+    
+    [Property]      // The spread distance while the text is "focused"
+    var FocusedSpread       : Real      = 2.0;
+    
+    [Property]      // The spread distance while the text is "unfocused"
+    var UnfocusedSpread     : Real      = 200.0;
+    
+    [Property]      // The position (as a percentage) relative to the parent text where the knob is created
+    var KnobOffsetPercent   : Real2     = Real2(0.0, 0.0);
+    
+    [Property]      // The Z-position of the knob relative to the parent text
+    var FragmentDepth       : Real      = -0.5;
+    
+    [Property]      // The angle offset (in degrees) for the fragments
+    var OffsetAngle         : Real      = 0.0;
+    
+    [Property]      // How long it takes (in seconds) for the Focus or Unfocus Action to complete
+    var Duration            : Real      = 1.0;
+    
+    [Property]      // Whether the text should be created as if "focused" at Initialize-time
+    var StartFocused        : Boolean   = false;
+    
+    [Property]      // Whether the parent text should be faded during a Focus or Unfocus Action
+    var AffectParentOpacity : Boolean   = true;
+    
+    [Property]      // The opacity of the parent text while the text is "focused"
+    var FocusedOpacity      : Real      = 1.0;
+    
+    [Property]      // The opacity of the parent text while the text is "unfocused"
+    var UnfocusedOpacity    : Real      = 0.0;
+    
+    [Property]      // The color for each fragment while the text is "focused"
+    var FocusedColor        : Real4     = Real4(1.0, 1.0, 1.0, 0.125);
+    
+    [Property]      // The color for each fragment while the text is "unfocused"
+    var UnfocusedColor      : Real4     = Real4(1.0, 1.0, 1.0, 0.0);
+    
+    [Property]      // The Archetype to be used for the "knob," as described below
+    var KnobArchetype       : Archetype = Archetype.Find("Transform");
+    
+    [Property]      // The Archetype to be used for the individual text fragments
+    var TextArchetype       : Archetype = Archetype.Find("SpriteText");
+    
+    
+    // The knob is an empty transform to which all the text fragments are parented
+    var Knob      : Cog        = null;
+    
+    // The array where all the fragments are stored
+    var Fragments : Array[Cog] = new Array[Cog]();
+    
+    // The current distance (as a percentage) of each fragment from the knob
+    //   Used in interpolation
+    var Spread    : Real       = 0.0;
+    
+    // The current color of each fragment
+    //   Used in interpolation
+    var Color     : Real4      = Real4(1.0, 1.0, 1.0, 0.0);
+    
+    // The current opacity of the parent text
+    //   Used in interpolation
+    var Opacity   : Real       = 0.0;
+    
+    // Whether the Focus or Unfocus Action is currently in progress
+    var Focusing  : Boolean    = false;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        // Make the fragment array big enough for the requested number of fragments
+        this.Fragments.Resize(this.FragmentCount);
+        
+        // Decide the starting Spread and Color based on whether StartFocused is true
+        this.Spread  = this.FocusedSpread;
+        this.Color   = this.FocusedColor;
+        
+        if(!this.StartFocused)
+        {
+            this.Spread  = this.UnfocusedSpread;
+            this.Color   = this.UnfocusedColor;
+        }
+        
+        // If AffectParentOpacity is true, then the starting color of the parent text
+        //   is set according to whether StartFocused is true
+        if(this.AffectParentOpacity)
+        {
+            var color:Real4 = this.SpriteText.Color;
+            
+            if(this.StartFocused)
+            {
+                this.Opacity = this.FocusedOpacity;
+            }
+            else
+            {
+                this.Opacity = this.UnfocusedOpacity;
+            }
+            
+            color.W = this.Opacity;
+            this.SpriteText.Color = color;
+        }
+        
+        // Calculate the fragment distance as a function of Spread and the
+        //   height of an em square in the font
+        var height:Real = this.SpriteText.MeasureGivenText("").Y;
+        var distance:Real = height * this.Spread * 0.01;
+        
+        // Calculate the position of the knob as a function of KnobOffsetPercent
+        //   and the height of an em square in the font
+        var knobX:Real = this.KnobOffsetPercent.X * 0.01 * height;
+        var knobY:Real = this.KnobOffsetPercent.Y * 0.01 * height;
+        var knobZ:Real = this.FragmentDepth;
+        var knobPos:Real3 = Real3(knobX, knobY, knobZ);
+        
+        // Create the knob and attach it to the parent text
+        this.Knob = this.Space.CreateAtPosition(this.KnobArchetype, knobPos);
+        this.Knob.AttachTo(this.Owner);
+        
+        // For convenience, the above-defined Angle is converted to radians
+        var offsetAngleR:Real = Math.ToRadians(this.OffsetAngle);
+        
+        // Loop to create the shadows
+        for(var i:Integer = 0; i < this.FragmentCount; ++i)
+        {
+            // Adjust the angle based on the number of shadows being created
+            var angle = offsetAngleR + 2.0 * Math.Pi * (i as Real) / (this.FragmentCount as Real);
+            
+            // Calculate the position where the fragment should be created
+            var x:Real = distance * Math.Cos(angle);
+            var y:Real = distance * Math.Sin(angle);
+            var z:Real = 0.0;
+            var fragmentPos:Real3 = Real3(x, y, z);
+            
+            // Create the fragment, parent it to the knob, and add it to the Fragments array
+            var fragment:Cog = this.Space.CreateAtPosition(this.TextArchetype, fragmentPos);
+            fragment.AttachTo(this.Knob);
+            this.Fragments.Set(i, fragment);
+            
+            // Copy the relevant properties from the parent text over to the fragment
+            this.CopyProperties(fragment);
+            
+            // Color the fragment appropriately
+            fragment.SpriteText.Color = this.Color;
+        }
+        
+        // Connect to the LogicUpdate event to allow the fragments to continually update
+        //   themselves to match any changes to the parent text
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        // Loop to copy properties to each fragment
+        for(var i:Integer = 0; i < this.FragmentCount; ++i)
+        {
+            // Each fragment's properties are updated to match those of the parent text
+            var fragment:Cog = this.Fragments.Get(i);
+            this.CopyProperties(fragment);
+        }
+        
+        // If a Focus or Unfocus Action is currently in progress...
+        if(this.Focusing)
+        {
+            // ...Update the shadows' positions and colors
+            this.PositionFragments();
+            this.ColorFragments();
+            
+            // If AffectParentOpacity is true, update the parent text's opacity
+            if(this.AffectParentOpacity)
+            {
+                this.SetParentOpacity();
+            }
+        }
+    }
+    
+    
+    // Copies all relevant properties from the parent text to the
+    //   SpriteText of the given fragment
+    function CopyProperties(fragment : Cog)
+    {
+        fragment.SpriteText.Align         = this.SpriteText.Align;
+        fragment.SpriteText.BlendMode     = this.SpriteText.BlendMode;
+        fragment.SpriteText.Font          = this.SpriteText.Font;
+        fragment.SpriteText.FontSize      = this.SpriteText.FontSize;
+        fragment.SpriteText.GeometryMode  = this.SpriteText.GeometryMode;
+        fragment.SpriteText.PixelsPerUnit = this.SpriteText.PixelsPerUnit;
+        //fragment.SpriteText.Position      = this.SpriteText.Position;
+        //fragment.SpriteText.Size          = this.SpriteText.Size;
+        fragment.SpriteText.SpriteLayer   = this.SpriteText.SpriteLayer;
+        fragment.SpriteText.Text          = this.SpriteText.Text;
+        fragment.SpriteText.Visible       = this.SpriteText.Visible;
+    }
+    
+    
+    // Interpolates Spread  from UnfocusedSpread  to FocusedSpread,
+    //              Color   from UnfocusedColor   to FocusedColor,
+    //                    and (if AffectParentOpacity is true)
+    //              Opacity from UnfocusedOpacity to FocusedOpacity over Duration seconds
+    function Focus()
+    {
+        var spreadTarget :Real  = this.FocusedSpread;
+        var colorTarget  :Real4 = this.FocusedColor;
+        var opacityTarget:Real  = this.FocusedOpacity;
+        
+        this.FocusHelper(spreadTarget, colorTarget, opacityTarget);
+    }
+    
+    
+    // Interpolates Spread  from FocusedSpread  to UnfocusedSpread,
+    //              Color   from FocusedColor   to UnfocusedColor,
+    //                    and (if AffectParentOpacity is true)
+    //              Opacity from FocusedOpacity to UnfocusedOpacity over Duration seconds
+    function Unfocus()
+    {
+        var spreadTarget :Real  = this.UnfocusedSpread;
+        var colorTarget  :Real4 = this.UnfocusedColor;
+        var opacityTarget:Real  = this.UnfocusedOpacity;
+        
+        this.FocusHelper(spreadTarget, colorTarget, opacityTarget);
+    }
+    
+    
+    // Helper function used by Focus and Unfocus
+    function FocusHelper(spreadTarget:Real, colorTarget:Real4, opacityTarget:Real)
+    {
+        // Clear the Actions of the parent object
+        this.Owner.Actions.Cancel();
+        
+        // Set the Focusing flag so that OnLogicUpdate will call PositionFragments
+        this.Focusing = true;
+        
+        // Prepare an Action sequence for the Focus, which will end with a callback
+        var focusSeq:ActionSet = Action.Sequence(this.Owner.Actions);
+        
+        // Prepare an Action group for all the simultaneous Actions in the Focus
+        var focusGrp:ActionSet = Action.Group(focusSeq);
+        
+        var duration:Real      = this.Duration;
+        
+        // Prepare the Action for the fragments' Spread
+        var spreadProperty:Property[Real]  = @this.Spread;
+        var spreadEase    :Ease            =  Ease.QuadInOut;
+        Action.Property(focusGrp, spreadProperty, spreadTarget, duration, spreadEase);
+        
+        // Prepare the Action for the fragments' Color
+        var colorProperty :Property[Real4] = @this.Color;
+        var colorEase     :Ease            =  Ease.QuadInOut;
+        Action.Property(focusGrp, colorProperty, colorTarget, duration, colorEase);
+        
+        // If AffectParentOpacity is true, prepare the Action for the parent text's opacity
+        if(this.AffectParentOpacity)
+        {
+            var opacityProperty:Property[Real] = @this.Opacity;
+            var opacityEase    :Ease           =  Ease.QuadInOut;
+            Action.Property(focusGrp, opacityProperty, opacityTarget, duration, opacityEase);
+        }
+        
+        // Include in the sequence a callback to clear the Focusing flag
+        Action.Call(focusSeq, this.OnFocusCompleted);
+    }
+    
+    
+    // Completion callback for the Focus Action
+    function OnFocusCompleted()
+    {
+        // One last call to PositionFragments, ColorFragments, and (if AffectParentOpacity
+        //   is true) SetParentOpacity, because Focusing gets cleared before OnLogicUpdate
+        //   gets a chance to run on the final frame of the Action sequence
+        this.PositionFragments();
+        this.ColorFragments();
+        
+        if(this.AffectParentOpacity)
+        {
+            this.SetParentOpacity();
+        }
+        
+        // Clear the Focusing flag so that OnLogicUpdate won't waste time calling PositionFragments
+        this.Focusing = false;
+    }
+    
+    
+    // Focuses the text instantaneously rather than via an Action sequence
+    function SnapFocus()
+    {
+        this.Spread = this.FocusedSpread;
+        this.Color  = this.FocusedColor;
+        
+        this.PositionFragments();
+        this.ColorFragments();
+        
+        if(this.AffectParentOpacity)
+        {
+            this.Opacity = this.FocusedOpacity;
+            
+            this.SetParentOpacity();
+        }
+    }
+    
+    
+    // Unfocuses the text instantaneously rather than via an Action sequence
+    function SnapUnfocus()
+    {
+        this.Spread = this.UnfocusedSpread;
+        this.Color  = this.UnfocusedColor;
+        
+        this.PositionFragments();
+        this.ColorFragments();
+        
+        if(this.AffectParentOpacity)
+        {
+            this.Opacity = this.UnfocusedOpacity;
+            
+            this.SetParentOpacity();
+        }
+    }
+    
+    
+    // Puts all the fragments in their correct positions based on the current Spread
+    function PositionFragments()
+    {
+        // Calculate the fragment distance as a function of Spread and the
+        //   height of an em square in the font
+        var height:Real = this.SpriteText.MeasureGivenText("").Y;
+        var distance:Real = height * this.Spread * 0.01;
+        
+        // For convenience, the above-defined Angle is converted to radians
+        var offsetAngleR:Real = Math.ToRadians(this.OffsetAngle);
+        
+        // Loop to position each fragment
+        for(var i:Integer = 0; i < this.FragmentCount; ++i)
+        {
+            var fragment:Cog = this.Fragments.Get(i);
+            
+            // Adjust the angle based on the number of fragments present
+            var angle = offsetAngleR + 2.0 * Math.Pi * (i as Real) / (this.FragmentCount as Real);
+            
+            // Calculate the new position of the fragment
+            var x:Real = distance * Math.Cos(angle);
+            var y:Real = distance * Math.Sin(angle);
+            var z:Real = 0.0;
+            var fragmentPos:Real3 = Real3(x, y, z);
+            
+            // Position the fragment
+            fragment.Transform.Translation = fragmentPos;
+        }
+    }
+    
+    
+    // Changes the color of each fragment during a Focus or Unfocus Action
+    function ColorFragments()
+    {
+        // Loop to color each fragment
+        for(var i:Integer = 0; i < this.FragmentCount; ++i)
+        {
+            var fragment:Cog = this.Fragments.Get(i);
+            
+            // Set the fragment's color
+            fragment.SpriteText.Color = this.Color;
+        }
+    }
+    
+    
+    // Changes the opacity of the parent text during a Focus or Unfocus Action
+    function SetParentOpacity()
+    {
+        var color:Real4 = this.SpriteText.Color;
+        color.W = this.Opacity;
+        this.SpriteText.Color = color;
+    }
+}

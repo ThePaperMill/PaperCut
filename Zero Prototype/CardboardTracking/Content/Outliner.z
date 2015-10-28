@@ -1,0 +1,150 @@
+// Outliner v2.125
+//
+//   by Douglas Zwick
+//     8 Sep 2014
+//     douglas.zwick@digipen.edu
+//
+//   The Outliner component can be attached to any Cog that uses the SpriteText
+// component. It gives the text a drop shadow or outline effect by creating
+// copies of the parent text and positioning them with the parameters specified
+// in its Properties.
+//
+//   For a drop shadow, set ShadowCount to 1. For an outline, set it to at least
+// 6 or 8, or 16-24 for smoother edges around corners. Of course, it can be set
+// arbitrarily high, but the effects become much less noticeable if ShadowCount
+// is much higher than about 24 or 32.
+
+
+class Outliner : ZilchComponent
+{
+    [Dependency]    // This will only work with something that has a SpriteText
+    var SpriteText : SpriteText = null;
+    
+    
+    [Property]      // The number of shadows to make
+    var ShadowCount       : Integer   = 16;
+    
+    [Property]      // The distance (as a percentage) of each shadow from the knob
+    var SpreadPercent     : Real      = 5.0;
+    
+    [Property]      // The position (as a percentage) relative to the parent text where the knob is created
+    var KnobOffsetPercent : Real2     = Real2(0.0, 0.0);
+    
+    [Property]      // The Z-position of the knob relative to the parent text
+    var ShadowDepth       : Real      = -0.5;
+    
+    [Property]      // The angle offset (in degrees) for the shadows
+    var OffsetAngle       : Real      = -45.0;
+    
+    [Property]      // Whether the shadows' opacities should reflect that of the parent text
+    var MatchOpacity      : Boolean   = true;
+    
+    [Property]      // The color for each shadow
+    var Color             : Real4     = Real4(0.0625, 0.0625, 0.0625, 0.75);
+    
+    [Property]      // The Archetype to be used for the "knob," as described below
+    var KnobArchetype     : Archetype = Archetype.Find("Transform");
+    
+    [Property]      // The Archetype to be used for the individual text shadows
+    var TextArchetype     : Archetype = Archetype.Find("SpriteText");
+    
+    
+    // The knob is an empty transform to which all the text shadows are parented
+    var Knob     : Cog        = null;
+    
+    // The array where all the shadows are stored
+    var Shadows  : Array[Cog] = new Array[Cog]();
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        // Make the shadow array big enough for the requested number of shadows
+        this.Shadows.Resize(this.ShadowCount);
+        
+        // Calculate the shadow distance as a function of SpreadPercent and the
+        //   height of an em square in the font
+        var height:Real = this.SpriteText.MeasureGivenText("").Y;
+        var distance:Real = height * this.SpreadPercent * 0.01;
+        
+        // Calculate the position of the knob as a function of KnobOffsetPercent
+        //   and the height of an em square in the font
+        var knobX:Real = this.KnobOffsetPercent.X * 0.01 * height;
+        var knobY:Real = this.KnobOffsetPercent.Y * 0.01 * height;
+        var knobZ:Real = this.ShadowDepth;
+        var knobPos:Real3 = Real3(knobX, knobY, knobZ);
+        
+        // Create the knob and attach it to the parent text
+        this.Knob = this.Space.CreateAtPosition(this.KnobArchetype, knobPos);
+        this.Knob.AttachTo(this.Owner);
+        
+        // For convenience, the above-defined Angle is converted to radians
+        var offsetAngleR:Real = Math.ToRadians(this.OffsetAngle);
+        
+        // Loop to create the shadows
+        for(var i:Integer = 0; i < this.ShadowCount; ++i)
+        {
+            // Adjust the angle based on the number of shadows being created
+            var angle = offsetAngleR + 2.0 * Math.Pi * (i as Real) / (this.ShadowCount as Real);
+            
+            // Calculate the position where the shadow should be created
+            var x:Real = distance * Math.Cos(angle);
+            var y:Real = distance * Math.Sin(angle);
+            var z:Real = 0.0;
+            var shadowPos:Real3 = Real3(x, y, z);
+            
+            // Create the shadow, parent it to the knob, and add it to the Shadows array
+            var shadow:Cog = this.Space.CreateAtPosition(this.TextArchetype, shadowPos);
+            shadow.AttachTo(this.Knob);
+            this.Shadows.Set(i, shadow);
+            
+            // Copy the relevant properties from the parent text over to the shadow
+            this.CopyProperties(shadow);
+        }
+        
+        // Connect to the LogicUpdate event to allow the shadows to continually update
+        //   themselves to match any changes to the parent text
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event:UpdateEvent)
+    {
+        // Loop to copy properties to each shadow
+        for(var i:Integer = 0; i < this.ShadowCount; ++i)
+        {
+            // Each shadow's properties are updated to match those of the parent text
+            var shadow:Cog = this.Shadows.Get(i);
+            this.CopyProperties(shadow);
+        }
+    }
+    
+    
+    // Copies all relevant properties from the parent text to the
+    //   SpriteText of the given shadow
+    function CopyProperties(shadow : Cog)
+    {
+        shadow.SpriteText.Align         = this.SpriteText.Align;
+        shadow.SpriteText.BlendMode     = this.SpriteText.BlendMode;
+        shadow.SpriteText.Font          = this.SpriteText.Font;
+        shadow.SpriteText.FontSize      = this.SpriteText.FontSize;
+        shadow.SpriteText.GeometryMode  = this.SpriteText.GeometryMode;
+        shadow.SpriteText.PixelsPerUnit = this.SpriteText.PixelsPerUnit;
+        //shadow.SpriteText.Position      = this.SpriteText.Position;
+        //shadow.SpriteText.Size          = this.SpriteText.Size;
+        shadow.SpriteText.SpriteLayer   = this.SpriteText.SpriteLayer;
+        shadow.SpriteText.Text          = this.SpriteText.Text;
+        shadow.SpriteText.Visible       = this.SpriteText.Visible;
+        
+        // The only exception is Color, which should remain whatever is given above,
+        //   except its alpha should be multiplied by the alpha of the parent text's color
+        //   if MatchOpacity is true
+        var color:Real4 = this.Color;
+        
+        if(this.MatchOpacity)
+        {
+            color.W *= this.SpriteText.Color.W;
+        }
+        
+        shadow.SpriteText.Color = color;
+    }
+}

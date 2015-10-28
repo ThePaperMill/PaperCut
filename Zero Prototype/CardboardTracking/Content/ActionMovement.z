@@ -1,0 +1,34 @@
+//ActionMovement is attached during runtime.
+
+//Action movement stores the original position of an object when initialized
+
+//Action movement recieves a call. It alters a "BaseMovementVector" which is the distance from the origina an object is. 
+
+//Then it calls a new action interpolating to the new basemovement position plus the original position over a period of time
+
+class ActionMovement : ZilchComponent
+{
+    
+    var OrigPos : Real3 = Real3(0,0,0);
+    var BaseMovementVector : Real3 =Real3(0,0,0);
+    var InterpolationLength : Real = 1.0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.OrigPos = this.Owner.Transform.Translation;
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+    function Interpolate(pos : Real3)
+    {
+        this.BaseMovementVector += pos;
+        
+        var seq = Action.Sequence(this.Owner.Actions);
+        Action.Property(seq, @this.Owner.Transform.Translation, this.OrigPos +  this.BaseMovementVector, this.InterpolationLength, SampleCurve.Bounce);
+        
+        
+    }
+}

@@ -1,0 +1,85 @@
+
+
+/*
+So right now, I can save a value on an object between game sessions. 
+
+Step 1: see if I can save an array on an object between game sessions
+PRess a button, add an integer to the array. 
+
+ITS POSSIBLE IF THEY ARE CHILDREN
+
+If I didn't want to savefile, 
+
+
+What do I need? 
+I need to be able to save what an object's conversations will be, even after leaving a room.
+
+I need to save the children attached to me. 
+
+I need to know if 
+
+1) EVERYTHING IN THE LEVEL THAT CHANGES NEEDS TO BE STORED IN A "LEVEL PARENT" OBJECT WHICH HAS AN ARCHTYPE- "LEVEL1ARCHTYPE". 
+THIS ARCTYPE HAS A FUNCTION you can call that reuploads its current information to it's secondary arctype. 
+
+
+Test1: Walking out of a room
+
+
+
+I NEED TO HAVE A METHOD OF DETERMINING WHETHER TO LOAD THE MAIN ARCTYPE OR THE SUB ARCTYPE
+-My gamesession could have an array of archtypes
+
+
+on initialize, all children have a code that checks if they are a child of the parent object. 
+If they are not, 
+    they parent locally 
+    then update that object's Primary arctype to include themselves.
+
+On initialize, the parent object has all the necessary children.
+It searchs gamesession's array of levelarctypes for one with it's "Main arctype" name.
+if it doesn't find one,
+    then it reverts itself to the "Main" arctype, then adds itself to the array
+if it finds one,
+    then it reverts itself to the "Sub" arctype.
+
+
+Can I upload to arctype during runtime? 
+REvert to an arctype during runtime?
+
+
+
+I could just delete myself and remake the original arctyep in my position
+
+
+*/
+class RoomSaver_GameSession : ZilchComponent
+{
+    var ActionArray : Array[Archetype] = Array[Archetype]();
+    function Initialize(init : CogInitializer)
+    {
+    }
+}
+class RoomSaver_Parent : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+    }
+}
+class RoomSaver_Child : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        var parent = this.Space.FindObjectByName("RoomSaverParent");
+        
+        if(parent == null)
+        {
+            Trace("ERROR ERROR ERROR: RoomSaver_Child could not find a parent. Please add a parent object.");
+        }
+        
+        
+        
+        
+        //I need to find the parent. If there is no parent, give myself a massive error. 
+        //Each room needs a parent put there manually.
+    }
+}

@@ -1,0 +1,39 @@
+/*
+ChangeCameraDistanceOnCollide is designed to be used with the GameControlledCamera script. 
+
+this function alters the distance of the GameControlledCamera when the parent obejct (which should be invisible) collides with the player. 
+
+This means the camera will pan to a new viewing angle on collision with the player, and return to normal when ending collision with teh player.
+*/
+class ChangeCameraDistanceOnCollide : ZilchComponent
+{
+    [Property]
+    var NewCameraDist : Real3 = Real3( 1,1,1);
+    var OriginalCamDist : Real3 = Real3(0,0,0);
+    var Camera : GameControlledCamera = null;
+    function Initialize(init : CogInitializer)
+    {
+        var cam = this.Space.FindObjectByName("Camera");
+        if(cam.GameControlledCamera != null)
+        {
+            this.Camera = cam.GameControlledCamera;
+        }
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.OnCollisionEnded);
+    }
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.PlayerController3D != null)
+        {
+            this.OriginalCamDist = this.Camera.DefaultDist;
+            this.Camera.ChangeDistanceVector(this.NewCameraDist, true, 0);
+        }
+    }
+    function OnCollisionEnded(event : CollisionEvent)
+    {
+        if(event.OtherObject.PlayerController3D != null)
+        {
+            this.Camera.ChangeDistanceVector(this.OriginalCamDist, true, 0);
+        }
+    }
+}

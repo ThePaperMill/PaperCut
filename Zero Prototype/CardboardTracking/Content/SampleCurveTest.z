@@ -1,0 +1,264 @@
+class SampleCurveTest : ZilchComponent
+{
+    [Property]
+    var DistanceFromStartingPosition : Real3 = Real3(1,1,1);
+    [Property]
+    var RandomicityValue : Real  = 0.001;
+    var Random : Random = new Random();
+
+    function Initialize(init : CogInitializer)
+    {
+        //get a random value based on the seed "Randomicity Value" and set randomicity value to it. 
+        this.RandomicityValue = this.Random.Range(0, this.RandomicityValue);
+        //Call an action sequence
+        this.Action();
+    }
+
+    function Action()
+    {
+        //Create a new sequence
+        var seq = Action.Sequence(this.Owner.Actions);
+        //Move this object's translation to the location DistanceFromStartingPosition over the course of two seconds plus the randomized seed, using the curve SampleCurve.Bounce
+        Action.Property(seq, @this.Owner.Transform.Translation, this.Owner.Transform.Translation - this.DistanceFromStartingPosition, 2.0 + this.RandomicityValue, SampleCurve.Bounce);
+    }
+}
+class ListOfItems : ZilchComponent
+{
+    //Add to levelsettings in the HUDspace
+    //keeps track of all items created on spawning the hudspace
+    //Moves them all left or right when left/right input is pressed 
+    //keeps gamecontroller data 
+    var ListOfItems : Array[Cog] =  Array[Cog]();
+    var ItemIndex : Integer = 0;
+    
+    [Property]
+    var GamePadIndex : Integer = 0;
+    //Declare a variable "GameController" which references a plugged in GamePad device that GamePadIndex will refer to
+    var GameController : Gamepad = null;
+    
+    var SelectCloses : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnSelectReleased);
+        //Find the Gamecontroller
+        this.GameController = Zero.Gamepads.GetGamePad(this.GamePadIndex);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.ListOfItems.Count > 0)
+        {
+            this.Input();
+        }
+        this.RenameTexts();
+        this.CheckClose();
+    }
+    function Input()
+    {
+        //I need to check if the closest object is NOT the left most object already
+        var leftmost = this.ListOfItems.Get(0);
+        foreach(var item in this.ListOfItems)
+        {
+            //if current item. position is smaller than then the leftmost 
+            if(item.Transform.Translation.X < leftmost.Transform.Translation.X)
+            {
+                //then set leftmost to the current item
+                leftmost = item;
+            }
+        }
+        var closest = this.FindClosest();
+        
+        if(this.GameController.LeftStick.X - this.GameController.LeftStickDelta.X == 0.0 && this.GameController.LeftStick.X != 0.0)
+        {
+            
+            //Trace(this.GameController.LeftStick.X);
+        }
+        
+        //If the player has pressed the left key AND the current indext is not set to the left most position,
+        if(Zero.Keyboard.KeyIsPressed(Keys.Left) || (this.GameController.LeftStick.X - this.GameController.LeftStickDelta.X == 0.0 && this.GameController.LeftStick.X < 0.0 ) && this.ItemIndex != 0)
+        {
+            //Go through each object in the array of items
+            foreach(var item in this.ListOfItems)
+            {
+                //If they have the do not have an ActionMovement component, add it
+                if(item.ActionMovement == null)
+                {
+                    item.AddComponentByName("ActionMovement");
+                    item.ActionMovement.Initialize(null);
+                }
+                //Move each of these objects a distance to the right.
+                item.ActionMovement.Interpolate(Real3(3, 0, 0));
+            }
+            //Increment the item index so we have a different object highlighted.
+            this.ItemIndex -= 1;
+        }
+        //I need to check if the cloest object is NOT the right most object already
+        var rightmost = this.ListOfItems.Get(0);
+        foreach(var item in this.ListOfItems)
+        {
+            //if current item. position is smaller than then the leftmost 
+            if(item.Transform.Translation.X > rightmost.Transform.Translation.X)
+            {
+                //then set leftmost to the current item
+                rightmost = item;
+            }
+        }
+        if(Zero.Keyboard.KeyIsPressed(Keys.Right) || (this.GameController.LeftStick.X - this.GameController.LeftStickDelta.X == 0.0 && this.GameController.LeftStick.X > 0.0 ) && this.ItemIndex < this.ListOfItems.Count -1)
+        {
+            foreach(var item in this.ListOfItems)
+            {
+                if(item.ActionMovement == null)
+                {
+                    item.AddComponentByName("ActionMovement");
+                    item.ActionMovement.Initialize(null);
+                }
+                item.ActionMovement.Interpolate(Real3(-3, 0, 0));
+            }
+            this.ItemIndex += 1;
+        }
+    }
+    function CheckClose()
+    {
+        if((this.GameController.IsButtonPressed(Buttons.B) || 
+        this.GameController.IsButtonPressed(Buttons.X) || 
+        this.GameController.IsButtonPressed(Buttons.Start) || 
+        this.GameController.IsButtonPressed(Buttons.Back) ||
+        Zero.Keyboard.KeyIsPressed(Keys.Space))
+        && this.SelectCloses == true)
+        {
+            //send out a close HUDevent
+            //When player hears, they gain back their boolean and if the space isn't null, it closes
+            //when the thing hears, they confirm or deny which thing they wanted, and if the space isn't null, it closes.
+            
+            //then send it a deinteract event before giving the newinteract event
+            //Create a ScriptEvent
+            var myCloseHUDEvent = new ItemHUDCloseEvent();
+            //Attach all available data
+            if(this.ListOfItems.Count > 1)
+            {
+                myCloseHUDEvent.Arctype = Archetype.Find(this.FindClosest().Name);
+            }
+            
+            //Dispatch it to owner
+            this.GameSession.DispatchEvent("ItemHUDCloseEvent", myCloseHUDEvent);
+        }
+    }
+
+    function OnSelectReleased(event : UpdateEvent)
+    {
+        
+        if(this.GameController.IsButtonReleased(Buttons.B)
+         || this.GameController.IsButtonReleased(Buttons.X)
+         || this.GameController.IsButtonReleased(Buttons.Start)
+         || this.GameController.IsButtonReleased(Buttons.Back))
+         {
+             this.SelectCloses = true;
+             //disconnect from all logic update events
+             Zero.Disconnect(this.Space, Events.LogicUpdate, this);
+             //reconnect to the one we want to keep. 
+             Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+         }
+    }
+    function AssignSpin()
+    {
+        var closest = this.FindClosest();
+        if(closest != null)
+        {
+            //closest.AddComponentByName("HighlightController");
+            //closest.HighlightController.Height = 0;
+            //closest.HighlightController.Initialize(null);
+        }
+    }
+
+    function FindClosest():Cog
+    {
+        if(this.ListOfItems.Count == 0)
+        {
+            return null;
+        }
+        
+        var selectIcon = this.Space.FindObjectByName("SubIcon");
+        //find the object closest to selecticon 
+        var closest : Cog = this.ListOfItems.Get(0);
+        foreach (var itemobject in this.ListOfItems)
+        {
+            var dist = Math.Distance(itemobject.Transform.WorldTranslation, selectIcon.Transform.WorldTranslation);
+            var closestDist =Math.Distance(closest.Transform.WorldTranslation, selectIcon.Transform.WorldTranslation);
+            if(dist < closestDist)
+            {
+                closest = itemobject;
+            }
+        }
+        return closest;
+    }
+
+    function RenameTexts()
+    {
+        if(this.ListOfItems.Count > 0)
+        {
+            var itemName = this.Space.FindObjectByName("ItemName");
+            var itemDescription = this.Space.FindObjectByName("ItemDescription");
+            
+            var closest = this.FindClosest();
+            
+            //Check every object in the list for the component highlight controller
+            foreach (var item in this.ListOfItems)
+            {
+                if(item == closest && item.HighlightController == null)
+                {
+                    //Trace("FUCK");
+                }
+                //Trace("Checking Every object");
+                //Trace(item);
+                //Trace("Does this object's highlight Exist? `item.HighlightController != null`");
+                //Trace("is this object not the closest? `item != closest`");
+                //If the object has a highlight controller but is not the closest,
+                if(item.HighlightController != null && item != closest)
+                {
+                    Trace("Changing the highlighted object!");
+                    //remove the highlight controller, set the rotation to 0,0,0
+                    item.RemoveComponentByName("HighlightController");
+                    item.Transform.Rotation == Math.ToQuaternion(Real3(0,0,0));
+                    //add a highlight controller to the closest
+                    closest.AddComponentByName("HighlightController");
+                    //change the height value of the highlight controller to 0.
+                    closest.HighlightController.Height = 0.0;
+                    Trace("Whenever the focus changes to a new object, I want that object to spin. ");
+                }
+                
+            }
+
+            
+            
+            itemName.SpriteText.Text = closest.Item.Name;
+            itemDescription.SpriteText.Text = closest.Item.Description;
+        }
+    }
+    
+    function AddItem(cog : Cog)
+    {
+        this.ListOfItems.Add(cog);
+    }
+    function RemoveItem(cog : Cog)
+    {
+        for(var i = 0; i < this.ListOfItems.Count; ++i)
+        {
+            var obj = this.ListOfItems.Get(i);
+            if(obj == cog)
+            {
+                this.ListOfItems.Set(i, this.ListOfItems.Get(this.ListOfItems.LastIndex));
+                this.ListOfItems.RemoveAt(this.ListOfItems.LastIndex);
+                return;
+            }
+        }
+    }
+    function SortItems()
+    {
+        this.ListOfItems.Sort(this.SmallestFirst);
+    }
+    function SmallestFirst(left : Cog, right : Cog) : Boolean
+    {
+        return left.Transform.Translation.X < right.Transform.Translation.X;
+    }
+}

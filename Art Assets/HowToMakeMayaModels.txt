@@ -1,0 +1,130 @@
+AFTER CHOOSING A SCANNED ASSET TO LOAD:
+
+OPEN MAYA 2015
+-doubleclick the Maya 2015 program icon
+-Close all helper windows, they do not help. Unclick the "Show at Startup" icon.
+-Save project/scene with the same name as the scanned asset you are modeling, using "File" -> "Save Scene As" as Maya Binary.
+
+LOAD CARDBOARD TUBING
+-Click "File" -> "Import"
+-Manouvre to the directory for "PerfectTile_10x10" .mb file and double click it.
+
+LOAD IMAGE REFERENCE
+-while your mouse hovers over the center of the screen, quickly tap spacebar, WHILE NOT TOUCHING YOUR MOUSE
+-You should now be in "Four Perspective" mode, with four cameras depicting "Top", "Front", "Side", and "Perspective" in four viewports.
+-Under the "Front" perspective (lower left), click "View"->"Image Plane"->"Import Image"
+-Manouvre to the directory for your scanned asset
+-Hove your mouse over the Persp window (upper right), lightly tap the spacebar without touching your mouse
+-Press the W Key to enter Translate Tool mode
+-move your image reference slightly forward along the Z-Axis (Hold Left-Click on the blue arrow, and drag it) until it is entirely visible 
+
+SET UP CUTOUT
+-Under "File", "Edit", and "Modify", there is a drop down select menu with an arrow pointing down. Select "Polygons".
+-Beneath the "Polygons" drop down menu, there should be a list of tabs, including "General", "Curves", "Surfaces", and "Polygons. Make sure "Polygons" is selected.
+-there are several icons for Polygonal objects under the polygon tool. Click the Cube tool (shaped like a cube)
+-Create a cube by left clicking once(Unit Square), or Drag clicking 3 times (User Defined x,y,x) on the grid
+-Using the Scale tool (r), Rotate Tool (e), or Translate tool (w), manouvre the object around the Character/Prop on the Image Reference.
+-Create multiple cubes by using the Cube tool, or CTRL+V, then CTRL+D to copy and then paste a duplicate version of your currently selected cube.
+-Place all these cubes surrounding the Image Reference, so that they are penetrating the cardboard tubing entirely on the Z axis (blue axis), and close to the black border of the image reference.
+-Always place the "Base" cube first, on the bottom of the image reference. This should not be rotated, and represents the flat bottom of the asset. 
+-Place as few boxes as possible, but have no acute angles, or angles approaching 90 degrees. 
+
+SET UP THE BOOLEAN TOOL ON THE TOOLBAR FOR EASY ACCESS
+-Under "Mesh" -> "COMBINE" -> "Booleans" -> "Difference", CTRL+Shift+LeftClick "Difference". 
+-This should spawn a new tool icon on the POLYGONS Toolbar, at the far right of the toolbar. It resembles a cylinder with a chunk ripped out of it, and a ghost cylinder with a ghost box
+
+CUT OUT THE MODEL
+-Select all of your cut out objects by drag clicking over all of them (not model you're trying to cut out, though) or selecting them one at a time with shift+left click. 
+-Press ctrl+c and ctrl+V to clone/duplicate them, and press w to select the move tool and move them away from the object you're cutting out on the Z axis
+-Left click your cardboard tubing object (do NOT click the Image reference image itself. This is the wrong object)
+-With ONLY your Cardboard Tubing object selected/highlighted, Shift+LeftClick one of your cutout objects.
+-With ONLY the cardboard Tubing object and ONE of the cutout objects, left click the BooleanTool on the toolbar. this will "Cut out" the second selection from the first selection.
+-Repeat previous step until all cardboard boxes have been "Cut out" of the original Cardboard Tubing Import. 
+-After all of your cutout objects have been deleted in this way, select the copies you pushed to a different Z layer. 
+-Move them back over the original object, and begin cutting out the other cardboard tubing layer with the same process.
+- select both the inner and outer Cardboard Tubing using left click and then Shift+Left Click.
+-Under "Mesh"-> "COMBINE" -> click "Combine". this combined the two separate models into one. 
+-Ensure that there are no HOLES in the Model. If the inside of the model is visible from any of the sides, press ctrl + Z to undo ALL boolean cuts until you find which box cut out the improper section. Cut out a smaller bit of the model, one small peice at a time. 
+-Clean up any artifacts using more the boolean tool and more cubes from the cube tool. Artifacts are bits of the cardboard model that are outside of the cuts you made.
+-Ensure no Artifacts and no Holes are present on the model. 
+-Delete the Image Reference image by dragging left click over it to select it(It is only selectable by drag select) and pressing the Delete key.
+
+
+CLEAN THE MODEL
+-Select "Modify" -> click "Center Pivot"
+-Select "Modify" -> click "Freeze Transformations"
+-Select "Edit" -> "Delete All By Type" -> click "Non-Deformer History"
+-Save your scene with Ctrl + S
+
+MAP THE UV'S
+-Select "Window" -> select "UV Texture Editor" to open the UV Texture Editor Window.
+-Left click on the Cardboard Cutout Model to highlight it and display it's UVs in the UV Texture Editor window
+-Hold Right Click with your mouse hovering over the model and the model highlighted to bring up the MAYA QUICKMENU 
+-Still holding right click, drag your cursor down to "Face" and unclick the right mouse to "Select" face mode. 
+-Left click one of the outermost faces, and then shift-click the second outermost face to highlight both of the faces
+-Switch to the TRANSLATE tool with w key.
+-While INSIDE the UV Texture Editor window, drag the two axis so that the two Green outlines are NOWHERE CLOSE to any of the other outlines
+-Inside the UV Texture Editor Window, select the "Polygons" tab, and select "UV Snapshot" at the bottom.
+-In the "FileName" section, make sure your directory points to the Assets repo. Rename "outUV" to the name of the Maya File
+-In the "Size X" and "Size Y" section, type in 2048
+-In the "Image format", select "TIFF" from the drop down menu.
+-You can click "okay" now
+-Minimize the UV Texture Editor, then select the perspective frame by clicking in the window and pressing CTRL + S to save the project
+
+EXPORT THE UNITY FILETYPE MODEL
+-with any part of the Model highlighted, move your mouse over and Right Click to bring up the UNITY quick-tool menu
+-Drag-Select "Object Mode" and release to switch from face mode back to Object Mode (Where you can select an entire object)
+-Select said entire object
+-Select "File" -> "Export Selection" to open the Export Selection window
+-At the bottom of the screen, type in the filename you want to save the file as
+-switch "Files of Type" to "FBX Export"
+-Under "Options" on the right side of the screen, expand "File Type Specific Options", then expand "Include", then expand "Geometry"
+-Make sure the "Smooth Mesh", "Referenced Assets Content", and "Triangulate" checkboxes are selected.
+-Manouvre to the directory where you want to save the FBX (Game Engine file) in the main window
+-Click "Export Selection" to close the window. 
+-Save the project with CTRL + S.
+-Close The Maya Project, but make sure all of the files you've saved (.mb, .TIF, .Fbx, .jpeg) are in the same directory folder named after the asset.
+
+OPEN PHOTOSHOP
+open Adobe PhotoshopCS5.1
+Double click the .TIF file to open it in photoshop in a new tab
+You should see a black screen with two white outlines- the shape of the outer faces of the cardboard model
+In photoshop on the right side of the screen, there should be a "Layers", Channels", and "Paths" tab. Click the Channels tab, then click back to the Layer's tab (Even if you started on the Layers tab)
+Double click the italicized "Background" layer in the "Layers" tab to open the New Layer Window.
+Click "Ok" in the layer tabs window to close the window and Unlock the layer for editing.
+Open the Asset Folder and click and drag the jpeg file into the new window.
+click the enter key to unlock the imported file
+In the layers tab, drag the jpeg layer down under "Layer 0" to "Disappear" the jpeg layer
+Make sure you have the TIFF layer selected (The black layer with the outlines)
+Under "Layers" should be a drop down menu that has "Normal" selected. Click the down arrow and scroll to "Screen" and select it to allow your outlines to shine through to the under layer
+Ctrl + A to select the current layer, Ctrl + C to copy the current layer, then CTRL + V to paste the current layer.
+Drag the layer down to the bottom of the list (Making it the background). Click the Eyeball to make it invisible.
+
+MAP THE TEXTURE TO THE UVs
+Select the middle jpeg layer
+press M to select the "Select tool", then drag around the jpeg image
+Press v to select the "Move tool"
+click and drag inside of the selection to move the jpeg to the outline on the Screened TIFF layer, roughly where the image was when you created the model in Maya.
+Still in the Selection, press CTRL + T to open the "Transform tool". While holding SHIFT, you can click and drag on the edges of the selection to scale the layer to the size of the outline.
+MANUALLY click the move tool in the toolbar on the left side of the screen (The top tool).  You'll get a pop-up.  Click "Apply Transformation"
+Copy your current TIFF layer with CTRL C + CTRL V.
+With the copied layer selected, select "Edit" -> "Transform" -> "Flip horizontal" to flip the copied layer. 
+Use the move tool and move the flipped layer over to the flipped outline that's empty
+Manouvre to the file "DefaultCardboardTexture" and drag and drop the file onto the photoshop window
+Hit enter to unlock the layer for editing, then drag and drop the layer into the layer above the invisible background.
+Use the move tool in conjunction with Ctrl+c and Ctrl+V to paste multiple layers, and slowly fill in the black behind the scanned image.
+Use ctrl+E after selecting one of the cardboard background layers to merge downwards from the currently selected layer.
+Continue merging all of the BACKGROUND cardboard layers.
+Make top (screened) layer invisible.
+Ctrl + S to save the TFF file.  Don't change the TIFF Options that pop up.
+Press File -> Save as to open the save file dialogue once more. Before pressing ok, switch the file type to .PNG, and export it to the folder with all of the close assets.
+Close Photoshop
+
+IMPORT TO UNITY
+Open the Unity Project
+Create a new sub folder in the Assets folder, named after the new asset. 
+Drag and drop the .PNG and the .FBX file into the new folder
+Drag the new model into the gamespace, and drag the new material onto it.
+Drag the new game object into your asset folder to create an archetype out of it.
+
+Success!
