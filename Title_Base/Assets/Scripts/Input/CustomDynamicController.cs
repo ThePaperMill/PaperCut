@@ -76,6 +76,8 @@ public class CustomDynamicController : MonoBehaviour
     // additional gravity to be applied to the player.
     public float AdditionalGravity = 0.0f;
 
+    public float MaxUpwardVelocity = 4.0f;
+
     // A scalar for the amount of force the player can apply to move
     // Should be between 0-1
     // 0: No control while on the ground
@@ -319,6 +321,8 @@ public class CustomDynamicController : MonoBehaviour
         UpdateCurrentState(MoveDirection);
 
         UpdateModel(RawInput);
+
+        print(RBody.velocity);
     }
 
     /****************************************************************************/
@@ -743,7 +747,7 @@ public class CustomDynamicController : MonoBehaviour
     {
       if(PlayerModel == null)
       {
-        return;
+            return;
       }
 
       PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
@@ -771,21 +775,21 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     private void Jump()
     {
-        // Get only horizontal element of our velocity (none in the direction of our Up vector)
-        var currVelocity = RBody.velocity;
-        var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
+        //// Get only horizontal element of our velocity (none in the direction of our Up vector)
+        //var currVelocity = RBody.velocity;
+        //var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
 
-        // Add velocity upward by the initial jump strength
-        newVelocity += WorldUp * InitialJumpVelocity;
+        //// Add velocity upward by the initial jump strength
+        //newVelocity += WorldUp * InitialJumpVelocity;
 
-        // We want to add the velocity of the surface we're currently on
-        // This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
-        newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
+        //// We want to add the velocity of the surface we're currently on
+        //// This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
+        //newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
 
-        // Set the velocity
-        RBody.velocity = newVelocity;
+        //// Set the velocity
+        //RBody.velocity = newVelocity;
 
-        //RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
+        RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
 
         // We're no longer on the ground
         OnGround = false;
@@ -812,11 +816,11 @@ public class CustomDynamicController : MonoBehaviour
       {
         ClampSpeed.x = MaxSpeed;
       }
-      //if (RBody.velocity.y > MaxSpeed)
-      //{
-      //  ClampSpeed.y = MaxSpeed;
-      //}
-      if (RBody.velocity.z > MaxSpeed)
+        if (RBody.velocity.y > MaxUpwardVelocity)
+        {
+            ClampSpeed.y = MaxUpwardVelocity;
+        }
+        if (RBody.velocity.z > MaxSpeed)
       {
         ClampSpeed.z = MaxSpeed;
       }
@@ -825,10 +829,10 @@ public class CustomDynamicController : MonoBehaviour
       {
           ClampSpeed.x = -MaxSpeed;
       }
-      //if (RBody.velocity.y < -MaxSpeed)
-      //{
-      //    ClampSpeed.y = -MaxSpeed;
-      //}
+      if (RBody.velocity.y < -2 * MaxUpwardVelocity)
+      {
+          ClampSpeed.y = - 2 * MaxUpwardVelocity;
+      }
       if (RBody.velocity.z < -MaxSpeed)
       {
           ClampSpeed.z = -MaxSpeed;

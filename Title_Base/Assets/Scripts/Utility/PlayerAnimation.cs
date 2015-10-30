@@ -66,7 +66,7 @@ public class PlayerAnimation : MonoBehaviour
         //return;
         var test = ActionSystem.Action.Sequence(grp);
 
-        ActionSystem.Action.Property(test, this.PlayerModel.transform.GetProperty(x => x.localEulerAngles), Rotation, 0.25f, Ease.Linear);
+        ActionSystem.Action.Property(test, this.transform.GetProperty(x => x.localEulerAngles), Rotation, 0.25f, Ease.Linear);
     }
 
     /****************************************************************************/

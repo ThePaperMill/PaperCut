@@ -431,7 +431,8 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
                 }
                 case InputTypes.Mouse:
                 {
-                }break;
+                   break;
+                }
             }
 
         }
