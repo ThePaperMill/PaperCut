@@ -96,16 +96,6 @@ public class InteractManager : MonoBehaviour
 		// Remove all of the null objects (done here in case objects are destroyed in level)
 		AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
     //print ("Can talk with " + AllInteractableObjects.Count + " people.");
-
-    
-         
-    if(Closest)
-    {
-        if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.InteractKeys))
-        {
-            Closest.DispatchEvent(Events.Interact);
-        }
-    }
   }
 
     public GameObject GetClosestObj()

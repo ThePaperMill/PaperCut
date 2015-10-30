@@ -6,8 +6,9 @@ using UnityEngine;
 
 class GlobalControls
 {
-    public static List<InputCodes> InteractKeys = new List<InputCodes>{ KeyCode.E, XINPUT_BUTTONS.BUTTON_A };
+    public static List<InputCodes> InteractKeys = new List<InputCodes>{ KeyCode.E, XINPUT_BUTTONS.BUTTON_X, XINPUT_BUTTONS.BUTTON_Y };
     public static List<InputCodes> OpenInventoryKeys = new List<InputCodes> { KeyCode.I, XINPUT_BUTTONS.BUTTON_BACK };
+    public static List<InputCodes> JumpKeys = new List<InputCodes> { KeyCode.Space, XINPUT_BUTTONS.BUTTON_A};
 }
 
 public enum InputTypes

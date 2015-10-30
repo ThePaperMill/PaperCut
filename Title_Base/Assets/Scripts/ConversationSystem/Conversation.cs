@@ -26,6 +26,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void OnEngageConversation(EventData eventData)
         {
+            
             Engage();
         }
         public void OnDisengageConversation(EventData eventData)
@@ -35,7 +36,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void Engage()
         {
-            if(Actions.Count == 0)
+            if(Actions.Count == 0 || Engaged)
             {
                 return;
             }
@@ -51,8 +52,10 @@ namespace Assets.Scripts.ConversationSystem
 
         void OnNextAction(EventData data)
         {
-            if(Engaged)
+            if (Engaged)
+            {
                 NextAction();
+            }
         }
 
         public void NextAction()
@@ -96,6 +99,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void Disengage()
         {
+            //Debug.Log("DSADA");
             if (Actions.Count == 0)
             {
                 return;
@@ -119,12 +123,11 @@ namespace Assets.Scripts.ConversationSystem
         // Update is called once per frame
         void Update()
         {
-            Debug.Log("DSADSA");
-            Debug.Log(ConversationAction.MoveNextInputRecieved());
-            if (ConversationAction.MoveNextInputRecieved() && Engaged)
-            {
-                this.NextAction();
-            }
+            
+            //if (ConversationAction.MoveNextInputRecieved() && Engaged)
+            //{
+            //    this.NextAction();
+            //}
         }
     }
 }
