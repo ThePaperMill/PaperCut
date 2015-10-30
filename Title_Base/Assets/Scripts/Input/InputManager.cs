@@ -383,4 +383,78 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     {
       return Input.GetKeyUp(Key);
     }
+
+    public bool IsInputTriggered(List<InputCodes> inputCodes)
+    {
+        foreach(var i in inputCodes)
+        {
+            switch (i.InputType)
+            {
+                case InputTypes.Controller:
+                {
+                     return IsButtonTriggered((XINPUT_BUTTONS)i.Value);
+                }
+                case InputTypes.Keyboard:
+                {
+                     return IsKeyTriggered((KeyCode)i.Value);
+                }
+                case InputTypes.Mouse:
+                {
+                }break;
+            }
+
+        }
+
+        return false;
+    }
+
+    public bool IsInputDown(List<InputCodes> inputCodes)
+    {
+        foreach (var i in inputCodes)
+        {
+            switch (i.InputType)
+            {
+                case InputTypes.Controller:
+                    {
+                        return IsButtonDown((XINPUT_BUTTONS)i.Value);
+                    }
+                case InputTypes.Keyboard:
+                    {
+                        return IsKeyDown((KeyCode)i.Value);
+                    }
+                case InputTypes.Mouse:
+                    {
+                    }
+                    break;
+            }
+
+        }
+
+        return false;
+    }
+
+    public bool IsInputReleased(List<InputCodes> inputCodes)
+    {
+        foreach (var i in inputCodes)
+        {
+            switch (i.InputType)
+            {
+                case InputTypes.Controller:
+                    {
+                        return IsButtonReleased((XINPUT_BUTTONS)i.Value);
+                    }
+                case InputTypes.Keyboard:
+                    {
+                        return IsKeyReleased((KeyCode)i.Value);
+                    }
+                case InputTypes.Mouse:
+                    {
+                    }
+                    break;
+            }
+
+        }
+
+        return false;
+    }
 }

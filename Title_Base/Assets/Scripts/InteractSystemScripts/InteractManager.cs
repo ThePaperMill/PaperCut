@@ -92,7 +92,7 @@ public class InteractManager : MonoBehaviour
     //print ("Can talk with " + AllInteractableObjects.Count + " people.");
 
     
-    if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.I))
+    if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.E))
     {     
       if(Closest)
       {
