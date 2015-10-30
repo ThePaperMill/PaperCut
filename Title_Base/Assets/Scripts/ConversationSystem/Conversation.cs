@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Assets.Scripts.ConversationSystem
 {
 
-    public class Conversation : MonoBehaviour
+    public class Conversation : EventHandler
     { 
         public List<ConversationAction> Actions = new List<ConversationAction>();
         private bool Engaged = false;
@@ -119,6 +119,8 @@ namespace Assets.Scripts.ConversationSystem
         // Update is called once per frame
         void Update()
         {
+            Debug.Log("DSADSA");
+            Debug.Log(ConversationAction.MoveNextInputRecieved());
             if (ConversationAction.MoveNextInputRecieved() && Engaged)
             {
                 this.NextAction();

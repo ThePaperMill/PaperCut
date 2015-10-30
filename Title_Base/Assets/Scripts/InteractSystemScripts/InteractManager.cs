@@ -98,14 +98,14 @@ public class InteractManager : MonoBehaviour
     //print ("Can talk with " + AllInteractableObjects.Count + " people.");
 
     
-    if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.E))
-    {     
-      if(Closest)
-      {
-        Closest.DispatchEvent(Events.Interact);
-      }
+         
+    if(Closest)
+    {
+        if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.InteractKeys))
+        {
+            Closest.DispatchEvent(Events.Interact);
+        }
     }
-
   }
 
     public GameObject GetClosestObj()

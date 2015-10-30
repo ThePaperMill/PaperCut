@@ -223,7 +223,7 @@ public class CustomDynamicController : MonoBehaviour
         {
             if(InteractPressed == true)
             {
-                EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
+                //EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
             }
 
             return;
@@ -248,7 +248,7 @@ public class CustomDynamicController : MonoBehaviour
                 // if there is an object, dispatch the interact event to them.
                 if (test)
                 {
-                    test.DispatchEvent(Events.Interact);
+                    //test.DispatchEvent(Events.Interact);
                     return;
                 }
             }
