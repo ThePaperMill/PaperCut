@@ -423,16 +423,29 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
             {
                 case InputTypes.Controller:
                 {
-                     return IsButtonTriggered((XINPUT_BUTTONS)i.Value);
+                     if(IsButtonTriggered((XINPUT_BUTTONS)i.Value))
+                     {
+                            return true;
+                     }
+                     break;
                 }
                 case InputTypes.Keyboard:
                 {
-                     return IsKeyTriggered((KeyCode)i.Value);
+                     if(IsKeyTriggered((KeyCode)i.Value))
+                    {
+                        return true;
+                    }
+                    break;
                 }
                 case InputTypes.Mouse:
                 {
-                   break;
+                     if( IsMouseTriggered((MOUSE)i.Value))
+                    {
+                        return true;
+                    }
+                    break;
                 }
+                    
             }
 
         }
@@ -455,16 +468,29 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
             {
                 case InputTypes.Controller:
                     {
-                        return IsButtonDown((XINPUT_BUTTONS)i.Value);
+                        if (IsButtonDown((XINPUT_BUTTONS)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
                 case InputTypes.Keyboard:
                     {
-                        return IsKeyDown((KeyCode)i.Value);
+                        if (IsKeyDown((KeyCode)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
                 case InputTypes.Mouse:
                     {
+                        if (IsMouseDown((MOUSE)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
-                    break;
+
             }
 
         }
@@ -487,16 +513,29 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
             {
                 case InputTypes.Controller:
                     {
-                        return IsButtonReleased((XINPUT_BUTTONS)i.Value);
+                        if (IsButtonReleased((XINPUT_BUTTONS)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
                 case InputTypes.Keyboard:
                     {
-                        return IsKeyReleased((KeyCode)i.Value);
+                        if (IsKeyReleased((KeyCode)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
                 case InputTypes.Mouse:
                     {
+                        if (IsMouseReleased((MOUSE)i.Value))
+                        {
+                            return true;
+                        }
+                        break;
                     }
-                    break;
+
             }
 
         }
