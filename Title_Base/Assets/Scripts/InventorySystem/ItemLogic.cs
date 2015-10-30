@@ -2,7 +2,7 @@
 using System.Collections;
 using ActionSystem;
 
-public class ItemLogic : MonoBehaviour
+public class ItemLogic : EventHandler
 {
   private ActionSequence Seq = new ActionSequence();
   public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -38,7 +38,7 @@ public class ItemLogic : MonoBehaviour
   {
     // lerp down to the camera.
     var test = ActionSystem.Action.Sequence(Seq);
-    var finalPos = new Vector3(0.0f, 0.0f, 0.0f);
+    var finalPos = new Vector3(10.0f, 10.0f, 10.0f);
     finalPos.z = transform.localPosition.z;
     Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
   }
@@ -49,4 +49,10 @@ public class ItemLogic : MonoBehaviour
   {
     Seq.Update(Time.deltaTime);
 	}
+
+  void OnDestroy()
+  {
+    EventSystem.GlobalHandler.Disconnect(Events.MoveItem, OnMoveItem);
+    EventSystem.GlobalHandler.Disconnect(Events.ActivateSelector, OnActivateSelector);
+  }
 }

@@ -14,14 +14,20 @@ using System.Collections;
 using ActionSystem;
 
 
+public enum FLIP_MODEL
+{
+    FLIP_POSITIVE,
+    FLIP_NEGATIVE,
+}
+
 [RequireComponent(typeof(MeshRenderer))]
 public class PlayerAnimation : MonoBehaviour 
 {
-  MeshRenderer MRenderer   = null;  // the player's mesh renderer
-  GameObject PlayerModel   = null;  // the Player's model
-  GameObject Cam           = null;  // the main camera in the level
-  ActionGroup grp          = new ActionGroup();
-  Vector3 StartRotation    = new Vector3();
+  MeshRenderer MRenderer        = null;  // the player's mesh renderer
+  public GameObject PlayerModel = null;  // the Player's model
+  GameObject Cam                = null;  // the main camera in the level
+  ActionGroup grp               = new ActionGroup();
+  public Vector3 RotationAngle  = new Vector3();
 
   /****************************************************************************/
   /*!
@@ -51,31 +57,54 @@ public class PlayerAnimation : MonoBehaviour
 
         // find the camera so we can look at it
         Cam = GameObject.FindGameObjectWithTag("MainCamera");
-
-        StartRotation = transform.localEulerAngles;
     }
 	
-    public void RotatePlayer()
+    public void RotateModel(Vector3 Rotation)
     {
-        // lerp up away from the camera
-        var test = ActionSystem.Action.Sequence(grp);
-        var finalPos = new Vector3(0.0f, 90.0f, 0.0f);
-        finalPos.z = transform.localPosition.z;
+        RotationAngle = Rotation;
 
-        Action.Property(test, gameObject.transform.GetProperty(o => o.localEulerAngles), StartRotation + finalPos, 0.5, Ease.Linear);
+        //return;
+        var test = ActionSystem.Action.Sequence(grp);
+
+        ActionSystem.Action.Property(test, this.PlayerModel.transform.GetProperty(x => x.localEulerAngles), Rotation, 0.25f, Ease.Linear);
     }
 
-	void Update () 
+    /****************************************************************************/
+    /*!
+        \brief
+          Really Hacky way to do this.
+    */
+    /****************************************************************************/
+    public void FlipModel (FLIP_MODEL val)
+    {
+        if (val == FLIP_MODEL.FLIP_POSITIVE && PlayerModel.transform.localScale.x < 0)
+        {
+            var curscale = PlayerModel.transform.localScale;
+
+            PlayerModel.transform.localScale = new Vector3(-curscale.x,curscale.y,curscale.z);
+        }
+        else if (val == FLIP_MODEL.FLIP_NEGATIVE && PlayerModel.transform.localScale.x > 0)
+        {
+            var curscale = PlayerModel.transform.localScale;
+
+            PlayerModel.transform.localScale = new Vector3(-curscale.x, curscale.y, curscale.z);
+        }
+    }
+
+    void Update () 
     {
         // get the camera's position and look at it.
         Vector3 Lookposition = new Vector3(Cam.transform.position.x, transform.position.y, Cam.transform.position.z);
-        
-        // immediately look at the camera
-        //PlayerModel.transform.LookAt(Lookposition);
 
-        var newRotation = Quaternion.LookRotation(PlayerModel.transform.position - Lookposition, Vector3.forward);
+        Quaternion newRotation = new Quaternion();
+
+        newRotation = Quaternion.LookRotation((PlayerModel.transform.position - Lookposition), Vector3.forward);
+
+        //Vector3 EulerAngle = newRotation.eulerAngles;
+
         newRotation.x = 0.0f;
         newRotation.z = 0.0f;
+
         PlayerModel.transform.rotation = Quaternion.Slerp(PlayerModel.transform.rotation, newRotation, Time.deltaTime * 8);
 
         // update our position to be the same as the players
@@ -83,6 +112,4 @@ public class PlayerAnimation : MonoBehaviour
 
         grp.Update(Time.deltaTime);
     }
-
-   
 }

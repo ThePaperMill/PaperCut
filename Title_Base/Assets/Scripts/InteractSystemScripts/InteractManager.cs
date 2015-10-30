@@ -21,10 +21,10 @@ public class InteractManager : MonoBehaviour
 	public float EaseSpeed = 0.5f;
 	GameObject CurrentlyInteractedObject;
 	
-	void Start()
+	void Awake()
 	{
-		//Store the player object
-		Player = GameObject.Find("Player");
+        //Store the player object
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         if(Player == null)
         {
@@ -34,8 +34,14 @@ public class InteractManager : MonoBehaviour
 	
 	void Update()
 	{
-		//grab the position of the closest object
-		GameObject closestobj = FindClosestObjectToPlayer();
+        if (Player == null)
+        {
+            //Store the player object
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        //grab the position of the closest object
+        GameObject closestobj = FindClosestObjectToPlayer();
 		//if(closestobj){print (closestobj.name + " is closest");}
 
 		//If there are objects in the array and there is no highlight object,

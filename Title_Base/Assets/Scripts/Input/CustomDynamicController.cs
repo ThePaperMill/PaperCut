@@ -123,6 +123,12 @@ public class CustomDynamicController : MonoBehaviour
 
     bool InventoryStatus = false;
 
+    public GameObject PlayerModel;
+
+    Vector3 RawInput = new Vector3();
+
+    Vector3 PrevInput = new Vector3();
+
     public CustomDynamicController()
     {
         EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
@@ -286,7 +292,7 @@ public class CustomDynamicController : MonoBehaviour
         // if we are idle, add force otherwise,
         if (State == PlayerState.Idle)
         {
-          RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
+            RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
         }
         else
         {
@@ -305,6 +311,8 @@ public class CustomDynamicController : MonoBehaviour
         ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
+
+        UpdateModel(RawInput);
     }
 
     /****************************************************************************/
@@ -346,6 +354,8 @@ public class CustomDynamicController : MonoBehaviour
     {
         var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
         Vector3 movement = new Vector3();
+        RawInput = movement;
+
 
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
@@ -357,14 +367,17 @@ public class CustomDynamicController : MonoBehaviour
             movement -= Cam.transform.forward;
         }
 
+        // store the raw input, so we can turn the model
         if (MoveLeft || LeftStickPosition.XPos < -0.2)
         {
             movement -= Cam.transform.right;
+            RawInput += new Vector3(-1, 0, 0);
         }
 
         else if (MoveRight || LeftStickPosition.XPos > 0.2)
         {
             movement += Cam.transform.right;
+            RawInput += new Vector3(1, 0, 0);
         }
 
         MoveDirection = movement;
@@ -706,6 +719,38 @@ public class CustomDynamicController : MonoBehaviour
       InteractPressed = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
       InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyReleased(KeyCode.Space);
       OpenInventory = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_BACK) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.E);
+    }
+
+
+    /****************************************************************************/
+    /*!
+        \brief
+          sends the desired direction we want to move, and adjusts the players 
+          rotation based on that.
+    */
+    /****************************************************************************/
+    void UpdateModel(Vector3 Input)
+    {
+      if(PlayerModel == null)
+      {
+        return;
+      }
+
+      PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
+
+      /* Rotate the mode here based on movement directions */
+      if (Input.x < 0 && OnGround)
+      {
+            //ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
+            ModelEffects.FlipModel(FLIP_MODEL.FLIP_NEGATIVE);
+      }
+      else if (Input.x > 0 && OnGround)
+      {
+            //ModelEffects.RotateModel(new Vector3(0.0f, 180, 0.0f));
+            ModelEffects.FlipModel(FLIP_MODEL.FLIP_POSITIVE);
+      }
+
+      PrevInput = Input;
     }
 
     /****************************************************************************/
