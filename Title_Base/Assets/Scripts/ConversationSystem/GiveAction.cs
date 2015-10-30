@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using UnityEngine;
-
 
 namespace Assets.Scripts.ConversationSystem
 {
@@ -18,17 +16,17 @@ namespace Assets.Scripts.ConversationSystem
         public override void Start()
         {
             base.Start();
-            
-            
-            
+
+            // we have to init the item we want to give because of unity 
+            ItemToGive.InitializeItem();
         }
 
         public override void StartAction()
         {
-            StringEventData.Message = Text;
-            EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, StringEventData);
-            
-            
+            print("Sending item " + ItemToGive.ItemPrefab.name);
+
+            RecievedItemEvent test = new RecievedItemEvent(ItemToGive);
+            EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
         }
 
         

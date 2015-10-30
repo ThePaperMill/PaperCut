@@ -122,6 +122,8 @@ public class InventorySystem : Singleton<InventorySystem>
             // add the item to the vector
             var data = eventData as RecievedItemEvent;
 
+            print("Recieved item " + data.Info.ItemPrefab.name);
+
             Inventory.Add(data.Info);
         }
    }
@@ -294,6 +296,8 @@ public class InventorySystem : Singleton<InventorySystem>
       return;
     }
 
+    print("wat");
+
     // destroy each game object.
     foreach (var i in Inventory_Items)
     {
@@ -330,14 +334,19 @@ public class InventorySystem : Singleton<InventorySystem>
   /****************************************************************************/
   void CreateItem(Vector3 pos, ItemInfo item)
   {
-    GameObject Temp = new GameObject("");
+    GameObject Temp = new GameObject("Item_" + item.ItemName);
+    Temp.transform.localScale = item.ItemPrefab.transform.localScale;
 
-    Temp.AddComponent<MeshRenderer>();
-    Temp.AddComponent<MeshFilter>();
+    var tempMesh = Temp.AddComponent<MeshRenderer>();
+    var test     = Temp.AddComponent<MeshFilter>();
     Temp.AddComponent<ItemLogic>();
 
-    MeshFilter tempMesh = Temp.GetComponent<MeshFilter>();
-    tempMesh.sharedMesh = item.DisplayMesh.sharedMesh;
+    test.sharedMesh = item.DisplayMesh.sharedMesh;
+
+    tempMesh.material = item.DisplayMaterial;
+    tempMesh.material.shader = item.DisplayMaterial.shader;
+
+    print(item.DisplayMaterial.shader);
 
     Temp.transform.position = pos;
   }

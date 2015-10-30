@@ -11,25 +11,35 @@ using System;
 [Serializable]
 public class ItemInfo 
 {
-    public bool UsePrefabInfo = true;
+  public bool UsePrefabInfo = true;
 
-    public string ItemDescription   = "Insert Witty Text Here";
-    public string ItemName          = "Default";
-    public MeshFilter DisplayMesh   = null;
-    public Material DisplayMaterial = null;
-    public GameObject ItemPrefab    = null;
+  public string ItemDescription   = "Insert Witty Text Here";
+  public string ItemName          = "Default";
+  public MeshRenderer MRenderer   = null;
+  public Material DisplayMaterial = null;
+  public GameObject ItemPrefab    = null;
+  public MeshFilter DisplayMesh         = null;
 
   public ItemInfo()
   {
-    if(UsePrefabInfo && ItemPrefab != null)
-    {
-        ItemName = ItemPrefab.name;
-        DisplayMesh = ItemPrefab.GetComponent<MeshFilter>();
-        
-        MeshRenderer temp = ItemPrefab.GetComponent<MeshRenderer>();
+    Debug.Log("item created");
+  }
 
-        if (temp)
-            DisplayMaterial = temp.sharedMaterial;
+  public void InitializeItem()
+  {
+    if (UsePrefabInfo && ItemPrefab != null)
+    {
+      Debug.Log("Using Prefab");
+
+      ItemName = ItemPrefab.name;
+      MRenderer = ItemPrefab.GetComponent<MeshRenderer>();
+
+      DisplayMesh = ItemPrefab.GetComponent<MeshFilter>();
+
+      Debug.Log(MRenderer.sharedMaterial.shader);
+
+      if (MRenderer)
+        DisplayMaterial = MRenderer.sharedMaterial;
     }
   }
 }
