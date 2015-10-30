@@ -8,7 +8,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     public class GiveAction : ConversationAction
     {
-        public String Text;
+        public new ConversationAction Next;
 
         public ItemInfo ItemToGive = new ItemInfo();
 
@@ -24,9 +24,11 @@ namespace Assets.Scripts.ConversationSystem
         public override void StartAction()
         {
             print("Sending item " + ItemToGive.ItemPrefab.name);
-
+            base.Next = Next;
             RecievedItemEvent test = new RecievedItemEvent(ItemToGive);
             EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
+            
+            this.DispatchEvent(Events.NextAction);
         }
 
         

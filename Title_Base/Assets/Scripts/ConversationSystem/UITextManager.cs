@@ -53,6 +53,7 @@ namespace Assets.Scripts.ConversationSystem
             var finalPos = InitialPos;
             
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+            Action.Call(seq, gameObject.Destroy);
         }
 
         public void UpdateText(string newText)
@@ -74,6 +75,7 @@ namespace Assets.Scripts.ConversationSystem
         }
         public void OnDeactivateWindowEvent(EventData eventData)
         {
+
             Disappear();
         }
 

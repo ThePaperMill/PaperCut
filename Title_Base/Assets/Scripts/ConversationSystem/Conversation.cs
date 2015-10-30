@@ -14,7 +14,9 @@ namespace Assets.Scripts.ConversationSystem
         private List<ConversationAction>.Enumerator CurrentNode;
         private ConversationAction CurrentAction;
         public System.Action Test;
-        
+
+        private GameObject ConversationWindow;
+        public Vector3 WindowOffset = new Vector3(0, 0, 1);
         // Use this for initialization
         void Start()
         {
@@ -40,6 +42,10 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
+            Debug.Log(ConversationWindow);
+            ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
+            ConversationWindow.transform.position = gameObject.transform.position + WindowOffset + new Vector3(0,1,0);
+            ConversationWindow.GetComponent<UITextManager>().FinalPos = gameObject.transform.position + WindowOffset;
 
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();

@@ -24,6 +24,6 @@ public class Billboard : MonoBehaviour
 	void Update ()
     {
         // saved for future reference, this lets us easily always look at the camera
-        transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
+        transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
     }
 }
