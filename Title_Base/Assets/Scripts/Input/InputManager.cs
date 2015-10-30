@@ -13,6 +13,13 @@ using System.Collections;
 using XInputDotNetPure; // Required in C#
 using System.Collections.Generic;
 
+public enum MOUSE
+{
+    LEFT,
+    RIGHT,
+    MIDDLE
+}
+
 public enum XINPUT_BUTTONS
 {
     BUTTON_X,
@@ -374,16 +381,40 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
       return Input.GetKeyDown(Key);
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
     public bool IsKeyDown(KeyCode Key)
     {
       return Input.GetKey(Key);
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
     public bool IsKeyReleased(KeyCode Key)
     {
       return Input.GetKeyUp(Key);
     }
 
+    /*********************************************************************
+    Input Wrappers 
+    *********************************************************************/
+
+    /*************************************************************************/
+    /*!
+      \brief
+        uses the gloabal list of input to check for actions
+    */
+    /*************************************************************************/
     public bool IsInputTriggered(List<InputCodes> inputCodes)
     {
         foreach(var i in inputCodes)
@@ -408,6 +439,13 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         return false;
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
     public bool IsInputDown(List<InputCodes> inputCodes)
     {
         foreach (var i in inputCodes)
@@ -433,6 +471,13 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         return false;
     }
 
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
     public bool IsInputReleased(List<InputCodes> inputCodes)
     {
         foreach (var i in inputCodes)
@@ -456,5 +501,45 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         }
 
         return false;
+    }
+
+    /*********************************************************************
+    Keyboard wrappers 
+    *********************************************************************/
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsMouseDown(MOUSE button)
+    {
+        return Input.GetMouseButton((int)button);
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsMouseReleased(MOUSE button)
+    {
+        return Input.GetMouseButtonUp((int)button);
+
+    }
+
+    /*************************************************************************/
+    /*!
+      \brief
+        returns true if the right trigger down, true each frame the trigger
+        is down
+    */
+    /*************************************************************************/
+    public bool IsMouseTriggered(MOUSE button)
+    {
+        return Input.GetMouseButtonDown((int)button);
     }
 }
