@@ -31,9 +31,10 @@ public class CustomDynamicController : MonoBehaviour
     private bool MoveLeft;
     private bool MoveRight;
     private bool InteractPressed;
-    private bool InteractReleased;
+
     private bool OpenInventory;
     private bool JumpPressed;
+    private bool JumpReleased;
 
     public bool Active = true;
 
@@ -254,11 +255,15 @@ public class CustomDynamicController : MonoBehaviour
                 }
             }
 
+        }
+
+        if(JumpPressed)
+        {
             BeginJump();
         }
 
         // when jump is released, update our jump state.
-        else if (InteractReleased)
+        else if (JumpReleased)
         {
           EndJump();
         }
@@ -717,10 +722,13 @@ public class CustomDynamicController : MonoBehaviour
       MoveBack = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyDown(KeyCode.DownArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.S);
       MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
       MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
-      JumpPressed = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
-      InteractPressed = InputManager.GetSingleton.IsInputTriggered(GlobalControls.InteractKeys);
-      InteractReleased = InputManager.GetSingleton.IsInputTriggered(GlobalControls.InteractKeys);
-      OpenInventory = InputManager.GetSingleton.IsInputTriggered(GlobalControls.OpenInventoryKeys);
+
+
+      JumpPressed      = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
+      JumpReleased     = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
+
+      InteractPressed  = InputManager.GetSingleton.IsInputTriggered(GlobalControls.InteractKeys);
+      OpenInventory    = InputManager.GetSingleton.IsInputTriggered(GlobalControls.OpenInventoryKeys);
     }
 
 
