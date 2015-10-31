@@ -6660,7 +6660,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 875063646}
-  WindowOffset: {x: 0, y: 0, z: 1}
+  WindowEaseDuration: 0
+  WindowOffsetInitial: {x: 0, y: 1, z: 0}
+  WindowOffsetFinal: {x: 0, y: 0, z: 0}
+  WindowRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &508049955 stripped
 Transform:
   m_PrefabParentObject: {fileID: 429382, guid: e7f8487af6a2abe48be65c9f891c77df, type: 2}
@@ -7470,7 +7473,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 408070596}
-  WindowOffset: {x: 0, y: 5, z: 0}
+  WindowEaseDuration: 1.5
+  WindowOffsetInitial: {x: 0, y: 5, z: -2.5}
+  WindowOffsetFinal: {x: 0, y: 1, z: -2.5}
+  WindowRotation: {x: 0, y: -90, z: 0}
 --- !u!4 &587328655 stripped
 Transform:
   m_PrefabParentObject: {fileID: 464198, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
@@ -19664,6 +19670,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   ScrollSpeed: 10
   MaxLineLength: 20
+  EaseTime: 1.5
   FinalPos: {x: 0, y: 1, z: 5}
 --- !u!1001 &1546041727
 Prefab:
@@ -23173,6 +23180,10 @@ Prefab:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2332722, guid: 0f4eca448d0d45f4db6e4c3ba6e944bd, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f4eca448d0d45f4db6e4c3ba6e944bd, type: 2}
   m_IsPrefabParent: 0
@@ -23363,7 +23374,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464198, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
       propertyPath: m_RootOrder
-      value: 85
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 140210, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
       propertyPath: m_Name

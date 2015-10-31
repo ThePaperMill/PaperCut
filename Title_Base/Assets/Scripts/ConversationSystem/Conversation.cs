@@ -16,7 +16,10 @@ namespace Assets.Scripts.ConversationSystem
         public System.Action Test;
 
         private GameObject ConversationWindow;
-        public Vector3 WindowOffset = new Vector3(0, 0, 1);
+        public double WindowEaseDuration = 1.5;
+        public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
+        public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
+        public Vector3 WindowRotation = new Vector3(0, 0, 0);
         // Use this for initialization
         void Start()
         {
@@ -30,6 +33,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             
             Engage();
+            
         }
         public void OnDisengageConversation(EventData eventData)
         {
@@ -42,10 +46,14 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
-            Debug.Log(ConversationWindow);
+            
             ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
-            ConversationWindow.transform.position = gameObject.transform.position + WindowOffset + new Vector3(0,1,0);
-            ConversationWindow.GetComponent<UITextManager>().FinalPos = gameObject.transform.position + WindowOffset;
+            ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
+            ConversationWindow.transform.Rotate(WindowRotation);
+            var comp = ConversationWindow.GetComponent<UITextManager>();
+            comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
+            comp.Connect();
+            comp.EaseTime = WindowEaseDuration;
 
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
@@ -55,6 +63,8 @@ namespace Assets.Scripts.ConversationSystem
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
         }
+
+        
 
         void OnNextAction(EventData data)
         {
