@@ -322,7 +322,7 @@ public class CustomDynamicController : MonoBehaviour
 
         UpdateModel(RawInput);
 
-        print(RBody.velocity);
+        //print(RBody.velocity);
     }
 
     /****************************************************************************/
