@@ -53,7 +53,9 @@ public struct InputCodes
 
     public static implicit operator InputCodes(MOUSE a)
     {
+        
         return new InputCodes(a);
     }
 }
+
 
