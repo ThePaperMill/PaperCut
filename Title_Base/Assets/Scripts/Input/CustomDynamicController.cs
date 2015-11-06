@@ -755,12 +755,12 @@ public class CustomDynamicController : MonoBehaviour
       /* Rotate the mode here based on movement directions */
       if (Input.x < 0 && OnGround)
       {
-            //ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
+            ModelEffects.RotateModel(new Vector3(0.0f, 180.0f, 0.0f));
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_NEGATIVE);
       }
       else if (Input.x > 0 && OnGround)
       {
-            //ModelEffects.RotateModel(new Vector3(0.0f, 180, 0.0f));
+            ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_POSITIVE);
       }
 
