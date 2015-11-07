@@ -47,19 +47,28 @@ namespace Assets.Scripts.ConversationSystem
                 return;
             }
             
-            ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
-            ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
-            ConversationWindow.transform.Rotate(WindowRotation);
-            var comp = ConversationWindow.GetComponent<UITextManager>();
-            comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
-            comp.Connect();
-            comp.EaseTime = WindowEaseDuration;
+            if(ConversationWindow == null)
+            {
+                ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
+                ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
+                ConversationWindow.transform.Rotate(WindowRotation);
+                var comp = ConversationWindow.GetComponent<UITextManager>();
+                comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
+                comp.Connect();
+                comp.EaseTime = WindowEaseDuration;
+            }
+            
 
             CurrentNode = Actions.GetEnumerator();
             CurrentNode.MoveNext();
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
             Engaged = true;
             CurrentAction = CurrentNode.Current;
+            if(CurrentAction == null)
+            {
+                Debug.Log("Please set a start to the conversation on object: " + gameObject.name);
+                return;
+            }
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
         }

@@ -54,6 +54,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void Appear()
         {
+            grp.Clear();
             var seq = ActionSystem.Action.Sequence(grp);
             
             
