@@ -48,7 +48,7 @@ public class InventorySystem : Singleton<InventorySystem>
     GameObject CurItem = null;
 
     // the speed at which the selected item rotates
-    float RotationSpeed = 10.0f;
+    float RotationSpeed = 20.0f;
 
     // boolean values for input
     bool MoveLeft  = false;
@@ -60,6 +60,9 @@ public class InventorySystem : Singleton<InventorySystem>
 
     // this represents the space between items when they are laid out in the world.
     Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
+    Vector3 MoveAmount = new Vector3(0.1f, 0, 0);
+
+    Quaternion OriginalItemRotation;
 
     /****************************************************************************/
     /*!
@@ -121,8 +124,6 @@ public class InventorySystem : Singleton<InventorySystem>
         {
             // add the item to the vector
             var data = eventData as RecievedItemEvent;
-
-            print("Recieved item " + data.Info.ItemPrefab.name);
 
             Inventory.Add(data.Info);
         }
@@ -270,10 +271,22 @@ public class InventorySystem : Singleton<InventorySystem>
     // set inventory to open
     InventoryOpen = true;
 
+    GameObject Selector = GameObject.FindGameObjectWithTag("Selector");
+
+    if(Selector)
+    {
+      InventoryLand = Selector.transform.position;
+    }
+
     // create each of the objects in the inventory.
     for (int i = 0; i < Inventory.Count; ++i)
     {
-      CreateItem(InventoryLand + i * ItemWidth, Inventory[i]);
+      var tempobject = CreateItem(InventoryLand + (i * ItemWidth), Inventory[i]);
+      
+      if(Selector)
+      {
+        tempobject.transform.parent = Selector.transform;
+      }
     }
 
     // send a activate selector event, we don't use message data, so null is okay
@@ -281,6 +294,9 @@ public class InventorySystem : Singleton<InventorySystem>
 
     // set our current position at the start of the items
     CurPosition = 0;
+
+    if(Inventory_Items.Count > 0)
+      CurItem = Inventory_Items[0];
   }
 
   /****************************************************************************/
@@ -296,12 +312,10 @@ public class InventorySystem : Singleton<InventorySystem>
       return;
     }
 
-    print("wat");
-
     // destroy each game object.
     foreach (var i in Inventory_Items)
     {
-      Destroy(i);
+      GameObject.Destroy(i);
     }
 
     Inventory_Items.Clear();
@@ -332,7 +346,7 @@ public class InventorySystem : Singleton<InventorySystem>
        Creates a single item.
   */
   /****************************************************************************/
-  void CreateItem(Vector3 pos, ItemInfo item)
+  GameObject CreateItem(Vector3 pos, ItemInfo item)
   {
     GameObject Temp = new GameObject("Item_" + item.ItemName);
     Temp.transform.localScale = item.ItemPrefab.transform.localScale;
@@ -346,9 +360,13 @@ public class InventorySystem : Singleton<InventorySystem>
     tempMesh.material = item.DisplayMaterial;
     tempMesh.material.shader = item.DisplayMaterial.shader;
 
-    print(item.DisplayMaterial.shader);
+    Temp.transform.localPosition = pos;
+    Temp.transform.position += new Vector3(0,0,0.5f);
+    Temp.layer = 5;
 
-    Temp.transform.position = pos;
+    Inventory_Items.Add(Temp);
+
+    return Temp;
   }
 
 
@@ -411,6 +429,11 @@ public class InventorySystem : Singleton<InventorySystem>
     // move the items left
     if (MoveLeft)
     {
+      if(Inventory.Count == 1)
+      {
+        return;
+      }
+
       --CurPosition;
 
       if (CurPosition < 0)
@@ -418,28 +441,45 @@ public class InventorySystem : Singleton<InventorySystem>
         CurPosition = Inventory.Count - 1;
       }
 
+      Vector3 prevposition = CurItem.transform.localPosition;
+
       CurItem = Inventory_Items[CurPosition];
 
-      MoveItemEvent MIE = new MoveItemEvent(-ItemWidth);
+      MoveItemEvent MIE = new MoveItemEvent(prevposition - CurItem.transform.localPosition);
 
       EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
+
+      UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
+
+      EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
     }
 
     // move the items right
     else if (MoveRight)
     {
+      if (Inventory.Count == 1)
+      {
+        return;
+      }
+
       ++CurPosition;
 
-      if (CurPosition > Inventory.Count)
+      if (CurPosition >= Inventory.Count)
       {
         CurPosition = 0;
       }
 
+      Vector3 prevpostion = CurItem.transform.localPosition;
+
       CurItem = Inventory_Items[CurPosition];
 
-      MoveItemEvent MIE = new MoveItemEvent(ItemWidth);
+      MoveItemEvent MIE = new MoveItemEvent(prevpostion - CurItem.transform.localPosition);
 
       EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
+
+      UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
+
+      EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
     }
 
     else if(Activate)
@@ -501,4 +541,20 @@ public class MoveItemEvent : EventData
     {
         MoveAmount = pos;
     }
+}
+
+/****************************************************************************/
+/*!
+  \brief
+    This is the event that gets sent when we want to move the selector
+*/
+/****************************************************************************/
+public class UpdateItemTextEvent : EventData
+{
+  public string NewText;
+
+  public UpdateItemTextEvent(string txt)
+  {
+    NewText = txt;
+  }
 }

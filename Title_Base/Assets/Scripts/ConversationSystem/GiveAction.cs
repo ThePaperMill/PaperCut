@@ -23,7 +23,6 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
-            print("Sending item " + ItemToGive.ItemPrefab.name);
             base.Next = Next;
             RecievedItemEvent test = new RecievedItemEvent(ItemToGive);
             EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
