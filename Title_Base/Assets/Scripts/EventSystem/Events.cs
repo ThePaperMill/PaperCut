@@ -40,5 +40,7 @@ public static class Events
 
     public static readonly String Interact = "InteractEvent";
 
+    public static readonly String WindowActivated = "WindowActivatedEvent";
+
 }
 

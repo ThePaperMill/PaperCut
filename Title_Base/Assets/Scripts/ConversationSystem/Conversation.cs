@@ -20,6 +20,11 @@ namespace Assets.Scripts.ConversationSystem
         public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
         public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
         public Vector3 WindowRotation = new Vector3(0, 0, 0);
+        public AudioClip SoundClip = null;
+        public float AudioDelay = 0.5f;
+
+        private ActionSequence seq = new ActionSequence();
+
         // Use this for initialization
         void Start()
         {
@@ -60,7 +65,6 @@ namespace Assets.Scripts.ConversationSystem
             
             if (!CurrentAction)
             {
-                print("dasdsada");
                 CurrentNode = Actions.GetEnumerator();
                 CurrentNode.MoveNext();
                 CurrentAction = CurrentNode.Current;
@@ -75,6 +79,9 @@ namespace Assets.Scripts.ConversationSystem
             }
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
+
+            ActionSystem.Action.Delay(seq, AudioDelay);
+            ActionSystem.Action.Call(seq, PlaySound);
         }
 
         
@@ -150,11 +157,25 @@ namespace Assets.Scripts.ConversationSystem
             }
         }
 
+        public void PlaySound()
+        {
+            if (SoundClip != null)
+            {
+                AudioSource temp = GetComponent<AudioSource>();
+
+                if (temp)
+                {
+                    temp.clip = SoundClip;
+                    temp.PlayOneShot(SoundClip);
+                }
+            }
+        }
+
 
         // Update is called once per frame
         void Update()
         {
-            
+            seq.Update(Time.deltaTime);
             //if (ConversationAction.MoveNextInputRecieved() && Engaged)
             //{
             //    this.NextAction();

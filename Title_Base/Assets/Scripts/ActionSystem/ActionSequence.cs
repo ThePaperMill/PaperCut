@@ -29,6 +29,7 @@ namespace ActionSystem
 
         public override void Update(double dt)
         {
+            
             if (IsPaused() || IsCompleted())
             {
                 return;
@@ -77,6 +78,7 @@ namespace ActionSystem
 
         public void AddAction(ActionBase action)
         {
+            Completed = false;
             ActionQueue.Add(action);
             CurrentAction = ActionQueue.First();
         }
