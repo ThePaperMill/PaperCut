@@ -30,8 +30,6 @@ public class ItemLogic : EventHandler
     // store our current position
     Vector3 CurPos = gameObject.transform.localPosition;
 
-    print(CurPos + temp.MoveAmount);
-
     // lerp by the given amount
     Action.Property(ActionS, gameObject.transform.GetProperty(o => o.localPosition), CurPos + temp.MoveAmount, 0.25, Curve);
   }

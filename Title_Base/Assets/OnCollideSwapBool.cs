@@ -15,7 +15,6 @@ public class OnCollideSwapBool : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.tag);
         if (other.gameObject.tag == "Player")
         {
             IsOn = true;

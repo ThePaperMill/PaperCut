@@ -18,7 +18,7 @@ public class SelectorLogic : EventHandler
     {
         // lerp down to the camera
         var test = ActionSystem.Action.Sequence(Seq);
-        var finalPos = new Vector3(0.0f,-1.0f,0.0f);
+        var finalPos = new Vector3(0.0f,0.0f,0.0f);
         finalPos.z = transform.localPosition.z;
         
         Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
