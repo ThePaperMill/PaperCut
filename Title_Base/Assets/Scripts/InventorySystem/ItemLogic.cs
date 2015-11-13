@@ -4,14 +4,14 @@ using ActionSystem;
 
 public class ItemLogic : EventHandler
 {
-  private ActionSequence Seq = new ActionSequence();
+  private ActionGroup Seq = new ActionGroup();
   public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
 
   public ItemLogic()
   {
     EventSystem.GlobalHandler.Connect(Events.MoveItem, OnMoveItem);
-    EventSystem.GlobalHandler.Connect(Events.ActivateSelector, OnActivateSelector);
+    //EventSystem.GlobalHandler.Connect(Events.ActivateSelector, OnActivateSelector);
   }
 
   // Use this for initialization
@@ -28,7 +28,9 @@ public class ItemLogic : EventHandler
     MoveItemEvent temp = (MoveItemEvent)data;
 
     // store our current position
-    Vector3 CurPos = gameObject.transform.position;
+    Vector3 CurPos = gameObject.transform.localPosition;
+
+    print(CurPos + temp.MoveAmount);
 
     // lerp by the given amount
     Action.Property(ActionS, gameObject.transform.GetProperty(o => o.localPosition), CurPos + temp.MoveAmount, 0.25, Curve);
@@ -38,9 +40,9 @@ public class ItemLogic : EventHandler
   {
     // lerp down to the camera.
     var test = ActionSystem.Action.Sequence(Seq);
-    var finalPos = new Vector3(10.0f, 10.0f, 10.0f);
+    var finalPos = new Vector3(0.0f, -1.0f, 0.0f);
     finalPos.z = transform.localPosition.z;
-    Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+    Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), transform.localPosition + finalPos, 1.5, Curve);
   }
 
 
@@ -48,6 +50,7 @@ public class ItemLogic : EventHandler
   void Update ()
   {
     Seq.Update(Time.deltaTime);
+    //print(transform.localPosition);
 	}
 
   void OnDestroy()

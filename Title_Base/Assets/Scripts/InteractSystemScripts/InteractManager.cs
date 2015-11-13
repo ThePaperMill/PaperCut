@@ -28,7 +28,7 @@ public class InteractManager : MonoBehaviour
 
         if(Player == null)
         {
-            Debug.Log("If we have no player, then how can we have a game?");
+            //Debug.Log("If we have no player, then how can we have a game?");
         }
 	}
 	

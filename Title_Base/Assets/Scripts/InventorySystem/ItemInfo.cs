@@ -22,21 +22,17 @@ public class ItemInfo
 
   public ItemInfo()
   {
-    Debug.Log("item created");
+
   }
 
   public void InitializeItem()
   {
     if (UsePrefabInfo && ItemPrefab != null)
     {
-      Debug.Log("Using Prefab");
-
       ItemName = ItemPrefab.name;
       MRenderer = ItemPrefab.GetComponent<MeshRenderer>();
 
       DisplayMesh = ItemPrefab.GetComponent<MeshFilter>();
-
-      Debug.Log(MRenderer.sharedMaterial.shader);
 
       if (MRenderer)
         DisplayMaterial = MRenderer.sharedMaterial;
