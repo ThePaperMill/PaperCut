@@ -79,6 +79,11 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
     }
 
+    public void Initialize()
+    {
+
+    }
+
     /****************************************************************************/
     /*!
       \brief
@@ -234,6 +239,7 @@ public class InventorySystem : Singleton<InventorySystem>
             if (Inventory[i].ItemName == item.ItemName)
             {
                 CurPosition = i;
+                MoveItems();
                 return;
             }
         }
@@ -324,11 +330,16 @@ public class InventorySystem : Singleton<InventorySystem>
             return;
         }
 
-        // destroy each game object.
-        foreach (var i in Inventory_Items)
+        if(CurItem != null)
         {
-            GameObject.Destroy(i);
+            CurItem.transform.rotation = OriginalItemRotation;
         }
+
+        // destroy each game object.
+        //foreach (var i in Inventory_Items)
+        //{
+        //    GameObject.Destroy(i);
+        //}
 
         Inventory_Items.Clear();
 
@@ -366,6 +377,8 @@ public class InventorySystem : Singleton<InventorySystem>
         var tempMesh = Temp.AddComponent<MeshRenderer>();
         var test = Temp.AddComponent<MeshFilter>();
         Temp.AddComponent<ItemLogic>();
+
+        tempMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         test.sharedMesh = item.DisplayMesh.sharedMesh;
 
