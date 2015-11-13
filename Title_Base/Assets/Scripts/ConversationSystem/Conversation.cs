@@ -65,7 +65,6 @@ namespace Assets.Scripts.ConversationSystem
             
             if (!CurrentAction)
             {
-                print("dasdsada");
                 CurrentNode = Actions.GetEnumerator();
                 CurrentNode.MoveNext();
                 CurrentAction = CurrentNode.Current;
