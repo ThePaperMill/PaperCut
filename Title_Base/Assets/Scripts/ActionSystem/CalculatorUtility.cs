@@ -171,7 +171,7 @@ namespace ActionSystem
         }
     }
 
-    struct FloatCalculator : ICalculator<float>
+    struct SingleCalculator : ICalculator<float>
     {
         public float Decrement(float a)
         {
@@ -459,17 +459,22 @@ namespace ActionSystem
         /// Since the ICalculator is cached, this if chain is executed only once per type
         /// </summary>
         /// <returns>The type of the calculator that needs to be created</returns>
-
+        
         public static Type GetCalculatorType()
         {
             Type tType = typeof(T);
+            if (tType == typeof(Single))
+            {
+                tType = typeof(float);
+            }
+
             String propName = String.Format(tType.Name + "Calculator");
             if (!Types.HasType(propName))
             {
-                throw new InvalidCastException(String.Format("Unsupported Type- Type {0}" +
+                throw new InvalidCastException("Unsupported Type: " + tType.Name +
                       " does not have a partner implementation of interface " +
                       "ICalculator<T> and cannot be used in generic " +
-                      "arithmetic using type Number<T>", tType.Name));
+                      "arithmetic using type Number<T>");
             }
             
             return Types.GetType(propName);
