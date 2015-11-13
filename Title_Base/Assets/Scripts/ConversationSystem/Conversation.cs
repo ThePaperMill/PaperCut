@@ -25,7 +25,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             this.gameObject.Connect(Events.EngageConversation, OnEngageConversation);
             this.gameObject.Connect(Events.DisengageConversation, OnDisengageConversation);
-
+            
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
 
@@ -58,9 +58,13 @@ namespace Assets.Scripts.ConversationSystem
                 comp.EaseTime = WindowEaseDuration;
             }
             
-
-            CurrentNode = Actions.GetEnumerator();
-            CurrentNode.MoveNext();
+            if (!CurrentAction)
+            {
+                print("dasdsada");
+                CurrentNode = Actions.GetEnumerator();
+                CurrentNode.MoveNext();
+                CurrentAction = CurrentNode.Current;
+            }
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
             Engaged = true;
             CurrentAction = CurrentNode.Current;
@@ -99,22 +103,24 @@ namespace Assets.Scripts.ConversationSystem
                 }
                 else
                 {
+                    Disengage();
                     if (!CurrentNode.MoveNext())
                     {
-                        Disengage();
-                        return;
+                        CurrentAction = null;
                     }
-                    CurrentAction = CurrentNode.Current;
+                    
+                    
+                    return;
                 }
             }
             else
             {
+                Disengage();
                 if (!CurrentNode.MoveNext())
                 {
-                    Disengage();
-                    return;
+                    CurrentAction = null;
                 }
-                CurrentAction = CurrentNode.Current;
+                
             }
 
             CurrentAction.Connect(Events.NextAction, OnNextAction);
@@ -131,8 +137,8 @@ namespace Assets.Scripts.ConversationSystem
             }
             EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateTextWindow);
             Engaged = false;
-            CurrentNode = Actions.GetEnumerator();
-            CurrentNode.MoveNext();
+            //CurrentNode = Actions.GetEnumerator();
+            
             CurrentAction = CurrentNode.Current;
         }
 
