@@ -57,7 +57,7 @@ namespace Assets.Scripts.ConversationSystem
       // Request an item from the player
       EventSystem.GlobalHandler.DispatchEvent(Events.ScientistReq, SciReq);
 
-      EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
+      Scientist.Connect(Events.RecievedItem, OnRecievedItem);
     }
 
     void OnRecievedItem(EventData eventData)
@@ -90,7 +90,7 @@ namespace Assets.Scripts.ConversationSystem
       }
 
 
-      this.Disconnect(Events.RecievedItem, OnRecievedItem);
+      Scientist.Disconnect(Events.RecievedItem, OnRecievedItem);
       //Dispatching whether or not the correct item was recieved.
       EventSystem.GlobalHandler.DispatchEvent(Events.RecievedProperItem, BoolEventData);
 

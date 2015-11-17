@@ -64,6 +64,8 @@ public class InventorySystem : Singleton<InventorySystem>
 
     Quaternion OriginalItemRotation;
 
+    GameObject Scientist = null;
+
     /****************************************************************************/
     /*!
     \brief
@@ -115,6 +117,9 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     void OnScientistRequest(EventData data)
     {
+       var sciRequest = (ScientistReqEvent)data;
+       Scientist = sciRequest.Sender;
+
       OpenInventory(InventoryState.INVENTORY_GIVE);
     }
 
@@ -348,22 +353,10 @@ public class InventorySystem : Singleton<InventorySystem>
             return;
         }
 
-        // if we close the inventory in give mode, send a empty message
-        if(CurState == InventoryState.INVENTORY_GIVE)
-        {
-         
-        }
-
         if(CurItem != null)
         {
             CurItem.transform.rotation = OriginalItemRotation;
         }
-
-        // destroy each game object.
-        //foreach (var i in Inventory_Items)
-        //{
-        //    GameObject.Destroy(i);
-        //}
 
         Inventory_Items.Clear();
 
@@ -562,11 +555,22 @@ public class InventorySystem : Singleton<InventorySystem>
         // if the current state is to give an item, then we want to dispatch an event with the current item
         if (CurState == InventoryState.INVENTORY_GIVE)
         {
-            ItemInfo temp = Inventory[CurPosition];
+            if (Inventory.Count > 0)
+            {
+                ItemInfo temp = Inventory[CurPosition];
 
-            RecievedItemEvent give = new RecievedItemEvent(temp);
+                RecievedItemEvent give = new RecievedItemEvent(temp);
 
-            EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, give);
+                Scientist.DispatchEvent(Events.RecievedItem, give);
+
+                CloseInventory();
+            }
+            else
+            {
+                Scientist.DispatchEvent(Events.RecievedItem, null);
+
+                CloseInventory();
+            }
         }
     }
 }

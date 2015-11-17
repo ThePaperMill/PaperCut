@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-
 namespace Assets.Scripts.ConversationSystem
 {
-    public class TalkAction : ConversationAction
+    public class TransformationReact : ConversationAction
     {
         [Multiline]
         public String Text;
@@ -15,9 +14,10 @@ namespace Assets.Scripts.ConversationSystem
 
         public ConversationAction NextAction;
 
+        // Use this for initialization
         public override void Start()
         {
-            base.Start();           
+            base.Start();
         }
 
         public override void StartAction()
@@ -31,31 +31,8 @@ namespace Assets.Scripts.ConversationSystem
         // Update is called once per frame
         void Update()
         {
-            
-        }
 
-        
-
-    }
-
-    public class StringEvent : EventData
-    {
-        public String Message;
-        public StringEvent(String message = "")
-        {
-            Message = message;
-        }
-
-        public static implicit operator String (StringEvent eventData)
-        {
-            return eventData.Message;
         }
     }
-  public class TextAreaScript : MonoBehaviour
-  {
 
-    public string longString;
-  }
 }
-
-
