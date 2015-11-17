@@ -22500,13 +22500,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Next: {fileID: 0}
   ItemToGive:
-    UsePrefabInfo: 1
-    ItemDescription: Where did my plant get this?
+    Transformable: 1
+    CurStatus: 1
+    CardboardItemDescription: Its a crate.  It holds things.
+    RealItemDescription: "I not even sure what I'm \nlooking at here."
     ItemName: Default
-    MRenderer: {fileID: 0}
-    DisplayMaterial: {fileID: 0}
     ItemPrefab: {fileID: 102008, guid: 91dc2e1a366da4349ab14fb5570049f0, type: 2}
-    DisplayMesh: {fileID: 0}
+    ItemDescription: Where did my plant get this?
+    CardboardItemPrefab: {fileID: 160750, guid: e7f8487af6a2abe48be65c9f891c77df,
+      type: 2}
+    RealItemPrefab: {fileID: 154072, guid: 1b4ac48bdd7e607448d7e61531f85a86, type: 2}
 --- !u!4 &1746317173
 Transform:
   m_ObjectHideFlags: 0
@@ -22952,13 +22955,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Next: {fileID: 0}
   ItemToGive:
-    UsePrefabInfo: 1
-    ItemDescription: Insert Witty Text Here
+    Transformable: 0
+    CurStatus: 1
+    CardboardItemDescription: Insert Witty Text Here
+    RealItemDescription: Insert Witty Text Here
     ItemName: Default
-    MRenderer: {fileID: 0}
-    DisplayMaterial: {fileID: 0}
     ItemPrefab: {fileID: 100000, guid: 7db3224a062481b44a21a976becc4f51, type: 3}
-    DisplayMesh: {fileID: 0}
+    ItemDescription: Insert Witty Text Here
+    CardboardItemPrefab: {fileID: 0}
+    RealItemPrefab: {fileID: 0}
 --- !u!4 &1773777523
 Transform:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ public class ItemTextBox : EventHandler
 	// Update is called once per frame
   void Update () 
   {
-        Seq.Update(Time.fixedDeltaTime);
+        Seq.Update(Time.deltaTime);
   }
 
   void OnDestroy()

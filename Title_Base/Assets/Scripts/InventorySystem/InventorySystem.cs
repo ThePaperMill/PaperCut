@@ -371,24 +371,32 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     GameObject CreateItem(Vector3 pos, ItemInfo item)
     {
-        GameObject Temp = new GameObject("Item_" + item.ItemName);
-        Temp.transform.localScale = item.ItemPrefab.transform.localScale;
+        GameObject Temp = GameObject.Instantiate(item.ItemPrefab);
 
-        var tempMesh = Temp.AddComponent<MeshRenderer>();
-        var test = Temp.AddComponent<MeshFilter>();
-        Temp.AddComponent<ItemLogic>();
-
-        tempMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-
-        test.sharedMesh = item.DisplayMesh.sharedMesh;
-
-        tempMesh.material = item.DisplayMaterial;
-        tempMesh.material.shader = item.DisplayMaterial.shader;
+        Temp.name = ("Item_" + item.ItemName);
 
         Temp.transform.localPosition = pos;
         Temp.transform.position += new Vector3(0, 0, 0.5f);
         Temp.layer = 5;
 
+
+        foreach(Transform child in Temp.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        
+
+        // disable all other components
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
+
+        // add the item logic script
+        Temp.AddComponent<ItemLogic>();
+
+        // add the item to the list
         Inventory_Items.Add(Temp);
 
         return Temp;
