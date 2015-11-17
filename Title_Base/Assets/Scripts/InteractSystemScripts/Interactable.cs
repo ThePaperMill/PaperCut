@@ -37,9 +37,16 @@ public class Interactable : MonoBehaviour
 			print("ERROR: LEVELSETTINGS DOES NOT HAVE INTERACTMANAGER COMPONENT. Adding to component list");
 		}
 		
+    GameObject childRigid = null;
+
 		//Create a new interactable ghost collider for this object at it's position. if the player touches this, then this object can be interacted with
-		GameObject childRigid = Instantiate(InteractCollider, gameObject.transform.position, Quaternion.identity) as GameObject;
-		//Increase the size of the bounding box based on property interactablesize scalar.
+		if(InteractCollider)
+      childRigid = Instantiate(InteractCollider, gameObject.transform.position, Quaternion.identity) as GameObject;
+		// resouce load it if we don't have it set.
+    else
+      childRigid = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("InteractColliderResource"));
+    
+    //Increase the size of the bounding box based on property interactablesize scalar.
 		SphereCollider childSphere = childRigid.GetComponent("SphereCollider") as SphereCollider;
 		childSphere.radius *= this.InteractSizeScalar;
 		//Tell the new rigidbody to keep track of this object

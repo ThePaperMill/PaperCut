@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   DestroyObject.cs
+\author Steven Gallwas
+\brief  
+       Destroy utility script
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

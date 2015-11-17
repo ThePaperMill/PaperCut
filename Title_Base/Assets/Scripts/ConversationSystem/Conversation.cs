@@ -1,4 +1,14 @@
-﻿using ActionSystem;
+﻿/****************************************************************************/
+/*!
+\file   Conversation.cs
+\author Joshua Biggs
+\brief  
+       The base conversation class.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using ActionSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;

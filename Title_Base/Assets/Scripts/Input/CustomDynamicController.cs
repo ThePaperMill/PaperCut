@@ -212,7 +212,7 @@ public class CustomDynamicController : MonoBehaviour
 
         InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
 
-        // if the inventory is open and we press the inventory button, close it
+        // if the inventory is open and we press the inventory button, close it ignore other input 
         if (InventoryStatus)
         {
             if (OpenInventory)
@@ -223,6 +223,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
+        // advance dialog
         if (MenuActive)
         {
             if(InteractPressed == true)
@@ -241,7 +242,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
-        // Check jump/interact first 
+        // interact after everything else 
         if (InteractPressed)
         {
             // if the interact manager exists, check to see if we are colliding with an interactable object.

@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   GamestateManager.cs
+\author Steven Gallwas
+\brief  
+       The gamestate manager to handle pause and cutscenes
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public enum GAME_STATE

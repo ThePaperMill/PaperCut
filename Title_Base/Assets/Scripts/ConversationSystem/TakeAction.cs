@@ -1,4 +1,14 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+\file   Take Action 
+\author Joshua Biggs and Steven Gallwas
+\brief  
+       The request conversation for the scientist.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

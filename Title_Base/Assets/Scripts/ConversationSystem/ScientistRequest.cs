@@ -1,10 +1,18 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+\file   ScientistRequest.cs
+\author Steven Gallwas
+\brief  
+       The request conversation for the scientist.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using UnityEngine;
-
 
 namespace Assets.Scripts.ConversationSystem
 {
@@ -71,6 +79,8 @@ namespace Assets.Scripts.ConversationSystem
           Next = NextIfTrue;
 
           // dispatch a transformation event with the item to transform.
+          RecievedItemEvent iEvent = new RecievedItemEvent(data.Info);
+          EventSystem.GlobalHandler.DispatchEvent(Events.TransformItem, iEvent);
         }
         else
         {
