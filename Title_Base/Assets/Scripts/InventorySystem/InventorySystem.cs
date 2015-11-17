@@ -79,6 +79,11 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
     }
 
+    public void Initialize()
+    {
+
+    }
+
     /****************************************************************************/
     /*!
       \brief
@@ -234,6 +239,7 @@ public class InventorySystem : Singleton<InventorySystem>
             if (Inventory[i].ItemName == item.ItemName)
             {
                 CurPosition = i;
+                MoveItems();
                 return;
             }
         }
@@ -296,7 +302,19 @@ public class InventorySystem : Singleton<InventorySystem>
         CurPosition = 0;
 
         if (Inventory_Items.Count > 0)
-            CurItem = Inventory_Items[0];
+        {
+            CurItem = Inventory_Items[CurPosition];
+            OriginalItemRotation = CurItem.transform.rotation;
+
+            UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
+
+            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+        }
+        else
+        {
+            UpdateItemTextEvent text = new UpdateItemTextEvent("Nothing... \n\nIt fills most of the universe");
+            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+        }
     }
 
     /****************************************************************************/
@@ -312,11 +330,16 @@ public class InventorySystem : Singleton<InventorySystem>
             return;
         }
 
-        // destroy each game object.
-        foreach (var i in Inventory_Items)
+        if(CurItem != null)
         {
-            GameObject.Destroy(i);
+            CurItem.transform.rotation = OriginalItemRotation;
         }
+
+        // destroy each game object.
+        //foreach (var i in Inventory_Items)
+        //{
+        //    GameObject.Destroy(i);
+        //}
 
         Inventory_Items.Clear();
 
@@ -354,6 +377,8 @@ public class InventorySystem : Singleton<InventorySystem>
         var tempMesh = Temp.AddComponent<MeshRenderer>();
         var test = Temp.AddComponent<MeshFilter>();
         Temp.AddComponent<ItemLogic>();
+
+        tempMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         test.sharedMesh = item.DisplayMesh.sharedMesh;
 
@@ -413,10 +438,46 @@ public class InventorySystem : Singleton<InventorySystem>
         Updates the current input for this frame.
     */
     /****************************************************************************/
+    void MoveItems()
+    {
+        GameObject Selector = GameObject.FindGameObjectWithTag("Selector");
+
+        CurItem.transform.rotation = OriginalItemRotation;
+        Vector3 prevposition = CurItem.transform.localPosition;
+        CurItem = Inventory_Items[CurPosition];
+
+        OriginalItemRotation = CurItem.transform.rotation;
+
+        if (Selector)
+        {
+            prevposition = Selector.transform.localPosition;
+        }
+
+        Vector3 movePos = prevposition - CurItem.transform.localPosition;
+        movePos.z = 0.0f;
+        movePos.y = 0.0f;
+
+        MoveItemEvent MIE = new MoveItemEvent(movePos);
+
+        EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
+
+        UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
+
+        EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Updates the current input for this frame.
+    */
+    /****************************************************************************/
     void UpdateCurrentItem()
     {
-        if (Inventory.Count == 0)
+        // if there is only one thing in the inventory don't do movement.
+        if (Inventory.Count <= 1)
         {
+            // still check for activate button
             if (Activate)
             {
                 ActivateButton();
@@ -428,11 +489,6 @@ public class InventorySystem : Singleton<InventorySystem>
         // move the items left
         if (MoveLeft)
         {
-            if (Inventory.Count == 1)
-            {
-                return;
-            }
-
             --CurPosition;
 
             if (CurPosition < 0)
@@ -440,27 +496,13 @@ public class InventorySystem : Singleton<InventorySystem>
                 CurPosition = Inventory.Count - 1;
             }
 
-            Vector3 prevposition = CurItem.transform.localPosition;
-
-            CurItem = Inventory_Items[CurPosition];
-
-            MoveItemEvent MIE = new MoveItemEvent(prevposition - CurItem.transform.localPosition);
-
-            EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
-
-            UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
-
-            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+            // moves the items and dispatches a new text event
+            MoveItems();
         }
 
         // move the items right
         else if (MoveRight)
         {
-            if (Inventory.Count == 1)
-            {
-                return;
-            }
-
             ++CurPosition;
 
             if (CurPosition >= Inventory.Count)
@@ -468,17 +510,7 @@ public class InventorySystem : Singleton<InventorySystem>
                 CurPosition = 0;
             }
 
-            Vector3 prevpostion = CurItem.transform.localPosition;
-
-            CurItem = Inventory_Items[CurPosition];
-
-            MoveItemEvent MIE = new MoveItemEvent(prevpostion - CurItem.transform.localPosition);
-
-            EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
-
-            UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
-
-            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+            MoveItems();
         }
 
         else if (Activate)

@@ -92,6 +92,11 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
       }
     }
 
+    public void Initialize()
+    {
+
+    }
+
     /*************************************************************************/
     /*!
       \brief
@@ -100,7 +105,8 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     /*************************************************************************/
     void Start ()
     {
-    InventorySystem.GetSingleton.ClearInventory();
+        InventorySystem.GetSingleton.ClearInventory();
+        PauseManager.GetSingleton.ResumeGame();
     }
 
     /*************************************************************************/

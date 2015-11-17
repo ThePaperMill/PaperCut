@@ -11,7 +11,7 @@ public class ItemLogic : EventHandler
   public ItemLogic()
   {
     EventSystem.GlobalHandler.Connect(Events.MoveItem, OnMoveItem);
-    //EventSystem.GlobalHandler.Connect(Events.ActivateSelector, OnActivateSelector);
+    EventSystem.GlobalHandler.Connect(Events.DeactivateSelector, OnDeactivateSelector);
   }
 
   // Use this for initialization
@@ -19,6 +19,16 @@ public class ItemLogic : EventHandler
   {
 
   }
+
+  void OnDeactivateSelector(EventData data)
+  {
+        EventSystem.GlobalHandler.Disconnect(Events.MoveItem, OnMoveItem);
+
+        // lerp down to the camera.
+        var test = ActionSystem.Action.Sequence(Seq);
+        Action.Delay(test, 0.5f);
+        Action.Call(test, DestroySelf);
+    }
 
   void OnMoveItem(EventData data)
   {
@@ -29,8 +39,6 @@ public class ItemLogic : EventHandler
 
     // store our current position
     Vector3 CurPos = gameObject.transform.localPosition;
-
-    print(CurPos + temp.MoveAmount);
 
     // lerp by the given amount
     Action.Property(ActionS, gameObject.transform.GetProperty(o => o.localPosition), CurPos + temp.MoveAmount, 0.25, Curve);
@@ -45,17 +53,19 @@ public class ItemLogic : EventHandler
     Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), transform.localPosition + finalPos, 1.5, Curve);
   }
 
+  void DestroySelf ()
+  {
+      GameObject.Destroy(gameObject);
+  }
 
   // Update is called once per frame
   void Update ()
   {
     Seq.Update(Time.deltaTime);
-    //print(transform.localPosition);
-	}
+  }
 
   void OnDestroy()
   {
     EventSystem.GlobalHandler.Disconnect(Events.MoveItem, OnMoveItem);
-    EventSystem.GlobalHandler.Disconnect(Events.ActivateSelector, OnActivateSelector);
   }
 }
