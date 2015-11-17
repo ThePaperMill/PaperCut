@@ -60,7 +60,6 @@ public class InventorySystem : Singleton<InventorySystem>
 
     // this represents the space between items when they are laid out in the world.
     Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
-    Vector3 MoveAmount = new Vector3(0.1f, 0, 0);
 
     Quaternion OriginalItemRotation;
 
@@ -79,6 +78,12 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
     }
 
+    /****************************************************************************/
+    /*!
+    \brief
+    *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
     public void Initialize()
     {
 

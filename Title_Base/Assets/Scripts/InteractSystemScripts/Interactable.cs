@@ -22,10 +22,14 @@ public class Interactable : MonoBehaviour
 	
 	void Start()
 	{
+    LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
+
 		//If the levelsettings does not have an interactable manager, add one and print an error message.
 		InteractManager initial = LevelSettings.GetComponent("InteractManager") as InteractManager;
-        this.gameObject.Connect(Events.Interact, OnInteractEvent);
-		if(initial == null)
+    
+    this.gameObject.Connect(Events.Interact, OnInteractEvent);
+		
+    if(initial == null)
 		{
 			LevelSettings.AddComponent<InteractManager>();
 			print("ERROR: LEVELSETTINGS DOES NOT HAVE INTERACTMANAGER COMPONENT. Adding to component list");
