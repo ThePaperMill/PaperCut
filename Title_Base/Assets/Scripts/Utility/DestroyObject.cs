@@ -9,20 +9,27 @@ public class DestroyObject : MonoBehaviour
   public bool DestroyOnSelectedComponentCollide = false;
   public bool DestroyOnCollideWithNamedObject   = false;
   public bool DestroyOffCamera                  = false;
+  public bool DestroyOnEvent                    = false;
 
   public List<string> CheckComponents = new List<string>();
   public List<string> OtherObjectNames   = new List<string>();
   public float DestroyTime        = 1.0f;
-
+  public string DestroyEvent = Events.DefaultEvent;
 
   float DestroyTimer = 0.0f;
 
 	// Use this for initialization
 	void Start () 
   {
-	
+    if(DestroyEvent != Events.DefaultEvent)
+      EventSystem.GlobalHandler.Connect(DestroyEvent, OnDestroyEvent);
 	}
 	
+  void OnDestroyEvent(EventData data)
+  {
+    DestroySelf();
+  }
+
   void DestroySelf()
   {
     GameObject.Destroy(gameObject);
@@ -41,6 +48,12 @@ public class DestroyObject : MonoBehaviour
         return;
       }
     }
+  }
+
+  void OnBecameInvisible()
+  {
+    if (DestroyOffCamera)
+      DestroySelf();
   }
 
   void OnCollisionEnter(Collision collision) 
