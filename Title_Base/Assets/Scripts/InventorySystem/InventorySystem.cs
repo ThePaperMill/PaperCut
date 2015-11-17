@@ -19,6 +19,7 @@ public enum InventoryState
 {
   INVENTORY_VIEW, // general viewing of the inventory
   INVENTORY_GIVE, // when prompted to give an item
+  INVENTORY_GIVE_SCIENTIST,
 }
 
 /****************************************************************************/
@@ -76,6 +77,7 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
+        EventSystem.GlobalHandler.Connect(Events.ScientistReq, OnScientistRequest);
     }
 
     /****************************************************************************/
@@ -103,6 +105,17 @@ public class InventorySystem : Singleton<InventorySystem>
         var info = new ItemInfo();
         info.ItemName = "DefaultCrate";
         EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, new RecievedItemEvent(info));
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    void OnScientistRequest(EventData data)
+    {
+      OpenInventory(InventoryState.INVENTORY_GIVE);
     }
 
     /****************************************************************************/
@@ -333,6 +346,12 @@ public class InventorySystem : Singleton<InventorySystem>
         if (InventoryOpen == false)
         {
             return;
+        }
+
+        // if we close the inventory in give mode, send a empty message
+        if(CurState == InventoryState.INVENTORY_GIVE)
+        {
+         
         }
 
         if(CurItem != null)
@@ -600,5 +619,21 @@ public class UpdateItemTextEvent : EventData
   public UpdateItemTextEvent(string txt)
   {
     NewText = txt;
+  }
+}
+
+/****************************************************************************/
+/*!
+  \brief
+    This is the event that gets sent when we want to move the selector
+*/
+/****************************************************************************/
+public class ScientistReqEvent : EventData
+{
+  public GameObject Sender = null;
+
+  public ScientistReqEvent(GameObject scientist)
+  {
+    Sender = scientist;
   }
 }

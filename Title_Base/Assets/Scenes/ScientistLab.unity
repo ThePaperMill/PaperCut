@@ -2750,7 +2750,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 407082, guid: 6e5e33d1b9cbdf744a87e4632547a456, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 142962, guid: 6e5e33d1b9cbdf744a87e4632547a456, type: 2}
       propertyPath: m_Name
@@ -3769,6 +3769,49 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 993e6c75bd8507042ae5b9c0399f5feb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1129210570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1129210571}
+  - 114: {fileID: 1129210572}
+  m_Layer: 0
+  m_Name: RequestItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1129210571
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129210570}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1312897463}
+  m_RootOrder: 0
+--- !u!114 &1129210572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129210570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6aafa904bdc1db448fe640539e5addd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: DefaultCube
+  NextIfTrue: {fileID: 0}
+  NextIfFalse: {fileID: 0}
+  NextIfNone: {fileID: 0}
 --- !u!1001 &1135523735
 Prefab:
   m_ObjectHideFlags: 0
@@ -4311,11 +4354,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 481778, guid: bc598065f4769cf4aa2e6458ce959159, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc598065f4769cf4aa2e6458ce959159, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1312897463 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 481778, guid: bc598065f4769cf4aa2e6458ce959159, type: 2}
+  m_PrefabInternal: {fileID: 1312897462}
 --- !u!1001 &1383853342
 Prefab:
   m_ObjectHideFlags: 0
