@@ -14,63 +14,102 @@ using ActionSystem;
 
 public class TransformMachine : EventHandler
 {
-  public GameObject LightningBoltPrefab = null;
-  private ActionGroup grp = new ActionGroup();
-  Vector3 ItemPosition = new Vector3();
+    public GameObject LightningBoltPrefab = null;
+    private ActionGroup grp = new ActionGroup();
+    Vector3 ItemPosition = new Vector3();
+    ItemInfo Item = null;
+    GameObject OldObject = null;
+    GameObject NewObject = null;
+    GameObject LBolt = null;
 
 	// Use this for initialization
-  void Start () 
-  {
-    EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
-    ItemPosition = transform.position - new Vector3(0,2.0f,0);
-  }
-
-  void OnTransformItem(EventData eventData)
-  {
-    // cast as a recieved item event
-    var data = eventData as RecievedItemEvent;
-    ItemInfo Item = data.Info;
-
-        CreateItem(Item);
-
-  }
-
-     void CreateItem(ItemInfo Item)
+    void Start () 
     {
+        EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
+        ItemPosition = transform.position - new Vector3(0,2.0f,0);
+    }
+
+    void OnTransformItem(EventData eventData)
+    {
+        // cast as a recieved item event
+        var data = eventData as RecievedItemEvent;
+        Item = data.Info;
+
+        var test = ActionSystem.Action.Sequence(grp);
+
+        Action.Call(test, CreateOldItem);
+        Action.Delay(test, 0.5f);
+        Action.Call(test, CreateLightningBolt);
+        Action.Delay(test, 0.5f);
+        Action.Call(test, CreateNewItem);
+    }
+
+    void CreateLightningBolt()
+    {
+        LBolt = (GameObject)Instantiate(LightningBoltPrefab,transform.position, Quaternion.identity);
+        LBolt.AddComponent<Rigidbody>();
+    }
+
+    void CreateOldItem()
+    {
+        GameObject Temp = null;
+
         //if the item is cardboard, create the real version
         if (Item.CurStatus == ITEM_STATUS.IS_CARDBOARD)
         {
-            GameObject Temp = GameObject.Instantiate(Item.RealItemPrefab);
-
-            Temp.name = ("Item_" + Item.ItemName);
-
-            Temp.transform.localPosition = ItemPosition;
-            Temp.transform.position += new Vector3(0, 0, 0.5f);
-
-            // disable all other components
-            var comps = Temp.GetComponents<MonoBehaviour>();
-            foreach (var c in comps)
-            {
-                c.enabled = false;
-            }
+            Temp = GameObject.Instantiate(Item.CardboardItemPrefab);
         }
         // if the item is real, create the cardboard version.
         else
         {
-            GameObject Temp = GameObject.Instantiate(Item.RealItemPrefab);
-
-            Temp.name = ("Item_" + Item.ItemName);
-
-            Temp.transform.localPosition = ItemPosition;
-            Temp.transform.position += new Vector3(0, 0, 0.5f);
-
-            // disable all other components
-            var comps = Temp.GetComponents<MonoBehaviour>();
-            foreach (var c in comps)
-            {
-                c.enabled = false;
-            }
+            Temp = GameObject.Instantiate(Item.RealItemPrefab);
         }
+
+        Temp.name = ("Item_" + Item.ItemName);
+
+        Temp.transform.localPosition = ItemPosition;
+        Temp.transform.position += new Vector3(0, 0, 0.5f);
+
+        // disable all other components
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
+
+        OldObject = Temp;
+    }
+
+    void CreateNewItem()
+    {
+        GameObject.Destroy(OldObject);
+
+        GameObject Temp = null;
+
+        //if the item is cardboard, create the real version
+        if (Item.CurStatus == ITEM_STATUS.IS_CARDBOARD)
+        {
+            Temp = GameObject.Instantiate(Item.RealItemPrefab);
+        }
+        // if the item is real, create the cardboard version.
+        else
+        {
+            Temp = GameObject.Instantiate(Item.RealItemPrefab);
+        }
+
+        Temp.name = ("Item_" + Item.ItemName);
+
+        Temp.transform.localPosition = ItemPosition;
+        Temp.transform.position += new Vector3(0, 0, 0.5f);
+
+        // disable all other components
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
+
+        NewObject = Temp;
     }
 
 	// Update is called once per frame
