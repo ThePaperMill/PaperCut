@@ -43,5 +43,8 @@ public static class Events
     public static readonly String WindowActivated = "WindowActivatedEvent";
     public static readonly String ScientistReq    = "ScientistRequestEvent";
     public static readonly String TransformItem   = "TransformItemEvent";
+
+    public static readonly String PauseGameEvent  = "PauseGameEvent";
+    public static readonly String ResumeGameEvent = "ResumeGameEvent";
 }
 

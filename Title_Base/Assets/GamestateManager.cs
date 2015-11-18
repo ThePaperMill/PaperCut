@@ -38,25 +38,32 @@ public class GamestateManager : Singleton<GamestateManager>
 	
   public void PauseGame()
   {
+      EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent, null);
       IsPaused = true;
-      //Time.timeScale = 0.0f;
+      Time.timeScale = 0.0f;
   }
 
   public void ResumeGame()
   {
+      EventSystem.GlobalHandler.DispatchEvent(Events.ResumeGameEvent, null);
       IsPaused = false;
-      //Time.timeScale = 1.0f;
+      Time.timeScale = 1.0f;
+  }
+
+  public void Initialize()
+  {
+
   }
 
 	// Update is called once per frame
 	void Update ()
+  {
+	  if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape) || InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_START))
     {
-	    if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
-        {
-            if (IsPaused == false)
-                PauseGame();
-            else
-                ResumeGame();
-        }
+      if (IsPaused == false)
+          PauseGame();
+      else
+          ResumeGame();
+    }
 	}
 }
