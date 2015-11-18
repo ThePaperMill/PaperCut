@@ -76,6 +76,8 @@ public class CustomDynamicController : MonoBehaviour
     // additional gravity to be applied to the player.
     public float AdditionalGravity = 0.0f;
 
+    public float MaxUpwardVelocity = 4.0f;
+
     // A scalar for the amount of force the player can apply to move
     // Should be between 0-1
     // 0: No control while on the ground
@@ -210,7 +212,7 @@ public class CustomDynamicController : MonoBehaviour
 
         InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
 
-        // if the inventory is open and we press the inventory button, close it
+        // if the inventory is open and we press the inventory button, close it ignore other input 
         if (InventoryStatus)
         {
             if (OpenInventory)
@@ -221,6 +223,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
+        // advance dialog
         if (MenuActive)
         {
             if(InteractPressed == true)
@@ -239,7 +242,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
-        // Check jump/interact first 
+        // interact after everything else 
         if (InteractPressed)
         {
             // if the interact manager exists, check to see if we are colliding with an interactable object.
@@ -319,6 +322,8 @@ public class CustomDynamicController : MonoBehaviour
         UpdateCurrentState(MoveDirection);
 
         UpdateModel(RawInput);
+
+        //print(RBody.velocity);
     }
 
     /****************************************************************************/
@@ -722,7 +727,8 @@ public class CustomDynamicController : MonoBehaviour
       MoveBack = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyDown(KeyCode.DownArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.S);
       MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
       MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
-
+      
+      
 
       JumpPressed      = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
       JumpReleased     = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
@@ -743,7 +749,7 @@ public class CustomDynamicController : MonoBehaviour
     {
       if(PlayerModel == null)
       {
-        return;
+            return;
       }
 
       PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
@@ -751,12 +757,12 @@ public class CustomDynamicController : MonoBehaviour
       /* Rotate the mode here based on movement directions */
       if (Input.x < 0 && OnGround)
       {
-            //ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
+            ModelEffects.RotateModel(new Vector3(0.0f, 180.0f, 0.0f));
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_NEGATIVE);
       }
       else if (Input.x > 0 && OnGround)
       {
-            //ModelEffects.RotateModel(new Vector3(0.0f, 180, 0.0f));
+            ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_POSITIVE);
       }
 
@@ -771,21 +777,21 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     private void Jump()
     {
-        // Get only horizontal element of our velocity (none in the direction of our Up vector)
-        var currVelocity = RBody.velocity;
-        var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
+        //// Get only horizontal element of our velocity (none in the direction of our Up vector)
+        //var currVelocity = RBody.velocity;
+        //var newVelocity = currVelocity - WorldUp * Vector3.Dot(currVelocity, WorldUp);
 
-        // Add velocity upward by the initial jump strength
-        newVelocity += WorldUp * InitialJumpVelocity;
+        //// Add velocity upward by the initial jump strength
+        //newVelocity += WorldUp * InitialJumpVelocity;
 
-        // We want to add the velocity of the surface we're currently on
-        // This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
-        newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
+        //// We want to add the velocity of the surface we're currently on
+        //// This allows us to get an extra boost from jumping off moving objects (e.g. platforms moving upwards)
+        //newVelocity += new Vector3(WorldUp.x * VelocityOfGround.x, WorldUp.y * VelocityOfGround.y, WorldUp.z * VelocityOfGround.z);
 
-        // Set the velocity
-        RBody.velocity = newVelocity;
+        //// Set the velocity
+        //RBody.velocity = newVelocity;
 
-        //RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
+        RBody.AddForce(WorldUp * InitialJumpVelocity,ForceMode.Impulse);
 
         // We're no longer on the ground
         OnGround = false;
@@ -812,11 +818,11 @@ public class CustomDynamicController : MonoBehaviour
       {
         ClampSpeed.x = MaxSpeed;
       }
-      //if (RBody.velocity.y > MaxSpeed)
-      //{
-      //  ClampSpeed.y = MaxSpeed;
-      //}
-      if (RBody.velocity.z > MaxSpeed)
+        if (RBody.velocity.y > MaxUpwardVelocity)
+        {
+            ClampSpeed.y = MaxUpwardVelocity;
+        }
+        if (RBody.velocity.z > MaxSpeed)
       {
         ClampSpeed.z = MaxSpeed;
       }
@@ -825,10 +831,10 @@ public class CustomDynamicController : MonoBehaviour
       {
           ClampSpeed.x = -MaxSpeed;
       }
-      //if (RBody.velocity.y < -MaxSpeed)
-      //{
-      //    ClampSpeed.y = -MaxSpeed;
-      //}
+      if (RBody.velocity.y < -2 * MaxUpwardVelocity)
+      {
+          ClampSpeed.y = - 2 * MaxUpwardVelocity;
+      }
       if (RBody.velocity.z < -MaxSpeed)
       {
           ClampSpeed.z = -MaxSpeed;

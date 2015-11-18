@@ -1,4 +1,14 @@
-﻿using ActionSystem;
+﻿/****************************************************************************/
+/*!
+\file   Conversation.cs
+\author Joshua Biggs
+\brief  
+       The base conversation class.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using ActionSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +24,23 @@ namespace Assets.Scripts.ConversationSystem
         private List<ConversationAction>.Enumerator CurrentNode;
         private ConversationAction CurrentAction;
         public System.Action Test;
-        
+
+        private GameObject ConversationWindow;
+        public double WindowEaseDuration = 1.5;
+        public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
+        public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
+        public Vector3 WindowRotation = new Vector3(0, 0, 0);
+        public AudioClip SoundClip = null;
+        public float AudioDelay = 0.5f;
+
+        private ActionSequence seq = new ActionSequence();
+
         // Use this for initialization
         void Start()
         {
             this.gameObject.Connect(Events.EngageConversation, OnEngageConversation);
             this.gameObject.Connect(Events.DisengageConversation, OnDisengageConversation);
-
+            
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
 
@@ -28,6 +48,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             
             Engage();
+            
         }
         public void OnDisengageConversation(EventData eventData)
         {
@@ -40,15 +61,40 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
-
-            CurrentNode = Actions.GetEnumerator();
-            CurrentNode.MoveNext();
+            
+            if(ConversationWindow == null)
+            {
+                ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
+                ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
+                ConversationWindow.transform.Rotate(WindowRotation);
+                var comp = ConversationWindow.GetComponent<UITextManager>();
+                comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
+                comp.Connect();
+                comp.EaseTime = WindowEaseDuration;
+            }
+            
+            if (!CurrentAction)
+            {
+                CurrentNode = Actions.GetEnumerator();
+                CurrentNode.MoveNext();
+                CurrentAction = CurrentNode.Current;
+            }
             EventSystem.GlobalHandler.DispatchEvent(Events.ActivateTextWindow);
             Engaged = true;
             CurrentAction = CurrentNode.Current;
+            if(CurrentAction == null)
+            {
+                Debug.Log("Please set a start to the conversation on object: " + gameObject.name);
+                return;
+            }
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
+
+            ActionSystem.Action.Delay(seq, AudioDelay);
+            ActionSystem.Action.Call(seq, PlaySound);
         }
+
+        
 
         void OnNextAction(EventData data)
         {
@@ -74,22 +120,24 @@ namespace Assets.Scripts.ConversationSystem
                 }
                 else
                 {
+                    Disengage();
                     if (!CurrentNode.MoveNext())
                     {
-                        Disengage();
-                        return;
+                        CurrentAction = null;
                     }
-                    CurrentAction = CurrentNode.Current;
+                    
+                    
+                    return;
                 }
             }
             else
             {
+                Disengage();
                 if (!CurrentNode.MoveNext())
                 {
-                    Disengage();
-                    return;
+                    CurrentAction = null;
                 }
-                CurrentAction = CurrentNode.Current;
+                
             }
 
             CurrentAction.Connect(Events.NextAction, OnNextAction);
@@ -106,8 +154,8 @@ namespace Assets.Scripts.ConversationSystem
             }
             EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateTextWindow);
             Engaged = false;
-            CurrentNode = Actions.GetEnumerator();
-            CurrentNode.MoveNext();
+            //CurrentNode = Actions.GetEnumerator();
+            
             CurrentAction = CurrentNode.Current;
         }
 
@@ -119,11 +167,25 @@ namespace Assets.Scripts.ConversationSystem
             }
         }
 
+        public void PlaySound()
+        {
+            if (SoundClip != null)
+            {
+                AudioSource temp = GetComponent<AudioSource>();
+
+                if (temp)
+                {
+                    temp.clip = SoundClip;
+                    temp.PlayOneShot(SoundClip);
+                }
+            }
+        }
+
 
         // Update is called once per frame
         void Update()
         {
-            
+            seq.Update(Time.deltaTime);
             //if (ConversationAction.MoveNextInputRecieved() && Engaged)
             //{
             //    this.NextAction();

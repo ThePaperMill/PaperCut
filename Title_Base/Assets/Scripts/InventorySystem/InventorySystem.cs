@@ -19,6 +19,7 @@ public enum InventoryState
 {
   INVENTORY_VIEW, // general viewing of the inventory
   INVENTORY_GIVE, // when prompted to give an item
+  INVENTORY_GIVE_SCIENTIST,
 }
 
 /****************************************************************************/
@@ -27,7 +28,7 @@ public enum InventoryState
     The inventroy system is a singleton
 */
 /****************************************************************************/
-public class InventorySystem : Singleton<InventorySystem> 
+public class InventorySystem : Singleton<InventorySystem>
 {
     // the vector of iteminfo structs
     List<ItemInfo> Inventory;
@@ -48,18 +49,22 @@ public class InventorySystem : Singleton<InventorySystem>
     GameObject CurItem = null;
 
     // the speed at which the selected item rotates
-    float RotationSpeed = 10.0f;
+    float RotationSpeed = 20.0f;
 
     // boolean values for input
-    bool MoveLeft  = false;
+    bool MoveLeft = false;
     bool MoveRight = false;
-    bool Activate  = false;
+    bool Activate = false;
 
     // this is where we want the hud to go by default
     Vector3 InventoryLand = new Vector3();
 
     // this represents the space between items when they are laid out in the world.
     Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
+
+    Quaternion OriginalItemRotation;
+
+    GameObject Scientist = null;
 
     /****************************************************************************/
     /*!
@@ -69,11 +74,23 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     InventorySystem()
     {
-        Inventory       = new List<ItemInfo>();
+        Inventory = new List<ItemInfo>();
         Inventory_Items = new List<GameObject>();
         EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
+        EventSystem.GlobalHandler.Connect(Events.ScientistReq, OnScientistRequest);
+    }
+
+    /****************************************************************************/
+    /*!
+    \brief
+    *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    public void Initialize()
+    {
+
     }
 
     /****************************************************************************/
@@ -98,11 +115,25 @@ public class InventorySystem : Singleton<InventorySystem>
       *  The Basic structure representing each item in our inventory
     */
     /****************************************************************************/
+    void OnScientistRequest(EventData data)
+    {
+       var sciRequest = (ScientistReqEvent)data;
+       Scientist = sciRequest.Sender;
+
+      OpenInventory(InventoryState.INVENTORY_GIVE);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
     void OnRecievedProperItem(EventData eventData)
     {
         var data = eventData as BoolEvent;
-        
-        if(data.IsTrue)
+
+        if (data.IsTrue)
         {
             //remove item
         }
@@ -122,11 +153,9 @@ public class InventorySystem : Singleton<InventorySystem>
             // add the item to the vector
             var data = eventData as RecievedItemEvent;
 
-            print("Recieved item " + data.Info.ItemPrefab.name);
-
             Inventory.Add(data.Info);
         }
-   }
+    }
 
     /****************************************************************************/
     /*!
@@ -135,337 +164,415 @@ public class InventorySystem : Singleton<InventorySystem>
     */
     /****************************************************************************/
     bool HasItem(ItemInfo item)
-  {
-    foreach(var i in Inventory)
     {
-      if(i.ItemName == item.ItemName)
-      {
-        return true;
-      }
+        foreach (var i in Inventory)
+        {
+            if (i.ItemName == item.ItemName)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    return false;
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-     remove all items from the inventory
-  */
-  /****************************************************************************/
-  public void ClearInventory()
-  {
-    Inventory.Clear();
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-      Sort 
-  */
-  /****************************************************************************/
-  public void SortInventory()
-  {
-    for (int i = 0; i < Inventory.Count; ++i)
+    /****************************************************************************/
+    /*!
+      \brief
+       remove all items from the inventory
+    */
+    /****************************************************************************/
+    public void ClearInventory()
     {
-      int j = i;
-      var current = Inventory[i];
-
-      while ((j > 0) && (string.Compare(Inventory[j - 1].ItemName, current.ItemName, true)) < 0)
-      {
-        Inventory[j] = Inventory[j - 1];
-        j--;
-      }
-
-      Inventory[j] = current;
+        Inventory.Clear();
     }
-  }
 
-  /****************************************************************************/
-  /*!
-    \brief
-   *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  private void RemoveItem(ItemInfo Item)
-  {
-    foreach (var i in Inventory)
+    /****************************************************************************/
+    /*!
+      \brief
+        Sort 
+    */
+    /****************************************************************************/
+    public void SortInventory()
     {
-      if (i == Item)
-      {
-        Inventory.Remove(i);        
-      }
+        for (int i = 0; i < Inventory.Count; ++i)
+        {
+            int j = i;
+            var current = Inventory[i];
+
+            while ((j > 0) && (string.Compare(Inventory[j - 1].ItemName, current.ItemName, true)) < 0)
+            {
+                Inventory[j] = Inventory[j - 1];
+                j--;
+            }
+
+            Inventory[j] = current;
+        }
     }
-  }
 
-  private void RemoveFirstByName(string name)
-  {
-    foreach (var i in Inventory)
+    /****************************************************************************/
+    /*!
+      \brief
+     *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    private void RemoveItem(ItemInfo Item)
     {
-      if (i.ItemName == name)
-      {
-        Inventory.Remove(i);
-      }
+        foreach (var i in Inventory)
+        {
+            if (i == Item)
+            {
+                Inventory.Remove(i);
+            }
+        }
     }
-  }
 
-  /****************************************************************************/
-  /*!
-    \brief
-      Adds an item to the inventory, opens the inventory, and moves to the item.
-  */
-  /****************************************************************************/
-  public void AddItem(ItemInfo Item)
-  {
-    Inventory.Add(Item);
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-     The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  void MoveToItem(ItemInfo item)
-  {
-    for(int i = 0; i < Inventory.Count; ++i)
+    private void RemoveFirstByName(string name)
     {
-      if (Inventory[i].ItemName == item.ItemName)
-      {
-        CurPosition = i;
+        foreach (var i in Inventory)
+        {
+            if (i.ItemName == name)
+            {
+                Inventory.Remove(i);
+            }
+        }
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Adds an item to the inventory, opens the inventory, and moves to the item.
+    */
+    /****************************************************************************/
+    public void AddItem(ItemInfo Item)
+    {
+        Inventory.Add(Item);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+       The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    void MoveToItem(ItemInfo item)
+    {
+        for (int i = 0; i < Inventory.Count; ++i)
+        {
+            if (Inventory[i].ItemName == item.ItemName)
+            {
+                CurPosition = i;
+                MoveItems();
+                return;
+            }
+        }
+
         return;
-      }
     }
 
-    return;
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-   *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  public bool isInventoryOpen()
-  {
-    return InventoryOpen;
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-   *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  public void OpenInventory(InventoryState state)
-  {
-    if(InventoryOpen)
+    /****************************************************************************/
+    /*!
+      \brief
+     *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    public bool isInventoryOpen()
     {
-      return;
+        return InventoryOpen;
     }
 
-    // choose which state to open the menu in
-    CurState = state;
-
-    // set inventory to open
-    InventoryOpen = true;
-
-    // create each of the objects in the inventory.
-    for (int i = 0; i < Inventory.Count; ++i)
+    /****************************************************************************/
+    /*!
+      \brief
+     *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    public void OpenInventory(InventoryState state)
     {
-      CreateItem(InventoryLand + i * ItemWidth, Inventory[i]);
-    }
+        if (InventoryOpen)
+        {
+            return;
+        }
 
-    // send a activate selector event, we don't use message data, so null is okay
-    EventSystem.GlobalHandler.DispatchEvent(Events.ActivateSelector);
+        // choose which state to open the menu in
+        CurState = state;
 
-    // set our current position at the start of the items
-    CurPosition = 0;
-  }
+        // set inventory to open
+        InventoryOpen = true;
 
-  /****************************************************************************/
-  /*!
-    \brief
-   *  The Basic structure representing each item in our inventory
-  */
-  /****************************************************************************/
-  public void CloseInventory()
-  {
-    if(InventoryOpen == false)
-    {
-      return;
-    }
+        GameObject Selector = GameObject.FindGameObjectWithTag("Selector");
 
-    print("wat");
+        if (Selector)
+        {
+            InventoryLand = Selector.transform.position;
+        }
 
-    // destroy each game object.
-    foreach (var i in Inventory_Items)
-    {
-      Destroy(i);
-    }
+        // create each of the objects in the inventory.
+        for (int i = 0; i < Inventory.Count; ++i)
+        {
+            var tempobject = CreateItem(InventoryLand + (i * ItemWidth), Inventory[i]);
 
-    Inventory_Items.Clear();
+            if (Selector)
+            {
+                tempobject.transform.parent = Selector.transform;
+            }
+        }
 
-    // send a activate selector event, we don't use message data, so null is okay
-    EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateSelector);
+        // send a activate selector event, we don't use message data, so null is okay
+        EventSystem.GlobalHandler.DispatchEvent(Events.ActivateSelector);
 
-    CurPosition = 0;
-    CurItem = null;
-    InventoryOpen = false;
-    CurState = InventoryState.INVENTORY_VIEW;
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-      Initialize the class
-  */
-  /****************************************************************************/
-  void Start() 
-  {
-	
-  }
-
-  /****************************************************************************/
-  /*!
-        \brief
-       Creates a single item.
-  */
-  /****************************************************************************/
-  void CreateItem(Vector3 pos, ItemInfo item)
-  {
-    GameObject Temp = new GameObject("Item_" + item.ItemName);
-    Temp.transform.localScale = item.ItemPrefab.transform.localScale;
-
-    var tempMesh = Temp.AddComponent<MeshRenderer>();
-    var test     = Temp.AddComponent<MeshFilter>();
-    Temp.AddComponent<ItemLogic>();
-
-    test.sharedMesh = item.DisplayMesh.sharedMesh;
-
-    tempMesh.material = item.DisplayMaterial;
-    tempMesh.material.shader = item.DisplayMaterial.shader;
-
-    print(item.DisplayMaterial.shader);
-
-    Temp.transform.position = pos;
-  }
-
-
-  /****************************************************************************/
-  /*!
-    \brief
-      
-  */
-  /****************************************************************************/
-  void Update () 
-  {
-    // only check input when the inventory is open.
-	  if(InventoryOpen)
-    {
-      UpdateInput();
-
-      UpdateCurrentItem();
-
-      // rotate the current item here.
-      if(CurItem)
-      {
-         CurItem.transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
-      }
-
-    }
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-      Updates the current input for this frame.
-
-  */
-  /****************************************************************************/
-  void UpdateInput()
-  {
-    MoveLeft  = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_LEFT)  || InputManager.GetSingleton.IsKeyTriggered(KeyCode.LeftArrow);
-    MoveRight = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.RightArrow);
-    Activate  = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A)          || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
-  }
-
-  /****************************************************************************/
-  /*!
-    \brief
-      Updates the current input for this frame.
-  */
-  /****************************************************************************/
-  void UpdateCurrentItem()
-  {
-    if(Inventory.Count == 0)
-    {
-      if (Activate)
-      {
-        ActivateButton();
-      }
-
-      return;
-    }
-
-    // move the items left
-    if (MoveLeft)
-    {
-      --CurPosition;
-
-      if (CurPosition < 0)
-      {
-        CurPosition = Inventory.Count - 1;
-      }
-
-      CurItem = Inventory_Items[CurPosition];
-
-      MoveItemEvent MIE = new MoveItemEvent(-ItemWidth);
-
-      EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
-    }
-
-    // move the items right
-    else if (MoveRight)
-    {
-      ++CurPosition;
-
-      if (CurPosition > Inventory.Count)
-      {
+        // set our current position at the start of the items
         CurPosition = 0;
-      }
 
-      CurItem = Inventory_Items[CurPosition];
+        if (Inventory_Items.Count > 0)
+        {
+            CurItem = Inventory_Items[CurPosition];
+            OriginalItemRotation = CurItem.transform.rotation;
 
-      MoveItemEvent MIE = new MoveItemEvent(ItemWidth);
+            UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
 
-      EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
+            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+        }
+        else
+        {
+            UpdateItemTextEvent text = new UpdateItemTextEvent("Nothing... \n\nIt fills most of the universe");
+            EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+        }
     }
 
-    else if(Activate)
+    /****************************************************************************/
+    /*!
+      \brief
+     *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    public void CloseInventory()
     {
-      ActivateButton();
+        if (InventoryOpen == false)
+        {
+            return;
+        }
+
+        if(CurItem != null)
+        {
+            CurItem.transform.rotation = OriginalItemRotation;
+        }
+
+        Inventory_Items.Clear();
+
+        // send a activate selector event, we don't use message data, so null is okay
+        EventSystem.GlobalHandler.DispatchEvent(Events.DeactivateSelector);
+
+        CurPosition = 0;
+        CurItem = null;
+        InventoryOpen = false;
+        CurState = InventoryState.INVENTORY_VIEW;
     }
-  }
 
-  /****************************************************************************/
-  /*!
-    \brief
-      depending on the inventory state, dispatch events here
-  */
-  /****************************************************************************/
-  void ActivateButton()
-  {
-      // if the current state is to give an item, then we want to dispatch an event with the current item
-      if (CurState == InventoryState.INVENTORY_GIVE)
-      {
-        ItemInfo temp = Inventory[CurPosition];
+    /****************************************************************************/
+    /*!
+      \brief
+        Initialize the class
+    */
+    /****************************************************************************/
+    void Start()
+    {
 
-        RecievedItemEvent give = new RecievedItemEvent(temp);
+    }
 
-        EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, give);
-      }
-  }
+    /****************************************************************************/
+    /*!
+          \brief
+         Creates a single item.
+    */
+    /****************************************************************************/
+    GameObject CreateItem(Vector3 pos, ItemInfo item)
+    {
+        GameObject Temp = GameObject.Instantiate(item.ItemPrefab);
+
+        Temp.name = ("Item_" + item.ItemName);
+
+        Temp.transform.localPosition = pos;
+        Temp.transform.position += new Vector3(0, 0, 0.5f);
+        Temp.layer = 5;
+
+
+        foreach(Transform child in Temp.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        
+
+        // disable all other components
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
+
+        // add the item logic script
+        Temp.AddComponent<ItemLogic>();
+
+        // add the item to the list
+        Inventory_Items.Add(Temp);
+
+        return Temp;
+    }
+
+
+    /****************************************************************************/
+    /*!
+      \brief
+
+    */
+    /****************************************************************************/
+    void Update()
+    {
+        // only check input when the inventory is open.
+        if (InventoryOpen)
+        {
+            UpdateInput();
+
+            UpdateCurrentItem();
+
+            // rotate the current item here.
+            if (CurItem)
+            {
+                CurItem.transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Updates the current input for this frame.
+
+    */
+    /****************************************************************************/
+    void UpdateInput()
+    {
+        MoveLeft = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.LeftArrow);
+        MoveRight = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.RightArrow);
+        Activate = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Updates the current input for this frame.
+    */
+    /****************************************************************************/
+    void MoveItems()
+    {
+        GameObject Selector = GameObject.FindGameObjectWithTag("Selector");
+
+        CurItem.transform.rotation = OriginalItemRotation;
+        Vector3 prevposition = CurItem.transform.localPosition;
+        CurItem = Inventory_Items[CurPosition];
+
+        OriginalItemRotation = CurItem.transform.rotation;
+
+        if (Selector)
+        {
+            prevposition = Selector.transform.localPosition;
+        }
+
+        Vector3 movePos = prevposition - CurItem.transform.localPosition;
+        movePos.z = 0.0f;
+        movePos.y = 0.0f;
+
+        MoveItemEvent MIE = new MoveItemEvent(movePos);
+
+        EventSystem.GlobalHandler.DispatchEvent(Events.MoveItem, MIE);
+
+        UpdateItemTextEvent text = new UpdateItemTextEvent(Inventory[CurPosition].ItemDescription);
+
+        EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        Updates the current input for this frame.
+    */
+    /****************************************************************************/
+    void UpdateCurrentItem()
+    {
+        // if there is only one thing in the inventory don't do movement.
+        if (Inventory.Count <= 1)
+        {
+            // still check for activate button
+            if (Activate)
+            {
+                ActivateButton();
+            }
+
+            return;
+        }
+
+        // move the items left
+        if (MoveLeft)
+        {
+            --CurPosition;
+
+            if (CurPosition < 0)
+            {
+                CurPosition = Inventory.Count - 1;
+            }
+
+            // moves the items and dispatches a new text event
+            MoveItems();
+        }
+
+        // move the items right
+        else if (MoveRight)
+        {
+            ++CurPosition;
+
+            if (CurPosition >= Inventory.Count)
+            {
+                CurPosition = 0;
+            }
+
+            MoveItems();
+        }
+
+        else if (Activate)
+        {
+            ActivateButton();
+        }
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+        depending on the inventory state, dispatch events here
+    */
+    /****************************************************************************/
+    void ActivateButton()
+    {
+        // if the current state is to give an item, then we want to dispatch an event with the current item
+        if (CurState == InventoryState.INVENTORY_GIVE)
+        {
+            if (Inventory.Count > 0)
+            {
+                ItemInfo temp = Inventory[CurPosition];
+
+                RecievedItemEvent give = new RecievedItemEvent(temp);
+
+                Scientist.DispatchEvent(Events.RecievedItem, give);
+
+                CloseInventory();
+            }
+            else
+            {
+                Scientist.DispatchEvent(Events.RecievedItem, null);
+
+                CloseInventory();
+            }
+        }
+    }
 }
 
 /************************************************************************************/
@@ -501,4 +608,36 @@ public class MoveItemEvent : EventData
     {
         MoveAmount = pos;
     }
+}
+
+/****************************************************************************/
+/*!
+  \brief
+    This is the event that gets sent when we want to move the selector
+*/
+/****************************************************************************/
+public class UpdateItemTextEvent : EventData
+{
+  public string NewText;
+
+  public UpdateItemTextEvent(string txt)
+  {
+    NewText = txt;
+  }
+}
+
+/****************************************************************************/
+/*!
+  \brief
+    This is the event that gets sent when we want to move the selector
+*/
+/****************************************************************************/
+public class ScientistReqEvent : EventData
+{
+  public GameObject Sender = null;
+
+  public ScientistReqEvent(GameObject scientist)
+  {
+    Sender = scientist;
+  }
 }

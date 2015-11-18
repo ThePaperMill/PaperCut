@@ -2429,6 +2429,7 @@ GameObject:
   - 92: {fileID: 814923533}
   - 124: {fileID: 814923532}
   - 81: {fileID: 814923531}
+  - 114: {fileID: 814923536}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2503,6 +2504,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 99
+--- !u!114 &814923536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814923530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8336b22d6d3af4da2712827e9ad333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pluginPaths: []
 --- !u!1001 &843774129
 Prefab:
   m_ObjectHideFlags: 0
@@ -5415,6 +5428,12 @@ MonoBehaviour:
   Actions:
   - {fileID: 1341761746}
   - {fileID: 1926598345}
+  WindowEaseDuration: 1.5
+  WindowOffsetInitial: {x: 0, y: 5, z: 0}
+  WindowOffsetFinal: {x: 0, y: 1, z: 0}
+  WindowRotation: {x: 0, y: 0, z: 0}
+  SoundClip: {fileID: 0}
+  AudioDelay: .5
 --- !u!1001 &1969033612
 Prefab:
   m_ObjectHideFlags: 0
@@ -5571,14 +5590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab3c6e2f3bc18d4ebfa9bffdd8e8a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combineName: Combined Mesh
-  addMeshCollider: 0
-  destroyAfterwards: 1
-  getShadows: 1
-  castShadow: 1
-  combineOnStart: 1
-  generateTriangles: 0
-  waitFrame: 0
 --- !u!1001 &1985505341
 Prefab:
   m_ObjectHideFlags: 0

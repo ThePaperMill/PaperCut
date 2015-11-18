@@ -31,5 +31,21 @@ namespace Assets.Scripts.ConversationSystem
         {
             return UnityEngine.Random.Range(0f, 100f) >= Param1;
         }
+
+        static private bool HasTalkedToDuck = false;
+        static public bool SetHasTalkedToDuckFunc()
+        {
+            if (!HasTalkedToDuck)
+            {
+                HasTalkedToDuck = true;
+                return true;
+            }
+            return false;
+        }
+
+        static public bool HasTalkedToDuckFunc()
+        {
+            return HasTalkedToDuck;
+        }
     }
 }

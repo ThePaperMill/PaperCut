@@ -66,7 +66,7 @@ public class PlayerAnimation : MonoBehaviour
         //return;
         var test = ActionSystem.Action.Sequence(grp);
 
-        ActionSystem.Action.Property(test, this.PlayerModel.transform.GetProperty(x => x.localEulerAngles), Rotation, 0.25f, Ease.Linear);
+        ActionSystem.Action.Property(test, this.transform.GetProperty(x => x.localEulerAngles), Rotation, 0.25f, Ease.Linear);
     }
 
     /****************************************************************************/
@@ -91,19 +91,25 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    /****************************************************************************/
+    /*!
+        \brief
+          Updates 
+    */
+    /****************************************************************************/
     void Update () 
     {
         // get the camera's position and look at it.
-        Vector3 Lookposition = new Vector3(Cam.transform.position.x, transform.position.y, Cam.transform.position.z);
+        Vector3 Lookposition = Cam.transform.position;
 
         Quaternion newRotation = new Quaternion();
 
-        newRotation = Quaternion.LookRotation((PlayerModel.transform.position - Lookposition), Vector3.forward);
-
-        //Vector3 EulerAngle = newRotation.eulerAngles;
+        newRotation = Quaternion.LookRotation(PlayerModel.transform.position - Lookposition, Vector3.up);
 
         newRotation.x = 0.0f;
         newRotation.z = 0.0f;
+
+        //PlayerModel.transform.rotation = transform.rotation;
 
         PlayerModel.transform.rotation = Quaternion.Slerp(PlayerModel.transform.rotation, newRotation, Time.deltaTime * 8);
 

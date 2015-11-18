@@ -18,33 +18,47 @@ namespace Assets.Scripts.ConversationSystem
         private string NextPhrase = "sadassdasd";
         private ActionGroup grp = new ActionGroup();
         private Vector3 InitialPos = new Vector3();
+        public double EaseTime = 1.5;
 
         public Vector3 FinalPos;
         // Use this for initialization
         public UITextManager()
         {
-            //UITextManager.ConversationText = this;
+            
+
+            
         }
 
         void Start()
         {
-            InitialPos = this.gameObject.transform.localPosition;
-            SpriteText = this.gameObject.transform.FindChild("SpriteText").gameObject.GetComponent<TextMesh>();
+
             //TextBackground = (GameObject)Instantiate(TextBackground, this.gameObject.transform.position + InitialTextOffsett, new Quaternion());
             //TextBackground.transform.localScale = InitialTextScale;
-
+            //UITextManager.ConversationText = this;
             
+
+
+
+        }
+
+        public void Connect()
+        {
             EventSystem.GlobalHandler.Connect(Events.UpdateText, OnUpdateText);
             EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
             EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
 
+            InitialPos = this.gameObject.transform.localPosition;
+            SpriteText = this.gameObject.transform.FindChild("SpriteText").gameObject.GetComponent<TextMesh>();
         }
+
+
         public void Appear()
         {
+            grp.Clear();
             var seq = ActionSystem.Action.Sequence(grp);
             
             
-            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, 1.5, Curve);
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, EaseTime, Curve);
         }
 
         public void Disappear()
@@ -52,7 +66,8 @@ namespace Assets.Scripts.ConversationSystem
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
             
-            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, 1.5, Curve);
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, EaseTime, Curve);
+            Action.Call(seq, gameObject.Destroy);
         }
 
         public void UpdateText(string newText)
@@ -70,10 +85,19 @@ namespace Assets.Scripts.ConversationSystem
 
         public void OnActivateWindowEvent(EventData eventData)
         {
+            
             Appear();
         }
+
+        private void Destroy(EventData data)
+        {
+            //EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, Destroy);
+            gameObject.Destroy();
+        }
+
         public void OnDeactivateWindowEvent(EventData eventData)
         {
+
             Disappear();
         }
 

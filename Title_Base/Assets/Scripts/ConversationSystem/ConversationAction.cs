@@ -7,7 +7,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     public class ConversationAction : EventHandler
     {
-
+        
         protected bool Active = false;
         
         public ConversationAction Next {get; protected set; }

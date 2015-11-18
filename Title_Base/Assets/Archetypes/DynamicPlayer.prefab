@@ -188,15 +188,16 @@ MonoBehaviour:
   MaxSpeed: 1.5
   MovePower: 3.5
   AirControl: .150000006
-  WalkableSlopeAngle: 85
+  WalkableSlopeAngle: 65
   InitialJumpVelocity: 4
   AdditiveJumpVelocity: 2
   AdditiveJumpTime: 0
   JumpLagTimer: .230000004
   GroundContactDistance: .00999999978
   AdditionalGravity: 0
+  MaxUpwardVelocity: 4
   MoveDirection: {x: 0, y: 0, z: 0}
-  PlayerModel: {fileID: 0}
+  PlayerModel: {fileID: 145038}
 --- !u!136 &13688748
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -219,7 +220,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
-      value: 85
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -236,6 +237,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PlayerModel
+      value: 
+      objectReference: {fileID: 145038}
+    - target: {fileID: 0}
+      propertyPath: MaxUpwardVelocity
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

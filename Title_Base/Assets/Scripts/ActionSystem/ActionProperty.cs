@@ -14,6 +14,10 @@ namespace ActionSystem
         //I have the value passed in by pointer to make it clear that this value IS going to change.
         public ActionProperty(Property<T> startVal, T endVal, double duration, Ease ease) : base()
         {
+            if(duration == 0)
+            {
+                duration = 0.0000001;
+            }
             StartVal = startVal.Get();
             CurrentVal = startVal;
             EndVal = endVal;
@@ -22,6 +26,10 @@ namespace ActionSystem
         }
         public ActionProperty(Property<T> startVal, T endVal, double duration, SampleCurve<T> ease) : base()
         {
+            if (duration == 0)
+            {
+                duration = 0.0000001;
+            }
             StartVal = startVal.Get();
             CurrentVal = startVal;
             EndVal = endVal;
@@ -30,6 +38,10 @@ namespace ActionSystem
         }
         public ActionProperty(Property<T> startVal, T endVal, double duration, AnimationCurve curve) : base()
         {
+            if (duration == 0)
+            {
+                duration = 0.0000001;
+            }
             StartVal = startVal.Get();
             CurrentVal = startVal;
             EndVal = endVal;
