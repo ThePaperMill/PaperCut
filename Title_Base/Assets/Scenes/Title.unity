@@ -85,6 +85,90 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &123549775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 123549776}
+  - 222: {fileID: 123549778}
+  - 114: {fileID: 123549777}
+  m_Layer: 5
+  m_Name: Keyboard Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &123549776
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123549775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 934115699}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 210, y: 150}
+  m_SizeDelta: {x: 400, y: 38}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &123549777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123549775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 33
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'With a Keyboard:
+
+
+
+    WASD to move,
+
+    Spacebar to jump,
+
+    Esc to pause,
+
+    I (i) to view inventory,
+
+    & E to perform actions.'
+--- !u!222 &123549778
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123549775}
 --- !u!1 &257294690
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +201,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 210, y: -210}
+  m_AnchoredPosition: {x: 0, y: -230}
   m_SizeDelta: {x: 155.800003, y: 64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &257294692
@@ -315,8 +399,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -210, y: 75}
-  m_SizeDelta: {x: 332, y: 38}
+  m_AnchoredPosition: {x: -300, y: 150}
+  m_SizeDelta: {x: 400, y: 38}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &292107051
 MonoBehaviour:
@@ -339,7 +423,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -349,7 +433,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: (include pictures of middleware, DigiPen, & Unity?)
+  m_Text: '~From DigiPen~
+
+
+    Game Instructors:
+
+    Ellen Beeman
+
+    Stephen Beeman
+
+    Benjamin Ellinger
+
+    Rachel Rutherford
+
+
+    President:
+
+    Claude Comair'
 --- !u!222 &292107052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -734,7 +834,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Instructions
+  m_Text: How to Play
 --- !u!222 &433226525
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1001,8 +1101,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 150, y: 150}
-  m_SizeDelta: {x: 400, y: 37.5}
+  m_AnchoredPosition: {x: 300, y: 150}
+  m_SizeDelta: {x: 400, y: 38}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &612085780
 MonoBehaviour:
@@ -1035,32 +1135,32 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Game Creation:
+  m_Text: '~Game Creation~
 
 
-    Jerry
+    Ian Aemmer
 
-    Ian
+    Joshua Biggs
 
-    Steven
+    Steven Gallwas
 
-    Troy
+    Troy K B de Magro
 
+    Jerry Nacier
 
-    Sound:
-
-
-    Carsten
-
-    Eric
+    Michael Van Zant
 
 
-    Existing:
+    ~Sound~
 
 
-    Claude Comair
+    Eric Bergman
 
-    The GAM Professor of your choice'
+
+    ~Music~
+
+
+    Carsten Ronshaugen'
 --- !u!222 &612085781
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1312,6 +1412,8 @@ RectTransform:
   - {fileID: 433226526}
   - {fileID: 988477135}
   - {fileID: 257294691}
+  - {fileID: 1478484154}
+  - {fileID: 123549776}
   m_Father: {fileID: 1684031918}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -1383,8 +1485,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -150, y: 150}
-  m_SizeDelta: {x: 400, y: 37.5}
+  m_AnchoredPosition: {x: -210, y: -50}
+  m_SizeDelta: {x: 400, y: 269}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &988477136
 MonoBehaviour:
@@ -1394,32 +1496,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 988477134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 22
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 1
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: '1.  Hit begin game to begin game
-
-    2.  Google is your friend!'
+  m_Sprite: {fileID: 21300000, guid: b44fd479c013bb148a63606ae814f63a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &988477137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1549,7 +1644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22462504, guid: c904be70407e5c048aa6893d86999b8b, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 950
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 22462504, guid: c904be70407e5c048aa6893d86999b8b, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1578,6 +1673,10 @@ Prefab:
     - target: {fileID: 11468746, guid: c904be70407e5c048aa6893d86999b8b, type: 2}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22462504, guid: c904be70407e5c048aa6893d86999b8b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.14999998
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -1923,6 +2022,78 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1472676538}
+--- !u!1 &1478484153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1478484154}
+  - 222: {fileID: 1478484156}
+  - 114: {fileID: 1478484155}
+  m_Layer: 5
+  m_Name: Controller Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1478484154
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1478484153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 934115699}
+  m_RootOrder: 3
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: -210, y: 150}
+  m_SizeDelta: {x: 400, y: 38}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1478484155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1478484153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 33
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'With a Controller:'
+--- !u!222 &1478484156
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1478484153}
 --- !u!1 &1516415739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,7 +2520,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -210, y: -210}
+  m_AnchoredPosition: {x: 0, y: -210}
   m_SizeDelta: {x: 155.800003, y: 64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1751902776
@@ -2610,14 +2781,14 @@ RectTransform:
   m_GameObject: {fileID: 1788049423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.14125013, y: 1, z: 1}
+  m_LocalScale: {x: 1.14999998, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1516415740}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 950}
+  m_SizeDelta: {x: 1500, y: 960}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1788049429
 MonoBehaviour:
@@ -2961,7 +3132,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Instructions
+  m_Text: How to Play
 --- !u!222 &1940616884
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -8,24 +8,24 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{99612BF2-3DA1-45E8-9086-75D4E4760CBF}
+AppId={{3990925D-0486-465A-8D68-451D3054ECE5}
 ; Standard app data stuff
-; Change GameTestInstall to your game name
-AppName=GameTest
-AppVerName=GameTest Version 0.1
+; Change PaperCut to your game name
+AppName=PaperCut
+AppVerName=PaperCut Version 0.45
 AppPublisher=DigiPen Institute of Technology
 AppPublisherURL=http://www.digipen.edu/
 AppSupportURL=http://www.digipen.edu/
 ; !!! AppUpdatesURL=http://www.attackofthe50ftrobot.com/ !!!
 ; Default path to the file storage directory.
 ; {pf} is the default program files directory set by Windows
-DefaultDirName={pf}\DigiPen\GameTest
+DefaultDirName={pf}\DigiPen\PaperCut
 ; Start menu directory
-DefaultGroupName=DigiPen\GameTest
+DefaultGroupName=DigiPen\PaperCut
 ; Output directory for the installer.
 OutputDir=.\INSTALLER
 ; Setup executable installer
-OutputBaseFilename=GameTest_Setup
+OutputBaseFilename=PaperCut_Setup
 ; Path to the DigiPen EULA (Needed to pass TCRs)
 LicenseFile=EULA\DigiPen_EULA.txt
 ; Compression scheme for the installer. Check Inno Setup help files for more options.
@@ -61,8 +61,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; The game directoy is exaclty what you want your install directory in program files to look like
 Source: .\GAMEDIRECTORY\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
 ; Include the redistributable programs and install them to the temp directory
-Source: .\REDIST\vcredist_2008_x86.exe; DestDir: {tmp}; Flags: ignoreversion
-Source: .\REDIST\dxwebsetup.exe; DestDir: {tmp}; Flags: ignoreversion
+;Source: .\REDIST\vcredist_2008_x86.exe; DestDir: {tmp}; Flags: ignoreversion
+;Source: .\REDIST\dxwebsetup.exe; DestDir: {tmp}; Flags: ignoreversion
 
 ; This is the list of shortcuts that the installer will setup for you.
 ; Of note, this will create the uninstaller automatically.
@@ -71,9 +71,9 @@ Source: .\REDIST\dxwebsetup.exe; DestDir: {tmp}; Flags: ignoreversion
 ;   {group} is the start menu location that the game will install shortcuts to.
 ;   {commondesktop} is your Windows desktop directory.
 [Icons]
-Name: {group}\GameTest; Filename: {app}\GameTest.exe; WorkingDir: {app}
-Name: {group}\{cm:UninstallProgram,GameTest}; Filename: {uninstallexe}
-Name: {commondesktop}\GameTest; Filename: {app}\GameTest.exe; Tasks: desktopicon; WorkingDir: {app}
+Name: {group}\PaperCut; Filename: {app}\PaperCut.exe; WorkingDir: {app}
+Name: {group}\{cm:UninstallProgram,PaperCut}; Filename: {uninstallexe}
+Name: {commondesktop}\PaperCut; Filename: {app}\PaperCut.exe; Tasks: desktopicon; WorkingDir: {app}
 
 ; List of items to execute in the installer.
 ; Note that this will run all executables in their silent versions as required by the TCRs.
@@ -81,6 +81,6 @@ Name: {commondesktop}\GameTest; Filename: {app}\GameTest.exe; Tasks: desktopicon
 ; The last item being run is the installer option to automatically launch the game after
 ;   the installer exits as required by the TCRs.
 [Run]
-Filename: {tmp}\vcredist_2008_x86.exe; Parameters: /q; StatusMsg: Installing Visual C++ 2008 Redistributable...
-Filename: {tmp}\dxwebsetup.exe; Parameters: /q; StatusMsg: Installing DirectX...
-Filename: {app}\GameTest.exe; Description: {cm:LaunchProgram,GameTest}; Flags: nowait postinstall skipifsilent
+;Filename: {tmp}\vcredist_2008_x86.exe; Parameters: /q; StatusMsg: Installing Visual C++ 2008 Redistributable...
+;Filename: {tmp}\dxwebsetup.exe; Parameters: /q; StatusMsg: Installing DirectX...
+Filename: {app}\PaperCut.exe; Description: {cm:LaunchProgram,PaperCut}; Flags: nowait postinstall skipifsilent
