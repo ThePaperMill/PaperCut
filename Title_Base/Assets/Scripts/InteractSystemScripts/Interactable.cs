@@ -22,6 +22,7 @@ public class Interactable : MonoBehaviour
 	
 	void Start()
 	{
+
     // if the user didn't set the level settings, find it.
     if(!LevelSettings)
       LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
