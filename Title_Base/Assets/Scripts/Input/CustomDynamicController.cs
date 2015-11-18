@@ -205,7 +205,7 @@ public class CustomDynamicController : MonoBehaviour
     void LateUpdate()
     {
         // if the character controller is not active, do nothing
-        if (Active == false)
+        if (Active == false || GamestateManager.GetSingleton.IsPaused == true)
         {
             return;
         }
