@@ -38,7 +38,7 @@ public class TransformMachine : EventHandler
         var test = ActionSystem.Action.Sequence(grp);
 
         Action.Call(test, CreateOldItem);
-        Action.Delay(test, 0.5f);
+        Action.Delay(test, 1.5f);
         Action.Call(test, CreateLightningBolt);
         Action.Delay(test, 0.5f);
         Action.Call(test, CreateNewItem);
