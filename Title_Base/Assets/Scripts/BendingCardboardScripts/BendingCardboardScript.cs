@@ -94,8 +94,6 @@ public class BendingCardboardScript : MonoBehaviour {
         //If the colliding object is the player
         if (other.tag == "Player")
         {
-            
-
             Player = other.gameObject;
 
             var DistFromPlayer = Vector3.Distance(this.transform.position, Player.transform.position);

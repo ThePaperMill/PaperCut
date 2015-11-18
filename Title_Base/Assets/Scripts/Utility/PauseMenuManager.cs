@@ -7,10 +7,11 @@ public class PauseMenuManager : EventHandler
   GUITexture Gtxt = null;
   GameObject GtxtObj = null;
   ActionGroup grp = new ActionGroup();
+
   public float alpha { get; set; }
 
 	// Use this for initialization
-	void Start () 
+  void Start () 
   {
     GtxtObj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("GTexture"));
 
@@ -64,4 +65,10 @@ public class PauseMenuManager : EventHandler
 
     Gtxt.color = new Vector4(col.r, col.g, col.b, alpha);
 	}
+
+    void OnDestroy()
+    {
+        EventSystem.GlobalHandler.Disconnect(Events.PauseGameEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent);
+    }
 }
