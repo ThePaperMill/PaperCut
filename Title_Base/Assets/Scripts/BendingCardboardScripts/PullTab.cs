@@ -9,7 +9,10 @@ using System.Collections;
 
 public class PullTab : MonoBehaviour
 {
-
+    public bool LocksIntoPlace = true;
+    float UnengagedTimer = 1.0f;
+    public float LerpBackSpeed = 4.0f;
+    
     bool NearPlayer = false;
     GameObject Player = null;
 
@@ -35,7 +38,7 @@ public class PullTab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(NearPlayer == true && Player != null)
+        if (NearPlayer == true && Player != null)
         {
             if ((InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_X) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.E)) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)
             {
@@ -62,7 +65,7 @@ public class PullTab : MonoBehaviour
                         Player.transform.position = new Vector3(StartingPos.x + distance + PosOnStartLock.x, Player.transform.position.y, Player.transform.position.z);
                     }
 
-                    if(transform.root.position.x < StartingPos.x)
+                    if (transform.root.position.x < StartingPos.x)
                     {
                         transform.root.position = StartingPos;
                         Player.transform.position = new Vector3(StartingPos.x + PosOnStartLock.x, Player.transform.position.y, Player.transform.position.z);
@@ -83,14 +86,14 @@ public class PullTab : MonoBehaviour
                     }
                 }
 
-                LerpPos = Vector3.Distance(transform.root.position, StartingPos)/distance;
+                LerpPos = Vector3.Distance(transform.root.position, StartingPos) / distance;
 
                 var Siblings = transform.parent.GetComponentsInChildren<PullTabChild>();
                 foreach (var sib in Siblings)
                 {
-                    
+
                     sib.UpdateRot(LerpPos);
-                    
+
                 }
 
             }
@@ -100,7 +103,30 @@ public class PullTab : MonoBehaviour
             Player = null;
             OnUnlockBody();
         }
+        if (Engaged == false && LerpPos > 0)
+        {
+            //I need to push the object BACK to origin.
+            transform.root.position = Vector3.Lerp(StartingPos, transform.root.position, UnengagedTimer);
+            UnengagedTimer -= Time.deltaTime/ LerpBackSpeed;
+            LerpPos = Vector3.Distance(transform.root.position, StartingPos)* distance;
+            //LerpPos -= Time.deltaTime;
+            if (LerpPos < 0.0f)
+            {
+                LerpPos = 0.0f;
+            }
+            if(LerpPos > 0.99f && LocksIntoPlace == false)
+            {
+                LerpPos = 0.99f;
+            }
+            var Siblings = transform.parent.GetComponentsInChildren<PullTabChild>();
+            foreach (var sib in Siblings)
+            {
 
+                sib.UpdateRot(LerpPos);
+
+            }
+
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -181,6 +207,7 @@ public class PullTab : MonoBehaviour
     {
         if (Player != null)
         {
+            UnengagedTimer = 1;
             print(Time.time);
             //I need to make all of my siblings gain box collider
             var boxcolliders = transform.parent.GetComponentsInChildren<BoxCollider>();
