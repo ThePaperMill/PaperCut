@@ -19,6 +19,7 @@ public enum InventoryState
 {
   INVENTORY_VIEW, // general viewing of the inventory
   INVENTORY_GIVE, // when prompted to give an item
+  INVENTORY_GIVE_SCIENTIST,
 }
 
 /****************************************************************************/
@@ -60,9 +61,10 @@ public class InventorySystem : Singleton<InventorySystem>
 
     // this represents the space between items when they are laid out in the world.
     Vector3 ItemWidth = new Vector3(1.5f, 0, 0);
-    Vector3 MoveAmount = new Vector3(0.1f, 0, 0);
 
     Quaternion OriginalItemRotation;
+
+    GameObject Scientist = null;
 
     /****************************************************************************/
     /*!
@@ -77,8 +79,15 @@ public class InventorySystem : Singleton<InventorySystem>
         EventSystem.GlobalHandler.Connect(Events.RequestItem, OnRequestItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedProperItem, OnRecievedProperItem);
         EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
+        EventSystem.GlobalHandler.Connect(Events.ScientistReq, OnScientistRequest);
     }
 
+    /****************************************************************************/
+    /*!
+    \brief
+    *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
     public void Initialize()
     {
 
@@ -98,6 +107,20 @@ public class InventorySystem : Singleton<InventorySystem>
         var info = new ItemInfo();
         info.ItemName = "DefaultCrate";
         EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, new RecievedItemEvent(info));
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
+      *  The Basic structure representing each item in our inventory
+    */
+    /****************************************************************************/
+    void OnScientistRequest(EventData data)
+    {
+       var sciRequest = (ScientistReqEvent)data;
+       Scientist = sciRequest.Sender;
+
+      OpenInventory(InventoryState.INVENTORY_GIVE);
     }
 
     /****************************************************************************/
@@ -335,12 +358,6 @@ public class InventorySystem : Singleton<InventorySystem>
             CurItem.transform.rotation = OriginalItemRotation;
         }
 
-        // destroy each game object.
-        //foreach (var i in Inventory_Items)
-        //{
-        //    GameObject.Destroy(i);
-        //}
-
         Inventory_Items.Clear();
 
         // send a activate selector event, we don't use message data, so null is okay
@@ -371,24 +388,32 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     GameObject CreateItem(Vector3 pos, ItemInfo item)
     {
-        GameObject Temp = new GameObject("Item_" + item.ItemName);
-        Temp.transform.localScale = item.ItemPrefab.transform.localScale;
+        GameObject Temp = GameObject.Instantiate(item.ItemPrefab);
 
-        var tempMesh = Temp.AddComponent<MeshRenderer>();
-        var test = Temp.AddComponent<MeshFilter>();
-        Temp.AddComponent<ItemLogic>();
-
-        tempMesh.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-
-        test.sharedMesh = item.DisplayMesh.sharedMesh;
-
-        tempMesh.material = item.DisplayMaterial;
-        tempMesh.material.shader = item.DisplayMaterial.shader;
+        Temp.name = ("Item_" + item.ItemName);
 
         Temp.transform.localPosition = pos;
         Temp.transform.position += new Vector3(0, 0, 0.5f);
         Temp.layer = 5;
 
+
+        foreach(Transform child in Temp.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("UI");
+        }
+        
+
+        // disable all other components
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
+
+        // add the item logic script
+        Temp.AddComponent<ItemLogic>();
+
+        // add the item to the list
         Inventory_Items.Add(Temp);
 
         return Temp;
@@ -530,11 +555,22 @@ public class InventorySystem : Singleton<InventorySystem>
         // if the current state is to give an item, then we want to dispatch an event with the current item
         if (CurState == InventoryState.INVENTORY_GIVE)
         {
-            ItemInfo temp = Inventory[CurPosition];
+            if (Inventory.Count > 0)
+            {
+                ItemInfo temp = Inventory[CurPosition];
 
-            RecievedItemEvent give = new RecievedItemEvent(temp);
+                RecievedItemEvent give = new RecievedItemEvent(temp);
 
-            EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, give);
+                Scientist.DispatchEvent(Events.RecievedItem, give);
+
+                CloseInventory();
+            }
+            else
+            {
+                Scientist.DispatchEvent(Events.RecievedItem, null);
+
+                CloseInventory();
+            }
         }
     }
 }
@@ -587,5 +623,21 @@ public class UpdateItemTextEvent : EventData
   public UpdateItemTextEvent(string txt)
   {
     NewText = txt;
+  }
+}
+
+/****************************************************************************/
+/*!
+  \brief
+    This is the event that gets sent when we want to move the selector
+*/
+/****************************************************************************/
+public class ScientistReqEvent : EventData
+{
+  public GameObject Sender = null;
+
+  public ScientistReqEvent(GameObject scientist)
+  {
+    Sender = scientist;
   }
 }

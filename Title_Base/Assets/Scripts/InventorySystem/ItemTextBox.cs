@@ -31,7 +31,7 @@ public class ItemTextBox : EventHandler
     var test = ActionSystem.Action.Sequence(Seq);
     LerpPosition.z = transform.localPosition.z;
 
-    Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), LerpPosition, 1.5, Curve);
+    Action.Property(test, gameObject.transform.GetProperty(o => o.localPosition), LerpPosition, 1.25, Curve);
   }
 
   void OnDeactivateSelector(EventData data)
@@ -47,7 +47,7 @@ public class ItemTextBox : EventHandler
 	// Update is called once per frame
   void Update () 
   {
-        Seq.Update(Time.fixedDeltaTime);
+        Seq.Update(Time.deltaTime);
   }
 
   void OnDestroy()

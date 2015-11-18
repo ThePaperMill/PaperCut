@@ -17,10 +17,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void Start()
         {
-            base.Start();
-            
-            
-            
+            base.Start();           
         }
 
         public override void StartAction()
@@ -29,8 +26,6 @@ namespace Assets.Scripts.ConversationSystem
             Next = NextAction;
             StringEventData.Message = Text.ToString();
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
-            
-            
         }
 
         // Update is called once per frame

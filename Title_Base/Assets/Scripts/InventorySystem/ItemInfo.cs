@@ -2,6 +2,12 @@
 using System.Collections;
 using System;
 
+public enum ITEM_STATUS
+{
+    IS_REAL,
+    IS_CARDBOARD,
+}
+
 /****************************************************************************/
 /*!
   \brief
@@ -11,14 +17,26 @@ using System;
 [Serializable]
 public class ItemInfo 
 {
-  public bool UsePrefabInfo = true;
+    public bool Transformable = false;
+    public ITEM_STATUS CurStatus = ITEM_STATUS.IS_CARDBOARD;
 
-  public string ItemDescription   = "Insert Witty Text Here";
-  public string ItemName          = "Default";
-  public MeshRenderer MRenderer   = null;
-  public Material DisplayMaterial = null;
-  public GameObject ItemPrefab    = null;
-  public MeshFilter DisplayMesh         = null;
+    [TextArea]
+    public string CardboardItemDescription = "Insert Witty Text Here";
+
+    [TextArea]
+    public string RealItemDescription      = "Insert Witty Text Here";
+
+    [HideInInspector]
+    public string ItemName = "Default";
+
+    [HideInInspector]
+    public GameObject ItemPrefab = null;
+
+    [HideInInspector]
+    public string ItemDescription = "";
+
+    public GameObject CardboardItemPrefab = null;
+    public GameObject RealItemPrefab      = null;
 
   public ItemInfo()
   {
@@ -27,15 +45,17 @@ public class ItemInfo
 
   public void InitializeItem()
   {
-    if (UsePrefabInfo && ItemPrefab != null)
+    if(CurStatus == ITEM_STATUS.IS_CARDBOARD)
     {
-      ItemName = ItemPrefab.name;
-      MRenderer = ItemPrefab.GetComponent<MeshRenderer>();
-
-      DisplayMesh = ItemPrefab.GetComponent<MeshFilter>();
-
-      if (MRenderer)
-        DisplayMaterial = MRenderer.sharedMaterial;
+       ItemPrefab      = CardboardItemPrefab;
+       ItemDescription = CardboardItemDescription;
+       ItemName        = CardboardItemPrefab.name;
     }
+    else
+    {
+       ItemPrefab      = RealItemPrefab;
+       ItemDescription = RealItemDescription;
+       ItemName        = RealItemPrefab.name;
+    }   
   }
 }

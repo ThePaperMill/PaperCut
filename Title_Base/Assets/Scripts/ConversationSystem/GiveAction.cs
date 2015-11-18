@@ -16,14 +16,15 @@ namespace Assets.Scripts.ConversationSystem
         public override void Start()
         {
             base.Start();
-
-            // we have to init the item we want to give because of unity 
-            ItemToGive.InitializeItem();
         }
 
         public override void StartAction()
         {
             base.Next = Next;
+
+            // we have to init the item we want to give because of unity 
+            ItemToGive.InitializeItem();
+
             RecievedItemEvent test = new RecievedItemEvent(ItemToGive);
             EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
             
