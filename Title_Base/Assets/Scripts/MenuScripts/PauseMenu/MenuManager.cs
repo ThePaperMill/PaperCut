@@ -47,12 +47,11 @@ public class MenuManager : EventHandler
   int CurrentMenu   = 0;
   int CurrentButton = 0;
 
-  Vector3 ButtonOffset = new Vector3(-1,0,0);
+  Vector3 ButtonOffset = new Vector3(0,-0.075f, -0.045f);
 
   Dictionary<int, MenuInfo> Menus = new Dictionary<int, MenuInfo>();
 
   GameObject Selector = null;
-  MeshRenderer SelectorRenderer;
 
   MenuManager()
   {
@@ -78,13 +77,11 @@ public class MenuManager : EventHandler
 
 	// Use this for initialization
 	void Start () 
-  {
-    EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
-    EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
+    {
+        EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
 
-    Selector = Instantiate(Resources.Load("MenuSelector")) as GameObject;
-    SelectorRenderer = Selector.GetComponent<MeshRenderer>();
-    SelectorRenderer.enabled = false;
+        Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
 	}
 
 	// Update is called once per frame
@@ -156,9 +153,9 @@ public class MenuManager : EventHandler
 
   void UpdateInput()
   {
-    MoveUp         = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_UP);
-    MoveDown       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_DOWN);
-    Activate       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
+    MoveUp         = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_UP)   || InputManager.GetSingleton.IsKeyTriggered(KeyCode.W) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.UpArrow);
+    MoveDown       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.S) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.DownArrow); 
+    Activate       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A)         || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
     StickTriggered = InputManager.GetSingleton.IsLeftStickTriggered();
   }
 
