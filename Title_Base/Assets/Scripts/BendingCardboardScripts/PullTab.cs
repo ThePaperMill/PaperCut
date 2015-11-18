@@ -32,7 +32,7 @@ public class PullTab : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        StartingPos = transform.root.position;
+        StartingPos = transform.parent.position;
     }
 
     // Update is called once per frame
@@ -55,44 +55,45 @@ public class PullTab : MonoBehaviour
 
             if ((InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_X) || InputManager.GetSingleton.IsKeyDown(KeyCode.E)) && Engaged == true)
             {
-                transform.root.position = Player.transform.position - PosOnStartLock;
+                transform.parent.position = Player.transform.position - PosOnStartLock;
 
                 if (LockX == false)
                 {
-                    if (transform.root.position.x > StartingPos.x + distance)
+                    if (transform.parent.position.x > StartingPos.x + distance)
                     {
-                        transform.root.position = new Vector3(StartingPos.x + distance, StartingPos.y, StartingPos.z);
+                        transform.parent.position = new Vector3(StartingPos.x + distance, StartingPos.y, StartingPos.z);
                         Player.transform.position = new Vector3(StartingPos.x + distance + PosOnStartLock.x, Player.transform.position.y, Player.transform.position.z);
                     }
 
-                    if (transform.root.position.x < StartingPos.x)
+                    if (transform.parent.position.x < StartingPos.x)
                     {
-                        transform.root.position = StartingPos;
+                        transform.parent.position = StartingPos;
                         Player.transform.position = new Vector3(StartingPos.x + PosOnStartLock.x, Player.transform.position.y, Player.transform.position.z);
                     }
 
                 }
                 if (LockZ == false)
                 {
-                    if (transform.root.position.z > StartingPos.z + distance)
+                    if (transform.parent.position.z > StartingPos.z + distance)
                     {
-                        transform.root.position = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + distance);
+                        transform.parent.position = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + distance);
                         Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, StartingPos.z + distance + PosOnStartLock.z);
                     }
-                    if (transform.root.position.z < StartingPos.z)
+                    if (transform.parent.position.z < StartingPos.z)
                     {
-                        transform.root.position = StartingPos;
+                        transform.parent.position = StartingPos;
                         Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, StartingPos.z + PosOnStartLock.z);
                     }
                 }
 
-                LerpPos = Vector3.Distance(transform.root.position, StartingPos) / distance;
+                LerpPos = Vector3.Distance(transform.parent.position, StartingPos) / distance;
 
-                var Siblings = transform.parent.GetComponentsInChildren<PullTabChild>();
+                var Siblings = transform.root.GetComponentsInChildren<PullTabChild>();
                 foreach (var sib in Siblings)
                 {
-
+                    
                     sib.UpdateRot(LerpPos);
+                    print(LerpPos);
 
                 }
 
@@ -106,9 +107,13 @@ public class PullTab : MonoBehaviour
         if (Engaged == false && LerpPos > 0)
         {
             //I need to push the object BACK to origin.
-            transform.root.position = Vector3.Lerp(StartingPos, transform.root.position, UnengagedTimer);
+            if(LocksIntoPlace == false)
+            {
+                transform.parent.position = Vector3.Lerp(StartingPos, transform.parent.position, UnengagedTimer);
+
+            }
             UnengagedTimer -= Time.deltaTime/ LerpBackSpeed;
-            LerpPos = Vector3.Distance(transform.root.position, StartingPos)* distance;
+            LerpPos = Vector3.Distance(transform.parent.position, StartingPos)* distance;
             //LerpPos -= Time.deltaTime;
             if (LerpPos < 0.0f)
             {
@@ -118,11 +123,16 @@ public class PullTab : MonoBehaviour
             {
                 LerpPos = 0.99f;
             }
-            var Siblings = transform.parent.GetComponentsInChildren<PullTabChild>();
+            print(LerpPos);
+            var Siblings = transform.root.GetComponentsInChildren<PullTabChild>();
             foreach (var sib in Siblings)
             {
 
-                sib.UpdateRot(LerpPos);
+                if(LocksIntoPlace == false)
+                {
+                    sib.UpdateRot(LerpPos);
+                }
+                
 
             }
 
@@ -170,7 +180,7 @@ public class PullTab : MonoBehaviour
             Engaged = true;
 
             //I need to make all of my siblings lose box collider
-            var boxcolliders = transform.parent.GetComponentsInChildren<BoxCollider>();
+            var boxcolliders = transform.root.GetComponentsInChildren<BoxCollider>();
             foreach(var bCol in boxcolliders)
             {
                 if(bCol.gameObject != gameObject)
@@ -185,7 +195,7 @@ public class PullTab : MonoBehaviour
 
             //Store the player's current position
             //PlayerPosOnStartLock = Player.transform.position;
-            PosOnStartLock = Player.transform.position - transform.root.position;
+            PosOnStartLock = Player.transform.position - transform.parent.position;
 
             //lock all player positions that are supposed to be locked
             var rig = Player.GetComponent<Rigidbody>();
@@ -210,12 +220,11 @@ public class PullTab : MonoBehaviour
             UnengagedTimer = 1;
             print(Time.time);
             //I need to make all of my siblings gain box collider
-            var boxcolliders = transform.parent.GetComponentsInChildren<BoxCollider>();
+            var boxcolliders = transform.root.GetComponentsInChildren<BoxCollider>();
             foreach (var bCol in boxcolliders)
             {
                 if (bCol.gameObject != gameObject)
                 {
-                    print(bCol.gameObject.name);
                     bCol.enabled = true;
                 }
             }

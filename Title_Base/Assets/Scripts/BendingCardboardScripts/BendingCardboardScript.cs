@@ -32,8 +32,7 @@ public class BendingCardboardScript : MonoBehaviour {
     void Start () {
         Parent = transform.root.gameObject;
 
-        print(Parent.transform.rotation.eulerAngles);
-        Begin = Parent.transform.rotation;
+        Begin = Parent.transform.localRotation;
         End = Quaternion.Euler(endBackwards);
 
         //Call a function that will bend the cardboard.
@@ -87,7 +86,6 @@ public class BendingCardboardScript : MonoBehaviour {
         }
 
         
-        print("I NEED TO CHECK DOT PRODUCT!!11!!1");
     }
     void OnTriggerStay(Collider other)
     {
