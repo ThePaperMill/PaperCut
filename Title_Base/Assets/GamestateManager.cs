@@ -38,6 +38,8 @@ public class GamestateManager : Singleton<GamestateManager>
 	
   public void PauseGame()
   {
+      print("pausing the game");
+
       EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent, null);
       IsPaused = true;
       Time.timeScale = 0.0f;
