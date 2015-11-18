@@ -752,6 +752,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
       }
 
+        PlayerModel.transform.position = transform.position;
       PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
 
       /* Rotate the mode here based on movement directions */

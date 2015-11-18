@@ -55,6 +55,7 @@ public class MenuManager : EventHandler
 
   MenuManager()
   {
+
   }
   
   void OnDestroy()
@@ -85,7 +86,7 @@ public class MenuManager : EventHandler
 	}
 
 	// Update is called once per frame
-	void Update () 
+  void Update () 
   {
     if(Menus.ContainsKey(CurrentMenu) == false || Menus[CurrentMenu].MenuActive == false)
     {
@@ -96,16 +97,14 @@ public class MenuManager : EventHandler
       return;
     }
 
-    List<MenuButton> Buttons = Menus[CurrentMenu].Buttons;
-
-    if(Buttons.Count != 0)
+    if(Menus[CurrentMenu].Buttons.Count != 0)
     {
       UpdateInput();
       UpdateSelector();
       
       if(Activate)
       {
-        Buttons[CurrentButton].Activate();
+       Menus[CurrentMenu].Buttons[CurrentButton].Activate();
       }
 
       if (Selector)
@@ -125,13 +124,13 @@ public class MenuManager : EventHandler
   void UpdateSelector()
   {
     var leftStickInfo = InputManager.GetSingleton.GetLeftStickValues();
-    List<MenuButton> Buttons = Menus[CurrentMenu].Buttons;
+
 
     if (MoveDown || (StickTriggered && leftStickInfo.YPos < 0.0f))
     {
       ++CurrentButton;
 
-      if (CurrentButton == Buttons.Count)
+      if (CurrentButton == Menus[CurrentMenu].Buttons.Count)
       {
         CurrentButton = 0;
       }
@@ -143,12 +142,14 @@ public class MenuManager : EventHandler
 
       if (CurrentButton < 0)
       {
-        CurrentButton = Buttons.Count - 1;
+        CurrentButton = Menus[CurrentMenu].Buttons.Count - 1;
       }
     }
 
-    if(Selector)
-      Selector.transform.position = Buttons[CurrentButton].gameObject.transform.position + ButtonOffset;
+        if (Selector)
+        {
+            Selector.transform.position = Menus[CurrentMenu].Buttons[CurrentButton].gameObject.transform.position + ButtonOffset;
+        }
   }
 
   void UpdateInput()
