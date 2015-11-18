@@ -66,6 +66,8 @@ public class InventorySystem : Singleton<InventorySystem>
 
     GameObject Scientist = null;
 
+    ItemInfo LastGiveItem = null;
+
     /****************************************************************************/
     /*!
     \brief
@@ -133,9 +135,14 @@ public class InventorySystem : Singleton<InventorySystem>
     {
         var data = eventData as BoolEvent;
 
-        if (data.IsTrue)
+        if (data.IsTrue && LastGiveItem != null)
         {
+            RemoveItem(LastGiveItem);
             //remove item
+        }
+        else
+        {
+            LastGiveItem = null;
         }
     }
 
@@ -223,6 +230,7 @@ public class InventorySystem : Singleton<InventorySystem>
             if (i == Item)
             {
                 Inventory.Remove(i);
+                break;
             }
         }
     }
@@ -559,6 +567,8 @@ public class InventorySystem : Singleton<InventorySystem>
             {
                 ItemInfo temp = Inventory[CurPosition];
 
+                LastGiveItem = temp;
+
                 RecievedItemEvent give = new RecievedItemEvent(temp);
 
                 Scientist.DispatchEvent(Events.RecievedItem, give);
@@ -568,6 +578,8 @@ public class InventorySystem : Singleton<InventorySystem>
             else
             {
                 Scientist.DispatchEvent(Events.RecievedItem, null);
+
+                LastGiveItem = null;
 
                 CloseInventory();
             }

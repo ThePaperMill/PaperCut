@@ -68,6 +68,7 @@ namespace Assets.Scripts.ConversationSystem
       //if the item is null
       if (data == null || data.Info.ItemName == "")
       {
+        BoolEventData.IsTrue = false;
         Next = NextIfNone;
       }
 
@@ -88,7 +89,6 @@ namespace Assets.Scripts.ConversationSystem
           Next = NextIfFalse;
         }
       }
-
 
       Scientist.Disconnect(Events.RecievedItem, OnRecievedItem);
       //Dispatching whether or not the correct item was recieved.
