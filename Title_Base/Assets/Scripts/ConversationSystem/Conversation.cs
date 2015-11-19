@@ -44,7 +44,7 @@ namespace Assets.Scripts.ConversationSystem
             if (CurrentAction)
             {
               CurrentAction.Disconnect(Events.NextAction, OnNextAction);
-            }  
+            }
 
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
@@ -53,7 +53,8 @@ namespace Assets.Scripts.ConversationSystem
         {
           this.gameObject.Disconnect(Events.EngageConversation, OnEngageConversation);
           this.gameObject.Disconnect(Events.DisengageConversation, OnDisengageConversation);
-          EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
+
+          EventSystem.GlobalHandler.Disconnect(Events.NextAction, OnNextAction);
         }
 
         public void OnEngageConversation(EventData eventData)
@@ -110,6 +111,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             if (Engaged)
             {
+              Debug.Log("got the event moving on");
                 NextAction();
             }
         }
@@ -135,8 +137,7 @@ namespace Assets.Scripts.ConversationSystem
                     {
                         CurrentAction = null;
                     }
-                    
-                    
+                                     
                     return;
                 }
             }
@@ -147,12 +148,10 @@ namespace Assets.Scripts.ConversationSystem
                 {
                     CurrentAction = null;
                 }
-                
             }
 
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
-
         }
 
         public void Disengage()

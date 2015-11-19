@@ -17,6 +17,9 @@ public static class EventSystem
 
     static public void EventConnect(object listener, String eventName, Action<EventData> func)
     {
+        if(eventName == "NextActionEvent")
+        Debug.Log(func.Target + " Connecting to " + eventName);
+
         if (!EventList.ContainsKey(listener))
         {
             EventList.Add(listener, new Dictionary<String, List<Action<EventData>>>());
@@ -30,7 +33,6 @@ public static class EventSystem
 
 
         listeningObj[eventName].Add(func);
-
     }
 
     static public void EventDisconnect(object target, String eventName, object thisPointer = null)
@@ -116,12 +118,12 @@ public static class EventSystem
             eventData = DefaultEvent;
         }
         var functionList = listeningObj[eventName];
-        
-        //if(eventName == "NextActionEvent")
-        //{
-        //  foreach(var whatever in functionList)
-        //    Debug.Log(whatever.Target);
-        //}
+
+        if (eventName == "NextActionEvent")
+        {
+          foreach (var whatever in functionList)
+            Debug.Log("here is what is listening to next action " + whatever.Target);
+        }
 
 
         for (var i = 0; i < functionList.Count(); ++i)

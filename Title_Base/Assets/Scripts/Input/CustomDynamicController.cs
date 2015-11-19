@@ -236,6 +236,7 @@ public class CustomDynamicController : MonoBehaviour
         {
             if(InteractPressed == true)
             {
+                Debug.Log("Sending next action event from character controller");
                 EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
             }
 

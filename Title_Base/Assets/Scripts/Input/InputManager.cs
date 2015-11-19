@@ -105,7 +105,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     /*************************************************************************/
     void Start ()
     {
-        InventorySystem.GetSingleton.ClearInventory();
+        InventorySystem.GetSingleton.Initialize();
         GamestateManager.GetSingleton.Initialize();
     }
 
