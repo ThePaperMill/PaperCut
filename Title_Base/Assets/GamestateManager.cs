@@ -64,8 +64,6 @@ public class GamestateManager : Singleton<GamestateManager>
     {
       if (IsPaused == false)
           PauseGame();
-      else
-          ResumeGame();
     }
 	}
 }

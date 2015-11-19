@@ -46,5 +46,8 @@ public static class Events
 
     public static readonly String PauseGameEvent  = "PauseGameEvent";
     public static readonly String ResumeGameEvent = "ResumeGameEvent";
+
+    public static readonly String InitiateQuitEvent = "InitiateQuitEvent";
+    public static readonly String CancelQuitEvent   = "CancelQuitEvent";
 }
 

@@ -135,8 +135,7 @@ public class CustomDynamicController : MonoBehaviour
 
     public CustomDynamicController()
     {
-        EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
-        EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+
     }
 
     /****************************************************************************/
@@ -169,6 +168,9 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     void Start()
     {
+      EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
+      EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+
         RBody     = (Rigidbody)GetComponent<Rigidbody>();
         CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
         Cam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -182,6 +184,12 @@ public class CustomDynamicController : MonoBehaviour
         // we want to ignore the player layer
         CastFilter = 1 << 9;
         CastFilter = ~CastFilter;
+    }
+
+    void OnDestroy()
+    {
+            EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
+            EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
     }
 
     /****************************************************************************/

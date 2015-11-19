@@ -75,4 +75,9 @@ public class Interactable : MonoBehaviour
 			sendAvent.OnInteractEvent();
 		}
 	}
+  void OnDestroy()
+  {
+    this.gameObject.Disconnect(Events.Interact, OnInteractEvent);
+  }
+
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using ActionSystem;
 
-public class PauseMenuLogic : EventHandler
+public class ConfirmationLogic : EventHandler
 {
     ActionGroup grp = new ActionGroup();
     Vector3 StartingPosition = new Vector3();
@@ -10,20 +10,18 @@ public class PauseMenuLogic : EventHandler
     // Use this for initialization
     void Start ()
     {
-        EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
-        EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
-        EventSystem.GlobalHandler.Connect(Events.InitiateQuitEvent, OnResumeGameEvent);
-        EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Connect(Events.InitiateQuitEvent, OnInitiateQuit);
+        EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuit);
         StartingPosition = transform.localPosition;
     }
 
-    void OnPauseGameEvent(EventData data)
+    void OnInitiateQuit(EventData data)
     {
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), new Vector3(0, 0, 0.5f * StartingPosition.z), 1.0f, Ease.Linear);
     }
 
-    void OnResumeGameEvent(EventData data)
+    void OnCancelQuit(EventData data)
     {
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), StartingPosition, 0.5f, Ease.Linear);
@@ -38,9 +36,7 @@ public class PauseMenuLogic : EventHandler
 
     void OnDestroy()
     {
-        EventSystem.GlobalHandler.Disconnect(Events.PauseGameEvent, OnPauseGameEvent);
-        EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent);
-        EventSystem.GlobalHandler.Disconnect(Events.InitiateQuitEvent, OnResumeGameEvent);
-        EventSystem.GlobalHandler.Disconnect(Events.CancelQuitEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Disconnect(Events.InitiateQuitEvent, OnInitiateQuit);
+        EventSystem.GlobalHandler.Disconnect(Events.CancelQuitEvent, OnCancelQuit);
     }
 }

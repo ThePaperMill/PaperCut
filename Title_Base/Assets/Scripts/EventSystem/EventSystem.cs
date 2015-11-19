@@ -13,7 +13,7 @@ public static class EventSystem
     //The GameObject is the listener, 
     private static Dictionary<object, Dictionary<String, List<Action<EventData>>>> EventList = new Dictionary<object, Dictionary<String, List<Action<EventData>>>>();
 
-
+    
 
     static public void EventConnect(object listener, String eventName, Action<EventData> func)
     {
@@ -116,9 +116,26 @@ public static class EventSystem
             eventData = DefaultEvent;
         }
         var functionList = listeningObj[eventName];
+        
+        //if(eventName == "NextActionEvent")
+        //{
+        //  foreach(var whatever in functionList)
+        //    Debug.Log(whatever.Target);
+        //}
+
+
         for (var i = 0; i < functionList.Count(); ++i)
         {
             var func = functionList[i];
+
+            if (func.Target == null || func.Target.Equals(null))
+            {
+              Debug.Log("wat");
+              //continue;
+            }
+            else
+              Debug.Log(func.Target);
+
             if (func != null)
             {
                 func(eventData);
@@ -143,7 +160,7 @@ public static class EventSystem
     //ExtensionMethods
     public static void DispatchEvent<TObject>(this TObject instance, String eventName, EventData eventData = null)
     {
-        EventSystem.EventSend(instance, eventName, eventData);
+      EventSystem.EventSend(instance, eventName, eventData);
     }
     public static void Connect<TObject>(this TObject instance, String eventName, Action<EventData> function)
     {

@@ -37,9 +37,10 @@ public class PlayerSpawner : EventHandler
     // the last level that was loaded
     string PreviousLevel = "";
 
+
     public PlayerSpawner()
-    {     
-        EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
+    {
+
     }
 
     void OnAddSpawnPointEvent(EventData eventData)
@@ -61,6 +62,8 @@ public class PlayerSpawner : EventHandler
 
     void Start () 
     {
+        EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
+
         PreviousLevel = LevelManager.GetSingleton.PrevLevel;
 
         Cam = GameObject.FindGameObjectWithTag("MainCamera");

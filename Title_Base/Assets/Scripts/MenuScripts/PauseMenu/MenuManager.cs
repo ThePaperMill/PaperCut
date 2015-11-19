@@ -74,19 +74,31 @@ public class MenuManager : EventHandler
     DeactivateMenu(0);
   }
 
-
-
-	// Use this for initialization
+  	// Use this for initialization
 	void Start () 
-    {
-        EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
-        EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
+  {
+      EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
+      EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
+      EventSystem.GlobalHandler.Connect(Events.InitiateQuitEvent, OnInitiateQuitEvent);
+      EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuitEvent);
 
-        Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
+      Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
 	}
 
+  void OnInitiateQuitEvent(EventData data)
+  {
+    DeactivateMenu(0);
+    ActivateMenu(1);
+  }
+
+  void OnCancelQuitEvent(EventData data)
+  {
+    DeactivateMenu(1);
+    ActivateMenu(0);
+  }
+
 	// Update is called once per frame
-  void Update () 
+  void LateUpdate () 
   {
     if(Menus.ContainsKey(CurrentMenu) == false || Menus[CurrentMenu].MenuActive == false)
     {
