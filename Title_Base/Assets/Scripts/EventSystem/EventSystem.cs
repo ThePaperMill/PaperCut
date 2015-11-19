@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class EventSystem
 {
-    public static char GlobalHandler;
+    public static object GlobalHandler = new object();
     public static EventData DefaultEvent = new EventData();
 
     //The GameObject is the listener, 
