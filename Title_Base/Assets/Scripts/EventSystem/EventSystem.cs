@@ -128,16 +128,14 @@ public static class EventSystem
         {
             var func = functionList[i];
 
-            if (func.Target == null || func.Target.Equals(null))
-            {
-              Debug.Log("wat");
-              //continue;
-            }
-            else
-              Debug.Log(func.Target);
-
             if (func != null)
             {
+                if (func.Target == null || func.Target.Equals(null))
+                {
+                    Debug.Log(eventName + " wat " + func.Method);
+                    //continue;
+                }
+
                 func(eventData);
             }
             else

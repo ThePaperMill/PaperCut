@@ -60,8 +60,10 @@ public class MenuManager : EventHandler
   
   void OnDestroy()
   {
-    EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
-    EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
+    EventSystem.GlobalHandler.Disconnect(Events.PauseGameEvent, OnPauseGameEvent);
+    EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent);
+    EventSystem.GlobalHandler.Disconnect(Events.InitiateQuitEvent, OnInitiateQuitEvent);
+    EventSystem.GlobalHandler.Disconnect(Events.CancelQuitEvent, OnCancelQuitEvent);
   }
 
   void OnPauseGameEvent(EventData data)
@@ -168,7 +170,7 @@ public class MenuManager : EventHandler
   {
     MoveUp         = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_UP)   || InputManager.GetSingleton.IsKeyTriggered(KeyCode.W) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.UpArrow);
     MoveDown       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.S) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.DownArrow); 
-    Activate       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A)         || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
+    Activate       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A)         || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Return);
     StickTriggered = InputManager.GetSingleton.IsLeftStickTriggered();
   }
 
