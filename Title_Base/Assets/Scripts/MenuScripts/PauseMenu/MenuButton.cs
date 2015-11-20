@@ -9,7 +9,7 @@ public class MenuButton : MonoBehaviour
   MenuManager Mmngr = null;
 
 	// Use this for initialization
-	void Awake () 
+  void Awake () 
   {
     LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
 
