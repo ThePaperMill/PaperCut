@@ -54,6 +54,8 @@ public class MenuManager : EventHandler
 
   GameObject Selector = null;
 
+    public bool MainMenu = false;
+
   MenuManager()
   {
 
@@ -86,6 +88,10 @@ public class MenuManager : EventHandler
       EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuitEvent);
 
       Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
+      if(MainMenu)
+        {
+            ActivateMenu(0);
+        }
   }
 
   void OnInitiateQuitEvent(EventData data)
@@ -132,7 +138,7 @@ public class MenuManager : EventHandler
 
         if(Escape)
         {
-            if(CurrentMenu == 0)
+            if(CurrentMenu == 0 && !MainMenu)
             {
                 EventSystem.GlobalHandler.DispatchEvent(Events.ResumeGameEvent);
                 GamestateManager.GetSingleton.ResumeGame();
