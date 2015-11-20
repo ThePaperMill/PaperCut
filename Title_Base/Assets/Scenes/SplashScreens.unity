@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightmapSnapshot: {fileID: 112000001, guid: 7fceab28e6c518645920f116e91875d3,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -427,10 +428,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b842874ab79ddb44b0f3ae725bc947c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelToLoad: Player_House
+  LevelToLoad: MainMenu
   Sprites:
   - {fileID: 21300000, guid: 59bae25ab74ecd048a013bf78228aa8d, type: 3}
   - {fileID: 21300000, guid: 9d6a29b7bbafd6d4492f7c6d56ab239f, type: 3}
+  - {fileID: 21300000, guid: ff3372d8b63e77349b65be54549282ee, type: 3}
   ScreenTime: 3
 --- !u!114 &1508889080
 MonoBehaviour:
