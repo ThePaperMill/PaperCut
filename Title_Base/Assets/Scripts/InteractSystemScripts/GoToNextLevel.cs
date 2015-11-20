@@ -13,7 +13,10 @@ public class GoToNextLevel : MonoBehaviour
 	public string NextLevel;
 
 	bool delay = true;
-	
+
+    public bool PrevLevelTrigger = false;
+    public bool NextLevelTrigger = false;
+
 	void Update()
 	{		
 		// Give the game a frame to load before interacting
@@ -21,7 +24,17 @@ public class GoToNextLevel : MonoBehaviour
 		{
 			delay = false;
 		}
-	}
+
+        if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha1) && PrevLevelTrigger)
+        {
+            Application.LoadLevel(NextLevel);
+        }
+        else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha2) && NextLevelTrigger)
+        {
+            Application.LoadLevel(NextLevel);
+        }
+
+    }
 	
 	void OnTriggerEnter(Collider collision)
 	{
