@@ -21,7 +21,7 @@ public class NewMeshInstantiate : MonoBehaviour
     private Dictionary<int, List<int>> triangleList = new Dictionary<int, List<int>>();
 
     private List<Vector2> uv = new List<Vector2>();
-    private List<Vector2> uv2 = new List<Vector2>();
+    //private List<Vector2> uv2 = new List<Vector2>();
     private List<Vector3> vertexList = new List<Vector3>();
     private List<Vector4> tangentList = new List<Vector4>();
     private bool isTriangles;
@@ -39,7 +39,7 @@ public class NewMeshInstantiate : MonoBehaviour
 
     #endregion
 
-    public NewMeshInstantiate(bool trianglesOrList)
+    public void NewMeshInst(bool trianglesOrList)
     {
         // Are we using just triangles or were they assorted into a List?
         isTriangles = trianglesOrList;
@@ -54,7 +54,7 @@ public class NewMeshInstantiate : MonoBehaviour
         colourList.Capacity += toPlug;
         meshNormals.Capacity += toPlug;
         uv.Capacity += toPlug;
-        uv2.Capacity += toPlug;
+        //uv2.Capacity += toPlug;
         vertexList.Capacity += toPlug;
         tangentList.Capacity += toPlug;
     }
@@ -119,7 +119,7 @@ public class NewMeshInstantiate : MonoBehaviour
 
         // Get the mesh's info
         uv.AddRange(instance.mesh.uv);
-        uv2.AddRange(instance.mesh.uv2);
+        //uv2.AddRange(instance.mesh.uv2);
         colourList.AddRange(instance.mesh.colors);
 
         vertexList.AddRange(instance.mesh.vertices.Select(verts => instance.transform.MultiplyPoint(verts)));
@@ -196,7 +196,7 @@ public class NewMeshInstantiate : MonoBehaviour
             normals = meshNormals.ToArray(),
             colors = colourList.ToArray(),
             uv = uv.ToArray(),
-            uv2 = uv2.ToArray(),
+            //uv2 = uv2.ToArray(),
             tangents = tangentList.ToArray(),
             subMeshCount = (isTriangles) ?subMeshList.Count : triangleList.Count
         };
@@ -215,10 +215,11 @@ public class NewMeshInstantiate : MonoBehaviour
         return mesh;
     }
 
-    public static Mesh CombinePrep(IEnumerable<MeshInstance> instances, bool trianglesOrList)
+    public static Mesh CombinePrep(GameObject toAttach, IEnumerable<MeshInstance> instances, bool trianglesOrList)
     {
         // This will create a prepared class object for combining once the user is ready
-        NewMeshInstantiate processor = new NewMeshInstantiate(trianglesOrList);
+        NewMeshInstantiate processor = toAttach.AddComponent<NewMeshInstantiate>() as NewMeshInstantiate;
+        processor.NewMeshInst(trianglesOrList);
         processor.AddMultipleMeshes(instances);
         return processor.CreateCombine();
     }
