@@ -28,6 +28,7 @@ GameObject:
   - 33: {fileID: 3389468}
   - 23: {fileID: 2330654}
   - 65: {fileID: 6588662}
+  - 114: {fileID: 11484128}
   m_Layer: 5
   m_Name: Confirmation
   m_TagString: Untagged
@@ -79,6 +80,7 @@ GameObject:
   - 4: {fileID: 444248}
   - 33: {fileID: 3362888}
   - 23: {fileID: 2373632}
+  - 114: {fileID: 11451660}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -96,6 +98,7 @@ GameObject:
   - 4: {fileID: 449284}
   - 33: {fileID: 3384222}
   - 23: {fileID: 2394198}
+  - 114: {fileID: 11485478}
   m_Layer: 5
   m_Name: PauseButton (2)
   m_TagString: Untagged
@@ -172,8 +175,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112002}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 81.0839996, y: 10.4280005, z: -14.3034372}
-  m_LocalScale: {x: 18.257082, y: 20, z: 14.7869673}
+  m_LocalPosition: {x: .0993480682, y: 6.05495644, z: 1.78259754}
+  m_LocalScale: {x: 18.257082, y: 20, z: 14.7869682}
   m_Children:
   - {fileID: 449284}
   - {fileID: 444248}
@@ -234,7 +237,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -420,6 +423,43 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &11451660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912ec1ea39a7c5544aa9fd8d514e561c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 1
+  Priority: 1
+--- !u!114 &11484128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d5b04051528d24da4edf4b2ff12908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11485478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec60a0ca8d0c644e9becde7276f0143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 1
+  Priority: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

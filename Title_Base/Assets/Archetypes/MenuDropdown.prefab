@@ -44,6 +44,7 @@ GameObject:
   - 4: {fileID: 402164}
   - 33: {fileID: 3399972}
   - 23: {fileID: 2382586}
+  - 114: {fileID: 11483202}
   m_Layer: 5
   m_Name: PauseButton (3)
   m_TagString: Untagged
@@ -78,6 +79,7 @@ GameObject:
   - 4: {fileID: 454150}
   - 33: {fileID: 3326132}
   - 23: {fileID: 2392226}
+  - 114: {fileID: 11457888}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -95,6 +97,7 @@ GameObject:
   - 4: {fileID: 406302}
   - 33: {fileID: 3332612}
   - 23: {fileID: 2309708}
+  - 114: {fileID: 11428438}
   m_Layer: 5
   m_Name: PauseButton (1)
   m_TagString: Untagged
@@ -129,6 +132,7 @@ GameObject:
   - 4: {fileID: 468690}
   - 33: {fileID: 3359368}
   - 23: {fileID: 2337624}
+  - 114: {fileID: 11448602}
   m_Layer: 5
   m_Name: PauseButton (2)
   m_TagString: Untagged
@@ -147,6 +151,7 @@ GameObject:
   - 33: {fileID: 3329148}
   - 23: {fileID: 2380828}
   - 65: {fileID: 6572912}
+  - 114: {fileID: 11495836}
   m_Layer: 5
   m_Name: MenuDropdown
   m_TagString: Untagged
@@ -224,7 +229,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195116}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 79.7109985, y: 10.3669996, z: -14.3034372}
+  m_LocalPosition: {x: 1.06700003, y: 5.85395622, z: 2.44959736}
   m_LocalScale: {x: 20, y: 20, z: 22.0053959}
   m_Children:
   - {fileID: 402164}
@@ -253,7 +258,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.00810000021, y: .00590000022, z: -.00359999994}
+  m_LocalPosition: {x: -.0198999997, y: .00590000022, z: -.00359999994}
   m_LocalScale: {x: .000883954985, y: .000883954985, z: .000883954985}
   m_Children: []
   m_Father: {fileID: 402164}
@@ -348,7 +353,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195116}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -561,7 +566,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133606}
-  m_Text: Quit
+  m_Text: Quit Game
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -617,6 +622,69 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &11428438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0023773de2809b4cae16df5d384476b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 2
+--- !u!114 &11448602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0023773de2809b4cae16df5d384476b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 1
+--- !u!114 &11457888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c2f576598a2f04198d6deaf6469989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 0
+--- !u!114 &11483202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec6cc4a199d94c8bfb8cd27e29b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 3
+--- !u!114 &11495836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f3ad7ce3d199b40bc70393225d5bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
