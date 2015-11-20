@@ -23,21 +23,21 @@ public class PlayerSpawnPoint : MonoBehaviour
 
   }
 
-	void Start () 
-  {
-    MeshRenderer test = gameObject.GetComponent<MeshRenderer>();
-
-    if(test)
+    void Start()
     {
-      test.enabled = false;
-    }
+        MeshRenderer test = gameObject.GetComponent<MeshRenderer>();
 
-    // Dispatch an event to the global handler.
-    Position = gameObject.transform.position;
+        if(test)
+        {
+          test.enabled = false;
+        }
 
-    PlayerSpawnEvent PE = new PlayerSpawnEvent(this);
+        // Dispatch an event to the global handler.
+        Position = gameObject.transform.position;
 
-    EventSystem.GlobalHandler.DispatchEvent(Events.AddSpawnPoint, PE);
+        PlayerSpawnEvent PE = new PlayerSpawnEvent(this);
+
+        EventSystem.GlobalHandler.DispatchEvent(Events.AddSpawnPoint, PE);
 	}
 	
 	// Update is called once per frame

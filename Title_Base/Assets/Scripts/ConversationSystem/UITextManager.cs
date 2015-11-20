@@ -63,6 +63,10 @@ namespace Assets.Scripts.ConversationSystem
 
         public void Disappear()
         {
+          EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
+          EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
+          EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
             

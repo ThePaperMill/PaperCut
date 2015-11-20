@@ -97,6 +97,9 @@ public class GameStateControlledCamera : MonoBehaviour
 
   public void SwitchPosition()
   {
+    if (PosTarget == null)
+      return;
+
     //Calculate how fast the camera should move to it's target
     var journeyLength = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);
     float distCovered = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);

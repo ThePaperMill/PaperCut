@@ -10,18 +10,20 @@ public class PauseMenuLogic : EventHandler
     // Use this for initialization
     void Start ()
     {
-        EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent1);
-        EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent1);
+        EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
+        EventSystem.GlobalHandler.Connect(Events.InitiateQuitEvent, OnResumeGameEvent);
+        EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnPauseGameEvent);
         StartingPosition = transform.localPosition;
     }
 
-    void OnPauseGameEvent1(EventData data)
+    void OnPauseGameEvent(EventData data)
     {
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), new Vector3(0, 0, 0.5f * StartingPosition.z), 1.0f, Ease.Linear);
     }
 
-    void OnResumeGameEvent1(EventData data)
+    void OnResumeGameEvent(EventData data)
     {
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), StartingPosition, 0.5f, Ease.Linear);
@@ -36,7 +38,9 @@ public class PauseMenuLogic : EventHandler
 
     void OnDestroy()
     {
-        EventSystem.GlobalHandler.Disconnect(Events.PauseGameEvent, OnPauseGameEvent1);
-        EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent1);
+        EventSystem.GlobalHandler.Disconnect(Events.PauseGameEvent, OnPauseGameEvent);
+        EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent);
+        EventSystem.GlobalHandler.Disconnect(Events.InitiateQuitEvent, OnResumeGameEvent);
+        EventSystem.GlobalHandler.Disconnect(Events.CancelQuitEvent, OnPauseGameEvent);
     }
 }

@@ -7,13 +7,13 @@ using UnityEngine;
 
 public static class EventSystem
 {
-    public static char GlobalHandler;
+    public static object GlobalHandler = new object();
     public static EventData DefaultEvent = new EventData();
 
     //The GameObject is the listener, 
     private static Dictionary<object, Dictionary<String, List<Action<EventData>>>> EventList = new Dictionary<object, Dictionary<String, List<Action<EventData>>>>();
 
-
+    
 
     static public void EventConnect(object listener, String eventName, Action<EventData> func)
     {
@@ -30,7 +30,6 @@ public static class EventSystem
 
 
         listeningObj[eventName].Add(func);
-
     }
 
     static public void EventDisconnect(object target, String eventName, object thisPointer = null)
@@ -116,11 +115,22 @@ public static class EventSystem
             eventData = DefaultEvent;
         }
         var functionList = listeningObj[eventName];
+
+        //if (eventName == "NextActionEvent")
+        //{
+        //  foreach (var whatever in functionList)
+        //    Debug.Log("here is what is listening to next action " + whatever.Target);
+        //}
+
+
         for (var i = 0; i < functionList.Count(); ++i)
         {
             var func = functionList[i];
-            if (func != null)
+
+            if (func.Method.IsStatic || !func.Target.Equals(null))
             {
+                
+
                 func(eventData);
             }
             else
@@ -143,7 +153,7 @@ public static class EventSystem
     //ExtensionMethods
     public static void DispatchEvent<TObject>(this TObject instance, String eventName, EventData eventData = null)
     {
-        EventSystem.EventSend(instance, eventName, eventData);
+      EventSystem.EventSend(instance, eventName, eventData);
     }
     public static void Connect<TObject>(this TObject instance, String eventName, Action<EventData> function)
     {

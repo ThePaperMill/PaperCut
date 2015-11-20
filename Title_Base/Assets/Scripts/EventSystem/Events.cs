@@ -48,6 +48,11 @@ public static class Events
     public static readonly String ResumeGameEvent = "ResumeGameEvent";
 
     public static readonly String TabUpdatedEvent = "TabUpdated";
+
+    public static readonly String InitiateQuitEvent = "InitiateQuitEvent";
+    public static readonly String CancelQuitEvent   = "CancelQuitEvent";
+    public static readonly String OverlayActive     = "OverlayActiveEvent";
+    public static readonly String CancelOverlay     = "CancelOverlayEvent";
 }
 
 public class IntegerEvent : EventData

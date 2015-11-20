@@ -41,14 +41,25 @@ namespace Assets.Scripts.ConversationSystem
             this.gameObject.Connect(Events.EngageConversation, OnEngageConversation);
             this.gameObject.Connect(Events.DisengageConversation, OnDisengageConversation);
             
+            if (CurrentAction)
+            {
+              CurrentAction.Disconnect(Events.NextAction, OnNextAction);
+            }
+
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
+        }
+
+        void OnDestroy()
+        {
+          this.gameObject.Disconnect(Events.EngageConversation, OnEngageConversation);
+          this.gameObject.Disconnect(Events.DisengageConversation, OnDisengageConversation);
+
+          EventSystem.GlobalHandler.Disconnect(Events.NextAction, OnNextAction);
         }
 
         public void OnEngageConversation(EventData eventData)
         {
-            
-            Engage();
-            
+            Engage();            
         }
         public void OnDisengageConversation(EventData eventData)
         {
@@ -125,8 +136,7 @@ namespace Assets.Scripts.ConversationSystem
                     {
                         CurrentAction = null;
                     }
-                    
-                    
+                                     
                     return;
                 }
             }
@@ -137,12 +147,10 @@ namespace Assets.Scripts.ConversationSystem
                 {
                     CurrentAction = null;
                 }
-                
             }
 
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
-
         }
 
         public void Disengage()
@@ -157,6 +165,7 @@ namespace Assets.Scripts.ConversationSystem
             //CurrentNode = Actions.GetEnumerator();
             
             CurrentAction = CurrentNode.Current;
+            ConversationWindow = null;
         }
 
         public void PreviousAction()
@@ -180,7 +189,6 @@ namespace Assets.Scripts.ConversationSystem
                 }
             }
         }
-
 
         // Update is called once per frame
         void Update()

@@ -37,8 +37,7 @@ public class HighlightController : MonoBehaviour
 	void Update()
 	{
 		// Always be rotating
-		gameObject.transform.Rotate(new Vector3(0, RotateSpeedDegrees * Time.deltaTime, 0));
-		//old code --> this.Owner.Transform.Rotation = Math.ToQuaternion(this.Owner.Transform.EulerAngles);
+		gameObject.transform.Rotate(new Vector3(0, RotateSpeedDegrees * Time.smoothDeltaTime, 0));
 
 		// Move to a new locale if necessary
 		if(updating)
@@ -76,7 +75,7 @@ public class HighlightController : MonoBehaviour
 		// Stupidity Counter:  At a low FPS the Highlight can overshoot its mark, so reverse & lessen its speed
 		if(lastDist > 0.2f && nearApocynthion)
 		{
-			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed * 2) - gameObject.transform.position;
+			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed * 3) - gameObject.transform.position;
 			nearApocynthion = false;
 		}
 

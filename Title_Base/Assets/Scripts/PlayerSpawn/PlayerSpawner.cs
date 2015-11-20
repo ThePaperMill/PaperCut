@@ -37,9 +37,10 @@ public class PlayerSpawner : EventHandler
     // the last level that was loaded
     string PreviousLevel = "";
 
+
     public PlayerSpawner()
-    {     
-        EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
+    {
+
     }
 
     void OnAddSpawnPointEvent(EventData eventData)
@@ -59,9 +60,9 @@ public class PlayerSpawner : EventHandler
         SpawnPoints.Clear();
     }
 
-    void Start () 
+    void Awake () 
     {
-        PreviousLevel = LevelManager.GetSingleton.PrevLevel;
+        EventSystem.GlobalHandler.Connect(Events.AddSpawnPoint, OnAddSpawnPointEvent);
 
         Cam = GameObject.FindGameObjectWithTag("MainCamera");
        
@@ -69,6 +70,11 @@ public class PlayerSpawner : EventHandler
         {
             CamController = Cam.GetComponent<GameStateControlledCamera>();
         }
+    }
+
+    void Start()
+    {
+
     }
 	
     Vector3 ChoosePosition()
@@ -105,7 +111,9 @@ public class PlayerSpawner : EventHandler
         // if we haven't spawned the player yet, spawn them
         if (false == PlayerWasSpawned)
         {
-          Vector3 spawnPos = ChoosePosition();
+            PreviousLevel = LevelManager.GetSingleton.PrevLevel;
+
+            Vector3 spawnPos = ChoosePosition();
 
           GameObject spawnedPlayer = new GameObject();
       
