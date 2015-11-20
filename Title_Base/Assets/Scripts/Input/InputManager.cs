@@ -71,8 +71,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
   
     GamePadState prevState;
     
-    public
-    int ButtonTotal;
+    public int ButtonTotal;
 
     InputManager()
     {

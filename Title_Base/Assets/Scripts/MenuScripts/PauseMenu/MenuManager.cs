@@ -43,6 +43,7 @@ public class MenuManager : EventHandler
   bool MoveDown       = false;
   bool Activate       = false;
   bool StickTriggered = false;
+  bool Escape         = false;
 
   int CurrentMenu   = 0;
   int CurrentButton = 0;
@@ -77,7 +78,7 @@ public class MenuManager : EventHandler
   }
 
   	// Use this for initialization
-	void Start () 
+  void Start () 
   {
       EventSystem.GlobalHandler.Connect(Events.PauseGameEvent, OnPauseGameEvent);
       EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
@@ -85,7 +86,7 @@ public class MenuManager : EventHandler
       EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuitEvent);
 
       Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
-	}
+  }
 
   void OnInitiateQuitEvent(EventData data)
   {
@@ -102,24 +103,42 @@ public class MenuManager : EventHandler
 	// Update is called once per frame
   void LateUpdate () 
   {
-    if(Menus.ContainsKey(CurrentMenu) == false || Menus[CurrentMenu].MenuActive == false)
+    UpdateInput();
+
+    if (Menus.ContainsKey(CurrentMenu) == false || Menus[CurrentMenu].MenuActive == false)
     {
-      if (Selector)
-      {
-        Selector.SetActive(false);
-      }
-      return;
+        if (Escape)
+        {
+            EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent);
+            GamestateManager.GetSingleton.PauseGame();
+        }
+
+        else if (Selector)
+        {
+            Selector.SetActive(false);
+        }
+
+         return;
     }
 
     if(Menus[CurrentMenu].Buttons.Count != 0)
     {
-      UpdateInput();
-      UpdateSelector();
+        UpdateSelector();
       
-      if(Activate)
-      {
-       Menus[CurrentMenu].Buttons[CurrentButton].Activate();
-      }
+        if(Activate)
+        {
+            Menus[CurrentMenu].Buttons[CurrentButton].Activate();
+        }
+
+        if(Escape)
+        {
+            if(CurrentMenu == 0)
+            {
+                EventSystem.GlobalHandler.DispatchEvent(Events.ResumeGameEvent);
+                GamestateManager.GetSingleton.ResumeGame();
+                return;
+            }
+        }
 
       if (Selector)
       {
@@ -133,12 +152,11 @@ public class MenuManager : EventHandler
         Selector.SetActive(false);
       }
     }
-	}
+  }
 
   void UpdateSelector()
   {
     var leftStickInfo = InputManager.GetSingleton.GetLeftStickValues();
-
 
     if (MoveDown || (StickTriggered && leftStickInfo.YPos < 0.0f))
     {
@@ -160,10 +178,10 @@ public class MenuManager : EventHandler
       }
     }
 
-        if (Selector)
-        {
-            Selector.transform.position = Menus[CurrentMenu].Buttons[CurrentButton].gameObject.transform.position + ButtonOffset;
-        }
+    if (Selector)
+    {
+        Selector.transform.position = Menus[CurrentMenu].Buttons[CurrentButton].gameObject.transform.position + ButtonOffset;
+    }
   }
 
   void UpdateInput()
@@ -172,6 +190,7 @@ public class MenuManager : EventHandler
     MoveDown       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.S) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.DownArrow); 
     Activate       = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A)         || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Return);
     StickTriggered = InputManager.GetSingleton.IsLeftStickTriggered();
+    Escape = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_START) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape);
   }
 
   public void AddButton(int Menu, MenuButton button)

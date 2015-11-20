@@ -11,8 +11,10 @@ public class Menu_QuitButton : MenuButton
   {
    #if UNITY_EDITOR
     EditorApplication.isPlaying = false;
-   #endif
+#endif
 
+
+     GamestateManager.GetSingleton.AllowQuit = true;
     Application.Quit();
   }
 

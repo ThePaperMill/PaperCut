@@ -17,9 +17,6 @@ public static class EventSystem
 
     static public void EventConnect(object listener, String eventName, Action<EventData> func)
     {
-        if(eventName == "NextActionEvent")
-        Debug.Log(func.Target + " Connecting to " + eventName);
-
         if (!EventList.ContainsKey(listener))
         {
             EventList.Add(listener, new Dictionary<String, List<Action<EventData>>>());
