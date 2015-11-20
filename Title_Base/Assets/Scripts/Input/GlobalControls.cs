@@ -9,6 +9,7 @@ class GlobalControls
     public static List<InputCodes> InteractKeys = new List<InputCodes>{ KeyCode.E, XINPUT_BUTTONS.BUTTON_X, XINPUT_BUTTONS.BUTTON_Y , MOUSE.LEFT};
     public static List<InputCodes> OpenInventoryKeys = new List<InputCodes> { KeyCode.I, XINPUT_BUTTONS.BUTTON_BACK };
     public static List<InputCodes> JumpKeys = new List<InputCodes> { KeyCode.Space, XINPUT_BUTTONS.BUTTON_A};
+    public static List<InputCodes> TabControls = new List<InputCodes> { XINPUT_BUTTONS.BUTTON_X, KeyCode.E };
 }
 
 public enum InputTypes

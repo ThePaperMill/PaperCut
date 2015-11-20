@@ -29,10 +29,14 @@ public class PullTab : MonoBehaviour
 
     Vector3 PosOnStartLock = Vector3.zero;
 
+    Transform Root;
     // Use this for initialization
+    FloatEvent LerpData = new FloatEvent();
     void Start()
     {
         StartingPos = transform.parent.position;
+        //transform.root.GetComponentsInChildren<PullTabChild>();
+        Root = transform.root;
     }
 
     // Update is called once per frame
@@ -40,20 +44,20 @@ public class PullTab : MonoBehaviour
     {
         if (NearPlayer == true && Player != null)
         {
-            if ((InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_X) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.E)) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)
+            if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)
             {
                 print("Pressed a");
 
                 OnLockBody();
 
             }
-            if (InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_X) || InputManager.GetSingleton.IsKeyReleased(KeyCode.E))
+            if (InputManager.GetSingleton.IsInputReleased(GlobalControls.TabControls))
             {
                 print("released a");
                 OnUnlockBody();
             }
 
-            if ((InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_X) || InputManager.GetSingleton.IsKeyDown(KeyCode.E)) && Engaged == true)
+            if (InputManager.GetSingleton.IsInputDown(GlobalControls.TabControls) && Engaged == true)
             {
                 transform.parent.position = Player.transform.position - PosOnStartLock;
 
@@ -86,16 +90,27 @@ public class PullTab : MonoBehaviour
                     }
                 }
 
-                LerpPos = Vector3.Distance(transform.parent.position, StartingPos) / distance;
-
-                var Siblings = transform.root.GetComponentsInChildren<PullTabChild>();
-                foreach (var sib in Siblings)
+                LerpPos = Vector3.SqrMagnitude(transform.parent.position - StartingPos) / (distance * distance);
+                if (LerpData.value != LerpPos)
                 {
-                    
-                    sib.UpdateRot(LerpPos);
-                    print(LerpPos);
-
+                    LerpData.value = LerpPos;
+                    Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
                 }
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+                //#SHAME var Siblings = transform.root.GetComponentsInChildren<PullTabChild>();#SHAME
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+                //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
+
+                //foreach (var sib in Siblings)
+                //{
+
+                //    sib.UpdateRot(LerpPos);
+                //    print(LerpPos);
+
+                //}
 
             }
         }
@@ -113,7 +128,7 @@ public class PullTab : MonoBehaviour
 
             }
             UnengagedTimer -= Time.deltaTime/ LerpBackSpeed;
-            LerpPos = Vector3.Distance(transform.parent.position, StartingPos)* distance;
+            LerpPos = Vector3.SqrMagnitude(transform.parent.position - StartingPos) / (distance * distance);
             //LerpPos -= Time.deltaTime;
             if (LerpPos < 0.0f)
             {
@@ -123,18 +138,13 @@ public class PullTab : MonoBehaviour
             {
                 LerpPos = 0.99f;
             }
-            print(LerpPos);
-            var Siblings = transform.root.GetComponentsInChildren<PullTabChild>();
-            foreach (var sib in Siblings)
+            if(LerpData.value != LerpPos)
             {
-
-                if(LocksIntoPlace == false)
-                {
-                    sib.UpdateRot(LerpPos);
-                }
-                
-
+                LerpData.value = LerpPos;
+                Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
             }
+            
+            
 
         }
     }
@@ -218,7 +228,7 @@ public class PullTab : MonoBehaviour
         if (Player != null)
         {
             UnengagedTimer = 1;
-            print(Time.time);
+            //print(Time.time);
             //I need to make all of my siblings gain box collider
             var boxcolliders = transform.root.GetComponentsInChildren<BoxCollider>();
             foreach (var bCol in boxcolliders)

@@ -38,7 +38,7 @@ public static class Events
     // PlayerSpawnerEvent
     public static readonly String AddSpawnPoint      = "AddSpawnPoint";
 
-    public static readonly String Interact = "InteractEvent";
+    public static readonly String Interact  = "InteractEvent";
 
     public static readonly String WindowActivated = "WindowActivatedEvent";
     public static readonly String ScientistReq    = "ScientistRequestEvent";
@@ -46,5 +46,24 @@ public static class Events
 
     public static readonly String PauseGameEvent  = "PauseGameEvent";
     public static readonly String ResumeGameEvent = "ResumeGameEvent";
+
+    public static readonly String TabUpdatedEvent = "TabUpdated";
 }
 
+public class IntegerEvent : EventData
+{
+    public int value;
+    public IntegerEvent(int intValue = 0)
+    {
+        value = intValue;
+    }
+}
+
+public class FloatEvent : EventData
+{
+    public float value;
+    public FloatEvent(float floatValue = 0.0f)
+    {
+        value = floatValue;
+    }
+}
