@@ -351,7 +351,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     /*************************************************************************/
     public bool IsRightStickTriggered()
     {
-      return (prevState.ThumbSticks.Left.X == 0.0f && prevState.ThumbSticks.Left.Y == 0.0f && (state.ThumbSticks.Left.X != 0.0f || state.ThumbSticks.Left.Y != 0.0f));
+      return (prevState.ThumbSticks.Right.X == 0.0f && prevState.ThumbSticks.Right.Y == 0.0f && (state.ThumbSticks.Right.X != 0.0f || state.ThumbSticks.Right.Y != 0.0f));
     }
 
     /*************************************************************************/

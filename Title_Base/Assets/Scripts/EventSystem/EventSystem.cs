@@ -116,24 +116,20 @@ public static class EventSystem
         }
         var functionList = listeningObj[eventName];
 
-        if (eventName == "NextActionEvent")
-        {
-          foreach (var whatever in functionList)
-            Debug.Log("here is what is listening to next action " + whatever.Target);
-        }
+        //if (eventName == "NextActionEvent")
+        //{
+        //  foreach (var whatever in functionList)
+        //    Debug.Log("here is what is listening to next action " + whatever.Target);
+        //}
 
 
         for (var i = 0; i < functionList.Count(); ++i)
         {
             var func = functionList[i];
 
-            if (func != null)
+            if (func.Method.IsStatic || !func.Target.Equals(null))
             {
-                if (func.Target == null || func.Target.Equals(null))
-                {
-                    Debug.Log(eventName + " wat " + func.Method);
-                    //continue;
-                }
+                
 
                 func(eventData);
             }

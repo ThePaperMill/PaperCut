@@ -18,15 +18,20 @@ public class SplashScreenLogic : MonoBehaviour
   Image SplashImage = null;
 
 	// Use this for initialization
-	void Start () 
-  {
-    SplashImage = GetComponent<Image>();
-
-	}
+    void Start () 
+    {
+        SplashImage = GetComponent<Image>();
+        Cursor.visible = false;
+    }
 	
 	// Update is called once per frame
   void Update () 
   {
+    if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
+    {
+      Application.LoadLevel(LevelToLoad);
+    }
+
     TransitionTimer += Time.deltaTime;
 
     if (TransitionTimer > ScreenTime)

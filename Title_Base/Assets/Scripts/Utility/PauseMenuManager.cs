@@ -15,7 +15,7 @@ public class PauseMenuManager : EventHandler
   {
     GtxtObj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("GTexture"));
 
-    GtxtObj.transform.position = new Vector3();
+    GtxtObj.transform.position = new Vector3(0,0,-50);
 
     alpha = 0.0f;
 

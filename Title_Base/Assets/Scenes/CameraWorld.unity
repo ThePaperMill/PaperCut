@@ -98,7 +98,7 @@ GameObject:
   - 92: {fileID: 171809029}
   m_Layer: 5
   m_Name: TextCamera
-  m_TagString: Untagged
+  m_TagString: HudCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,9 +193,49 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11448602, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}
+    - {fileID: 11428438, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &615815981 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 186406, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}
+  m_PrefabInternal: {fileID: 615815980}
+--- !u!114 &615815982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 615815981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b082056a793cf045a2750471f56c255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 1
+  Overlay: {fileID: 161060, guid: ea7a94770a5acf04087102c1d34f8de3, type: 2}
+  CameraTag: HudCamera
+--- !u!1 &615815983 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 185028, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}
+  m_PrefabInternal: {fileID: 615815980}
+--- !u!114 &615815984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 615815983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b082056a793cf045a2750471f56c255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuNumber: 0
+  Priority: 2
+  Overlay: {fileID: 142254, guid: 5e29ce52f8434f34c8c4c050d805974b, type: 2}
+  CameraTag: HudCamera
 --- !u!4 &615815991 stripped
 Transform:
   m_PrefabParentObject: {fileID: 466882, guid: b62f7a6a905b71c4da31a0d1cbca3c14, type: 2}

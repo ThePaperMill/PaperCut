@@ -49,5 +49,7 @@ public static class Events
 
     public static readonly String InitiateQuitEvent = "InitiateQuitEvent";
     public static readonly String CancelQuitEvent   = "CancelQuitEvent";
+    public static readonly String OverlayActive     = "OverlayActiveEvent";
+    public static readonly String CancelOverlay     = "CancelOverlayEvent";
 }
 
