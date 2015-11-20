@@ -111,7 +111,6 @@ namespace Assets.Scripts.ConversationSystem
         {
             if (Engaged)
             {
-              Debug.Log("got the event moving on");
                 NextAction();
             }
         }

@@ -234,11 +234,10 @@ public class CustomDynamicController : MonoBehaviour
         // advance dialog
         if (MenuActive)
         {
-            //if(InteractPressed == true)
-            //{
-            //    Debug.Log("Sending next action event from character controller");
-            //    EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
-            //}
+            if (InteractPressed == true)
+            {
+                EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
+            }
 
             return;
         }
