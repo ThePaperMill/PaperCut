@@ -50,8 +50,10 @@ public class MeshCombine : MonoBehaviour
 
         for (int loop = 0; loop < children.Length; ++loop)
         {
+            print(children[loop].name);
             if (this != children[loop])
             {
+                print(this.name);
                 children[loop].CombineImmediately();
             }
         }
