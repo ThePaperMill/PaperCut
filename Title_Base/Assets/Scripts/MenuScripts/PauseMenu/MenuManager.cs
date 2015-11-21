@@ -90,11 +90,11 @@ public class MenuManager : EventHandler
       EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuitEvent);
       EventSystem.GlobalHandler.Connect(Events.OverlayActive, OnOverlayActive);
 
-        Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
+      Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
       if(MainMenu)
-        {
-            ActivateMenu(0);
-        }
+      {
+          ActivateMenu(0);
+      }
   }
 
     void OnOverlayActive(EventData data)
