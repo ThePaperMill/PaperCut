@@ -304,20 +304,22 @@ public class CustomDynamicController : MonoBehaviour
         MoveDirection = Vector3.ProjectOnPlane(MoveDirection, GroundNormal).normalized;
 
         // we'll try to round the movement values here, so we don't drift so much.
-       // RoundMovement();
+        // RoundMovement();
 
-        // if we are idle, add force otherwise,
+        //if we are idle, add force otherwise,
         if (State == PlayerState.Idle)
         {
             RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
         }
         else
         {
-          // Move in the given direction with our current max speed
-          RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
+            // Move in the given direction with our current max speed
+            RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
         }
 
-        if(StickToSlope && !Jumping && State == PlayerState.Idle)
+        //transform.position += MoveDirection * maxSpeed * Time.smoothDeltaTime;
+
+        if (StickToSlope && !Jumping && State == PlayerState.Idle)
         {
           if (GroundNormal != WorldUp)
           {
