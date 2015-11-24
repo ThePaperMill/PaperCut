@@ -319,6 +319,8 @@ public class CustomDynamicController : MonoBehaviour
 
         //transform.position += MoveDirection * maxSpeed * Time.smoothDeltaTime;
 
+        //print(MoveDirection * maxSpeed * Time.smoothDeltaTime);
+
         if (StickToSlope && !Jumping && State == PlayerState.Idle)
         {
           if (GroundNormal != WorldUp)
@@ -632,6 +634,8 @@ public class CustomDynamicController : MonoBehaviour
     { 
         // Returns the angle between the surface normal and the up vector of the character
         float cosTheta = Vector3.Dot(surfaceNormal, WorldUp);
+
+        cosTheta = Mathf.Clamp(cosTheta, -1, 1);
 
         float radians = Mathf.Acos(cosTheta);
 
