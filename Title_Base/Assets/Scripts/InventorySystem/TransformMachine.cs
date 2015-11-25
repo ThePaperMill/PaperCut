@@ -26,6 +26,12 @@ public class TransformMachine : EventHandler
     GameObject LBolt     = null;
     GameObject Particle  = null;
 
+    int transformations = 0;
+    public AudioClip TransformSound = null;
+
+    float Timer = 0.0f;
+
+    bool Triggered = false;
 	// Use this for initialization
     void Start () 
     {
@@ -65,6 +71,13 @@ public class TransformMachine : EventHandler
         Action.Call(test, CreateParticle);
         Action.Delay(test, 0.45f);
         Action.Call(test, CreateNewItem);
+        Action.Delay(test, 0.45f);
+        Action.Call(test, MachineFinished);
+    }
+
+    void MachineFinished()
+    {
+        EventSystem.GlobalHandler.DispatchEvent(Events.MachineFinisehd);
     }
 
     void CreateLightningBolt()
@@ -75,6 +88,15 @@ public class TransformMachine : EventHandler
 
     void CreateParticle()
     {
+        AudioSource tempaudio = GetComponent<AudioSource>();
+
+        if (tempaudio && TransformSound)
+        {
+            tempaudio.Stop();
+            tempaudio.PlayOneShot(TransformSound);
+        }
+
+
         GameObject.Destroy(OldObject);
 
         if (ParticleEffect)
@@ -118,6 +140,7 @@ public class TransformMachine : EventHandler
     void CreateNewItem()
     {
         GameObject Temp = null;
+        transformations++;
 
         //if the item is cardboard, create the real version
         if (Item.CurStatus == ITEM_STATUS.IS_CARDBOARD)
@@ -166,5 +189,20 @@ public class TransformMachine : EventHandler
   void Update () 
   {
     grp.Update(Time.deltaTime);
-	}
+
+    if(transformations >= 2 && !Triggered)
+    {
+        Triggered = true;
+        EventSystem.GlobalHandler.DispatchEvent(Events.EndTheGame);
+        GamestateManager.GetSingleton.CurState = GAME_STATE.GS_CINEMATIC;
+    }
+    else if(Triggered)
+    {
+        Timer += Time.deltaTime;
+        if(Timer > 3.5f)
+        {
+            Application.LoadLevel("ScrollingCredits");
+        }
+    }
+  }
 }

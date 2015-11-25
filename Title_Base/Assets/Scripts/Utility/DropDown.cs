@@ -17,6 +17,8 @@ public class DropDown : MonoBehaviour
     ActionGroup grp = new ActionGroup();
     Vector3 StartingPosition = new Vector3();
 
+    public float Duration = 1.0f;
+
     // Use this for initialization
     void Start()
     {
@@ -36,8 +38,6 @@ public class DropDown : MonoBehaviour
         {
             if(UseLocalPosition)
             {
-                ActionSequence temp = Action.Sequence(grp);
-
                 Vector3 pos = StartingPosition + RaisePosition;
 
                 if (MaintainZPos)
@@ -45,22 +45,36 @@ public class DropDown : MonoBehaviour
 
                 transform.localPosition = pos;
             }
+            else
+            {
+
+
+                Vector3 pos = StartingPosition + RaisePosition;
+
+                if (MaintainZPos)
+                    pos = new Vector3(pos.x, pos.y, StartingPosition.z);
+
+                transform.localPosition = pos;
+
+            }
         }
     }
 
     void OnLowerEvent(EventData data)
     {
+        print("wsasdfasdfa");
+
         ActionSequence temp = Action.Sequence(grp);
 
         Vector3 pos = StartingPosition;
 
         if (UseLocalPosition)
         {
-            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), pos, 1.0f, Ease.Linear);
+            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), pos, Duration, Ease.Linear);
         }
         else
         {
-            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.position), pos, 1.0f, Ease.Linear);
+            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.position), pos, Duration, Ease.Linear);
         }
     }
 
@@ -75,11 +89,11 @@ public class DropDown : MonoBehaviour
 
         if (UseLocalPosition)
         {
-            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), pos, 1.0f, Ease.Linear);
+            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), pos, Duration, Ease.Linear);
         }
         else
         {
-            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.position), pos, 1.0f, Ease.Linear);
+            Action.Property(temp, this.gameObject.transform.GetProperty(o => o.position), pos, Duration, Ease.Linear);
         }
     }
 

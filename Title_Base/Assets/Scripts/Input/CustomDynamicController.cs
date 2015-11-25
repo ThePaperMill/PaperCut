@@ -229,7 +229,7 @@ public class CustomDynamicController : MonoBehaviour
     void LateUpdate()
     {
         // if the character controller is not active, do nothing
-        if (Active == false || GamestateManager.GetSingleton.IsPaused == true)
+        if (Active == false || GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
         {
             return;
         }
