@@ -40,6 +40,8 @@ public class InteractManager : MonoBehaviour
             Player = GameObject.FindGameObjectWithTag("Player");
         }
 
+        AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
+
         //grab the position of the closest object
         GameObject closestobj = FindClosestObjectToPlayer();
 		//if(closestobj){print (closestobj.name + " is closest");}
@@ -94,7 +96,7 @@ public class InteractManager : MonoBehaviour
 		}
 		
 		// Remove all of the null objects (done here in case objects are destroyed in level)
-		AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
+
     //print ("Can talk with " + AllInteractableObjects.Count + " people.");
   }
 
@@ -146,6 +148,13 @@ public class InteractManager : MonoBehaviour
 		for(int i = 0; i < AllInteractableObjects.Count; ++i)
 		{
 			GameObject obj = AllInteractableObjects[i];
+
+            if(!obj)
+            {
+                print("God Dammit");
+                continue;
+            }
+
 			float dist = Vector3.Distance(obj.transform.position, Player.transform.position);
 			
 			if(dist < bestDist)
