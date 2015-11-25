@@ -60,6 +60,9 @@ public static class Events
     public static readonly String CancelQuitEvent   = "CancelQuitEvent";
     public static readonly String OverlayActive     = "OverlayActiveEvent";
     public static readonly String CancelOverlay     = "CancelOverlayEvent";
+    public static readonly String InteractedWith    = "InteractedWithEvent";
+    public static readonly String MachineFinisehd   = "MachineFinishedEvent";
+    public static readonly String EndTheGame        = "EndGameEvent";
 }
 
 public class IntegerEvent : EventData

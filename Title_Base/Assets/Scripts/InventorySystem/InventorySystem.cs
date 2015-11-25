@@ -416,6 +416,11 @@ public class InventorySystem : Singleton<InventorySystem>
         {
             c.enabled = false;
         }
+        var RTest = Temp.GetComponent<Rigidbody>();
+        if(RTest)
+        {
+            Destroy(RTest);
+        }
 
         // add the item logic script
         Temp.AddComponent<ItemLogic>();
