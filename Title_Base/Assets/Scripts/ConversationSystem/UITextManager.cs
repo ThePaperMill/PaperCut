@@ -1,4 +1,10 @@
-﻿using ActionSystem;
+﻿/****************************************************************************/
+/*!
+    \author Joshua Biggs  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using ActionSystem;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
