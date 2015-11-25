@@ -32,6 +32,7 @@ GameObject:
   - 23: {fileID: 2359946}
   - 54: {fileID: 5405974}
   - 114: {fileID: 11494760}
+  - 82: {fileID: 8251664}
   m_Layer: 0
   m_Name: DynamicPlayer
   m_TagString: Player
@@ -141,6 +142,76 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!82 &8251664
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178700}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9549700
 Animator:
   serializedVersion: 3
@@ -182,6 +253,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27917e4d2c7713f499034fb190ede6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_WalkSoundCycle: 20
+  m_RunSoundCycle: 14
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: 2d81343aaa04d2541b6fc68ef074cae8, type: 3}
+  - {fileID: 8300000, guid: d5d2c3e27f879a140b2cfe2c267621ed, type: 3}
+  m_JumpSound: {fileID: 8300000, guid: 82904e4bdaa46e842af19992553e7d19, type: 3}
+  m_LandSound: {fileID: 8300000, guid: 7eaef77c61b26e944a62286b4335c66c, type: 3}
+  m_StepInterval: 0
   Active: 1
   StickToSlope: 0
   moveSpeed: 5
@@ -219,6 +298,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: m_FootstepSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
       value: 65
       objectReference: {fileID: 0}
@@ -245,6 +328,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxUpwardVelocity
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_FootstepSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d81343aaa04d2541b6fc68ef074cae8, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_FootstepSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d5d2c3e27f879a140b2cfe2c267621ed, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_JumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 82904e4bdaa46e842af19992553e7d19, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LandSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7eaef77c61b26e944a62286b4335c66c, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_WalkSoundCycle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_RunSoundCycle
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
