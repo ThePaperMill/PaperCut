@@ -132,12 +132,29 @@ public class TransformMachine : EventHandler
 
         Temp.name = ("Item_" + Item.ItemName);
 
+        GameObject CollectableBase = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("CollectableBase"));
+
+        CollectableObject CO = CollectableBase.GetComponent<CollectableObject>();
+        CO.ItemToGive = Item;
+        
+        if(Item.CurStatus == ITEM_STATUS.IS_CARDBOARD)
+        {
+          CO.ItemToGive.CurStatus = ITEM_STATUS.IS_REAL;
+        }
+        else
+        {
+          CO.ItemToGive.CurStatus = ITEM_STATUS.IS_CARDBOARD;
+        }
+
+        CollectableBase.transform.position = Temp.transform.position;
+        CollectableBase.transform.parent = Temp.transform;
+
         //disable all other components
-        //var comps = Temp.GetComponents<MonoBehaviour>();
-        //foreach (var c in comps)
-        //{
-        //    c.enabled = false;
-        //}
+        var comps = Temp.GetComponents<MonoBehaviour>();
+        foreach (var c in comps)
+        {
+            c.enabled = false;
+        }
 
         Temp.transform.localPosition = ItemPosition;
         Temp.transform.position += new Vector3(0, 0, 0.5f);

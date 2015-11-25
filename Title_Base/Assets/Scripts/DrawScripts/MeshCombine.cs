@@ -32,6 +32,8 @@ public class MeshCombine : MonoBehaviour
 
     private void Start()
     {
+      print("wafa");
+
         if (combineOnStart && waitFrame == 0)
         {
             CombineImmediately();
