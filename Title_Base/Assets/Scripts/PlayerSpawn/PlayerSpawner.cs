@@ -115,9 +115,7 @@ public class PlayerSpawner : EventHandler
 
             Vector3 spawnPos = ChoosePosition();
 
-          GameObject spawnedPlayer = new GameObject();
-      
-          spawnedPlayer = (GameObject)GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
+            GameObject spawnedPlayer = (GameObject)GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity);
 
           if(SetCameraTarget)
           {

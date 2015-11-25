@@ -15,18 +15,39 @@ using ActionSystem;
 public class TransformMachine : EventHandler
 {
     public GameObject LightningBoltPrefab = null;
+    public GameObject ParticleEffect = null;
+   
     private ActionGroup grp = new ActionGroup();
     Vector3 ItemPosition = new Vector3();
     ItemInfo Item = null;
+
     GameObject OldObject = null;
     GameObject NewObject = null;
-    GameObject LBolt = null;
+    GameObject LBolt     = null;
+    GameObject Particle  = null;
 
 	// Use this for initialization
     void Start () 
     {
         EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
-        ItemPosition = transform.position - new Vector3(0,2.0f,0);
+
+        Ray testRay = new Ray();
+
+        testRay.origin = transform.position;
+        testRay.direction = Vector3.down;
+        RaycastHit RayResult = new RaycastHit();
+        
+        bool check = Physics.Raycast(testRay, out RayResult, 10);
+
+        if (check && false)
+        {
+            print(RayResult.collider.gameObject.name);
+            ItemPosition = transform.position - new Vector3(0, 0, RayResult.distance);
+        }
+        else
+        { 
+            ItemPosition = transform.position - new Vector3(0, 2.1f, 0);
+        }
     }
 
     void OnTransformItem(EventData eventData)
@@ -41,6 +62,8 @@ public class TransformMachine : EventHandler
         Action.Delay(test, 1.5f);
         Action.Call(test, CreateLightningBolt);
         Action.Delay(test, 0.5f);
+        Action.Call(test, CreateParticle);
+        Action.Delay(test, 0.45f);
         Action.Call(test, CreateNewItem);
     }
 
@@ -48,6 +71,18 @@ public class TransformMachine : EventHandler
     {
         LBolt = (GameObject)Instantiate(LightningBoltPrefab,transform.position, Quaternion.identity);
         LBolt.AddComponent<Rigidbody>();
+    }
+
+    void CreateParticle()
+    {
+        GameObject.Destroy(OldObject);
+
+        if (ParticleEffect)
+        {
+            Instantiate(ParticleEffect, ItemPosition, Quaternion.identity);
+            Instantiate(ParticleEffect, ItemPosition + new Vector3(0,1.0f,0), Quaternion.identity);
+            Instantiate(ParticleEffect, ItemPosition + new Vector3(0,-1.0f,0), Quaternion.identity);
+        }
     }
 
     void CreateOldItem()
@@ -82,8 +117,6 @@ public class TransformMachine : EventHandler
 
     void CreateNewItem()
     {
-        GameObject.Destroy(OldObject);
-
         GameObject Temp = null;
 
         //if the item is cardboard, create the real version
@@ -94,20 +127,20 @@ public class TransformMachine : EventHandler
         // if the item is real, create the cardboard version.
         else
         {
-            Temp = GameObject.Instantiate(Item.RealItemPrefab);
+            Temp = GameObject.Instantiate(Item.CardboardItemPrefab);
         }
 
         Temp.name = ("Item_" + Item.ItemName);
 
+        //disable all other components
+        //var comps = Temp.GetComponents<MonoBehaviour>();
+        //foreach (var c in comps)
+        //{
+        //    c.enabled = false;
+        //}
+
         Temp.transform.localPosition = ItemPosition;
         Temp.transform.position += new Vector3(0, 0, 0.5f);
-
-        // disable all other components
-        var comps = Temp.GetComponents<MonoBehaviour>();
-        foreach (var c in comps)
-        {
-            c.enabled = false;
-        }
 
         NewObject = Temp;
     }

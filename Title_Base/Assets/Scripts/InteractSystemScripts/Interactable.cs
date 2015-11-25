@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour
 {
 	public GameObject LevelSettings;
 	public GameObject InteractCollider;
+    GameObject childRigid = null;
 
 	//InteractSizeScalar is how big the bounding box of the collidable detection object is.
 	public float InteractSizeScalar = 1.5f;
@@ -38,7 +39,7 @@ public class Interactable : MonoBehaviour
 			print("ERROR: LEVELSETTINGS DOES NOT HAVE INTERACTMANAGER COMPONENT. Adding to component list");
 		}
 		
-    GameObject childRigid = null;
+        childRigid = null;
 
 		//Create a new interactable ghost collider for this object at it's position. if the player touches this, then this object can be interacted with
 		if(InteractCollider)
@@ -58,7 +59,9 @@ public class Interactable : MonoBehaviour
       public void OnInteractEvent(EventData eventData)
       {
         this.gameObject.DispatchEvent(Events.EngageConversation);
-      }
+        this.gameObject.DispatchEvent(Events.InteractedWith);
+    }
+
 
 	public bool GetIsInInteraction()
 	{
@@ -78,6 +81,9 @@ public class Interactable : MonoBehaviour
   void OnDestroy()
   {
     this.gameObject.Disconnect(Events.Interact, OnInteractEvent);
+
+    if (childRigid)
+        GameObject.Destroy(childRigid);
   }
 
 }
