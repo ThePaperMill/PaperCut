@@ -22,7 +22,7 @@ public class CollectableObject :MonoBehaviour
         EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
 
         //transform.parent
-        if(transform.parent.gameObject)
+        if(transform.parent && transform.parent.gameObject != null)
           GameObject.Destroy(transform.parent.gameObject);
         
         GameObject.Destroy(gameObject);
