@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   CreditsScroll.cs
+\author Steven Gallwas
+\brief  
+    Makes the credits scroll.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class CreditsScroll : MonoBehaviour 

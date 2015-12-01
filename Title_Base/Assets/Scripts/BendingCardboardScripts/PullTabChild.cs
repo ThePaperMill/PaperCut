@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   PullTabChild.cs
+\author Ian Aemmer and Joshua Biggs.
+\brief  
+    Description of script
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class PullTabChild : MonoBehaviour {

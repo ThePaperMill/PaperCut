@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   OverlayButton.cs
+\author Steven Gallwas.cs
+\brief  
+    Triggers and overlay.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class OverlayButton : MenuButton

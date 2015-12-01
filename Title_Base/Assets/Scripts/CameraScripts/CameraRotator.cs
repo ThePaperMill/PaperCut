@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   CameraRotator.cs
+\author Ian Aemmer
+\brief  
+    rotates the camera.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class CameraRotator : MonoBehaviour {

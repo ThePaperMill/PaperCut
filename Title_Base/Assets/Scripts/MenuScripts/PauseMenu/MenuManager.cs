@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   MenuManager.cs
+\author Steven Gallwas
+\brief  
+    Manages the menu.  Should never have more than 1.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

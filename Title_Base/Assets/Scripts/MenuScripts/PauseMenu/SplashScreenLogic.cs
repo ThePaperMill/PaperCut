@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   SplashScreenLogic.cs
+\author Steven Gallwas
+\brief  
+    Controls the transitions between the splash screens.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;

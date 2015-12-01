@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   RigidMassAlter.cs
+\author Ian Aemmer
+\brief  
+    Alters the mass of a rigid body.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class RigidMassAlter : MonoBehaviour 

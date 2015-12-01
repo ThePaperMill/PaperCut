@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   DropDown.cs
+\author Steven Gallwas 
+\brief  
+	makes an object move up or down based on events.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 using System.Collections.Generic;
