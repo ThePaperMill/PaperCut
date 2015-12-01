@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   Menu_QuitButton.cs
+\author Steven Gallwas 
+\brief  
+    initiates the quit sequence
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 #if UNITY_EDITOR

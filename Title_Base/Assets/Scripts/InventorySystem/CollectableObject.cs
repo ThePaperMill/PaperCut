@@ -1,4 +1,15 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+\file   CollectableObject.cs
+\author Steven Gallwas
+\brief  
+    Logic for an object that can be picked up by the player.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

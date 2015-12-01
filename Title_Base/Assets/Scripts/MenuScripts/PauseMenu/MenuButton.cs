@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   MenuButton.cs
+\author Steven Gallwas 
+\brief  
+    Base Menu Button.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class MenuButton : MonoBehaviour 

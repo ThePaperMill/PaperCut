@@ -1,6 +1,6 @@
 ﻿/****************************************************************************/
 /*!
-\file   SimpleCharacterController.cs
+\file   Billboard.cs
 \author Steven Gallwas
 \brief  
     This file contains the implementation to make an object always look at the

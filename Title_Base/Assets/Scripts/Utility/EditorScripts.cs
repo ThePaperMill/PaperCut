@@ -1,6 +1,6 @@
 ﻿/****************************************************************************/
 /*!
-\file   SimpleCharacterController.cs
+\file   EditorScrips
 \author Steven Gallwas
 \brief  
     This file contains the implementation for some simple editor scrips.

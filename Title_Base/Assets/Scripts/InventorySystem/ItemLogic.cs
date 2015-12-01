@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   ItemLogic.cs
+\author Steven Gallwas
+\brief  
+    Moves each item in the player's inventory.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 

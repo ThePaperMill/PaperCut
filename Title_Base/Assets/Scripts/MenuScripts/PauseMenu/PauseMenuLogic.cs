@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   PauseMenuLogic.cs
+\author Steven Gallwas
+\brief  
+    Drops down the pause menu.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 

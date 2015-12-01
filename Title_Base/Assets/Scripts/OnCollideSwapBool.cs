@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   OnCollideSwapBool.cs
+\author Ian Aemmer
+\brief  
+    read name.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class OnCollideSwapBool : MonoBehaviour {
