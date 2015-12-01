@@ -53,5 +53,16 @@ namespace Assets.Scripts.ConversationSystem
         {
             return HasTalkedToDuck;
         }
+
+        static private bool HasUsedCrate = false;
+        static public bool UsedCrate()
+        {
+            return !HasUsedCrate;
+        }
+        static public bool UseCrate()
+        {
+            HasUsedCrate = true;
+            return HasUsedCrate;
+        }
     }
 }
