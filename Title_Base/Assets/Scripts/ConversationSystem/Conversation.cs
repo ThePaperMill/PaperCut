@@ -26,10 +26,10 @@ namespace Assets.Scripts.ConversationSystem
         public System.Action Test;
 
         private GameObject ConversationWindow;
-        public double WindowEaseDuration = 1.5;
-        public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
-        public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
-        public Vector3 WindowRotation = new Vector3(0, 0, 0);
+        //public double WindowEaseDuration = 1.5;
+        //public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
+        //public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
+        //public Vector3 WindowRotation = new Vector3(0, 0, 0);
         public AudioClip SoundClip = null;
         public float AudioDelay = 0.5f;
 
@@ -45,7 +45,7 @@ namespace Assets.Scripts.ConversationSystem
             {
               CurrentAction.Disconnect(Events.NextAction, OnNextAction);
             }
-
+            
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
 
@@ -75,13 +75,14 @@ namespace Assets.Scripts.ConversationSystem
             
             if(ConversationWindow == null)
             {
-                ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
-                ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
-                ConversationWindow.transform.Rotate(WindowRotation);
-                var comp = ConversationWindow.GetComponent<UITextManager>();
-                comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
-                comp.Connect();
-                comp.EaseTime = WindowEaseDuration;
+                ConversationWindow = UITextManager.ConversationText.gameObject;
+                //    ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
+                //    ConversationWindow.transform.position = gameObject.transform.position + WindowOffsetInitial;
+                //    ConversationWindow.transform.Rotate(WindowRotation);
+                //    var comp = ConversationWindow.GetComponent<UITextManager>();
+                //    comp.FinalPos = gameObject.transform.position + WindowOffsetFinal;
+                //    comp.Connect();
+                //    comp.EaseTime = WindowEaseDuration;
             }
             
             if (!CurrentAction)

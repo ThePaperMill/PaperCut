@@ -14,7 +14,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     class UITextManager : EventHandler
     {
-        //static public UITextManager ConversationText;
+        static public UITextManager ConversationText;
 
         private TextMesh SpriteText;
         public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -30,8 +30,8 @@ namespace Assets.Scripts.ConversationSystem
         // Use this for initialization
         public UITextManager()
         {
-            
 
+            ConversationText = this;
             
         }
 
@@ -41,7 +41,7 @@ namespace Assets.Scripts.ConversationSystem
             //TextBackground = (GameObject)Instantiate(TextBackground, this.gameObject.transform.position + InitialTextOffsett, new Quaternion());
             //TextBackground.transform.localScale = InitialTextScale;
             //UITextManager.ConversationText = this;
-            
+            Connect();
 
 
 
@@ -63,21 +63,21 @@ namespace Assets.Scripts.ConversationSystem
             grp.Clear();
             var seq = ActionSystem.Action.Sequence(grp);
             
-            
+
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, EaseTime, Curve);
         }
 
         public void Disappear()
         {
-          EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
-          EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
-          EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+          //EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
+          //EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
+          //EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
 
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
             
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, EaseTime, Curve);
-            Action.Call(seq, gameObject.Destroy);
+            //Action.Call(seq, gameObject.Destroy);
         }
 
         public void UpdateText(string newText)
@@ -102,7 +102,7 @@ namespace Assets.Scripts.ConversationSystem
         private void Destroy(EventData data)
         {
             //EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, Destroy);
-            gameObject.Destroy();
+            //gameObject.Destroy();
         }
 
         public void OnDeactivateWindowEvent(EventData eventData)
