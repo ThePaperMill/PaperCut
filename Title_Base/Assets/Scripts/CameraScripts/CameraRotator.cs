@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   CameraTotater.cs
+\author Ian aemmer
+\brief  
+    this does stuff to the camera.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
+
 using System.Collections;
 
 public class CameraRotator : MonoBehaviour {
@@ -20,8 +31,8 @@ public class CameraRotator : MonoBehaviour {
 
         if(Player == null)
         {
-            print("Fix this");
-            print("Search level for an object with tag player");
+            //print("Fix this");
+            //print("Search level for an object with tag player");
             Player = GameObject.FindGameObjectWithTag("Player");
                 //if it exists, set that player to that
             if(Player != null)

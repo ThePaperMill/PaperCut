@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   RotateTowards.cs
+\author Steven Gallwas
+\brief  
+	makes things rotate to a given angle.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class RotateTowards : MonoBehaviour 

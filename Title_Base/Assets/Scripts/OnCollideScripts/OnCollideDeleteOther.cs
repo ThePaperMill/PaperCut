@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   OnCollideDeleteOther.cs
+\author Ian Aemmer
+\brief  
+    Destroy objects on collide.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class OnCollideDeleteOther : MonoBehaviour {

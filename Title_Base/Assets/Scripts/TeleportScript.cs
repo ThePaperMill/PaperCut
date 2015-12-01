@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   TeleportScript.cs
+\author Ian Aemmer
+\brief  
+    Teleport Cheats.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class TeleportScript : MonoBehaviour {

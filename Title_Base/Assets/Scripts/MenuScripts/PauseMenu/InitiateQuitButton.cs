@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   InitiateQuitButton.cs
+\author Steven Gallwas 
+\brief  
+    Imitates the quit sequence.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class InitiateQuitButton : MenuButton

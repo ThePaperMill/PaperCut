@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   MakeInvisible.cs
+\author Steven Gallwas
+\brief  
+    Makes things invisible.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(MeshRenderer))]
