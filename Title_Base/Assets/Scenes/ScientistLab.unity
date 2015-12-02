@@ -747,6 +747,8 @@ MonoBehaviour:
     CardboardItemPrefab: {fileID: 160750, guid: e7f8487af6a2abe48be65c9f891c77df,
       type: 2}
     RealItemPrefab: {fileID: 154072, guid: 1b4ac48bdd7e607448d7e61531f85a86, type: 2}
+    RealItemName: 
+    CardboardItemName: 
 --- !u!4 &178527775
 Transform:
   m_ObjectHideFlags: 0
@@ -1439,6 +1441,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 48
       objectReference: {fileID: 0}
+    - target: {fileID: 10239176, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Thats how it started...'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
   m_IsPrefabParent: 0
@@ -1798,8 +1806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: "Quick Morty, \nput it back into the machine!"
-  NextAction: {fileID: 1665575925}
+  Text: "Quick, \nput it back into the machine!"
+  NextAction: {fileID: 1081187060}
 --- !u!1001 &424056932
 Prefab:
   m_ObjectHideFlags: 0
@@ -3097,7 +3105,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456576, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: m_RootOrder
-      value: 23
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 11435634, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: PreviousLevel.Array.data[0]
@@ -3106,6 +3114,10 @@ Prefab:
     - target: {fileID: 11435634, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: PreviousLevel.Array.data[1]
       value: MilestonePretest
+      objectReference: {fileID: 0}
+    - target: {fileID: 11435634, guid: 11b7512affe07e643893f545dde89d20, type: 2}
+      propertyPath: IsDefault
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b7512affe07e643893f545dde89d20, type: 2}
@@ -3914,6 +3926,51 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 422044, guid: fab9639e4e8cc734cbfb978adfbe1f36, type: 2}
   m_PrefabInternal: {fileID: 1077173720}
+--- !u!1 &1081187058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1081187059}
+  - 114: {fileID: 1081187060}
+  m_Layer: 0
+  m_Name: RequestItem2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1081187059
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081187058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0174337868, y: .0266882572, z: -.0258758869}
+  m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
+  m_Children:
+  - {fileID: 1803647222}
+  - {fileID: 1143122290}
+  m_Father: {fileID: 1312897463}
+  m_RootOrder: 7
+--- !u!114 &1081187060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1081187058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a085f7649a9c8ca419f511ddc29681bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scientist: {fileID: 445578028}
+  NextIfTrue: {fileID: 0}
+  NextIfFalse: {fileID: 1143122291}
+  NextIfNone: {fileID: 1803647223}
 --- !u!1001 &1082152321
 Prefab:
   m_ObjectHideFlags: 0
@@ -4168,6 +4225,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 1136504307}
+--- !u!1 &1143122289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1143122290}
+  - 114: {fileID: 1143122291}
+  m_Layer: 0
+  m_Name: falseItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1143122290
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1143122289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1081187059}
+  m_RootOrder: 1
+--- !u!114 &1143122291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1143122289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: I have no idea what you're showing me.
+  NextAction: {fileID: 0}
 --- !u!1001 &1179873602
 Prefab:
   m_ObjectHideFlags: 0
@@ -4293,6 +4391,14 @@ Prefab:
     - target: {fileID: 11448432, guid: 6023e2e8dc3563e45a2b889d0131d454, type: 2}
       propertyPath: ItemToGive.CurStatus
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448432, guid: 6023e2e8dc3563e45a2b889d0131d454, type: 2}
+      propertyPath: ItemToGive.CardboardItemName
+      value: Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448432, guid: 6023e2e8dc3563e45a2b889d0131d454, type: 2}
+      propertyPath: ItemToGive.RealItemName
+      value: Crate?
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6023e2e8dc3563e45a2b889d0131d454, type: 2}
@@ -6496,6 +6602,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 407082, guid: 6e5e33d1b9cbdf744a87e4632547a456, type: 2}
   m_PrefabInternal: {fileID: 1797121438}
+--- !u!1 &1803647221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1803647222}
+  - 114: {fileID: 1803647223}
+  m_Layer: 0
+  m_Name: NoItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1803647222
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1803647221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1081187059}
+  m_RootOrder: 0
+--- !u!114 &1803647223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1803647221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: "Don't just stand there, \ngive me the crate!"
+  NextAction: {fileID: 0}
 --- !u!1 &1804316964
 GameObject:
   m_ObjectHideFlags: 0

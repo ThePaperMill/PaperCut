@@ -52,6 +52,11 @@ public class PlayerSpawner : EventHandler
 
     void AddSpawnPoint(PlayerSpawnPoint Pt)
     {
+        if(Pt.IsDefault)
+        {
+            DefaultPosition = Pt.Position;
+        }
+
         SpawnPoints.Add(Pt);
     }
 

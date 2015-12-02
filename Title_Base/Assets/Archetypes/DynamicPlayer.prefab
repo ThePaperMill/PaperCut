@@ -297,16 +297,17 @@ MonoBehaviour:
   m_WalkSoundCycle: 0
   m_RunSoundCycle: 0
   m_FootstepSounds: []
-  m_JumpSound: {fileID: 0}
-  m_LandSound: {fileID: 0}
+  m_JumpSound: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
+  m_LandSound: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_StepInterval: 0
   Active: 1
+  UseForces: 1
   StickToSlope: 1
   moveSpeed: 5
   MaxSpeed: 1.5
   MovePower: 3.5
   AirControl: .150000006
-  WalkableSlopeAngle: 45
+  WalkableSlopeAngle: 60
   InitialJumpVelocity: 4
   AdditiveJumpVelocity: 2
   AdditiveJumpTime: 0
@@ -314,7 +315,10 @@ MonoBehaviour:
   GroundContactDistance: .00999999978
   AdditionalGravity: 0
   MaxUpwardVelocity: 4
+  InAirFromJump: 0
+  VelocityOfGround: {x: 0, y: 0, z: 0}
   MoveDirection: {x: 0, y: 0, z: 0}
+  PlayerModel: {fileID: 0}
   RawInput: {x: 0, y: 0, z: 0}
 --- !u!114 &11499540
 MonoBehaviour:
@@ -349,11 +353,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
-      value: 65
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -390,11 +394,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_JumpSound
       value: 
-      objectReference: {fileID: 8300000, guid: 82904e4bdaa46e842af19992553e7d19, type: 3}
+      objectReference: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
     - target: {fileID: 0}
       propertyPath: m_LandSound
       value: 
-      objectReference: {fileID: 8300000, guid: 7eaef77c61b26e944a62286b4335c66c, type: 3}
+      objectReference: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
     - target: {fileID: 0}
       propertyPath: m_WalkSoundCycle
       value: 20
@@ -406,6 +410,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BouncePeak.y
       value: .25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: UseForces
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

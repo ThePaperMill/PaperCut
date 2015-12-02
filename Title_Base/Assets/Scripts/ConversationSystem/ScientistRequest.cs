@@ -31,24 +31,6 @@ namespace Assets.Scripts.ConversationSystem
       SciReq = new ScientistReqEvent(Scientist);
 
       base.Start();
-      if (NextIfTrue == null)
-      {
-        var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-        //next.Text = "Thanks for the \n<b>" + ItemName + "</b>!";
-        NextIfTrue = next;
-      }
-      if (NextIfFalse == null)
-      {
-        var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-        //next.Text = "This isn't an \n<b>" + ItemName + "</b>...";
-        NextIfFalse = next;
-      }
-      if (NextIfNone == null)
-      {
-        var next = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TalkAction")).AddComponent<TalkAction>();
-        //next.Text = "Come back when you have \na <b>" + ItemName + "</b>.";
-        NextIfNone = next;
-      }
 
     }
 
@@ -93,7 +75,7 @@ namespace Assets.Scripts.ConversationSystem
       Scientist.Disconnect(Events.RecievedItem, OnRecievedItem);
       //Dispatching whether or not the correct item was recieved.
       EventSystem.GlobalHandler.DispatchEvent(Events.RecievedProperItem, BoolEventData);
-
+      
       this.DispatchEvent(Events.NextAction);
     }
 

@@ -13,6 +13,7 @@ using UnityEngine;
 using System.Collections;
 using ActionSystem;
 using System.Collections.Generic;
+using Assets.Scripts.ConversationSystem;
 
 public class DropDown : MonoBehaviour
 {
@@ -73,8 +74,7 @@ public class DropDown : MonoBehaviour
 
     void OnLowerEvent(EventData data)
     {
-        print("wsasdfasdfa");
-
+        UITextManager.ConversationText.Disappear();
         ActionSequence temp = Action.Sequence(grp);
 
         Vector3 pos = StartingPosition;

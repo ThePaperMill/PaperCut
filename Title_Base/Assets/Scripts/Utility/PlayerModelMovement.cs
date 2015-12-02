@@ -15,13 +15,12 @@
 using UnityEngine;
 using System.Collections;
 using ActionSystem;
+using Assets.Scripts.ConversationSystem;
 
 public class PlayerModelMovement : MonoBehaviour
 {
     // the Player's model
 	public GameObject PlayerModel = null;  
-    // the main camera in the level
-	GameObject Cam                = null;
     // the var needed to use actions
     ActionGroup grp               = new ActionGroup();
     // The vector3 that is going to be the model facing right
@@ -41,12 +40,29 @@ public class PlayerModelMovement : MonoBehaviour
         FacingRight = new Vector3(0, 0, 0);
         // Initialize FacingLeft vec3 at 180 on the y-axis(the back of the model). The model will turn 180 degrees
         FacingLeft = new Vector3(0, 180.0f, 0);
-        // find the camera so we can look at it
-        Cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void Update () 
 	{
+        /*Added by stven to stop during certain events.*/
+        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+        {
+            return;
+        }
+
+        bool InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
+
+        // if the inventory is open and we press the inventory button, close it ignore other input 
+        if (InventoryStatus)
+        {
+            return;
+        }
+
+        if(UITextManager.ConversationText.WindowActive)
+        {
+            return;
+        }
+
         // MoveLeft boolean is equal to any down input that makes the player move left: gamepad, arrow keys, WASD 
         MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
         // MoveLeft boolean is equal to any down input that makes the player move right: gamepad, arrow keys, WASD  

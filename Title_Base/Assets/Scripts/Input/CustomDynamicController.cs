@@ -51,6 +51,8 @@ public class CustomDynamicController : MonoBehaviour
 
     public bool Active = true;
 
+    public bool UseForces = false;
+
     public bool StickToSlope = true;
 
     //The up vector of the character
@@ -98,8 +100,9 @@ public class CustomDynamicController : MonoBehaviour
     float Traction = 1.0f;
     
     // booleans to determine if we are jumping
-    bool Jumping       = false;
-    bool InAirFromJump = false;
+    bool Jumping              = false;
+    [HideInInspector]
+    public bool InAirFromJump = false;
     
     // Whether or not we're considered to be on the ground
 	bool OnGround = false;
@@ -110,7 +113,8 @@ public class CustomDynamicController : MonoBehaviour
     
     // The velocity of the ground we're standing on
     // This is used for to maintain velocity when jumping off of moving ground
-    Vector3 VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+    [HideInInspector]
+    public Vector3 VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
 
     // the players state default to idle
     PlayerState State = PlayerState.Idle;
@@ -141,11 +145,9 @@ public class CustomDynamicController : MonoBehaviour
 
     bool InventoryStatus = false;
 
-    //public GameObject PlayerModel;
+    public GameObject PlayerModel;
 
     public Vector3 RawInput = new Vector3();
-
-    Vector3 PrevInput = new Vector3();
 
     public CustomDynamicController()
     {
@@ -334,20 +336,23 @@ public class CustomDynamicController : MonoBehaviour
         // we'll try to round the movement values here, so we don't drift so much.
         // RoundMovement();
 
-        //if we are idle, add force otherwise,
-        if (State == PlayerState.Idle)
+        if (UseForces)
         {
-            RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
+            //if we are idle, add force otherwise,
+            if (State == PlayerState.Idle)
+            {
+                RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
+            }
+            else
+            {
+                // Move in the given direction with our current max speed
+                RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
+            }
         }
         else
         {
-            // Move in the given direction with our current max speed
-            RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
+            transform.position += MoveDirection * maxSpeed * Time.deltaTime;
         }
-
-        //transform.position += MoveDirection * maxSpeed * Time.smoothDeltaTime;
-
-        //print(MoveDirection * maxSpeed * Time.smoothDeltaTime);
 
         if (StickToSlope && !Jumping && State == PlayerState.Idle)
         {
@@ -361,11 +366,9 @@ public class CustomDynamicController : MonoBehaviour
 
         UpdateCurrentState(MoveDirection);
 
-        UpdateModel(RawInput);
+        //UpdateModel(RawInput);
 		
 		PrevGroundState = OnGround;
-
-        //print(RBody.velocity);
     }
 
     /****************************************************************************/
@@ -510,6 +513,12 @@ public class CustomDynamicController : MonoBehaviour
     float GetMaxSpeed()
     {
         float speed = moveSpeed;
+
+        if (!UseForces)
+        {
+            speed = MaxSpeed;
+        }
+            
         
         // If we are grounded return the max speed
         if(OnGround)
@@ -790,18 +799,17 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     void UpdateModel(Vector3 Input)
     {
-		/*
       if(PlayerModel == null)
       {
             return;
       }
 
         PlayerModel.transform.position = transform.position;
-      PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
-		if (ModelEffects == null) 
-		{
-			return;
-		}
+        PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
+        if (ModelEffects == null) 
+        {
+	        return;
+        }
 
       // Rotate the mode here based on movement directions 
       if (Input.x < 0 && OnGround)
@@ -814,8 +822,6 @@ public class CustomDynamicController : MonoBehaviour
             ModelEffects.RotateModel(new Vector3(0.0f, 0.0f, 0.0f));
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_POSITIVE);
       }
-
-      PrevInput = Input; */
     }
 
     /****************************************************************************/

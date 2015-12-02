@@ -16,7 +16,9 @@ public class PlayerSpawnPoint : MonoBehaviour
 {
   public List<string> PreviousLevel;
   
-  public Vector3 Position = new Vector3(); 
+  public Vector3 Position = new Vector3();
+
+  public bool IsDefault = false;
 
   public PlayerSpawnPoint()
   {
