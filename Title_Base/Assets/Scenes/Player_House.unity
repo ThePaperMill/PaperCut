@@ -5562,11 +5562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'I''m a plant.
-
-    Uh... I mean
-
-'
+  Text: "Why, hello there! \nI'm your plant!"
   NextAction: {fileID: 749637393}
 --- !u!4 &408070597
 Transform:
@@ -6194,7 +6190,7 @@ Transform:
   - {fileID: 1492340190}
   - {fileID: 1919941578}
   m_Father: {fileID: 0}
-  m_RootOrder: 109
+  m_RootOrder: 108
 --- !u!114 &432526526 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11473068, guid: 2231a53eddb314f448459279e425d7f9,
@@ -7860,10 +7856,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 408070596}
-  WindowEaseDuration: 1.5
-  WindowOffsetInitial: {x: 0, y: 5, z: -2.5}
-  WindowOffsetFinal: {x: 0, y: 1, z: -2.5}
-  WindowRotation: {x: 0, y: -90, z: 0}
   SoundClip: {fileID: 0}
   AudioDelay: .5
 --- !u!4 &587328655 stripped
@@ -9608,7 +9600,7 @@ Transform:
   m_LocalScale: {x: .400000006, y: .5, z: .400000006}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 55
 --- !u!1001 &706423098
 Prefab:
   m_ObjectHideFlags: 0
@@ -9760,7 +9752,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 112
+  m_RootOrder: 111
 --- !u!1001 &715220528
 Prefab:
   m_ObjectHideFlags: 0
@@ -10486,8 +10478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: '...'
-  NextAction: {fileID: 0}
+  Text: "...wait a second, plants aren't \nsupposed to talk, are they?"
+  NextAction: {fileID: 1922608130}
 --- !u!4 &749637394
 Transform:
   m_ObjectHideFlags: 0
@@ -10495,11 +10487,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749637392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.4122868, y: -3.94590425, z: 5.43234777}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -.0381356254, y: -.0885452181, z: -.0666326061}
+  m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 108
+  m_Father: {fileID: 587328655}
+  m_RootOrder: 1
 --- !u!1001 &751580566
 Prefab:
   m_ObjectHideFlags: 0
@@ -18001,7 +17993,7 @@ Transform:
   m_LocalScale: {x: .400000006, y: .5, z: .400000006}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 111
+  m_RootOrder: 110
 --- !u!1001 &1362198841
 Prefab:
   m_ObjectHideFlags: 0
@@ -23828,7 +23820,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 114
+  m_RootOrder: 113
 --- !u!1001 &1755259319
 Prefab:
   m_ObjectHideFlags: 0
@@ -24306,7 +24298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 113
+  m_RootOrder: 112
 --- !u!1001 &1780925608
 Prefab:
   m_ObjectHideFlags: 0
@@ -24502,7 +24494,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464198, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
       propertyPath: m_RootOrder
-      value: 96
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 140210, guid: 8be53f2e68ef38d4982cb8ceb6004ae3, type: 2}
       propertyPath: m_Name
@@ -26286,6 +26278,47 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8f8cd62df40dda49bc8d4522ce69614, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1922608129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1922608131}
+  - 114: {fileID: 1922608130}
+  m_Layer: 0
+  m_Name: plant2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1922608130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922608129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: Er... I mean...
+  NextAction: {fileID: 2059700976}
+--- !u!4 &1922608131
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922608129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0381356254, y: -.0885452181, z: -.0666326061}
+  m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
+  m_Children: []
+  m_Father: {fileID: 587328655}
+  m_RootOrder: 2
 --- !u!1001 &1930249486
 Prefab:
   m_ObjectHideFlags: 0
@@ -28365,6 +28398,47 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205360fff0d96cb46883ac3019100d09, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2059700974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2059700975}
+  - 114: {fileID: 2059700976}
+  m_Layer: 0
+  m_Name: plant2 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2059700975
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059700974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0381356254, y: -.0885452181, z: -.0666326061}
+  m_LocalScale: {x: .0500000007, y: .0500000007, z: .0500000007}
+  m_Children: []
+  m_Father: {fileID: 587328655}
+  m_RootOrder: 3
+--- !u!114 &2059700976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059700974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: '"............................."'
+  NextAction: {fileID: 0}
 --- !u!1001 &2068548481
 Prefab:
   m_ObjectHideFlags: 0
