@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   CreditsScroll.cs
+\author Steven Gallwas
+\brief  
+    Makes the credits scroll.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class CreditsScroll : MonoBehaviour 
@@ -9,6 +19,8 @@ public class CreditsScroll : MonoBehaviour
 
   public float Delay = 30.0f;
 
+    bool escape = false;
+
 	// Use this for initialization
 	void Start () 
   {
@@ -18,12 +30,18 @@ public class CreditsScroll : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
   {
-    if (Timer > Delay)
+        UpdateInput();
+
+    if (Timer > Delay || escape)
       Application.LoadLevel("MainMenu");
 
     Timer += Time.deltaTime;
 
-    print(Timer);
       transform.position += Vector3.up * ScrollSpeed * Time.deltaTime;
 	}
+
+    void UpdateInput()
+    {
+        escape = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_START) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape);
+    }
 }

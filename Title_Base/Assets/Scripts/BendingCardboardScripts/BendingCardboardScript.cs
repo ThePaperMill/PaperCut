@@ -30,7 +30,7 @@ public class BendingCardboardScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Parent = transform.root.gameObject;
+        Parent = transform.parent.gameObject;
 
         Begin = Parent.transform.localRotation;
         End = Quaternion.Euler(endBackwards);
@@ -65,11 +65,11 @@ public class BendingCardboardScript : MonoBehaviour {
 
             if(CurrentDirection)
             {
-                Parent.transform.rotation = Quaternion.Slerp(Begin, Quaternion.Euler(endBackwards), SliderTime);
+                Parent.transform.rotation = ActionSystem.ActionMath<Quaternion>.CubicInOut(SliderTime, Begin, Quaternion.Euler(endBackwards), 1);
             }
             else
             {
-                Parent.transform.rotation = Quaternion.Slerp(Begin, Quaternion.Euler(endForward), SliderTime);
+                Parent.transform.rotation = ActionSystem.ActionMath<Quaternion>.CubicInOut(SliderTime, Begin, Quaternion.Euler(endForward), 1);
             }
             
         }

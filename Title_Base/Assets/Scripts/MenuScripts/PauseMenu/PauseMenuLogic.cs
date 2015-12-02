@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   PauseMenuLogic.cs
+\author Steven Gallwas
+\brief  
+    Drops down the pause menu.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 
@@ -19,12 +29,14 @@ public class PauseMenuLogic : EventHandler
 
     void OnPauseGameEvent(EventData data)
     {
+        grp.Clear();
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), new Vector3(0, 0, 0.5f * StartingPosition.z), 1.0f, Ease.Linear);
     }
 
     void OnResumeGameEvent(EventData data)
     {
+        grp.Clear();
         ActionSequence temp = Action.Sequence(grp);
         Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), StartingPosition, 0.5f, Ease.Linear);
     }

@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+    \author Joshua Biggs  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using ActionSystem.Internal;
 using ActionSystem; //You either must say "using ActionSystem" or put "ActionSystem." in front of anything having to do with actions.

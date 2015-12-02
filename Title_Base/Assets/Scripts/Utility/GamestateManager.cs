@@ -81,13 +81,24 @@ public class GamestateManager : Singleton<GamestateManager>
         if (AllowQuit == false)
         {
             Application.CancelQuit();
-            PauseGame();
-            EventSystem.GlobalHandler.DispatchEvent(Events.InitiateQuitEvent);
+
+            if (Application.loadedLevelName == "ScrollingCredits" || Application.loadedLevelName == "SplashScreens")
+            {
+                return;
+            }
+            else
+            {
+                PauseGame();
+                EventSystem.GlobalHandler.DispatchEvent(Events.InitiateQuitEvent);
+            }
         }           
     }
 
     public void PauseGame()
     {
+        if (IsPaused)
+            return;
+
         EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent, null);
         IsPaused = true;
         Time.timeScale = 0.0f;

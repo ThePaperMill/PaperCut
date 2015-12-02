@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   MenuManager.cs
+\author Steven Gallwas
+\brief  
+    Manages the menu.  Should never have more than 1.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -59,7 +70,7 @@ public class MenuManager : EventHandler
 
   MenuManager()
   {
-
+      
   }
   
   void OnDestroy()
@@ -72,8 +83,8 @@ public class MenuManager : EventHandler
   }
 
   void OnPauseGameEvent(EventData data)
-  {
-    ActivateMenu(0);
+  { 
+        ActivateMenu(0);
   }
 
   void OnResumeGameEvent(EventData data)
@@ -90,11 +101,11 @@ public class MenuManager : EventHandler
       EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnCancelQuitEvent);
       EventSystem.GlobalHandler.Connect(Events.OverlayActive, OnOverlayActive);
 
-        Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
+      Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
       if(MainMenu)
-        {
-            ActivateMenu(0);
-        }
+      {
+          ActivateMenu(0);
+      }
   }
 
     void OnOverlayActive(EventData data)
@@ -102,8 +113,11 @@ public class MenuManager : EventHandler
         OverlayActive = true;
     }
 
-    void OnInitiateQuitEvent(EventData data)
+  void OnInitiateQuitEvent(EventData data)
   {
+    EventSystem.GlobalHandler.DispatchEvent(Events.CancelOverlay);
+    OverlayActive = false;
+
     DeactivateMenu(0);
     ActivateMenu(1);
   }
@@ -121,7 +135,7 @@ public class MenuManager : EventHandler
     
     if(OverlayActive && (Escape || Activate))
     {
-        EventSystem.GlobalHandler.DispatchEvent(Events.CancelOverlay);
+            EventSystem.GlobalHandler.DispatchEvent(Events.CancelOverlay);
             OverlayActive = false;
             return;
     }
@@ -130,7 +144,6 @@ public class MenuManager : EventHandler
     {
         if (Escape)
         {
-            EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent);
             GamestateManager.GetSingleton.PauseGame();
         }
 
@@ -155,7 +168,6 @@ public class MenuManager : EventHandler
         {
             if(CurrentMenu == 0 && !MainMenu)
             {
-                EventSystem.GlobalHandler.DispatchEvent(Events.ResumeGameEvent);
                 GamestateManager.GetSingleton.ResumeGame();
                 return;
             }

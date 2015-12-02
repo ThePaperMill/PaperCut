@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+    \author Joshua Biggs  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -437,6 +443,84 @@ namespace ActionSystem
         }
     }
 
+    struct QuaternionCalculator : ICalculator<Quaternion>
+    {
+        public Quaternion Decrement(Quaternion a)
+        {
+            --a.x;
+            --a.y;
+            --a.z;
+            --a.w;
+            return a;
+        }
+
+        public Quaternion Sum(Quaternion a, Quaternion b)
+        {
+            
+            return new Quaternion(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        }
+
+        public Quaternion Difference(Quaternion a, Quaternion b)
+        {
+            return new Quaternion(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+        }
+
+        public bool Compare(Quaternion a, Quaternion b)
+        {
+            return (a.x + a.y + a.z + a.w) > (b.x + b.y + b.z + b.w);
+        }
+
+        public bool Compare(Quaternion a, int b)
+        {
+            return (a.x + a.y + a.z + a.w) > (b);
+        }
+
+        public Quaternion Multiply(Quaternion a, Double b)
+        {
+            a.x *= (float)b;
+            a.y *= (float)b;
+            a.z *= (float)b;
+            a.w *= (float)b;
+            return a;
+        }
+
+        public Quaternion Multiply(Quaternion a, Quaternion b)
+        {
+            a.x *= b.x;
+            a.y *= b.y;
+            a.z *= b.z;
+            a.w *= b.z;
+            return a;
+        }
+
+        public Quaternion Divide(Quaternion a, Double b)
+        {
+            a.x /= (float)b;
+            a.y /= (float)b;
+            a.z /= (float)b;
+            a.w /= (float)b;
+            return a;
+        }
+
+        public Quaternion Divide(Quaternion a, Quaternion b)
+        {
+            a.x /= b.x;
+            a.y /= b.y;
+            a.z /= b.z;
+            a.w /= b.z;
+            return a;
+        }
+
+        public Quaternion Divide(Quaternion a, int b)
+        {
+            a.x /= (float)b;
+            a.y /= (float)b;
+            a.z /= (float)b;
+            a.w /= (float)b;
+            return a;
+        }
+    }
+
     /// <summary>
     /// This class uses reflection to automatically create the correct 
     /// ICalculator<T> that is needed for any particular type T.
@@ -463,10 +547,6 @@ namespace ActionSystem
         public static Type GetCalculatorType()
         {
             Type tType = typeof(T);
-            if (tType == typeof(Single))
-            {
-                tType = typeof(float);
-            }
 
             String propName = String.Format(tType.Name + "Calculator");
             if (!Types.HasType(propName))

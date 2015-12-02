@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+    \author Joshua Biggs  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,11 +52,11 @@ namespace ActionSystem
             ;
             if (currentTime < 1)
             {
-                return (change / 2 * currentTime * currentTime + startValue);
+                return ((change / 2.0) * currentTime * currentTime + startValue);
             }
 
             currentTime -= 1;
-            return ((change * -1) / 2 * (currentTime * (currentTime - 2) - 1) + startValue);
+            return (((change * -1) / 2.0) * (currentTime * (currentTime - 2) - 1) + startValue);
         }
 
         //Sinusoidal
@@ -71,8 +77,8 @@ namespace ActionSystem
         public static T SinInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
-
-            return ((change * -0.5) * (Math.Cos((Pi * currentTime / duration) - 1)) + startValue);
+            change *= -0.5;
+            return ( change * (Math.Cos(((Pi * currentTime) / duration)) - 1) + startValue);
         }
 
         //Exponential
@@ -97,11 +103,11 @@ namespace ActionSystem
             currentTime /= (duration / 2.0);
             if (currentTime < 1)
             {
-                return change / 2 * Math.Pow(2, 10 * (currentTime - 1)) + startValue;
+                return (change / 2.0) * Math.Pow(2, 10 * (currentTime - 1)) + startValue;
             }
             --currentTime;
 
-            return (change / 2 * (-Math.Pow(2, -10 * currentTime) + 2) + startValue);
+            return ((change / 2.0) * (-Math.Pow(2, -10 * currentTime) + 2) + startValue);
         }
 
         ////Circular
@@ -131,11 +137,11 @@ namespace ActionSystem
             if (currentTime < 1)
             {
                 
-                return (change * -1) / 2 * (Math.Sqrt(1 - currentTime * currentTime) - 1) + startValue;
+                return ((change * -1) / 2.0) * (Math.Sqrt(1 - currentTime * currentTime) - 1) + startValue;
             }
             currentTime -= 2;
             
-            return (change / 2 * (Math.Sqrt(1 - currentTime * currentTime) + 1) + startValue);
+            return ((change / 2.0) * (Math.Sqrt(1 - currentTime * currentTime) + 1) + startValue);
         }
 
         //Cubic
@@ -164,11 +170,11 @@ namespace ActionSystem
             currentTime /= (duration / 2.0);
             if (currentTime < 1)
             {
-                return (change / 2 * currentTime * currentTime * currentTime + startValue);
+                return ((change / 2.0) * currentTime * currentTime * currentTime + startValue);
             }
 
             currentTime -= 2;
-            return (change / 2 * (currentTime * currentTime * currentTime + 2) + startValue);
+            return ((change / 2.0) * (currentTime * currentTime * currentTime + 2) + startValue);
         }
 
         //Quartic
@@ -194,14 +200,14 @@ namespace ActionSystem
         {
             Number<T> change = endValue - startValue;
 
-            currentTime /= duration / 2;
+            currentTime /= (duration / 2.0);
             if (currentTime < 1)
             {
-                return (change / 2 * currentTime * currentTime * currentTime * currentTime + startValue);
+                return ((change / 2) * (currentTime * currentTime * currentTime * currentTime) + startValue);
             }
-
+            
             currentTime -= 2;
-            return ((change * -1) / 2 * (currentTime * currentTime * currentTime * currentTime - 2) + startValue);
+            return (((change * -1) / 2.0) * (currentTime * currentTime * currentTime * currentTime - 2) + startValue);
         }
 
         //Quintic
@@ -229,11 +235,11 @@ namespace ActionSystem
             currentTime /= (duration / 2.0);
             if (currentTime < 1)
             {
-                return (change / 2 * currentTime * currentTime * currentTime * currentTime * currentTime + startValue);
+                return ((change / 2.0) * currentTime * currentTime * currentTime * currentTime * currentTime + startValue);
             }
 
             currentTime -= 2;
-            return (change / 2 * (currentTime * currentTime * currentTime * currentTime * currentTime + 2) + startValue);
+            return ((change / 2.0) * (currentTime * currentTime * currentTime * currentTime * currentTime + 2) + startValue);
         }
     }//namespace Math
 

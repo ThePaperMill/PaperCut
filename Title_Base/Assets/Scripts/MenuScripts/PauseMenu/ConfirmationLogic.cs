@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   ConfirmationLogic.cs
+\author Steven Gallwas 
+\brief  
+    Handles confirmations
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 

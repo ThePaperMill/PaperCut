@@ -17,14 +17,16 @@ public class MeshCombine : MonoBehaviour
 {
     public string combineName = "Combined Mesh";
 
-    public bool addMeshCollider;
-    public bool destroyAfterwards;
+    public bool addMeshCollider = false;
+    public bool destroyAfterwards = true;
     public bool getShadows = true;
     public bool castShadow = true;
     public bool combineOnStart = true;
 
-    /// Rendering with a triangle list is usually faster, but when there's very few triangles the list takes longer
-    public bool generateTriangles = true;
+    //public int numUVmaps = 1;
+
+    // Rendering with a triangle list is usually faster, but when there's very few triangles the list takes longer
+    public bool generateTriangles = false;
 
     public int waitFrame;
 
@@ -48,8 +50,10 @@ public class MeshCombine : MonoBehaviour
 
         for (int loop = 0; loop < children.Length; ++loop)
         {
+            print(children[loop].name);
             if (this != children[loop])
             {
+                print(this.name);
                 children[loop].CombineImmediately();
             }
         }
@@ -159,7 +163,7 @@ public class MeshCombine : MonoBehaviour
         Renderer renderer = GetComponent<MeshRenderer>();
 
         // Apply the changes in-game
-        Mesh final = NewMeshInstantiate.CombinePrep(materialToMesh.SelectMany(kvp => kvp.Value), generateTriangles);
+        Mesh final = NewMeshInstantiate.CombinePrep(gameObject, materialToMesh.SelectMany(kvp => kvp.Value), generateTriangles);
         final.name = combineName;
 
         if (Application.isPlaying)

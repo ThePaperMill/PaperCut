@@ -1,4 +1,11 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+\author Joshua Biggs
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +45,7 @@ public static class Events
     // PlayerSpawnerEvent
     public static readonly String AddSpawnPoint      = "AddSpawnPoint";
 
-    public static readonly String Interact = "InteractEvent";
+    public static readonly String Interact  = "InteractEvent";
 
     public static readonly String WindowActivated = "WindowActivatedEvent";
     public static readonly String ScientistReq    = "ScientistRequestEvent";
@@ -47,9 +54,31 @@ public static class Events
     public static readonly String PauseGameEvent  = "PauseGameEvent";
     public static readonly String ResumeGameEvent = "ResumeGameEvent";
 
+    public static readonly String TabUpdatedEvent = "TabUpdated";
+
     public static readonly String InitiateQuitEvent = "InitiateQuitEvent";
     public static readonly String CancelQuitEvent   = "CancelQuitEvent";
     public static readonly String OverlayActive     = "OverlayActiveEvent";
     public static readonly String CancelOverlay     = "CancelOverlayEvent";
+    public static readonly String InteractedWith    = "InteractedWithEvent";
+    public static readonly String MachineFinisehd   = "MachineFinishedEvent";
+    public static readonly String EndTheGame        = "EndGameEvent";
 }
 
+public class IntegerEvent : EventData
+{
+    public int value;
+    public IntegerEvent(int intValue = 0)
+    {
+        value = intValue;
+    }
+}
+
+public class FloatEvent : EventData
+{
+    public float value;
+    public FloatEvent(float floatValue = 0.0f)
+    {
+        value = floatValue;
+    }
+}

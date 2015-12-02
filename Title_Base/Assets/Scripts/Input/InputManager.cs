@@ -39,6 +39,16 @@ public enum XINPUT_BUTTONS
     BUTTON_TOTAL
 };
 
+public struct CustomGamepadState
+{
+    public GamePadButtons Buttons;
+    public GamePadTriggers Triggers;
+    public GamePadDPad DPad;
+    public GamePadThumbSticks ThumbSticks;
+    public bool IsConnected;
+    public uint PacketNumber;
+}
+
 public struct Gamepad_Stick_Values
 {
     public float XPos;
@@ -52,7 +62,6 @@ public struct Gamepad_Trigger_Values
 
     public float RightTrigger;
 }
-
 
 public class InputManager : Singleton<InputManager> //MonoBehaviour
 {
@@ -70,8 +79,16 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     GamePadState state;
   
     GamePadState prevState;
-    
+
     public int ButtonTotal;
+
+    bool AutoPlayActive = false;
+
+
+    public void ToggleAutoPlay()
+    {
+        AutoPlayActive = !AutoPlayActive;
+    }
 
     InputManager()
     {
@@ -134,8 +151,13 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
 
         // main update function 
         UpdateCurrentInput();
-    }
 
+        if(IsKeyTriggered(KeyCode.BackQuote))
+        {
+            ToggleAutoPlay();
+        }
+    }
+    
     /*************************************************************************/
     /*!
       \brief
@@ -153,8 +175,8 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         // store the previous state
         prevState = state;
 
-        // get the new state
         state = GamePad.GetState(playerIndex);
+
 
         // update the current buttons with the new input. there is probably a better way to do this.
         ButtonsPresent[(int)XINPUT_BUTTONS.BUTTON_A] = state.Buttons.A;
@@ -191,6 +213,11 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     /*************************************************************************/
     public bool IsButtonTriggered(XINPUT_BUTTONS Button)
     {
+        if(AutoPlayActive && Button != XINPUT_BUTTONS.BUTTON_START && Button != XINPUT_BUTTONS.BUTTON_BACK)
+        {
+            return (Mathf.RoundToInt(Random.Range(0.0f, 1.0f))) == 1;
+        }
+
         int tempButton = (int)Button;
 
         return (ButtonsPast[tempButton] == ButtonState.Released && ButtonsPresent[tempButton] == ButtonState.Pressed);
@@ -246,8 +273,16 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     {
         Gamepad_Stick_Values temp = new Gamepad_Stick_Values();
 
-        temp.XPos = state.ThumbSticks.Left.X;
-        temp.YPos = state.ThumbSticks.Left.Y;
+        if (!AutoPlayActive)
+        {
+            temp.XPos = state.ThumbSticks.Left.X;
+            temp.YPos = state.ThumbSticks.Left.Y;
+        }
+        else
+        {
+            temp.YPos = Random.Range(-1.0f, 1.0f);
+            temp.XPos = Random.Range(-1.0f, 1.0f);
+        }
 
         return temp;
     }
@@ -262,9 +297,16 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     {
         Gamepad_Stick_Values temp = new Gamepad_Stick_Values();
 
-        temp.XPos = state.ThumbSticks.Right.X;
-        temp.YPos = state.ThumbSticks.Right.Y;
-
+        if (!AutoPlayActive)
+        {
+            temp.XPos = state.ThumbSticks.Right.X;
+            temp.YPos = state.ThumbSticks.Right.Y;
+        }
+        else
+        {
+            temp.YPos = Random.Range(-1.0f, 1.0f);
+            temp.XPos = Random.Range(-1.0f, 1.0f);
+        }
         return temp;
     }
 
@@ -573,7 +615,6 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     public bool IsMouseReleased(MOUSE button)
     {
         return Input.GetMouseButtonUp((int)button);
-
     }
 
     /*************************************************************************/

@@ -25,6 +25,19 @@ public enum PlayerState
 [RequireComponent(typeof(Rigidbody),typeof(CapsuleCollider))]
 public class CustomDynamicController : MonoBehaviour
 {
+	[SerializeField] private int m_WalkSoundCycle;
+	[SerializeField] private int m_RunSoundCycle;
+	[SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+	[SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
+	[SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+	[SerializeField] private float m_StepInterval;
+
+	// Sound-control variables
+	private AudioSource m_AudioSource;
+	private int walkCycle = 0;
+	private float m_StepCycle = 0f;
+	private float m_NextStep = 0f;
+
     // basic move booleans 
     private bool MoveForward;
     private bool MoveBack;
@@ -89,7 +102,8 @@ public class CustomDynamicController : MonoBehaviour
     bool InAirFromJump = false;
     
     // Whether or not we're considered to be on the ground
-    bool OnGround = false;
+	bool OnGround = false;
+	bool PrevGroundState = false;
     
     // The time since we were in last direct contact with the ground
     float TimeSinceLastDirectContact = 0.0f;
@@ -184,6 +198,8 @@ public class CustomDynamicController : MonoBehaviour
         // we want to ignore the player layer
         CastFilter = 1 << 9;
         CastFilter = ~CastFilter;
+
+		m_AudioSource = GetComponent<AudioSource>();
     }
 
     void OnDestroy()
@@ -213,7 +229,7 @@ public class CustomDynamicController : MonoBehaviour
     void LateUpdate()
     {
         // if the character controller is not active, do nothing
-        if (Active == false || GamestateManager.GetSingleton.IsPaused == true)
+        if (Active == false || GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
         {
             return;
         }
@@ -277,10 +293,22 @@ public class CustomDynamicController : MonoBehaviour
         else if (JumpReleased)
         {
           EndJump();
-        }
+		}
+
+		// When landing from being in the air, play a sound effect
+		if (!PrevGroundState && OnGround)
+		{
+			PlayLandingSound();
+		}
 
         // update the direction we want to move in
         UpdateMoveVector();
+
+		// Update walking audio if moving
+		if(MoveDirection != Vector3.zero && OnGround)
+		{
+			WalkNoise();
+		}
 
         // Update whether or not we are on ground
         UpdateGroundState(Time.fixedDeltaTime);
@@ -304,20 +332,24 @@ public class CustomDynamicController : MonoBehaviour
         MoveDirection = Vector3.ProjectOnPlane(MoveDirection, GroundNormal).normalized;
 
         // we'll try to round the movement values here, so we don't drift so much.
-       // RoundMovement();
+        // RoundMovement();
 
-        // if we are idle, add force otherwise,
+        //if we are idle, add force otherwise,
         if (State == PlayerState.Idle)
         {
             RBody.AddForce(MoveDirection * maxSpeed * MovePower, ForceMode.Force);
         }
         else
         {
-          // Move in the given direction with our current max speed
-          RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
+            // Move in the given direction with our current max speed
+            RBody.AddForce(MoveDirection * maxSpeed * moveForce, ForceMode.Acceleration);
         }
 
-        if(StickToSlope && !Jumping && State == PlayerState.Idle)
+        //transform.position += MoveDirection * maxSpeed * Time.smoothDeltaTime;
+
+        //print(MoveDirection * maxSpeed * Time.smoothDeltaTime);
+
+        if (StickToSlope && !Jumping && State == PlayerState.Idle)
         {
           if (GroundNormal != WorldUp)
           {
@@ -330,6 +362,8 @@ public class CustomDynamicController : MonoBehaviour
         UpdateCurrentState(MoveDirection);
 
         UpdateModel(RawInput);
+		
+		PrevGroundState = OnGround;
 
         //print(RBody.velocity);
     }
@@ -631,6 +665,8 @@ public class CustomDynamicController : MonoBehaviour
         // Returns the angle between the surface normal and the up vector of the character
         float cosTheta = Vector3.Dot(surfaceNormal, WorldUp);
 
+        cosTheta = Mathf.Clamp(cosTheta, -1, 1);
+
         float radians = Mathf.Acos(cosTheta);
 
         float degrees = radians * Mathf.Rad2Deg;
@@ -665,6 +701,7 @@ public class CustomDynamicController : MonoBehaviour
       {
         Jump();
         JumpDelayTimer = 0.0f;
+		PlayJumpingSound();
       }
     }
 
@@ -854,5 +891,62 @@ public class CustomDynamicController : MonoBehaviour
 
       RBody.velocity = ClampSpeed;
     }
+
+	///////////////////////////////////////////////
+	// Troy's Walking Sound Functions Below Here //
+	///////////////////////////////////////////////
+	/// 
+	/*************************************************************************/
+	/*!
+      \brief
+        clamps the players velocity to the max value
+    */
+	/*************************************************************************/
+	private void WalkNoise()
+	{
+		m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.fixedDeltaTime);
+		
+		if ((m_StepCycle > m_NextStep))
+		{
+			m_NextStep = m_StepCycle + m_StepInterval;
+			++walkCycle;
+			if(walkCycle >= m_WalkSoundCycle)
+			{
+				walkCycle = 0;
+				PlayFootStepAudio();
+			}
+		}
+	}
+
+	private void PlayFootStepAudio()
+	{
+		if (!OnGround)
+		{
+			return;
+		}
+		// pick & play a random footstep sound from the array,
+		// excluding sound at index 0
+		int n = Random.Range(1, m_FootstepSounds.Length);
+		m_AudioSource.clip = m_FootstepSounds[n];
+		m_AudioSource.PlayOneShot(m_AudioSource.clip);
+		// move picked sound to index 0 so it's not picked next time
+		m_FootstepSounds[n] = m_FootstepSounds[0];
+		m_FootstepSounds[0] = m_AudioSource.clip;
+		}
+		
+		private void PlayLandingSound()
+		{
+			m_AudioSource.clip = m_LandSound;
+			m_AudioSource.Play();
+			m_NextStep = m_StepCycle + .5f;
+		}
+		
+		private void PlayJumpingSound()
+		{
+			m_AudioSource.clip = m_LandSound;
+			m_AudioSource.Play();
+			m_NextStep = 0;
+			m_StepCycle = 0;
+		}
 }
 

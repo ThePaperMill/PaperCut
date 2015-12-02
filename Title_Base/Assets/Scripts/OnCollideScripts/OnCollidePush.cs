@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   OnCollidePush.cs
+\author Ian Aemmer
+\brief  
+    on collide it pushes.
+  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class OnCollidePush : MonoBehaviour {

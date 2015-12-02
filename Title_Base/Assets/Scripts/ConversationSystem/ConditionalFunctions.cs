@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+    \author Joshua Biggs  
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +52,17 @@ namespace Assets.Scripts.ConversationSystem
         static public bool HasTalkedToDuckFunc()
         {
             return HasTalkedToDuck;
+        }
+
+        static private bool HasUsedCrate = false;
+        static public bool UsedCrate()
+        {
+            return !HasUsedCrate;
+        }
+        static public bool UseCrate()
+        {
+            HasUsedCrate = true;
+            return HasUsedCrate;
         }
     }
 }
