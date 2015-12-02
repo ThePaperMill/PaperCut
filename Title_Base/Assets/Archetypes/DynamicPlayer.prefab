@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &145038
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3342306}
   - 23: {fileID: 2307676}
   - 95: {fileID: 9549700}
-  - 114: {fileID: 11407658}
+  - 114: {fileID: 11433326}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -32,10 +32,27 @@ GameObject:
   - 23: {fileID: 2359946}
   - 54: {fileID: 5405974}
   - 114: {fileID: 11494760}
-  - 82: {fileID: 8251664}
+  - 82: {fileID: 8262256}
   m_Layer: 0
   m_Name: DynamicPlayer
   m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &196432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 448002}
+  - 114: {fileID: 11499540}
+  - 114: {fileID: 11414778}
+  m_Layer: 0
+  m_Name: CameraFacingParent
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,11 +64,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.3082085, y: -1.30000007, z: 3.9069376}
+  m_LocalPosition: {x: 24.2803612, y: -2.25656748, z: 2.86329532}
   m_LocalScale: {x: .400000006, y: .5, z: .400000006}
   m_Children:
-  - {fileID: 459752}
+  - {fileID: 448002}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &448002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 459752}
+  m_Father: {fileID: 416760}
   m_RootOrder: 0
 --- !u!4 &459752
 Transform:
@@ -60,10 +90,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0320000015, y: .00999999978, z: -.149999857}
+  m_LocalPosition: {x: -.0320005417, y: .0100002289, z: -.149999857}
   m_LocalScale: {x: 50, y: 40, z: 50}
   m_Children: []
-  m_Father: {fileID: 416760}
+  m_Father: {fileID: 448002}
   m_RootOrder: 0
 --- !u!23 &2307676
 MeshRenderer:
@@ -142,7 +172,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!82 &8251664
+--- !u!82 &8262256
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -229,7 +259,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11407658
+--- !u!114 &11414778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a4db375fb3d4e43a0ac0c16d2d9cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BouncePeak: {x: 0, y: .25, z: 0}
+--- !u!114 &11433326
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -237,11 +279,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 145038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2201b5a068f480445a88e7571ed20bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e0168d854c6bfd429364bd3667438c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerModel: {fileID: 0}
-  RotationAngle: {x: 0, y: 0, z: 0}
 --- !u!114 &11494760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,21 +294,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27917e4d2c7713f499034fb190ede6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSoundCycle: 20
-  m_RunSoundCycle: 14
-  m_FootstepSounds:
-  - {fileID: 8300000, guid: 2d81343aaa04d2541b6fc68ef074cae8, type: 3}
-  - {fileID: 8300000, guid: d5d2c3e27f879a140b2cfe2c267621ed, type: 3}
-  m_JumpSound: {fileID: 8300000, guid: 82904e4bdaa46e842af19992553e7d19, type: 3}
-  m_LandSound: {fileID: 8300000, guid: 7eaef77c61b26e944a62286b4335c66c, type: 3}
+  m_WalkSoundCycle: 0
+  m_RunSoundCycle: 0
+  m_FootstepSounds: []
+  m_JumpSound: {fileID: 0}
+  m_LandSound: {fileID: 0}
   m_StepInterval: 0
   Active: 1
-  StickToSlope: 0
+  StickToSlope: 1
   moveSpeed: 5
   MaxSpeed: 1.5
   MovePower: 3.5
   AirControl: .150000006
-  WalkableSlopeAngle: 65
+  WalkableSlopeAngle: 45
   InitialJumpVelocity: 4
   AdditiveJumpVelocity: 2
   AdditiveJumpTime: 0
@@ -276,7 +315,18 @@ MonoBehaviour:
   AdditionalGravity: 0
   MaxUpwardVelocity: 4
   MoveDirection: {x: 0, y: 0, z: 0}
-  PlayerModel: {fileID: 145038}
+  RawInput: {x: 0, y: 0, z: 0}
+--- !u!114 &11499540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b89d292722ff6248a1600e72214a84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13688748
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -352,6 +402,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_RunSoundCycle
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BouncePeak.y
+      value: .25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
