@@ -926,6 +926,11 @@ public class CustomDynamicController : MonoBehaviour
 		}
 		// pick & play a random footstep sound from the array,
 		// excluding sound at index 0
+        if(m_FootstepSounds.Length == 0)
+        {
+            return;
+        }
+
 		int n = Random.Range(1, m_FootstepSounds.Length);
 		m_AudioSource.clip = m_FootstepSounds[n];
 		m_AudioSource.PlayOneShot(m_AudioSource.clip);

@@ -11,6 +11,7 @@ class GlobalControls
     public static List<InputCodes> JumpKeys = new List<InputCodes> { KeyCode.Space, XINPUT_BUTTONS.BUTTON_A};
     public static List<InputCodes> MoveLeft = new List<InputCodes> { KeyCode.LeftArrow, KeyCode.A};
     public static List<InputCodes> MoveRight = new List<InputCodes> { KeyCode.RightArrow, KeyCode.D };
+    public static List<InputCodes> TabControls = new List<InputCodes> { XINPUT_BUTTONS.BUTTON_X, KeyCode.E };
 }
 
 public enum InputTypes
