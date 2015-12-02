@@ -14,13 +14,17 @@ public class TestScript : MonoBehaviour
     //ActionReturnCall - Calls the given returning function, using the specified parameters.
     //ActionSequence - Calls each action stored sequencially until no more actions remain.
     //ActionGroup - Calls all the actions stored at the same time until they have all been completed.
-    
+
 
     //The easiest way to use the ActionSystem is to create a new ActionGroup (the master group) as a member variable.  
     ActionGroup Grp = new ActionGroup();
     //If you wish to get the return from the function called by an ActionReturnCall, you should also store the ActionReturnCall in a variable.
     //If you want to store several different types of ActionReturnCalls, you could make this a ActionBase and typecast it later.
     ActionReturnCall<int, int> ReturnCall;
+
+    //In order to make an interpolatable value, it must be PUBLIC.
+    public Vector3 TestValue;
+
     void Start()
     {
         //Create an ActionSequence to be run inside the master group.

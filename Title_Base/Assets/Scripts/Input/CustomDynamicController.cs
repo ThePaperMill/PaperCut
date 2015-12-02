@@ -127,9 +127,9 @@ public class CustomDynamicController : MonoBehaviour
 
     bool InventoryStatus = false;
 
-    public GameObject PlayerModel;
+    //public GameObject PlayerModel;
 
-    Vector3 RawInput = new Vector3();
+    public Vector3 RawInput = new Vector3();
 
     Vector3 PrevInput = new Vector3();
 
@@ -735,8 +735,6 @@ public class CustomDynamicController : MonoBehaviour
       MoveBack = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_DOWN) || InputManager.GetSingleton.IsKeyDown(KeyCode.DownArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.S);
       MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
       MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
-      
-      
 
       JumpPressed      = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
       JumpReleased     = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
@@ -755,6 +753,7 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     void UpdateModel(Vector3 Input)
     {
+		/*
       if(PlayerModel == null)
       {
             return;
@@ -762,8 +761,12 @@ public class CustomDynamicController : MonoBehaviour
 
         PlayerModel.transform.position = transform.position;
       PlayerAnimation ModelEffects = PlayerModel.GetComponent<PlayerAnimation>();
+		if (ModelEffects == null) 
+		{
+			return;
+		}
 
-      /* Rotate the mode here based on movement directions */
+      // Rotate the mode here based on movement directions 
       if (Input.x < 0 && OnGround)
       {
             ModelEffects.RotateModel(new Vector3(0.0f, 180.0f, 0.0f));
@@ -775,7 +778,7 @@ public class CustomDynamicController : MonoBehaviour
             ModelEffects.FlipModel(FLIP_MODEL.FLIP_POSITIVE);
       }
 
-      PrevInput = Input;
+      PrevInput = Input; */
     }
 
     /****************************************************************************/
