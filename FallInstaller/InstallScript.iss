@@ -8,7 +8,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{3990925D-0486-465A-8D68-451D3054ECE5}
+AppId={{AE83F501-6A01-411A-A17E-B89F478E44B5}
 ; Standard app data stuff
 ; Change PaperCut to your game name
 AppName=PaperCut

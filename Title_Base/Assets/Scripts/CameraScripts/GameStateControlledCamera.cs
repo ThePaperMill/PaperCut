@@ -101,9 +101,10 @@ public class GameStateControlledCamera : MonoBehaviour
       return;
 
     //Calculate how fast the camera should move to it's target
-    var journeyLength = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);
-    float distCovered = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);
-    float fracJourney = distCovered / journeyLength + 100;
+    //var journeyLength = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);
+    //float distCovered = Vector3.Distance(transform.position, PosTarget.transform.position + PositionVector);
+    //float fracJourney = distCovered / journeyLength + 100;
+    
     //Slerp to the target position
     transform.position = Vector3.Slerp(transform.position, PosTarget.transform.position + PositionVector, Time.smoothDeltaTime);
   }

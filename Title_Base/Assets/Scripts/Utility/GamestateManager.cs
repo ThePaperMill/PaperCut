@@ -73,6 +73,7 @@ public class GamestateManager : Singleton<GamestateManager>
 
     void OnLevelWasLoaded()
     {
+
         ResumeGame();
     }
 
@@ -109,6 +110,7 @@ public class GamestateManager : Singleton<GamestateManager>
         EventSystem.GlobalHandler.DispatchEvent(Events.ResumeGameEvent, null);
         IsPaused = false;
         Time.timeScale = 1.0f;
+        CurState = GAME_STATE.GS_GAME;
     }
 
 

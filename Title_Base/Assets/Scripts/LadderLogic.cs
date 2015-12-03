@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   LadderLogic.cs
+\author Miachel Van Zant
+\brief  
+    This file contains the implementation of a ladder script 
+
+    © 2015 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class LadderLogic : MonoBehaviour
@@ -9,7 +19,6 @@ public class LadderLogic : MonoBehaviour
     bool MoveLeft;
     bool MoveRight;
     bool InteractPressed;
-    bool InteractReleased;
 
     GameObject Player;
 
@@ -90,6 +99,5 @@ public class LadderLogic : MonoBehaviour
         MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
         MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
         InteractPressed = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
-        InteractReleased = InputManager.GetSingleton.IsButtonReleased(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyReleased(KeyCode.Space);
     }
 }

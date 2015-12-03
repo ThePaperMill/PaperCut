@@ -18,7 +18,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public ItemInfo ItemToGive = new ItemInfo();
 
-        private StringEvent StringEventData = new StringEvent();
+        //private StringEvent StringEventData = new StringEvent();
         public override void Start()
         {
             base.Start();

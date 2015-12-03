@@ -49,6 +49,9 @@ public class ItemInfo
     public GameObject CardboardItemPrefab = null;
     public GameObject RealItemPrefab      = null;
 
+    public string RealItemName = "";
+    public string CardboardItemName = "";
+
   public ItemInfo()
   {
 
@@ -60,13 +63,21 @@ public class ItemInfo
     {
        ItemPrefab      = CardboardItemPrefab;
        ItemDescription = CardboardItemDescription;
-       ItemName        = CardboardItemPrefab.name;
+
+        if (CardboardItemName.Length == 0)
+            ItemName = CardboardItemPrefab.name;
+        else
+            ItemName = CardboardItemName;
     }
     else
     {
        ItemPrefab      = RealItemPrefab;
        ItemDescription = RealItemDescription;
-       ItemName        = RealItemPrefab.name;
+
+        if (RealItemName.Length == 0)
+            ItemName = RealItemPrefab.name;
+        else
+            ItemName = RealItemName;
     }   
   }
 }

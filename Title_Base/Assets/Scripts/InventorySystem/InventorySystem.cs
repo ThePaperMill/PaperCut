@@ -68,6 +68,9 @@ public class InventorySystem : Singleton<InventorySystem>
 
     ItemInfo LastGiveItem = null;
 
+    // update order sucks i'll fix this later, but for now this will work
+    bool InventoryOpening = false;
+
     /****************************************************************************/
     /*!
     \brief
@@ -148,6 +151,32 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     /*!
       \brief
+      *  creates feedback for acquiring items
+    */
+    /****************************************************************************/
+    void CreateAcquiredFeedback(string itemname)
+    {
+        // find the player, and create the text box above them.
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if(player)
+        {
+            GameObject tempobj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("AcquiredItem"));
+            
+            tempobj.transform.position = player.transform.position + new Vector3(0, 0.75f, 0);
+            TextMesh Text = tempobj.GetComponentInChildren<TextMesh>();
+            tempobj.transform.parent = player.transform;
+
+            if(Text)
+            {
+                Text.text = "Acquired item - " + itemname;
+            }
+        }
+    }
+
+    /****************************************************************************/
+    /*!
+      \brief
       *  The Basic structure representing each item in our inventory
     */
     /****************************************************************************/
@@ -160,6 +189,7 @@ public class InventorySystem : Singleton<InventorySystem>
             var data = eventData as RecievedItemEvent;
 
             Inventory.Add(data.Info);
+            CreateAcquiredFeedback(data.Info.ItemName);
         }
     }
 
@@ -306,6 +336,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
         // set inventory to open
         InventoryOpen = true;
+        InventoryOpening = true;
 
         GameObject Selector = GameObject.FindGameObjectWithTag("Selector");
 
@@ -342,7 +373,8 @@ public class InventorySystem : Singleton<InventorySystem>
         }
         else
         {
-            UpdateItemTextEvent text = new UpdateItemTextEvent("Nothing... \n\nIt fills most of the universe");
+            //UpdateItemTextEvent text = new UpdateItemTextEvent("Nothing... \n\nIt fills most of the universe");
+            UpdateItemTextEvent text = new UpdateItemTextEvent("My pockets are empty");
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateItemText, text);
         }
     }
@@ -374,6 +406,7 @@ public class InventorySystem : Singleton<InventorySystem>
         CurItem = null;
         InventoryOpen = false;
         CurState = InventoryState.INVENTORY_VIEW;
+        InventoryOpening = false;
     }
 
     /****************************************************************************/
@@ -431,15 +464,20 @@ public class InventorySystem : Singleton<InventorySystem>
         return Temp;
     }
 
-
     /****************************************************************************/
     /*!
       \brief
 
     */
     /****************************************************************************/
-    void Update()
+    void LateUpdate()
     {
+        if(InventoryOpening)
+        {
+            InventoryOpening = false;
+            return;
+        }
+
         // only check input when the inventory is open.
         if (InventoryOpen)
         {
@@ -464,9 +502,9 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     void UpdateInput()
     {
-        MoveLeft = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.LeftArrow);
-        MoveRight = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.RightArrow);
-        Activate = InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_A) || InputManager.GetSingleton.IsKeyTriggered(KeyCode.Space);
+        MoveLeft = InputManager.GetSingleton.IsInputTriggered(GlobalControls.MoveInventoryLeft);
+        MoveRight = InputManager.GetSingleton.IsInputTriggered(GlobalControls.MoveInventoryRight);
+        Activate = InputManager.GetSingleton.IsInputTriggered(GlobalControls.InventorySelectItem);
     }
 
     /****************************************************************************/

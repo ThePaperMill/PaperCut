@@ -21,7 +21,7 @@ public class BendingCardboardScript : MonoBehaviour {
 
 
     Quaternion Begin = Quaternion.Euler(Vector3.zero);
-    Quaternion End = Quaternion.Euler(Vector3.zero);
+    //Quaternion End = Quaternion.Euler(Vector3.zero);
     float SliderTime = 0.0f;
 
     bool HasCollided = false;
@@ -33,7 +33,7 @@ public class BendingCardboardScript : MonoBehaviour {
         Parent = transform.parent.gameObject;
 
         Begin = Parent.transform.localRotation;
-        End = Quaternion.Euler(endBackwards);
+        //End = Quaternion.Euler(endBackwards);
 
         //Call a function that will bend the cardboard.
         BendCardboard();

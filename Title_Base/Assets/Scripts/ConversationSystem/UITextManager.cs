@@ -25,8 +25,9 @@ namespace Assets.Scripts.ConversationSystem
         private ActionGroup grp = new ActionGroup();
         private Vector3 InitialPos = new Vector3();
         public double EaseTime = 1.5;
+        public bool WindowActive = false;
 
-        public Vector3 FinalPos;
+        public Vector3 FinalPos = new Vector3();
         // Use this for initialization
         public UITextManager()
         {
@@ -65,6 +66,7 @@ namespace Assets.Scripts.ConversationSystem
             
 
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, EaseTime, Curve);
+            WindowActive = true;
         }
 
         public void Disappear()
@@ -78,6 +80,7 @@ namespace Assets.Scripts.ConversationSystem
             
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, EaseTime, Curve);
             //Action.Call(seq, gameObject.Destroy);
+            WindowActive = false;
         }
 
         public void UpdateText(string newText)

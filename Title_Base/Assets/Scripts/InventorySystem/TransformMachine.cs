@@ -22,9 +22,7 @@ public class TransformMachine : EventHandler
     ItemInfo Item = null;
 
     GameObject OldObject = null;
-    GameObject NewObject = null;
     GameObject LBolt     = null;
-    GameObject Particle  = null;
 
     int transformations = 0;
     public AudioClip TransformSound = null;
@@ -37,23 +35,8 @@ public class TransformMachine : EventHandler
     {
         EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
 
-        Ray testRay = new Ray();
-
-        testRay.origin = transform.position;
-        testRay.direction = Vector3.down;
-        RaycastHit RayResult = new RaycastHit();
-        
-        bool check = Physics.Raycast(testRay, out RayResult, 10);
-
-        if (check && false)
-        {
-            print(RayResult.collider.gameObject.name);
-            ItemPosition = transform.position - new Vector3(0, 0, RayResult.distance);
-        }
-        else
-        { 
-            ItemPosition = transform.position - new Vector3(0, 2.1f, 0);
-        }
+        // hardcoded as F*** ****
+        ItemPosition = transform.position - new Vector3(0, 2.1f, 0);
     }
 
     void OnTransformItem(EventData eventData)
@@ -181,8 +164,6 @@ public class TransformMachine : EventHandler
 
         Temp.transform.localPosition = ItemPosition;
         Temp.transform.position += new Vector3(0, 0, 0.5f);
-
-        NewObject = Temp;
     }
 
 	// Update is called once per frame

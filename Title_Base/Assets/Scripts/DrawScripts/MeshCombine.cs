@@ -185,7 +185,7 @@ public class MeshCombine : MonoBehaviour
             gameObject.AddComponent<MeshCollider>();
         }
 
-        renderer.castShadows = castShadow;
+        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         renderer.receiveShadows = getShadows;
     }
 }

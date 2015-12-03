@@ -30,7 +30,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             base.StartAction();
             Next = NextAction;
-            StringEventData.Message = Text.ToString();
+            StringEventData.Message = Text;
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
         }
 

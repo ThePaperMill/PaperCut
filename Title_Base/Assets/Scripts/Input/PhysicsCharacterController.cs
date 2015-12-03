@@ -77,6 +77,11 @@ public class PhysicsCharacterController : MonoBehaviour
         return Grounded;
     }
 
+    public bool isJumping()
+    {
+        return Jumping;
+    }
+
     /*************************************************************************/
     /*!
       \brief

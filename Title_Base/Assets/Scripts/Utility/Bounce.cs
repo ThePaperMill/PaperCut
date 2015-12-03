@@ -15,6 +15,7 @@
 using UnityEngine;
 using System.Collections;
 using ActionSystem;
+using Assets.Scripts.ConversationSystem;
 
 public class Bounce : MonoBehaviour
 {
@@ -53,6 +54,25 @@ public class Bounce : MonoBehaviour
 	
 	void Update ()
     {
+        /*Added by stven to stop during certain events.*/
+        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+        {
+            return;
+        }
+
+        bool InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
+
+        // if the inventory is open and we press the inventory button, close it ignore other input 
+        if (InventoryStatus)
+        {
+            return;
+        }
+
+        if (UITextManager.ConversationText.WindowActive)
+        {
+            return;
+        }
+
         // MoveForward boolean is equal to any down input that makes the player move forward: gamepad, arrow keys, WASD  
         MoveForward = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_UP) || InputManager.GetSingleton.IsKeyDown(KeyCode.UpArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.W);
         // MoveBack boolean is equal to any down input that makes the player move back: gamepad, arrow keys, WASD  
@@ -62,7 +82,7 @@ public class Bounce : MonoBehaviour
         // MoveLeft boolean is equal to any down input that makes the player move right: gamepad, arrow keys, WASD  
         MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
         // Struct with two floats is equal to the left stick's value. Used in how far the player tilts the left stick
-        var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
+        //var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
         // if moving is equal to false/If not-moving is true...
         if(!moving)
         {
