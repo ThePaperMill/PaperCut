@@ -102,6 +102,7 @@ namespace Assets.Scripts.ConversationSystem
             CurrentAction.Connect(Events.NextAction, OnNextAction);
             CurrentAction.StartAction();
 
+            seq.Clear();
             ActionSystem.Action.Delay(seq, AudioDelay);
             ActionSystem.Action.Call(seq, PlaySound);
         }

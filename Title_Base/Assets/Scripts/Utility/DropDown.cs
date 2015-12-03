@@ -59,8 +59,6 @@ public class DropDown : MonoBehaviour
             }
             else
             {
-
-
                 Vector3 pos = StartingPosition + RaisePosition;
 
                 if (MaintainZPos)
@@ -74,7 +72,12 @@ public class DropDown : MonoBehaviour
 
     void OnLowerEvent(EventData data)
     {
-        UITextManager.ConversationText.Disappear();
+        if(UITextManager.ConversationText != null)
+        {
+                UITextManager.ConversationText.Disappear();
+        }
+
+
         ActionSequence temp = Action.Sequence(grp);
 
         Vector3 pos = StartingPosition;

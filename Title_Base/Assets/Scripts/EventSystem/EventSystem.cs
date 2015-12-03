@@ -135,8 +135,6 @@ public static class EventSystem
 
             if (func.Method.IsStatic || !func.Target.Equals(null))
             {
-                
-
                 func(eventData);
             }
             else
