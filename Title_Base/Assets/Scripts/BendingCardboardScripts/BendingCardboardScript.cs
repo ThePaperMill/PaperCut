@@ -83,6 +83,10 @@ public class BendingCardboardScript : MonoBehaviour {
         {
             print("I have ACTUALLY collided with player");
             HasCollided = true;
+            if(gameObject.GetComponent<AudioSource>().isPlaying == false)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
         }
 
         
@@ -95,7 +99,7 @@ public class BendingCardboardScript : MonoBehaviour {
             Player = other.gameObject;
 
             var DistFromPlayer = Vector3.Distance(this.transform.position, Player.transform.position);
-            print(DistFromPlayer);
+            //print(DistFromPlayer);
 
             SliderTime += Time.deltaTime * Speed / DistFromPlayer;
 
@@ -139,6 +143,11 @@ public class BendingCardboardScript : MonoBehaviour {
             HasCollided = false;
             //SliderTime = 0.0f;
             //Parent.transform.rotation = Quaternion.Slerp(Begin, Quaternion.Euler(endForward), 0.0f);
+
+            if (gameObject.GetComponent<AudioSource>().isPlaying == false)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
         }
     }
     void BendCardboard()

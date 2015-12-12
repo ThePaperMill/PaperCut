@@ -48,6 +48,11 @@ public class PullTab : MonoBehaviour
             {
                 print("Pressed a");
 
+                if (gameObject.GetComponent<AudioSource>().isPlaying == false)
+                {
+                    gameObject.GetComponent<AudioSource>().Play();
+                }
+
                 OnLockBody();
 
             }
