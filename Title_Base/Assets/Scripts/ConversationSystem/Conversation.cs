@@ -180,7 +180,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void PlaySound()
         {
-            if (SoundClip != null)
+            if (!SoundClip.Equals(null))
             {
                 AudioSource temp = GetComponent<AudioSource>();
 
