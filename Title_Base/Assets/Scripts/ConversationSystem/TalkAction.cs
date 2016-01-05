@@ -28,7 +28,11 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
-            gameObject.GetComponent<AudioSource>().Play();
+            var comp = gameObject.GetComponent<AudioSource>();
+            if (comp)
+            {
+                comp.Play();
+            }
             base.StartAction();
             Next = NextAction;
             StringEventData.Message = Text;
