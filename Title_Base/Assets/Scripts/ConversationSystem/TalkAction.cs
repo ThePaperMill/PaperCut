@@ -28,10 +28,13 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
+            gameObject.GetComponent<AudioSource>().Play();
             base.StartAction();
             Next = NextAction;
             StringEventData.Message = Text;
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
+
+
         }
 
         // Update is called once per frame
