@@ -9,6 +9,7 @@
 */
 /****************************************************************************/
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LevelManager : Singleton<LevelManager>
@@ -20,14 +21,14 @@ public class LevelManager : Singleton<LevelManager>
   void OnLevelWasLoaded(int level)
   {
     // we don't want previous and current to be the same, this will only happen with reloads
-    if(Application.loadedLevelName == CurLevel)
+    if(SceneManager.GetActiveScene().name == CurLevel)
     {
       return;
     }
 
     // store the previous level and get the new level
     PrevLevel = CurLevel;
-    CurLevel = Application.loadedLevelName;
+    CurLevel = SceneManager.GetActiveScene().name;
   }
 
 	// Use this for initialization
@@ -39,6 +40,6 @@ public class LevelManager : Singleton<LevelManager>
 	// Update is called once per frame
 	void Update () 
   {
-    CurLevel = Application.loadedLevelName;
+    CurLevel = SceneManager.GetActiveScene().name;
 	}
 }

@@ -11,6 +11,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SplashScreenLogic : MonoBehaviour 
@@ -39,7 +40,7 @@ public class SplashScreenLogic : MonoBehaviour
   {
     if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
     {
-      Application.LoadLevel(LevelToLoad);
+      SceneManager.LoadScene(LevelToLoad);
     }
 
     TransitionTimer += Time.deltaTime;
@@ -52,7 +53,7 @@ public class SplashScreenLogic : MonoBehaviour
       if (CurImage >= Sprites.Count)
       {
         // load level 
-        Application.LoadLevel(LevelToLoad);
+        SceneManager.LoadScene(LevelToLoad);
       }
       else
       {

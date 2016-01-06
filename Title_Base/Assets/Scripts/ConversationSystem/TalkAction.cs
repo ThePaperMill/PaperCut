@@ -28,27 +28,19 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
-            var comp = gameObject.GetComponent<AudioSource>();
-            if (comp)
+            // Play a sound if there is one
+            AudioSource sounde = gameObject.GetComponent<AudioSource>();
+
+            if(sounde != null)
             {
-                comp.Play();
+                sounde.Play();
             }
+
             base.StartAction();
             Next = NextAction;
             StringEventData.Message = Text;
             EventSystem.GlobalHandler.DispatchEvent(Events.UpdateText, StringEventData);
-
-
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
-        
-
     }
 
     public class StringEvent : EventData
@@ -70,5 +62,3 @@ namespace Assets.Scripts.ConversationSystem
     public string longString;
   }
 }
-
-

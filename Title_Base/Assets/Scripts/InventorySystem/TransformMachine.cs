@@ -10,6 +10,7 @@
 /****************************************************************************/
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using ActionSystem;
 
 public class TransformMachine : EventHandler
@@ -182,7 +183,7 @@ public class TransformMachine : EventHandler
         Timer += Time.deltaTime;
         if(Timer > 3.5f)
         {
-            Application.LoadLevel("ScrollingCredits");
+            SceneManager.LoadScene("ScrollingCredits");
         }
     }
   }

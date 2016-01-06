@@ -9,6 +9,7 @@
 */
 /****************************************************************************/
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class CreditsScroll : MonoBehaviour 
@@ -33,7 +34,7 @@ public class CreditsScroll : MonoBehaviour
         UpdateInput();
 
     if (Timer > Delay || escape)
-      Application.LoadLevel("MainMenu");
+      SceneManager.LoadScene("MainMenu");
 
     Timer += Time.deltaTime;
 

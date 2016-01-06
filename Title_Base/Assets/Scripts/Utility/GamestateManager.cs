@@ -10,6 +10,7 @@
 /****************************************************************************/
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System;
@@ -83,7 +84,7 @@ public class GamestateManager : Singleton<GamestateManager>
         {
             Application.CancelQuit();
 
-            if (Application.loadedLevelName == "ScrollingCredits" || Application.loadedLevelName == "SplashScreens")
+            if (SceneManager.GetActiveScene().name == "ScrollingCredits" || SceneManager.GetActiveScene().name == "SplashScreens")
             {
                 return;
             }

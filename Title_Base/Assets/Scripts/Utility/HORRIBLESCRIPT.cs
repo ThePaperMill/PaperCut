@@ -10,14 +10,17 @@
 /****************************************************************************/
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class HORRIBLESCRIPT : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-        Application.LoadLevelAdditive("CameraWorld");
-	}
+	void Start ()
+    {
+        //Application.LoadLevelAdditive("CameraWorld");
+        SceneManager.LoadScene("CameraWorld", LoadSceneMode.Additive);
+    }
 	
 	// Update is called once per frame
 	void Update () {

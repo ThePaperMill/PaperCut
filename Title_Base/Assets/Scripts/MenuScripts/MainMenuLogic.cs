@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenuLogic : MonoBehaviour {
@@ -95,7 +96,7 @@ public class MainMenuLogic : MonoBehaviour {
 	
 	public void StartGame()
 	{
-		Application.LoadLevel("Player_House");
+		SceneManager.LoadScene("Player_House");
 	}
 
 	public void QuitGame()
