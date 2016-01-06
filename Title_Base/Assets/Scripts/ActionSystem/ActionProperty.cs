@@ -28,9 +28,9 @@ namespace ActionSystem
             CurrentVal = startVal;
             EndVal = endVal;
             EndTime = duration;
-            EasingCurve = new SampleCurve<T>(ease);
+            EasingCurve = new Curve(ease);
         }
-        public ActionProperty(Property<T> startVal, T endVal, double duration, SampleCurve<T> ease) : base()
+        public ActionProperty(Property<T> startVal, T endVal, double duration, Curve ease) : base()
         {
             if (duration == 0)
             {
@@ -52,7 +52,7 @@ namespace ActionSystem
             CurrentVal = startVal;
             EndVal = endVal;
             EndTime = duration;
-            EasingCurve = new CustomCurve<T>(curve);
+            EasingCurve = new Curve(curve);
         }
 
         //Restarts the action, using the same memory location and the current starting value.
@@ -76,8 +76,8 @@ namespace ActionSystem
             {
                 return;
             }
-
-            CurrentVal.Set(EasingCurve.Sample(CurrentTime, StartVal, EndVal, EndTime));
+            
+            CurrentVal.Set(EasingCurve.Sample<T>(CurrentTime, StartVal, EndVal, EndTime));
 
             CurrentTime += dt;
             //Because the action is based entirely on duration, we do not need to worry
@@ -121,7 +121,7 @@ namespace ActionSystem
         public double CurrentTime { get; set; }
         public double EndTime { get; set; }
 
-        SampleCurve<T> EasingCurve;
+        Curve EasingCurve;
     };
 }
 

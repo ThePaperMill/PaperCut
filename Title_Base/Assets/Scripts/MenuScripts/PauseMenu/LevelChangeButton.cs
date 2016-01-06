@@ -10,6 +10,7 @@
 /****************************************************************************/
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LevelChangeButton : MenuButton
@@ -18,7 +19,7 @@ public class LevelChangeButton : MenuButton
 
   public override void Activate()
   {
-    Application.LoadLevel(Level);
+    SceneManager.LoadScene(Level);
   }
 	
 	// Update is called once per frame

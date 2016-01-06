@@ -9,6 +9,7 @@
 */
 /****************************************************************************/
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class OnCollideGoToLevel : MonoBehaviour
@@ -23,6 +24,6 @@ public class OnCollideGoToLevel : MonoBehaviour
 
     public void ChangeLevel()
     {
-        Application.LoadLevel(this.LevelName);
+        SceneManager.LoadScene(this.LevelName);
     }
 }

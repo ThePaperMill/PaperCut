@@ -65,11 +65,11 @@ public class BendingCardboardScript : MonoBehaviour {
 
             if(CurrentDirection)
             {
-                Parent.transform.rotation = ActionSystem.ActionMath<Quaternion>.CubicInOut(SliderTime, Begin, Quaternion.Euler(endBackwards), 1);
+                Parent.transform.rotation = ActionSystem.ActionMath.CubicInOut<Quaternion>(SliderTime, Begin, Quaternion.Euler(endBackwards), 1);
             }
             else
             {
-                Parent.transform.rotation = ActionSystem.ActionMath<Quaternion>.CubicInOut(SliderTime, Begin, Quaternion.Euler(endForward), 1);
+                Parent.transform.rotation = ActionSystem.ActionMath.CubicInOut<Quaternion>(SliderTime, Begin, Quaternion.Euler(endForward), 1);
             }
             
         }

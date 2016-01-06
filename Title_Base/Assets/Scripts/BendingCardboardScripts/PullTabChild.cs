@@ -32,6 +32,6 @@ public class PullTabChild : MonoBehaviour {
         //var vector = Vector3.LerpUnclamped(StartVector, BendVector, ((FloatEvent)slerptimer).value);
         //transform.localRotation.eulerAngles.Set(vector.x, vector.y, vector.z); //Vector3.LerpUnclamped(Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), slerptimer);
         //transform.rotation = Quaternion.Euler(ActionSystem.ActionMath<Vector3>.QuadInOut(((FloatEvent)slerptimer).value, StartVector, BendVector, 1));
-        transform.localRotation = ActionSystem.ActionMath<Quaternion>.QuadInOut(((FloatEvent)slerptimer).value, Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), 1);
+        transform.localRotation = ActionSystem.ActionMath.QuadInOut<Quaternion>(((FloatEvent)slerptimer).value, Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), 1);
     }
 }

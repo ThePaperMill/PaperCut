@@ -9,6 +9,7 @@
 */
 /****************************************************************************/
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class QuitButton : MonoBehaviour 
@@ -30,7 +31,7 @@ public class QuitButton : MonoBehaviour
 
         else if(Input.GetKey(KeyCode.R) || InputManager.GetSingleton.IsButtonTriggered(XINPUT_BUTTONS.BUTTON_BACK))
         {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

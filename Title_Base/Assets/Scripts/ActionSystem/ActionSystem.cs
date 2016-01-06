@@ -23,30 +23,16 @@ namespace ActionSystem
     static class Action
     {
 
-        public static ActionProperty<T> Property<T>(ActionSequence seq, Property<T> startVal, T endVal, double duration, Ease ease = Ease.Linear)
+        public static ActionProperty<T> Property<T>(ActionSequence seq, Property<T> startVal, T endVal, double duration, Curve ease)
         {
             var property = new ActionProperty<T>(startVal, endVal, duration, ease);
             seq.AddAction(property);
             return property;
         }
 
-        public static ActionProperty<T> Property<T>(ActionGroup grp, Property<T> startVal, T endVal, double duration, Ease ease = Ease.Linear)
+        public static ActionProperty<T> Property<T>(ActionGroup grp, Property<T> startVal, T endVal, double duration, Curve ease)
         {
             var property = new ActionProperty<T>(startVal, endVal, duration, ease);
-            grp.AddAction(property);
-            return property;
-        }
-
-        public static ActionProperty<T> Property<T>(ActionSequence seq, Property<T> startVal, T endVal, double duration, AnimationCurve curve)
-        {
-            var property = new ActionProperty<T>(startVal, endVal, duration, curve);
-            seq.AddAction(property);
-            return property;
-        }
-
-        public static ActionProperty<T> Property<T>(ActionGroup grp, Property<T> startVal, T endVal, double duration, AnimationCurve curve)
-        {
-            var property = new ActionProperty<T>(startVal, endVal, duration, curve);
             grp.AddAction(property);
             return property;
         }
@@ -60,6 +46,7 @@ namespace ActionSystem
 
         public static ActionSequence Sequence(ActionGroup grp, bool looping = false)
         {
+
             var sequence = new ActionSequence(looping);
             grp.AddAction(sequence);
             return sequence;
