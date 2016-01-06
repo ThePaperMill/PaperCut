@@ -128,6 +128,10 @@ Prefab:
       propertyPath: HighlightArchetype
       value: 
       objectReference: {fileID: 195702, guid: 1eec2eb9ed111304e92877791e45a6ec, type: 2}
+    - target: {fileID: 100272, guid: 072add2db055d614188e2288f664ae1c, type: 2}
+      propertyPath: m_TagString
+      value: LevelSettings
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 072add2db055d614188e2288f664ae1c, type: 2}
   m_IsPrefabParent: 0
@@ -3428,7 +3432,7 @@ GameObject:
   - 114: {fileID: 1232788371}
   m_Layer: 0
   m_Name: LevelSettings
-  m_TagString: Untagged
+  m_TagString: LevelSettings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5610,9 +5614,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1975500226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab3c6e2f3bc18d4ebfa9bffdd8e8a40, type: 3}
+  m_Script: {fileID: 11500000, guid: b178260a1272b8d48be5ec9fbb2c6c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combineName: Combined Mesh
+  addMeshCollider: 0
+  destroyAfterwards: 1
+  getShadows: 1
+  castShadow: 1
+  combineOnStart: 1
+  generateTriangles: 0
+  waitFrame: 0
 --- !u!1001 &1985505341
 Prefab:
   m_ObjectHideFlags: 0
