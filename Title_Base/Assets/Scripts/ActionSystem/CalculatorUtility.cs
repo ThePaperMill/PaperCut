@@ -330,6 +330,7 @@ namespace ActionSystem
             a.x *= (float)b;
             a.y *= (float)b;
             a.z *= (float)b;
+            
             return a;
         }
 

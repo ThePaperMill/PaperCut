@@ -13,20 +13,21 @@ using UnityEngine;
 namespace ActionSystem
 {
 
-    public class ActionMath<T>
+    public class ActionMath
     {
         const double Pi = Mathf.PI;
         
 
-        public static T Linear(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T Linear<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
+            
             Number<T> change = (endValue - startValue);
             return (change * currentTime / duration + startValue);
         }
 
         //Quadratic
 
-        public static T QuadIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuadIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             currentTime /= duration;
@@ -34,7 +35,7 @@ namespace ActionSystem
             return (change * currentTime * currentTime + startValue);
         }
 
-        public static T QuadOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuadOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -44,7 +45,7 @@ namespace ActionSystem
             return ((change * -1) * currentTime * (currentTime - 2) + startValue);
         }
 
-        public static T QuadInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuadInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -60,21 +61,21 @@ namespace ActionSystem
         }
 
         //Sinusoidal
-        public static T SinIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T SinIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
            Number<T> change = endValue - startValue;
 
             return ((change * -1) * Mathf.Cos((float)(currentTime / duration * (Pi / 2))) + change + startValue);
         }
 
-        public static T SinOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T SinOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
             return (change * Mathf.Sin((float)(currentTime / duration * (Pi / 2))) + startValue);
         }
 
-        public static T SinInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T SinInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             change *= -0.5;
@@ -83,21 +84,21 @@ namespace ActionSystem
 
         //Exponential
         
-        public static T ExpoIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T ExpoIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
             return (change * Math.Pow(2,(10 * (currentTime / duration - 1))) + startValue);
         }
         
-        public static T ExpoOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T ExpoOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
             return (change * (-Math.Pow(2, -10 * currentTime / duration) + 1) + startValue);
         }
 
-        public static T ExpoInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T ExpoInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             currentTime /= (duration / 2.0);
@@ -112,7 +113,7 @@ namespace ActionSystem
 
         ////Circular
 
-        public static T CircIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CircIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             currentTime /= duration;
@@ -120,7 +121,7 @@ namespace ActionSystem
             return ((change * -1) * (Math.Sqrt(1 - currentTime * currentTime) - 1) + startValue);
         }
 
-        public static T CircOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CircOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             currentTime /= duration;
@@ -129,7 +130,7 @@ namespace ActionSystem
             return (change * Math.Sqrt(1 - currentTime * currentTime) + startValue);
         }
 
-        public static T CircInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CircInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
             currentTime /= (duration / 2.0);
@@ -146,7 +147,7 @@ namespace ActionSystem
 
         //Cubic
 
-        public static T CubicIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CubicIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -154,7 +155,7 @@ namespace ActionSystem
             return (change * currentTime * currentTime * currentTime + startValue);
         }
 
-        public static T CubicOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CubicOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -163,7 +164,7 @@ namespace ActionSystem
             return (change * (currentTime * currentTime * currentTime + 1) + startValue);
         }
 
-        public static T CubicInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T CubicInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -179,7 +180,7 @@ namespace ActionSystem
 
         //Quartic
 
-        public static T QuarticIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuarticIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -187,7 +188,7 @@ namespace ActionSystem
             return (change * currentTime * currentTime * currentTime * currentTime + startValue);
         }
 
-        public static T QuarticOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuarticOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -196,7 +197,7 @@ namespace ActionSystem
             return ((change * -1) * (currentTime * currentTime * currentTime * currentTime - 1) + startValue);
         }
 
-        public static T QuarticInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuarticInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -211,7 +212,7 @@ namespace ActionSystem
         }
 
         //Quintic
-        public static T QuinticIn(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuinticIn<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -219,7 +220,7 @@ namespace ActionSystem
             return (change * currentTime * currentTime * currentTime * currentTime * currentTime + startValue);
         }
 
-        public static T QuinticOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuinticOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
@@ -228,7 +229,7 @@ namespace ActionSystem
             return (change * (currentTime * currentTime * currentTime * currentTime * currentTime + 1) + startValue);
         }
 
-        public static T QuinticInOut(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
+        public static T QuinticInOut<T>(Number<Double> currentTime, Number<T> startValue, Number<T> endValue, Number<Double> duration)
         {
             Number<T> change = endValue - startValue;
 
