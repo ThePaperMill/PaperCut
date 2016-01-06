@@ -105,7 +105,7 @@ public class CustomDynamicController : MonoBehaviour
     public bool InAirFromJump = false;
     
     // Whether or not we're considered to be on the ground
-	bool OnGround = false;
+	public bool OnGround = false;
 	bool PrevGroundState = false;
     
     // The time since we were in last direct contact with the ground
@@ -362,7 +362,7 @@ public class CustomDynamicController : MonoBehaviour
           }
         }
 
-        ClampVelocity();
+        //ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
 
