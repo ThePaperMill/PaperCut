@@ -1014,15 +1014,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 25.2700005
+      value: 25.27
       objectReference: {fileID: 0}
     - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.68000007
+      value: -3.68
       objectReference: {fileID: 0}
     - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.00300002
+      value: 1.003
       objectReference: {fileID: 0}
     - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1042,7 +1042,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_RootOrder
-      value: 110
+      value: 111
       objectReference: {fileID: 0}
     - target: {fileID: 11458882, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: NextLevel
@@ -1055,6 +1055,18 @@ Prefab:
     - target: {fileID: 187652, guid: 609298b188a74094d97d366955214584, type: 2}
       propertyPath: m_TagString
       value: IgnorebyCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581460, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.2594631
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.8983787
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 609298b188a74094d97d366955214584, type: 2}
@@ -9831,6 +9843,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 113
+--- !u!1 &705516585 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 187652, guid: 609298b188a74094d97d366955214584, type: 2}
+  m_PrefabInternal: {fileID: 62153310}
+--- !u!114 &705516591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 705516585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ecc7518e252a84a82edb1483f341e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextLevel: PlayerStreet
+  PrevLevelTrigger: 0
+  NextLevelTrigger: 1
 --- !u!1001 &706423098
 Prefab:
   m_ObjectHideFlags: 0
@@ -11835,7 +11865,7 @@ Transform:
   m_Children:
   - {fileID: 1806819734}
   m_Father: {fileID: 0}
-  m_RootOrder: 78
+  m_RootOrder: 109
 --- !u!114 &854088600
 MonoBehaviour:
   m_ObjectHideFlags: 0
