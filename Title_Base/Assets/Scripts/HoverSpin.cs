@@ -10,15 +10,16 @@ public class HoverSpin : MonoBehaviour
     private bool JumpHeld;
 
     public Vector3 Prone = new Vector3();
+    public float HoverDelay = 0.0f;
 
-    int JumpTimer;
+    float JumpTimer;
     ActionGroup grp = new ActionGroup();
     Rigidbody RB = new Rigidbody();
 
     // Use this for initialization
     void Start ()
     {
-        JumpTimer = 0;
+        JumpTimer = 0.0f;
         Grounded = this.GetComponent<CustomDynamicController>().OnGround;
         
 	}
@@ -34,7 +35,7 @@ public class HoverSpin : MonoBehaviour
             
         if (Grounded == true)
         {
-            JumpTimer = 0;
+            JumpTimer = 0.0f;
         }
     }
 
@@ -45,24 +46,25 @@ public class HoverSpin : MonoBehaviour
         //print(JumpReleased);
         if (Grounded == false && JumpHeld == true) 
         {
-            ++JumpTimer;
+            JumpTimer += Time.deltaTime;
         }
         //print(JumpTimer);
 
-        if(JumpTimer == 24)
+        if(JumpTimer >= HoverDelay)
         {
             Prone = new Vector3(90.0f, 0, 0);
             var seq = ActionSystem.Action.Sequence(grp);
             Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
 
-            RB = this.GetComponent<Rigidbody>();
+            //RB = this.GetComponent<Rigidbody>();
 
-            RB.velocity *= 0; //new Vector3(RB.velocity.x 0, RB.velocity.y * 0, RB.velocity.z);
+            //RB.velocity *= 0; //new Vector3(RB.velocity.x 0, RB.velocity.y * 0, RB.velocity.z);
 
             //this.transform.localEulerAngles = Prone;
             //print(this.transform.localEulerAngles);
         }
-        grp.Update(Time.smoothDeltaTime);
+
+        grp.Update(Time.deltaTime);
 
         if (JumpTimer == 0)
         {
