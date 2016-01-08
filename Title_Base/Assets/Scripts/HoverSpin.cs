@@ -33,7 +33,7 @@ public class HoverSpin : MonoBehaviour
 
         Spin();
             
-        if (Grounded == true)
+        if (Grounded == true || JumpReleased) // cancel spin when we land or when jump is released with addition of "|| JumpReleased"
         {
             JumpTimer = 0.0f;
         }
@@ -43,25 +43,18 @@ public class HoverSpin : MonoBehaviour
     void Spin()
     {
         bool JumpHeld = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
-        //print(JumpReleased);
+
         if (Grounded == false && JumpHeld == true) 
         {
             JumpTimer += Time.deltaTime;
         }
-        //print(JumpTimer);
+
 
         if(JumpTimer >= HoverDelay)
         {
             Prone = new Vector3(90.0f, 0, 0);
             var seq = ActionSystem.Action.Sequence(grp);
             Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
-
-            //RB = this.GetComponent<Rigidbody>();
-
-            //RB.velocity *= 0; //new Vector3(RB.velocity.x 0, RB.velocity.y * 0, RB.velocity.z);
-
-            //this.transform.localEulerAngles = Prone;
-            //print(this.transform.localEulerAngles);
         }
 
         grp.Update(Time.deltaTime);
