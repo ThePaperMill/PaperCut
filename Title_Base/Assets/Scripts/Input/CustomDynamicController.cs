@@ -105,7 +105,7 @@ public class CustomDynamicController : MonoBehaviour
     public bool InAirFromJump = false;
     
     // Whether or not we're considered to be on the ground
-	bool OnGround = false;
+	public bool OnGround = false;
 	bool PrevGroundState = false;
     
     // The time since we were in last direct contact with the ground
@@ -148,6 +148,12 @@ public class CustomDynamicController : MonoBehaviour
     public GameObject PlayerModel;
 
     public Vector3 RawInput = new Vector3();
+
+    float spinTimer = 0.0f;
+
+    public float HoverDelay = 0.5f;
+
+    public float HoverReduction = 0.0f;
 
     public CustomDynamicController()
     {
@@ -294,13 +300,26 @@ public class CustomDynamicController : MonoBehaviour
         // when jump is released, update our jump state.
         else if (JumpReleased)
         {
-          EndJump();
+            spinTimer = 0.0f;
+            EndJump();
 		}
+
+        bool JumpDown = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
+        if(OnGround == false && JumpDown)
+        {
+            spinTimer += Time.deltaTime;
+        }
+
+        if(spinTimer > HoverDelay)
+        {
+            RBody.velocity = new Vector3(RBody.velocity.x, RBody.velocity.y * HoverReduction, RBody.velocity.z);
+        }
 
 		// When landing from being in the air, play a sound effect
 		if (!PrevGroundState && OnGround)
 		{
 			PlayLandingSound();
+            spinTimer = 0.0f;
 		}
 
         // update the direction we want to move in
