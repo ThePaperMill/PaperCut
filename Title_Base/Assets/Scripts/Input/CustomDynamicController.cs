@@ -48,6 +48,7 @@ public class CustomDynamicController : MonoBehaviour
     private bool OpenInventory;
     private bool JumpPressed;
     private bool JumpReleased;
+    private bool JumpHeld;
 
     public bool Active = true;
 
@@ -297,6 +298,11 @@ public class CustomDynamicController : MonoBehaviour
             BeginJump();
         }
 
+        else if (OnGround == false && JumpHeld)
+        {
+            spinTimer += Time.deltaTime;
+        }
+
         // when jump is released, update our jump state.
         else if (JumpReleased)
         {
@@ -304,11 +310,6 @@ public class CustomDynamicController : MonoBehaviour
             EndJump();
 		}
 
-        bool JumpDown = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
-        if(OnGround == false && JumpDown)
-        {
-            spinTimer += Time.deltaTime;
-        }
 
         if(spinTimer > HoverDelay)
         {
@@ -332,10 +333,10 @@ public class CustomDynamicController : MonoBehaviour
 		}
 
         // Update whether or not we are on ground
-        UpdateGroundState(Time.fixedDeltaTime);
-
+        UpdateGroundState(Time.deltaTime);
+        
         // update our jumping state, i.e. falling
-        UpdateJumpState(Time.fixedDeltaTime);
+        UpdateJumpState(Time.deltaTime);
 
         // Get our current control (value between 0-1)
         var controlScalar = GetCurrentControlScalar();
@@ -352,9 +353,6 @@ public class CustomDynamicController : MonoBehaviour
         // Remove any upward forces in our move direction
         MoveDirection = Vector3.ProjectOnPlane(MoveDirection, GroundNormal).normalized;
 
-        // we'll try to round the movement values here, so we don't drift so much.
-        // RoundMovement();
-
         if (UseForces)
         {
             //if we are idle, add force otherwise,
@@ -370,6 +368,9 @@ public class CustomDynamicController : MonoBehaviour
         }
         else
         {
+            // we should check out what is in front of us 
+
+
             transform.position += MoveDirection * maxSpeed * Time.deltaTime;
         }
 
@@ -381,42 +382,12 @@ public class CustomDynamicController : MonoBehaviour
           }
         }
 
-        ClampVelocity();
+        if(UseForces)
+            ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
-
-        //UpdateModel(RawInput);
 		
 		PrevGroundState = OnGround;
-    }
-
-    /****************************************************************************/
-    /*!
-        \brief
-            Rounds the movement values, attempting to mitigate drift
-    */
-    /****************************************************************************/
-    void RoundMovement()
-    {
-        if (MoveDirection.x < 0.0f && MoveDirection.x > -0.3)
-        {
-            MoveDirection.x = 0.0f;
-        }
-
-        else if (MoveDirection.x > 0.0f && MoveDirection.x < 0.3)
-        {
-            MoveDirection.x = 0.0f;
-        }
-
-        if (MoveDirection.z < 0.0f && MoveDirection.z > -0.3)
-        {
-            MoveDirection.z = 0.0f;
-        }
-
-        else if (MoveDirection.z > 0.0f && MoveDirection.z < 0.3)
-        {
-            MoveDirection.x = 0.0f;
-        }
     }
 
     /****************************************************************************/
@@ -801,6 +772,7 @@ public class CustomDynamicController : MonoBehaviour
       MoveLeft = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_LEFT) || InputManager.GetSingleton.IsKeyDown(KeyCode.LeftArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.A);
       MoveRight = InputManager.GetSingleton.IsButtonDown(XINPUT_BUTTONS.BUTTON_DPAD_RIGHT) || InputManager.GetSingleton.IsKeyDown(KeyCode.RightArrow) || InputManager.GetSingleton.IsKeyDown(KeyCode.D);
 
+      JumpHeld = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
       JumpPressed      = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
       JumpReleased     = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
 
@@ -943,7 +915,13 @@ public class CustomDynamicController : MonoBehaviour
 		}
 	}
 
-	private void PlayFootStepAudio()
+    /*************************************************************************/
+    /*!
+      \brief
+        clamps the players velocity to the max value
+    */
+    /*************************************************************************/
+    private void PlayFootStepAudio()
 	{
 		if (!OnGround)
 		{
