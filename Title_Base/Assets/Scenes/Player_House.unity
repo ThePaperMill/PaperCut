@@ -9937,7 +9937,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 711131259}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 167415b60b512d343b217d9ff336e37a, type: 3}
@@ -9982,7 +9982,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -9993,7 +9993,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -10004,7 +10004,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!4 &711131261
 Transform:
   m_ObjectHideFlags: 0
@@ -11865,7 +11865,7 @@ Transform:
   m_Children:
   - {fileID: 1806819734}
   m_Father: {fileID: 0}
-  m_RootOrder: 109
+  m_RootOrder: 110
 --- !u!114 &854088600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16293,15 +16293,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 34.2000008
+      value: 16.75
       objectReference: {fileID: 0}
     - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.1000004
+      value: 10.1
       objectReference: {fileID: 0}
     - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -42.9000015
+      value: 6.93
       objectReference: {fileID: 0}
     - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_LocalRotation.x
@@ -16321,12 +16321,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 153112, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_TagString
       value: LevelSettings
       objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 11400000, guid: 612bb1b9954fcce4cb0b057ed6c33659,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
   m_IsPrefabParent: 0
