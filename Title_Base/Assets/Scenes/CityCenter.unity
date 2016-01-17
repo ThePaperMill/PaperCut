@@ -1050,11 +1050,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2589e47f09e81c34fb1d3aa830139947, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.85
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -1092,7 +1092,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1114,7 +1114,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!4 &358409864
 Transform:
   m_ObjectHideFlags: 0
@@ -1986,6 +1986,11 @@ Prefab:
       propertyPath: m_Name
       value: LevelSettings
       objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 11400000, guid: ac4da115b3f158b46ba68b47b65590f1,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 11404572, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}

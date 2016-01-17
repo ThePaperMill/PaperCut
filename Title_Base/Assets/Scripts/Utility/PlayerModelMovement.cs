@@ -78,7 +78,11 @@ public class PlayerModelMovement : MonoBehaviour
             return;
         }
 
-        AlsoProne = transform.parent.transform.parent.GetComponent<HoverSpin>().Prone;
+        HoverSpin Temp = transform.parent.transform.parent.GetComponent<HoverSpin>();
+
+        if(Temp)
+            AlsoProne = Temp.Prone;
+
         this.transform.localEulerAngles = new Vector3(AlsoProne.x, this.transform.localEulerAngles.y, this.transform.localEulerAngles.z);
         if (AlsoProne.x == 90.0f)
         {

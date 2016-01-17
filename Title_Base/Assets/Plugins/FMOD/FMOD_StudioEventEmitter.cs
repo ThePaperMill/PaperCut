@@ -77,8 +77,13 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 			StartEvent();
 	}
 	
-	void CacheEventInstance()
+	public void CacheEventInstance(FMODAsset FingMOD = null, bool set = false)
 	{
+        if(set)
+        {
+            asset = FingMOD;
+        }
+
 		if (asset != null)
 		{
 			evt = FMOD_StudioSystem.instance.GetEvent(asset.id);				
