@@ -187,7 +187,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -303,9 +303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27917e4d2c7713f499034fb190ede6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSoundCycle: 0
-  m_RunSoundCycle: 0
-  m_FootstepSounds: []
+  m_WalkSoundCycle: 10
+  m_RunSoundCycle: 22
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
+  - {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
   m_LandSound: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_StepInterval: 0
@@ -365,7 +367,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
@@ -398,11 +400,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 2d81343aaa04d2541b6fc68ef074cae8, type: 3}
+      objectReference: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: d5d2c3e27f879a140b2cfe2c267621ed, type: 3}
+      objectReference: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
     - target: {fileID: 0}
       propertyPath: m_JumpSound
       value: 
@@ -413,11 +415,11 @@ Prefab:
       objectReference: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
     - target: {fileID: 0}
       propertyPath: m_WalkSoundCycle
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_RunSoundCycle
-      value: 14
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BouncePeak.y
@@ -434,6 +436,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 0.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
