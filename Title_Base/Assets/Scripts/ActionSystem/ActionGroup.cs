@@ -46,10 +46,11 @@ namespace ActionSystem
             {
                 return;
             }
-            if (IsEmpty())
-            {
-                Completed = true;
-            }
+            
+            //if (IsEmpty())
+            //{
+            //    Completed = true;
+            //}
 
             Completed = true;
             while (Index < ActionQueue.Count)
@@ -62,6 +63,7 @@ namespace ActionSystem
                     continue;
                 }
                 //If we have not completed ALL of the actions in the group, the group has not finished.
+                
                 Completed = false;
                 ++Index;
             }

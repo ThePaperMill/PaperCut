@@ -46,9 +46,10 @@ public class PullTab : MonoBehaviour
         {
             if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)
             {
-                print("Pressed a");
+                //print("Pressed a");
 
-                if (gameObject.GetComponent<AudioSource>().isPlaying == false)
+                AudioSource noise = gameObject.GetComponent<AudioSource>();
+                if (noise && !noise.isPlaying)
                 {
                     gameObject.GetComponent<AudioSource>().Play();
                 }

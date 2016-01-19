@@ -68,7 +68,7 @@ public class Bounce : MonoBehaviour
             return;
         }
 
-        if (UITextManager.ConversationText.WindowActive)
+        if (UITextManager.ConversationText && UITextManager.ConversationText.WindowActive)
         {
             return;
         }

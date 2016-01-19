@@ -12,6 +12,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -140,7 +143,32 @@ public static class ExtensionMethods
         return null;
     }
 
-    
+    public static ActionGroup GetActions(this MonoBehaviour me)
+    {
+        var Actions = me.GetComponent<ObjectActions>();
+        if (Actions == null)
+        {
+            Actions = me.gameObject.AddComponent<ObjectActions>();
+        }
+        return Actions.Actions;
+    }
+
+#if UNITY_EDITOR
+    public static void DrawBaseDefaultInspector(this Editor me)
+    {
+        var type = me.target.GetType();
+        
+        var feilds = type.GetFields(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
+        foreach (var i in feilds)
+        {
+            var prop = me.serializedObject.FindProperty(i.Name);
+            if (prop != null)
+            {
+                EditorGUILayout.PropertyField(prop);
+            }
+        }
+    }
+#endif
 
     //public static Delegate GetDelegate<This>(this This me, System.Action function)
     //{
@@ -183,7 +211,23 @@ public static class ExtensionMethods
         GameObject.Destroy(obj);
     }
 
+    public static void Trace<T>(this T instance, object param)
+    {
+        MonoBehaviour.print(param);
+    }
 
-    
+    public static int IndexOf<T>(this T[] instance, T param)
+    {
+        for (int i = 0; i < instance.Length; ++i)
+        {
+            if (instance[i].Equals(param))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 }
 

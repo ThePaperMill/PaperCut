@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour
 {
 	public GameObject LevelSettings;
 	public GameObject InteractCollider;
+
     GameObject childRigid = null;
 
 	//InteractSizeScalar is how big the bounding box of the collidable detection object is.
@@ -26,12 +27,14 @@ public class Interactable : MonoBehaviour
 
     // if the user didn't set the level settings, find it.
     if(!LevelSettings)
-      LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
-
-		//If the levelsettings does not have an interactable manager, add one and print an error message.
-		InteractManager initial = LevelSettings.GetComponent("InteractManager") as InteractManager;
+    {
+        LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
+    }
+	
+    //If the levelsettings does not have an interactable manager, add one and print an error message.
+	InteractManager initial = LevelSettings.GetComponent("InteractManager") as InteractManager;
     
-    this.gameObject.Connect(Events.Interact, OnInteractEvent);
+    gameObject.Connect(Events.Interact, OnInteractEvent);
 		
     if(initial == null)
 		{

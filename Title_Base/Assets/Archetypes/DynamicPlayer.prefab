@@ -64,8 +64,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.2803612, y: -2.25656748, z: 2.86329532}
-  m_LocalScale: {x: .400000006, y: .5, z: .400000006}
+  m_LocalPosition: {x: 24.280361, y: -2.2565675, z: 2.8632953}
+  m_LocalScale: {x: 0.4, y: 0.5, z: 0.4}
   m_Children:
   - {fileID: 448002}
   m_Father: {fileID: 0}
@@ -90,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0320005417, y: .0100002289, z: -.149999857}
+  m_LocalPosition: {x: -0.03200054, y: 0.010000229, z: -0.14999986}
   m_LocalScale: {x: 50, y: 40, z: 50}
   m_Children: []
   m_Father: {fileID: 448002}
@@ -113,8 +113,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -137,8 +139,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -166,7 +170,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -183,7 +187,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -212,6 +216,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -222,6 +227,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -232,6 +238,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -242,6 +249,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9549700
 Animator:
   serializedVersion: 3
@@ -270,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a4db375fb3d4e43a0ac0c16d2d9cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BouncePeak: {x: 0, y: .25, z: 0}
+  BouncePeak: {x: 0, y: 0.25, z: 0}
 --- !u!114 &11433326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerModel: {fileID: 0}
+  AlsoProne: {x: 0, y: 0, z: 0}
 --- !u!114 &11494760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,9 +303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27917e4d2c7713f499034fb190ede6c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSoundCycle: 0
-  m_RunSoundCycle: 0
-  m_FootstepSounds: []
+  m_WalkSoundCycle: 10
+  m_RunSoundCycle: 22
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
+  - {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
   m_LandSound: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_StepInterval: 0
@@ -306,20 +317,23 @@ MonoBehaviour:
   moveSpeed: 5
   MaxSpeed: 1.5
   MovePower: 3.5
-  AirControl: .150000006
+  AirControl: 0.15
   WalkableSlopeAngle: 60
   InitialJumpVelocity: 4
   AdditiveJumpVelocity: 2
   AdditiveJumpTime: 0
-  JumpLagTimer: .230000004
-  GroundContactDistance: .00999999978
+  JumpLagTimer: 0.23
+  GroundContactDistance: 0.01
   AdditionalGravity: 0
   MaxUpwardVelocity: 4
   InAirFromJump: 0
+  OnGround: 0
   VelocityOfGround: {x: 0, y: 0, z: 0}
   MoveDirection: {x: 0, y: 0, z: 0}
   PlayerModel: {fileID: 0}
   RawInput: {x: 0, y: 0, z: 0}
+  HoverDelay: 0.5
+  HoverReduction: 0
 --- !u!114 &11499540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,7 +354,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -353,7 +367,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
@@ -386,11 +400,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 2d81343aaa04d2541b6fc68ef074cae8, type: 3}
+      objectReference: {fileID: 8300000, guid: 2e85269c092750842b84f5cb8de2de21, type: 3}
     - target: {fileID: 0}
       propertyPath: m_FootstepSounds.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: d5d2c3e27f879a140b2cfe2c267621ed, type: 3}
+      objectReference: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
     - target: {fileID: 0}
       propertyPath: m_JumpSound
       value: 
@@ -401,11 +415,11 @@ Prefab:
       objectReference: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
     - target: {fileID: 0}
       propertyPath: m_WalkSoundCycle
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_RunSoundCycle
-      value: 14
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BouncePeak.y
@@ -414,6 +428,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: UseForces
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 0.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

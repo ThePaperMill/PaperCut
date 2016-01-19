@@ -6,6 +6,7 @@
  *********************************/
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GoToNextLevel : MonoBehaviour
@@ -27,11 +28,11 @@ public class GoToNextLevel : MonoBehaviour
 
         if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha1) && PrevLevelTrigger)
         {
-            Application.LoadLevel(NextLevel);
+            SceneManager.LoadScene(NextLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha2) && NextLevelTrigger)
         {
-            Application.LoadLevel(NextLevel);
+            SceneManager.LoadScene(NextLevel);
         }
 
     }
@@ -41,7 +42,7 @@ public class GoToNextLevel : MonoBehaviour
 		// If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
 		if(collision.gameObject.GetComponent("CustomDynamicController") != null && !delay)
 		{
-			Application.LoadLevel(NextLevel);
+			SceneManager.LoadScene(NextLevel);
 		}
 	}
 }
