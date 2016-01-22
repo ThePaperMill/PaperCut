@@ -310,7 +310,7 @@ MonoBehaviour:
   m_LandSound: {fileID: 8300000, guid: c22e69d92c862e14ba94d9aae7d70f07, type: 3}
   m_StepInterval: 0
   Active: 1
-  UseForces: 1
+  UseForces: 0
   StickToSlope: 1
   moveSpeed: 5
   MaxSpeed: 1.5
@@ -425,7 +425,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: UseForces
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_RotationOrder
@@ -433,6 +433,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
