@@ -81,9 +81,10 @@ public class BendingCardboardScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            print("I have ACTUALLY collided with player");
+            Debug.Log("I have ACTUALLY collided with player");
             HasCollided = true;
-            if(gameObject.GetComponent<AudioSource>().isPlaying == false)
+            AudioSource noise = gameObject.GetComponent<AudioSource>();
+            if (noise && !noise.isPlaying)
             {
                 gameObject.GetComponent<AudioSource>().Play();
             }
@@ -139,12 +140,12 @@ public class BendingCardboardScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            print("I have STOPPED collided with player");
+            Debug.Log("I have STOPPED collided with player");
             HasCollided = false;
             //SliderTime = 0.0f;
             //Parent.transform.rotation = Quaternion.Slerp(Begin, Quaternion.Euler(endForward), 0.0f);
-
-            if (gameObject.GetComponent<AudioSource>().isPlaying == false)
+            AudioSource noise = gameObject.GetComponent<AudioSource>();
+            if (noise && !noise.isPlaying)
             {
                 gameObject.GetComponent<AudioSource>().Play();
             }
