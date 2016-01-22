@@ -156,6 +156,12 @@ public class CustomDynamicController : MonoBehaviour
 
     public float HoverReduction = 0.0f;
 
+    /****************************************************************************/
+    /*!
+        \brief
+
+    */
+    /****************************************************************************/
     public CustomDynamicController()
     {
 
@@ -211,6 +217,12 @@ public class CustomDynamicController : MonoBehaviour
 		m_AudioSource = GetComponent<AudioSource>();
     }
 
+    /****************************************************************************/
+    /*!
+        \brief
+            when the character id destroyed, disconnect from window events
+    */
+    /****************************************************************************/
     void OnDestroy()
     {
             EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
@@ -243,6 +255,7 @@ public class CustomDynamicController : MonoBehaviour
             return;
         }
 
+        // check if the inventory is open
         InventoryStatus = InventorySystem.GetSingleton.isInventoryOpen();
 
         // if the inventory is open and we press the inventory button, close it ignore other input 
