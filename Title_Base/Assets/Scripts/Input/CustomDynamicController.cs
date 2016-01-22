@@ -551,7 +551,7 @@ public class CustomDynamicController : MonoBehaviour
             determine everything we're in contact with.
     */
     /****************************************************************************/
-    void OnCollisionStaypotato(Collision collisionInfo)
+    void OnCollisionStay(Collision collisionInfo)
     {
       foreach (ContactPoint contact in collisionInfo.contacts)
       {
