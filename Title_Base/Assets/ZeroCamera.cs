@@ -20,10 +20,10 @@ public class ZeroCamera : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         // Lerp the cameras position towards the TargetObjects, plus offset of FollowDistance, at LerpSpeed
-        transform.position = Vector3.Lerp(transform.position, TargetObject.transform.position + FollowDistance, Time.deltaTime * LerpSpeed);
+        transform.position = Vector3.Lerp(transform.position, TargetObject.transform.position + FollowDistance, Time.fixedDeltaTime * LerpSpeed);
         // Constantly stare directly at the Target Object
         transform.LookAt(TargetObject.transform);
 	}
