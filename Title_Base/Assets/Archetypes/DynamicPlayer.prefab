@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prone: {x: 0, y: 0, z: 0}
-  HoverDelay: 0.25
+  HoverDelay: 0.45
 --- !u!114 &11494760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -344,7 +344,7 @@ MonoBehaviour:
   MoveDirection: {x: 0, y: 0, z: 0}
   PlayerModel: {fileID: 0}
   RawInput: {x: 0, y: 0, z: 0}
-  HoverDelay: 0.25
+  HoverDelay: 0.45
   HoverReduction: 0.25
 --- !u!114 &11499540
 MonoBehaviour:
@@ -459,7 +459,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: HoverDelay
-      value: 0.25
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
