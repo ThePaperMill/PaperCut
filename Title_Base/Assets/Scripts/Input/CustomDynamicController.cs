@@ -211,7 +211,7 @@ public class CustomDynamicController : MonoBehaviour
         }
 
         // we want to ignore the player layer
-        CastFilter = 1 << 9;
+        CastFilter = 1 << 10;
         CastFilter = ~CastFilter;
 
 		m_AudioSource = GetComponent<AudioSource>();
@@ -385,20 +385,27 @@ public class CustomDynamicController : MonoBehaviour
 
             Vector3 Poles = new Vector3(0, (CCollider.bounds.extents.y/2.0f), 0);
 
-            Debug.DrawLine(transform.position + Poles + new Vector3(0,0.5f*CCollider.radius,0), transform.position - Poles - new Vector3(0, 0.5f * CCollider.radius, 0));
-
             // we should check out what is in front of us 
-            bool check = Physics.CapsuleCast(transform.position - Poles, transform.position + Poles, 0.45f * CCollider.radius, MoveDirection,out Test ,MoveDirection.magnitude * Time.deltaTime, CastFilter); //RBody.SweepTest(MoveDirection, out Test, MoveDirection.magnitude * Time.deltaTime);
+            bool check = Physics.CapsuleCast(transform.position - Poles, transform.position + Poles, 0.45f * CCollider.radius, MoveDirection,out Test ,MoveDirection.magnitude * Time.deltaTime, CastFilter);
 
-            if (check && !Test.collider.isTrigger && Test.collider.GetComponent<Rigidbody>() != null)
+            if (check && Test.collider.isTrigger == false)
             {
-                //MoveDirection = MoveDirection - Test.normal * Vector3.Dot(MoveDirection, Test.normal);
+                print(Test.collider.name);
 
-                //transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+                // if we are going to move into a static gameobject, adjust out movement vector.
+                if (check && Test.collider.isTrigger == false)
+                {
+                    MoveDirection = MoveDirection - Test.normal * Vector3.Dot(MoveDirection, Test.normal);
+
+                    transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+                }
             }
             else
-               transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+            {
+                transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+            }
         }
+    
 
         if (StickToSlope && !Jumping && State == PlayerState.Idle)
         {
@@ -453,6 +460,25 @@ public class CustomDynamicController : MonoBehaviour
         }
 
         MoveDirection = movement;
+
+        if((RBody.constraints & RigidbodyConstraints.FreezePositionX) !=0)
+        {
+            print("okay");
+            Vector3 constraint = new Vector3(1, 0, 0);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
+        if ((RBody.constraints & RigidbodyConstraints.FreezePositionY) != 0)
+        {
+            print("okay2");
+            Vector3 constraint = new Vector3(0, 1, 0);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
+        if ((RBody.constraints & RigidbodyConstraints.FreezePositionZ) != 0)
+        {
+            print("okay3");
+            Vector3 constraint = new Vector3(0, 0, 1);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
     }
 
     /****************************************************************************/
@@ -632,7 +658,24 @@ public class CustomDynamicController : MonoBehaviour
             // Ignore trigger colliders
             if (contactHolder.collider.isTrigger)
             {
-                return;
+                //print("standing on a trigger");
+
+                //// Update the timer for late jumps
+                //TimeSinceLastDirectContact += dt;
+
+                ////if (TimeSinceLastDirectContact > JumpLagTimer)
+                ////{
+                ////    // Reset all values
+                ////    OnGround = false;
+                ////    VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                ////    GroundNormal = WorldUp;
+                ////}
+
+                //OnGround = false;
+                //VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                //GroundNormal = WorldUp;
+
+                //return;
             }
 
             // Get the object we're in contact with

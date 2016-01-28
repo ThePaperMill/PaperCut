@@ -34,7 +34,7 @@ GameObject:
   - 114: {fileID: 11494760}
   - 82: {fileID: 8262256}
   - 114: {fileID: 11434398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DynamicPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ MonoBehaviour:
   MaxSpeed: 1.5
   MovePower: 3.5
   AirControl: 0.15
-  WalkableSlopeAngle: 60
+  WalkableSlopeAngle: 45
   InitialJumpVelocity: 4
   AdditiveJumpVelocity: 2
   AdditiveJumpTime: 0
@@ -383,7 +383,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: WalkableSlopeAngle
-      value: 60
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -468,6 +468,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

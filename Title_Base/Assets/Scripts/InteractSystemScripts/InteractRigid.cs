@@ -54,7 +54,7 @@ public class InteractRigid : MonoBehaviour
             HoverExit();
         }
 
-        print("SPC1:  " + (player && !player.GetComponent<HoverSpin>().IsSpinning() && inCol && !toAdd.AllInteractableObjects.Find(predishit => predishit == Parent)));
+        //print("SPC1:  " + (player && !player.GetComponent<HoverSpin>().IsSpinning() && inCol && !toAdd.AllInteractableObjects.Find(predishit => predishit == Parent)));
 
         // Special Case:  We're in an interactable collision, not hovering, and there's no list
         if(player && !player.GetComponent<HoverSpin>().IsSpinning() && inCol && !toAdd.AllInteractableObjects.Find(predishit => predishit == Parent))
