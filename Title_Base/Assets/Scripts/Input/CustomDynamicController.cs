@@ -303,7 +303,6 @@ public class CustomDynamicController : MonoBehaviour
                     return;
                 }
             }
-
         }
 
         if(JumpPressed)
@@ -390,8 +389,6 @@ public class CustomDynamicController : MonoBehaviour
 
             if (check && Test.collider.isTrigger == false)
             {
-                print(Test.collider.name);
-
                 // if we are going to move into a static gameobject, adjust out movement vector.
                 if (check && Test.collider.isTrigger == false)
                 {
@@ -405,22 +402,22 @@ public class CustomDynamicController : MonoBehaviour
                 transform.position += MoveDirection * maxSpeed * Time.deltaTime;
             }
         }
-    
 
-        if (StickToSlope && !Jumping && State == PlayerState.Idle)
+        if (StickToSlope && !Jumping && MoveDirection.magnitude == 0)
         {
-          if (GroundNormal != WorldUp)
-          {
             RBody.velocity = new Vector3(0, RBody.velocity.y, 0);
-          }
         }
 
         if(UseForces)
             ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
-		
-		PrevGroundState = OnGround;
+
+        if (MoveDirection.magnitude > 0 && GroundNormal != WorldUp)
+        {
+            RBody.velocity = RBody.velocity - MoveDirection * Vector3.Dot(RBody.velocity, MoveDirection);
+        }
+        PrevGroundState = OnGround;
     }
 
     /****************************************************************************/
@@ -434,7 +431,6 @@ public class CustomDynamicController : MonoBehaviour
         var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
         Vector3 movement = new Vector3();
         RawInput = movement;
-
 
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
@@ -463,19 +459,16 @@ public class CustomDynamicController : MonoBehaviour
 
         if((RBody.constraints & RigidbodyConstraints.FreezePositionX) !=0)
         {
-            print("okay");
             Vector3 constraint = new Vector3(1, 0, 0);
             MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
         }
         if ((RBody.constraints & RigidbodyConstraints.FreezePositionY) != 0)
         {
-            print("okay2");
             Vector3 constraint = new Vector3(0, 1, 0);
             MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
         }
         if ((RBody.constraints & RigidbodyConstraints.FreezePositionZ) != 0)
         {
-            print("okay3");
             Vector3 constraint = new Vector3(0, 0, 1);
             MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
         }
@@ -649,7 +642,9 @@ public class CustomDynamicController : MonoBehaviour
         float RayDistance = GroundContactDistance + CCollider.bounds.extents.y - (CCollider.bounds.extents.x);
 
         // use sphere cast to 
+
         var GroundCheck = Physics.SphereCast(GroundRay, CCollider.bounds.extents.x, out Hitinfo, RayDistance, CastFilter);
+
 
         if (GroundCheck)
         {
@@ -701,6 +696,7 @@ public class CustomDynamicController : MonoBehaviour
                 TimeSinceLastDirectContact = 0.0f;
 
                 Rigidbody test = (Rigidbody)objectHit.GetComponent<Rigidbody>();
+
                 // We want to store the object's velocity so that we can
                 // jump with the object's velocity taken into account
                 if (test != null)
@@ -709,6 +705,10 @@ public class CustomDynamicController : MonoBehaviour
                 }
 
                 return;
+            }
+            else
+            {
+                GroundNormal = WorldUp;
             }
         }
 
@@ -762,7 +762,7 @@ public class CustomDynamicController : MonoBehaviour
         // If the angle of the surface's normal is less than the specified value,
         // we're considered to be on ground
         var degrees    = GetDegreeDifference(surfaceNormal);
-        return degrees < WalkableSlopeAngle;
+        return degrees <= WalkableSlopeAngle;
     }
 
     /****************************************************************************/
