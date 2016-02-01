@@ -211,7 +211,7 @@ public class CustomDynamicController : MonoBehaviour
         }
 
         // we want to ignore the player layer
-        CastFilter = 1 << 9;
+        CastFilter = 1 << 10;
         CastFilter = ~CastFilter;
 
 		m_AudioSource = GetComponent<AudioSource>();
@@ -303,7 +303,6 @@ public class CustomDynamicController : MonoBehaviour
                     return;
                 }
             }
-
         }
 
         if(JumpPressed)
@@ -381,26 +380,44 @@ public class CustomDynamicController : MonoBehaviour
         }
         else
         {
+            RaycastHit Test = new RaycastHit();
+
+            Vector3 Poles = new Vector3(0, (CCollider.bounds.extents.y/2.0f), 0);
+
             // we should check out what is in front of us 
+            bool check = Physics.CapsuleCast(transform.position - Poles, transform.position + Poles, 0.45f * CCollider.radius, MoveDirection,out Test ,MoveDirection.magnitude * Time.deltaTime, CastFilter);
 
+            if (check && Test.collider.isTrigger == false)
+            {
+                // if we are going to move into a static gameobject, adjust out movement vector.
+                if (check && Test.collider.isTrigger == false)
+                {
+                    MoveDirection = MoveDirection - Test.normal * Vector3.Dot(MoveDirection, Test.normal);
 
-            transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+                    transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+                }
+            }
+            else
+            {
+                transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+            }
         }
 
-        if (StickToSlope && !Jumping && State == PlayerState.Idle)
+        if (StickToSlope && !Jumping && MoveDirection.magnitude == 0)
         {
-          if (GroundNormal != WorldUp)
-          {
             RBody.velocity = new Vector3(0, RBody.velocity.y, 0);
-          }
         }
 
         if(UseForces)
             ClampVelocity();
 
         UpdateCurrentState(MoveDirection);
-		
-		PrevGroundState = OnGround;
+
+        if (MoveDirection.magnitude > 0 && GroundNormal != WorldUp)
+        {
+            RBody.velocity = RBody.velocity - MoveDirection * Vector3.Dot(RBody.velocity, MoveDirection);
+        }
+        PrevGroundState = OnGround;
     }
 
     /****************************************************************************/
@@ -414,7 +431,6 @@ public class CustomDynamicController : MonoBehaviour
         var LeftStickPosition = InputManager.GetSingleton.GetLeftStickValues();
         Vector3 movement = new Vector3();
         RawInput = movement;
-
 
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
@@ -440,6 +456,22 @@ public class CustomDynamicController : MonoBehaviour
         }
 
         MoveDirection = movement;
+
+        if((RBody.constraints & RigidbodyConstraints.FreezePositionX) !=0)
+        {
+            Vector3 constraint = new Vector3(1, 0, 0);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
+        if ((RBody.constraints & RigidbodyConstraints.FreezePositionY) != 0)
+        {
+            Vector3 constraint = new Vector3(0, 1, 0);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
+        if ((RBody.constraints & RigidbodyConstraints.FreezePositionZ) != 0)
+        {
+            Vector3 constraint = new Vector3(0, 0, 1);
+            MoveDirection = MoveDirection - constraint * Vector3.Dot(MoveDirection, constraint);
+        }
     }
 
     /****************************************************************************/
@@ -551,7 +583,7 @@ public class CustomDynamicController : MonoBehaviour
             determine everything we're in contact with.
     */
     /****************************************************************************/
-    void OnCollisionStay(Collision collisionInfo)
+    void OnCollisionStaytest(Collision collisionInfo)
     {
       foreach (ContactPoint contact in collisionInfo.contacts)
       {
@@ -593,10 +625,7 @@ public class CustomDynamicController : MonoBehaviour
     */
     /****************************************************************************/
     void UpdateGroundState(float dt)
-    {
-        // Update the timer for late jumps
-        TimeSinceLastDirectContact += dt;
-        
+    {      
         // We want to iterate through all objects we're in contact with in order
         // to determine whether or not we are in contact with the ground
         Ray GroundRay = new Ray();
@@ -613,16 +642,35 @@ public class CustomDynamicController : MonoBehaviour
         float RayDistance = GroundContactDistance + CCollider.bounds.extents.y - (CCollider.bounds.extents.x);
 
         // use sphere cast to 
-        var GroundCheck = Physics.SphereCast(GroundRay, 0.95f * CCollider.bounds.extents.x, out Hitinfo, RayDistance, CastFilter);
 
-        if(GroundCheck)
+        var GroundCheck = Physics.SphereCast(GroundRay, CCollider.bounds.extents.x, out Hitinfo, RayDistance, CastFilter);
+
+
+        if (GroundCheck)
         {
             var contactHolder = Hitinfo;
 
             // Ignore trigger colliders
             if (contactHolder.collider.isTrigger)
             {
-                return;
+                //print("standing on a trigger");
+
+                //// Update the timer for late jumps
+                //TimeSinceLastDirectContact += dt;
+
+                ////if (TimeSinceLastDirectContact > JumpLagTimer)
+                ////{
+                ////    // Reset all values
+                ////    OnGround = false;
+                ////    VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                ////    GroundNormal = WorldUp;
+                ////}
+
+                //OnGround = false;
+                //VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                //GroundNormal = WorldUp;
+
+                //return;
             }
 
             // Get the object we're in contact with
@@ -648,18 +696,35 @@ public class CustomDynamicController : MonoBehaviour
                 TimeSinceLastDirectContact = 0.0f;
 
                 Rigidbody test = (Rigidbody)objectHit.GetComponent<Rigidbody>();
+
                 // We want to store the object's velocity so that we can
                 // jump with the object's velocity taken into account
                 if (test != null)
                 {
                     VelocityOfGround = test.velocity;
                 }
+
+                return;
+            }
+            else
+            {
+                GroundNormal = WorldUp;
             }
         }
 
-        if (TimeSinceLastDirectContact > JumpLagTimer)
+        else 
         {
-            // Reset all values
+            // Update the timer for late jumps
+            TimeSinceLastDirectContact += dt;
+
+            //if (TimeSinceLastDirectContact > JumpLagTimer)
+            //{
+            //    // Reset all values
+            //    OnGround = false;
+            //    VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+            //    GroundNormal = WorldUp;
+            //}
+
             OnGround = false;
             VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
             GroundNormal = WorldUp;
@@ -697,7 +762,7 @@ public class CustomDynamicController : MonoBehaviour
         // If the angle of the surface's normal is less than the specified value,
         // we're considered to be on ground
         var degrees    = GetDegreeDifference(surfaceNormal);
-        return degrees < WalkableSlopeAngle;
+        return degrees <= WalkableSlopeAngle;
     }
 
     /****************************************************************************/
