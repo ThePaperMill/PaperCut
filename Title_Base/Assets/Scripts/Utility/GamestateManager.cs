@@ -104,6 +104,7 @@ public class GamestateManager : Singleton<GamestateManager>
         EventSystem.GlobalHandler.DispatchEvent(Events.PauseGameEvent, null);
         IsPaused = true;
         Time.timeScale = 0.0f;
+        CurState = GAME_STATE.GS_PAUSE;
     }
 
     public void ResumeGame()

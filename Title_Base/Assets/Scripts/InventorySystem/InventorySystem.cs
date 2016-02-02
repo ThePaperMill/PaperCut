@@ -1,6 +1,6 @@
 ﻿/****************************************************************************/
 /*!
-\file   Inventory.csSystem
+\file   InventorySystem.cs
 \author Steven Gallwas
 \brief  
     This file contains the implementation of the Inventory System
@@ -25,7 +25,7 @@ public enum InventoryState
 /****************************************************************************/
 /*!
   \brief
-    The inventroy system is a singleton
+    The inventory system is a singleton
 */
 /****************************************************************************/
 public class InventorySystem : Singleton<InventorySystem>

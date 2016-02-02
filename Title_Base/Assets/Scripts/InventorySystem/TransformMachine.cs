@@ -17,8 +17,9 @@ public class TransformMachine : EventHandler
 {
     public GameObject LightningBoltPrefab = null;
     public GameObject ParticleEffect = null;
-   
+
     private ActionGroup grp = new ActionGroup();
+    private ActionGroup grp2 = new ActionGroup();
     Vector3 ItemPosition = new Vector3();
     ItemInfo Item = null;
 
@@ -28,16 +29,69 @@ public class TransformMachine : EventHandler
     int transformations = 0;
     public AudioClip TransformSound = null;
 
-    float Timer = 0.0f;
+    // Use this for initialization
 
-    bool Triggered = false;
-	// Use this for initialization
+    public GameObject Light = null;
+    GameObject MCamera = null;
+
+    public Vector3 CamPosition = new Vector3();
+    public float CamDuration = 1.0f;
+
+    Vector3 CamStart = new Vector3();
+    Quaternion CamRotation = new Quaternion();
+    Light LightScript = null;
+
     void Start () 
     {
         EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
 
-        // hardcoded as F*** ****
+        // hardcoded as F*** **** **** *** * **** **** ***
         ItemPosition = transform.position - new Vector3(0, 2.1f, 0);
+
+        MCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        if(Light)
+        {
+            LightScript = Light.GetComponent<Light>();
+        }
+    }
+
+    void AdjustCamera()
+    {
+        var test = ActionSystem.Action.Group(grp2);
+
+        if (LightScript)
+        {
+            Action.Property(test, LightScript.GetProperty(o => o.intensity), 0.0f, CamDuration, Ease.Linear);
+        }
+
+        if (MCamera)
+        {
+            CamStart = MCamera.transform.localPosition;
+            Action.Property(test, MCamera.transform.GetProperty(o => o.localPosition), CamPosition, CamDuration, Ease.Linear);
+        }
+
+        GamestateManager.GetSingleton.CurState = GAME_STATE.GS_CINEMATIC;
+    }
+
+    void ReturnCamera()
+    {
+        var test = ActionSystem.Action.Group(grp2);
+
+        if (LightScript)
+        {
+            Action.Property(test, LightScript.GetProperty(o => o.intensity), 1.0f, CamDuration, Ease.Linear);
+        }
+
+        if (MCamera)
+        {
+            Action.Property(test, MCamera.transform.GetProperty(o => o.localPosition), CamStart, CamDuration, Ease.Linear);
+        }
+    }
+
+    void ResetCamera()
+    {
+        GamestateManager.GetSingleton.CurState = GAME_STATE.GS_GAME;
     }
 
     void OnTransformItem(EventData eventData)
@@ -48,20 +102,37 @@ public class TransformMachine : EventHandler
 
         var test = ActionSystem.Action.Sequence(grp);
 
+        // create the old item
         Action.Call(test, CreateOldItem);
         Action.Delay(test, 1.5f);
+
+        // move the camera to a different positon, then stay there for the duration of the cutscene
+        Action.Call(test, AdjustCamera);
+        Action.Delay(test, CamDuration);
+
+        // create the lightning bolt object here
         Action.Call(test, CreateLightningBolt);
         Action.Delay(test, 0.5f);
+
+        // create the particle effect here
         Action.Call(test, CreateParticle);
         Action.Delay(test, 0.45f);
+
+        // create the new object
         Action.Call(test, CreateNewItem);
         Action.Delay(test, 0.45f);
+
+
         Action.Call(test, MachineFinished);
+        Action.Call(test, ReturnCamera);
+        Action.Delay(test, CamDuration);
+
+        Action.Call(test, ResetCamera);
     }
 
     void MachineFinished()
     {
-        EventSystem.GlobalHandler.DispatchEvent(Events.MachineFinisehd);
+        EventSystem.GlobalHandler.DispatchEvent(Events.MachineFinished);
     }
 
     void CreateLightningBolt()
@@ -79,7 +150,6 @@ public class TransformMachine : EventHandler
             tempaudio.Stop();
             tempaudio.PlayOneShot(TransformSound);
         }
-
 
         GameObject.Destroy(OldObject);
 
@@ -172,19 +242,21 @@ public class TransformMachine : EventHandler
   {
     grp.Update(Time.deltaTime);
 
-    if(transformations >= 2 && !Triggered)
-    {
-        Triggered = true;
-        EventSystem.GlobalHandler.DispatchEvent(Events.EndTheGame);
-        GamestateManager.GetSingleton.CurState = GAME_STATE.GS_CINEMATIC;
-    }
-    else if(Triggered)
-    {
-        Timer += Time.deltaTime;
-        if(Timer > 3.5f)
-        {
-            SceneManager.LoadScene("ScrollingCredits");
-        }
-    }
+    grp2.Update(Time.deltaTime);
+
+  //  if(transformations >= 2 && !Triggered)
+  //  {
+  //      Triggered = true;
+  //      EventSystem.GlobalHandler.DispatchEvent(Events.EndTheGame);
+  //      GamestateManager.GetSingleton.CurState = GAME_STATE.GS_CINEMATIC;
+  //  }
+  //  else if(Triggered)
+  //  {
+  //      Timer += Time.deltaTime;
+  //      if(Timer > 3.5f)
+  //      {
+  //          SceneManager.LoadScene("ScrollingCredits");
+  //      }
+  //  }
   }
 }
