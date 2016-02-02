@@ -41,6 +41,9 @@ public class TransformMachine : EventHandler
     Quaternion CamRotation = new Quaternion();
     Light LightScript = null;
 
+    float ExplosionRadius = 15.0f;
+    float ExplosionForce = 200.0f;
+
     void Start () 
     {
         EventSystem.GlobalHandler.Connect(Events.TransformItem, OnTransformItem);
@@ -94,6 +97,23 @@ public class TransformMachine : EventHandler
         GamestateManager.GetSingleton.CurState = GAME_STATE.GS_GAME;
     }
 
+    void CreatePointBlast()
+    {
+        Vector3 ExplosionPoint = ItemPosition;
+
+        var colliders = Physics.OverlapSphere(ExplosionPoint, ExplosionRadius);
+
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+            if (rb != null && rb.isKinematic == false)
+            {
+                rb.AddExplosionForce(ExplosionForce, ExplosionPoint, ExplosionRadius, 3.0F);
+            }
+        }
+    }
+
     void OnTransformItem(EventData eventData)
     {
         // cast as a recieved item event
@@ -120,6 +140,12 @@ public class TransformMachine : EventHandler
 
         // create the new object
         Action.Call(test, CreateNewItem);
+
+        if(Item.Explode)
+        {
+            Action.Call(test, CreatePointBlast);
+        }
+
         Action.Delay(test, 0.45f);
 
 
