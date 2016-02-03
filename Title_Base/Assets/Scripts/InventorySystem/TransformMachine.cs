@@ -126,6 +126,8 @@ public class TransformMachine : EventHandler
         Action.Call(test, CreateOldItem);
         Action.Delay(test, 1.5f);
 
+        //test comment
+
         // move the camera to a different positon, then stay there for the duration of the cutscene
         Action.Call(test, AdjustCamera);
         Action.Delay(test, CamDuration);
@@ -136,16 +138,14 @@ public class TransformMachine : EventHandler
 
         // create the particle effect here
         Action.Call(test, CreateParticle);
+        if (Item.Explode)
+        {
+            Action.Call(test, CreatePointBlast);
+        }
         Action.Delay(test, 0.45f);
 
         // create the new object
         Action.Call(test, CreateNewItem);
-
-        if(Item.Explode)
-        {
-            Action.Call(test, CreatePointBlast);
-        }
-
         Action.Delay(test, 0.45f);
 
 
