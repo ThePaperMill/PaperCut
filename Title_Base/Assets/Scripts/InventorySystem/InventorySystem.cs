@@ -65,6 +65,7 @@ public class InventorySystem : Singleton<InventorySystem>
     Quaternion OriginalItemRotation;
 
     GameObject Scientist = null;
+    GameObject RequestTarget = null;
 
     ItemInfo LastGiveItem = null;
 
@@ -105,12 +106,20 @@ public class InventorySystem : Singleton<InventorySystem>
     /****************************************************************************/
     void OnRequestItem(EventData data)
     {
-        print("ITEM REQUEST");
-        StringEvent eventData = data as StringEvent;
-        print(eventData.Message);
-        var info = new ItemInfo();
-        info.ItemName = "DefaultCrate";
-        EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, new RecievedItemEvent(info));
+        var Testdata = data as RequestItemEvent;
+
+        if (Testdata != null && Testdata.Requestor)
+        {
+            RequestTarget = Testdata.Requestor;
+            OpenInventory(InventoryState.INVENTORY_GIVE);
+        }
+
+        //print("ITEM REQUEST");
+        //StringEvent eventData = data as StringEvent;
+        //print(eventData.Message);
+        //var info = new ItemInfo();
+        //info.ItemName = "DefaultCrate";
+        //EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, new RecievedItemEvent(info));
     }
 
     /****************************************************************************/
@@ -188,8 +197,12 @@ public class InventorySystem : Singleton<InventorySystem>
             // add the item to the vector
             var data = eventData as RecievedItemEvent;
 
-            Inventory.Add(data.Info);
-            CreateAcquiredFeedback(data.Info.ItemName);
+            if (data != null)
+            {
+                Inventory.Add(data.Info);
+
+                CreateAcquiredFeedback(data.Info.ItemName);
+            }
         }
     }
 
@@ -613,13 +626,27 @@ public class InventorySystem : Singleton<InventorySystem>
 
                 RecievedItemEvent give = new RecievedItemEvent(temp);
 
-                Scientist.DispatchEvent(Events.RecievedItem, give);
+
+                if (Scientist)
+                    Scientist.DispatchEvent(Events.RecievedItem, give);
+                else if (RequestTarget)
+                {
+                    print("sending event to request target.");
+                    RequestTarget.DispatchEvent(Events.RecievedItem, give);
+                }
+                CloseInventory();
+            }
+            else if(Scientist)
+            {
+                Scientist.DispatchEvent(Events.RecievedItem, null);
+
+                LastGiveItem = null;
 
                 CloseInventory();
             }
             else
             {
-                Scientist.DispatchEvent(Events.RecievedItem, null);
+                EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, null);
 
                 LastGiveItem = null;
 

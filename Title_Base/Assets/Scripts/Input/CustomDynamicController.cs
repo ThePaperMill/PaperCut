@@ -282,6 +282,8 @@ public class CustomDynamicController : MonoBehaviour
 
         if (OpenInventory)
         {
+            print("Hello");
+
             if (!InventoryStatus)
                 InventorySystem.GetSingleton.OpenInventory(InventoryState.INVENTORY_VIEW);
 

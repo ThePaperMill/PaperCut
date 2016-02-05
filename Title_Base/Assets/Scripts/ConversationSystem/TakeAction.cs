@@ -21,7 +21,10 @@ namespace Assets.Scripts.ConversationSystem
     public class TakeAction : ConversationAction
     {
         public String ItemName = "DefaultCube";
-        private StringEvent StringEventData = new StringEvent();
+        //private StringEvent StringEventData = new StringEvent();
+
+        private RequestItemEvent RIEvent = new RequestItemEvent();
+
         private BoolEvent BoolEventData = new BoolEvent();
 
         public ConversationAction NextIfTrue;
@@ -36,14 +39,17 @@ namespace Assets.Scripts.ConversationSystem
 
         public override void StartAction()
         {
-            StringEventData.Message = ItemName;
+            //StringEventData.Message = ItemName;
+            RIEvent.ItemName = ItemName;
+            RIEvent.Requestor = gameObject;
+            
             //Ask the inventory to give me an item.
             //this.Connect(Events.RecievedItem, OnRecievedItem);
             EventSystem.GlobalHandler.Connect(Events.RecievedItem, OnRecievedItem);
             //If they have the item
             if (!false)
             {
-                EventSystem.GlobalHandler.DispatchEvent(Events.RequestItem, StringEventData);
+                gameObject.DispatchEvent(Events.RequestItem, RIEvent);
             }
             //else
             //{
