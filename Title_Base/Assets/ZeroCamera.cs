@@ -3,9 +3,9 @@ using System.Collections;
 
 public class ZeroCamera : MonoBehaviour
 {
-    public GameObject TargetObject;         // The object we want the camera to focus on
     public Vector3 FollowDistance;          // The distance away from the target object we want the camera to be
     public float LerpSpeed;                 // The speed at which the camera moves to its new location.
+    public GameObject TargetObject;         // The object we want the camera to focus on
 
     private GameObject DefaultTarget;       // Variable for storing default value of TargetObject
     private Vector3 DefaultFollow;          // Variable for storing default value of FollowDistance
@@ -16,7 +16,6 @@ public class ZeroCamera : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        DefaultTarget = TargetObject;       // Store the default value of TargetObject
         DefaultFollow = FollowDistance;     // Store the default value of FollowDistance
         DefaultLerp = LerpSpeed;            // Store the default value of LerpSpeed
         LookAtPoint = TargetObject.transform.position;
@@ -25,6 +24,14 @@ public class ZeroCamera : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+        if(TargetObject == null)
+        {
+            TargetObject = GameObject.FindGameObjectWithTag("Player");
+
+            DefaultTarget = TargetObject;       // Store the default value of TargetObject
+        }
+        print(TargetObject.name);
+
         // Lerp the cameras position towards the TargetObjects, plus offset of FollowDistance, at LerpSpeed
         transform.position = Vector3.Lerp(transform.position, TargetObject.transform.position + FollowDistance, LerpSpeed * Time.fixedDeltaTime);
 
