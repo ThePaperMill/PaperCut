@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class PresentationSkip : Singleton<PresentationSkip>
 {
     string FirstLevel = "Player_House";
+
     string SecondLevel = "Jerry's_PrettyLevel";
-
-
+    string ThirdLevel = "MilestonePretest";
+    string FourthLevel = "HighRiseApartments";
 
 
     string LastLevel = "ScientistStreet";
@@ -37,11 +38,11 @@ public class PresentationSkip : Singleton<PresentationSkip>
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(ThirdLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha4))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(FourthLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha5))
         {
