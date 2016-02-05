@@ -13,12 +13,20 @@ public class ZeroCamera : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private Vector3 LookAtPoint;
 
+    public GameObject StartingLookTarget = null;
+
 	// Use this for initialization
 	void Start ()
     {
         DefaultFollow = FollowDistance;     // Store the default value of FollowDistance
         DefaultLerp = LerpSpeed;            // Store the default value of LerpSpeed
-        LookAtPoint = TargetObject.transform.position;
+
+        if(TargetObject)
+            LookAtPoint = TargetObject.transform.position;
+        else if(StartingLookTarget)
+        {
+            LookAtPoint = StartingLookTarget.transform.position;
+        }
     }
 	
 	// Update is called once per frame
@@ -29,8 +37,10 @@ public class ZeroCamera : MonoBehaviour
             TargetObject = GameObject.FindGameObjectWithTag("Player");
 
             DefaultTarget = TargetObject;       // Store the default value of TargetObject
+
+            return;
         }
-        print(TargetObject.name);
+        //print(TargetObject.name);
 
         // Lerp the cameras position towards the TargetObjects, plus offset of FollowDistance, at LerpSpeed
         transform.position = Vector3.Lerp(transform.position, TargetObject.transform.position + FollowDistance, LerpSpeed * Time.fixedDeltaTime);

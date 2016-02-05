@@ -33,7 +33,7 @@ public class PresentationSkip : Singleton<PresentationSkip>
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(SecondLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha3))
         {
