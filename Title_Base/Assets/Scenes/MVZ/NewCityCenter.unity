@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: d5bd76aa0cae2c84fbb869db19a022d9,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -97,6 +98,7 @@ GameObject:
   - 65: {fileID: 8679332}
   - 23: {fileID: 8679331}
   - 114: {fileID: 8679330}
+  - 114: {fileID: 8679335}
   m_Layer: 0
   m_Name: CameraRegion (3)
   m_TagString: Untagged
@@ -175,6 +177,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
+--- !u!114 &8679335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 8679329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f4876f2666afa4fa3682b02d01b86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &20657454
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +275,7 @@ GameObject:
   - 65: {fileID: 102872864}
   - 23: {fileID: 102872863}
   - 114: {fileID: 102872862}
+  - 114: {fileID: 102872867}
   m_Layer: 0
   m_Name: CameraRegion (1)
   m_TagString: Untagged
@@ -340,6 +354,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+--- !u!114 &102872867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 102872861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f4876f2666afa4fa3682b02d01b86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &140641185
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +704,7 @@ GameObject:
   - 33: {fileID: 572180899}
   - 65: {fileID: 572180898}
   - 23: {fileID: 572180897}
+  - 114: {fileID: 572180901}
   m_Layer: 0
   m_Name: House (6)
   m_TagString: Untagged
@@ -743,6 +769,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 21
+--- !u!114 &572180901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 572180896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f4876f2666afa4fa3682b02d01b86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &604437470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1051,7 @@ GameObject:
   - 65: {fileID: 839127860}
   - 23: {fileID: 839127859}
   - 114: {fileID: 839127858}
+  - 114: {fileID: 839127863}
   m_Layer: 0
   m_Name: CameraRegion (2)
   m_TagString: Untagged
@@ -1092,6 +1130,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!114 &839127863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839127857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f4876f2666afa4fa3682b02d01b86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &851035012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,9 +1522,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5888348d9a3e6d04697ca20556fbb2eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetObject: {fileID: 779208100}
   FollowDistance: {x: 0, y: 1.5, z: -5}
   LerpSpeed: 2
+  TargetObject: {fileID: 779208100}
+  StartingLookTarget: {fileID: 0}
 --- !u!1 &969793479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1971,7 @@ GameObject:
   - 65: {fileID: 1746754269}
   - 23: {fileID: 1746754268}
   - 114: {fileID: 1746754267}
+  - 114: {fileID: 1746754272}
   m_Layer: 0
   m_Name: CameraRegion
   m_TagString: Untagged
@@ -1999,6 +2050,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!114 &1746754272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1746754266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f4876f2666afa4fa3682b02d01b86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1785954756
 GameObject:
   m_ObjectHideFlags: 0
