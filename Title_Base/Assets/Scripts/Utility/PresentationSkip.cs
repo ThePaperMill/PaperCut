@@ -10,6 +10,13 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string ThirdLevel = "MilestonePretest";
     string FourthLevel = "HighRiseApartments";
 
+    // mechanics test
+    string FifthLevel = "HighRiseApartments";
+    string SixthLevel = "HighRiseApartments";
+    string SeventhLevel = "HighRiseApartments";
+    string EighthLevel = "HighRiseApartments";
+    string NinthLevel = "CityCenter";
+
 
     string LastLevel = "ScientistStreet";
 
@@ -46,23 +53,23 @@ public class PresentationSkip : Singleton<PresentationSkip>
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha5))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(FifthLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha6))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(SixthLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha7))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(SeventhLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha8))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(EighthLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha9))
         {
-            SceneManager.LoadScene(FirstLevel);
+            SceneManager.LoadScene(NinthLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha0))
         {
