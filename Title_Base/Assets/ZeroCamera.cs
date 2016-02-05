@@ -26,7 +26,7 @@ public class ZeroCamera : MonoBehaviour
 	void FixedUpdate ()
     {
         // Lerp the cameras position towards the TargetObjects, plus offset of FollowDistance, at LerpSpeed
-        transform.position = Vector3.SmoothDamp(transform.position, TargetObject.transform.position + FollowDistance, ref velocity, LerpSpeed);
+        transform.position = Vector3.Lerp(transform.position, TargetObject.transform.position + FollowDistance, LerpSpeed * Time.fixedDeltaTime);
 
         LookAtPoint = Vector3.Lerp(LookAtPoint, TargetObject.transform.position, Time.smoothDeltaTime * 3);
 
