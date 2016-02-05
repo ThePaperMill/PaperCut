@@ -126,8 +126,6 @@ public class TransformMachine : EventHandler
         Action.Call(test, CreateOldItem);
         Action.Delay(test, 1.5f);
 
-        //test comment
-
         // move the camera to a different positon, then stay there for the duration of the cutscene
         Action.Call(test, AdjustCamera);
         Action.Delay(test, CamDuration);

@@ -56,6 +56,13 @@ namespace Assets.Scripts.ConversationSystem
             return eventData.Message;
         }
     }
+
+    public class RequestItemEvent : EventData
+    {
+        public String ItemName = "";
+        public GameObject Requestor = null;
+    }
+
   public class TextAreaScript : MonoBehaviour
   {
 
