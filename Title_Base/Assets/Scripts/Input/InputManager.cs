@@ -123,6 +123,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     {
         InventorySystem.GetSingleton.Initialize();
         GamestateManager.GetSingleton.Initialize();
+        PresentationSkip.GetSingleton.Initialize();
     }
 
     /*************************************************************************/

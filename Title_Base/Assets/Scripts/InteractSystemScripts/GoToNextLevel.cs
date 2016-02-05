@@ -26,11 +26,11 @@ public class GoToNextLevel : MonoBehaviour
 			delay = false;
 		}
 
-        if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha1) && PrevLevelTrigger)
+        if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.F1) && PrevLevelTrigger)
         {
             SceneManager.LoadScene(NextLevel);
         }
-        else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha2) && NextLevelTrigger)
+        else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.F2) && NextLevelTrigger)
         {
             SceneManager.LoadScene(NextLevel);
         }
