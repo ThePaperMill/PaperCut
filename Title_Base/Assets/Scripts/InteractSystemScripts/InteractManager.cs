@@ -12,7 +12,7 @@ using ActionSystem;
 
 public class InteractManager : MonoBehaviour
 {
-	List<GameObject> AllInteractableObjects = new List<GameObject>{};
+	public List<GameObject> AllInteractableObjects = new List<GameObject>{};
 	GameObject Player;
 	public Object HighlightArchetype;
 	GameObject Highlight;

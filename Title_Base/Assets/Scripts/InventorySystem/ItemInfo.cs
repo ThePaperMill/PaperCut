@@ -52,6 +52,8 @@ public class ItemInfo
     public string RealItemName = "";
     public string CardboardItemName = "";
 
+    public bool Explode = false;
+
   public ItemInfo()
   {
 

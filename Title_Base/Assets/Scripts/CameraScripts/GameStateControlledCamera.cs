@@ -72,6 +72,13 @@ public class GameStateControlledCamera : MonoBehaviour
         ChangeHover(testPlsDelete);
     }*/
 
+   // if the game is in cinematic mode, don't update the camera.
+   if(GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+    {
+            return;
+    }
+
+
     //Call this every frame to move slowly towards the hover object (PosTarget)
     SwitchPosition();
 
