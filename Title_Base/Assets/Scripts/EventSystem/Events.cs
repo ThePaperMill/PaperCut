@@ -108,6 +108,8 @@ public class Events
 
     public static readonly String LightOff = "LightOff";
     public static readonly String LightOn = "LightOn";
+    public static readonly String CatchFire = "CatchFire";
+
     //Nonstatic
     public string EventName = DefaultEvent;
 
