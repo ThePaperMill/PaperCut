@@ -11,6 +11,8 @@ GameObject:
   - 33: {fileID: 3316170}
   - 23: {fileID: 2315012}
   - 65: {fileID: 6534946}
+  - 114: {fileID: 11471354}
+  - 114: {fileID: 11470772}
   m_Layer: 0
   m_Name: PanelBase
   m_TagString: Untagged
@@ -75,13 +77,62 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0025, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11470772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efd4e64a355d6041b6b9f59dee51c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  ListenEventName:
+    EventName: InitializeEvent
+  ListenTarget: {fileID: 187550}
+  DispatchEvents: 0
+  DispatchEventName:
+    EventName: DefaultEvent
+  DispatchTarget: {fileID: 187550}
+  TargetMaterial: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
+--- !u!114 &11471354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b22b18a5ddece43933eb794b5ae00f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  MouseEvents: 0
+  InstantiationEvents: 1
+  UpdateEvents: 0
+  CollisionEvents: 0
+  GameEvents: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: MouseEvents
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ListenEventName.EventName
+      value: InitializeEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TargetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187550}
