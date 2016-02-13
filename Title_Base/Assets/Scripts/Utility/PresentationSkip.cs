@@ -11,13 +11,15 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FourthLevel = "HighRiseApartments";
 
     // mechanics test
-    string FifthLevel = "HighRiseApartments";
-    string SixthLevel = "HighRiseApartments";
+    string FifthLevel = "Sewer";
+
+    string SixthLevel = "NewCityCenter";
     string SeventhLevel = "HighRiseApartments";
     string EighthLevel = "HighRiseApartments";
+
+
+
     string NinthLevel = "CityCenter";
-
-
     string LastLevel = "ScientistStreet";
 
     // Use this for initialization
