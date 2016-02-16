@@ -99,6 +99,8 @@ public class TransformMachine : EventHandler
 
     void CreatePointBlast()
     {
+        EventSystem.GlobalHandler.DispatchEvent(Events.CatchFire);
+
         Vector3 ExplosionPoint = ItemPosition;
 
         var colliders = Physics.OverlapSphere(ExplosionPoint, ExplosionRadius);
