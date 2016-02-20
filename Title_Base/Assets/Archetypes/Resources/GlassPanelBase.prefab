@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2315012}
   - 65: {fileID: 6534946}
   m_Layer: 0
-  m_Name: PanelBase
+  m_Name: GlassPanelBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,10 +37,10 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187550}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
+  - {fileID: 2100000, guid: 84387ae73d88e844792303c191e9b991, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -94,6 +94,22 @@ Prefab:
       propertyPath: TargetMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: GlassPanelBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 84387ae73d88e844792303c191e9b991, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187550}

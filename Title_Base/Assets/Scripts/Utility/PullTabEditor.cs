@@ -11,6 +11,19 @@ struct LastTabInfo
 
 public class PullTabEditor : MonoBehaviour
 {
+    public bool PopUp = true;
+    
+    [HideInInspector]
+    public bool FoldIn = false;
+    [HideInInspector]
+    public float RotationAmount = 90;
+    [HideInInspector]
+    public GameObject LargeBendyArch;
+    [HideInInspector]
+    public GameObject SmallBendyArch;
+    [HideInInspector]
+    public GameObject PanelBaseArch;
+
     public List<List<GameObject>> TileGrid = new List<List<GameObject>>();
     [HideInInspector]
     public GameObject CurrentTile = null;
@@ -20,13 +33,30 @@ public class PullTabEditor : MonoBehaviour
     
     void Start ()
     {
-	    
+	    if(!PopUp)
+        {
+            var comps = GetComponentsInChildren<PullTabChild>();
+            foreach(PullTabChild i in comps)
+            {
+                if(!i.gameObject.name.Contains("Column"))
+                {
+                    if(FoldIn)
+                    {
+                        i.BendVector = i.transform.localEulerAngles + i.BendVector;
+                    }
+                    else
+                    {
+                        i.BendVector = i.transform.localEulerAngles - i.BendVector;
+                    }
+                    
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void Update ()
     {
-        
         //Debug.Log("Update");
     }
 
@@ -35,11 +65,6 @@ public class PullTabEditor : MonoBehaviour
         //Debug.Log("Render");
     }
     
-    public void OnDeselect(BaseEventData data)
-    {
-        var mat = Resources.Load<Material>("BlankCardBoard");
-        Debug.Log("SDASD");
-    }
 }
 
 #if UNITY_EDITOR
@@ -60,17 +85,18 @@ namespace CustomInspector
     [CustomEditor(typeof(PullTabEditor), true)]
     public class PullTabEditorEditor : Editor
     {
-        //public List<List<GameObject>> LastTileGrid = new List<List<GameObject>>();
+        
+        Material LastSelectedMat;
         Material OutlineMatArch;
         Material DefaultMatArch;
-        GameObject PanelArch;
-        GameObject SmallPanelArch;
-        GameObject BaseArch;
+        GameObject PanelArch { get { return Comp.LargeBendyArch; } set { Comp.LargeBendyArch = value; } }
+        GameObject SmallPanelArch { get { return Comp.SmallBendyArch; } set { Comp.SmallBendyArch = value; } }
+        GameObject BaseArch { get { return Comp.PanelBaseArch; } set { Comp.PanelBaseArch = value; } }
         int Row = 0;
         int Column = 0;
         Vector3 CenterPos = new Vector3(0, -0.025f, 1.375f);
         //float TileWidth = 1;
-
+        SerializedProperty FoldInProp;
         bool Confirmation = false;
 
         GameObject CurrentPanel
@@ -88,14 +114,24 @@ namespace CustomInspector
         PullTabEditor Comp = null;
         public void OnEnable()
         {
+            Comp = target as PullTabEditor;
+            FoldInProp = serializedObject.FindProperty("FoldIn");
             DefaultMatArch = Resources.Load<Material>("BlankCardBoard");
             OutlineMatArch = Resources.Load<Material>("OutlinedCardboard");
-            PanelArch = Resources.Load<GameObject>("TabChild");
-            BaseArch = Resources.Load<GameObject>("PanelBase");
-            SmallPanelArch = Resources.Load<GameObject>("SmallTabChild");
-            Comp = target as PullTabEditor;
-            Comp.TileGrid.Clear();
+            if (!PanelArch)
+            {
+                PanelArch = Resources.Load<GameObject>("TabChild");
+            }
+            if(!BaseArch)
+            {
+                BaseArch = Resources.Load<GameObject>("PanelBase");
+            }
+            if(!SmallPanelArch)
+            {
+                SmallPanelArch = Resources.Load<GameObject>("SmallTabChild");
+            }
             
+            Comp.TileGrid.Clear();
 
             foreach (Transform i in Comp.GetComponentInChildren<Transform>())
             {
@@ -123,10 +159,12 @@ namespace CustomInspector
                             if(Comp.TileGrid[index].Count == 0)
                             {
                                 Comp.TileGrid[index].Add(j.gameObject.transform.parent.gameObject);
+                                
                             }
                             else
                             {
                                 Comp.TileGrid[index].Add(j.gameObject);
+                                
                             }
                             
                         }
@@ -150,7 +188,7 @@ namespace CustomInspector
             {
                 Column = 0;
             }
-            if(Comp.TileGrid.Count > 0)
+            if(Comp.TileGrid.Count > 0 && !Application.isPlaying)
             {
                 SetCurrentPanel(Comp.TileGrid[Column][Row]);
             }
@@ -161,6 +199,11 @@ namespace CustomInspector
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+            if (!Comp.PopUp)
+            {
+                EditorGUILayout.PropertyField(FoldInProp);
+                serializedObject.ApplyModifiedProperties();
+            }
             GUILayout.Label("Use WASD to navigate and add tiles." + 
                             "\nHold SHIFT to add a tile that should be bent towards you." + 
                             "\nHold CTRL to add a tile that should bent away from you." +
@@ -224,6 +267,13 @@ namespace CustomInspector
                     }
                 }
             }
+            bool allowSceneObjects = !EditorUtility.IsPersistent(target);
+            Comp.RotationAmount = EditorGUILayout.FloatField("Rotation Amount", Comp.RotationAmount);
+
+            Comp.LargeBendyArch = (GameObject)EditorGUILayout.ObjectField("Large Bendy", Comp.LargeBendyArch, typeof(GameObject), allowSceneObjects);
+            Comp.SmallBendyArch = (GameObject)EditorGUILayout.ObjectField("Small Bendy", Comp.SmallBendyArch, typeof(GameObject), allowSceneObjects);
+            Comp.PanelBaseArch = (GameObject)EditorGUILayout.ObjectField("Panel Base", Comp.PanelBaseArch, typeof(GameObject), allowSceneObjects);
+            
         }
 
         void OnSceneGUI()
@@ -242,11 +292,11 @@ namespace CustomInspector
                         {
                             if(Row != 0)
                             {
-                                SetPanelRotation(new Vector3(0, 90, 0));
+                                SetPanelRotation(new Vector3(0, Comp.RotationAmount, 0));
                             }
                             else
                             {
-                                SetPanelRotation(new Vector3(90, 0, 0));
+                                SetPanelRotation(new Vector3(Comp.RotationAmount, 0, 0));
                             }
                             
                         }
@@ -254,11 +304,11 @@ namespace CustomInspector
                         {
                             if (Row != 0)
                             {
-                                SetPanelRotation(new Vector3(0, -90, 0));
+                                SetPanelRotation(new Vector3(0, -Comp.RotationAmount, 0));
                             }
                             else
                             {
-                                SetPanelRotation(new Vector3(-90, 0, 0));
+                                SetPanelRotation(new Vector3(-Comp.RotationAmount, 0, 0));
                             }
                         }
 
@@ -346,6 +396,11 @@ namespace CustomInspector
                     }
                     break;
             }
+
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                SetCurrentPanel(null);
+            }
         }
 
         void ShiftLeft()
@@ -372,7 +427,33 @@ namespace CustomInspector
         void DeleteCurrentTile()
         {
             var currentTile = Comp.TileGrid[Column][Row];
-            if(Row == 0)
+            if (currentTile.name == "PanelBase")
+            {
+                var info = FindLastTabChild(Row);
+                List<Transform> Results = new List<Transform>(info.NonTabChildren + 1);
+                info.Tab.transform.GetComponentsInChildren<Transform>(Results);
+                bool destroy = false;
+                for(var i = 1; i < Results.Count; ++i)
+                {
+                    if(Results[i].gameObject == currentTile)
+                    {
+                        destroy = true;
+                        continue;
+                    }
+                    if(!destroy)
+                    {
+                        continue;
+                    }
+                    if (Results[i].name != "PanelBase")
+                    {
+                        DestroyImmediate(Results[i].gameObject);
+                        break;
+                    }
+                    DestroyImmediate(Results[i].gameObject);
+                }
+            }
+
+            if (Row == 0)
             {
                 Comp.TileGrid.RemoveAt(Column);
                 if(currentTile.transform.localPosition.x >= 0)
@@ -389,8 +470,8 @@ namespace CustomInspector
                 Comp.TileGrid[Column].RemoveRange(Row, Comp.TileGrid[Column].Count - Row);
             }
             DestroyImmediate(currentTile);
-            
-            if(Column >= Comp.TileGrid.Count)
+
+            if (Column >= Comp.TileGrid.Count)
             {
                 Column = Comp.TileGrid.Count - 1;
                 if (Column < 0)
@@ -450,13 +531,14 @@ namespace CustomInspector
         {
             int nonTabChildren = 0;
             LastTabInfo info = new LastTabInfo();
-            Debug.Log(row);
+            
             var column = Comp.TileGrid[Column];
             while(row > 0)
             {
                 if (column[row].name == "TabChild")
                 {
                     info.Tab = column[row];
+                    
                     info.NonTabChildren = nonTabChildren;
                     return info;
                 }
@@ -549,6 +631,7 @@ namespace CustomInspector
         {
             if(CurrentPanel)
             {
+
                 MeshRenderer oldRenderer;
                 if (CurrentPanel.name != "PanelBase")
                 {
@@ -558,7 +641,11 @@ namespace CustomInspector
                 {
                     oldRenderer = CurrentPanel.GetComponent<MeshRenderer>();
                 }
-                oldRenderer.material = DefaultMatArch;
+                if(!LastSelectedMat)
+                {
+                    LastSelectedMat = DefaultMatArch;
+                }
+                oldRenderer.material = LastSelectedMat;
             }
             if (!panel)
             {
@@ -574,6 +661,8 @@ namespace CustomInspector
             {
                 renderer = panel.GetComponent<MeshRenderer>();
             }
+            LastSelectedMat = renderer.sharedMaterial;
+            
             renderer.material = OutlineMatArch;
             
             CurrentPanel = panel;
@@ -628,9 +717,18 @@ namespace CustomInspector
             Column = 0;
             Comp.PoppedUp = true;
         }
-    }
 
-    
+        void OnDisable()
+        {
+            SetCurrentPanel(null);
+        }
+
+        void OnDestroy()
+        {
+            SetCurrentPanel(null);
+        }
+
+    }
 }
 #endif
 

@@ -11,8 +11,6 @@ GameObject:
   - 33: {fileID: 3362472}
   - 23: {fileID: 2339474}
   - 65: {fileID: 6570650}
-  - 114: {fileID: 11496622}
-  - 114: {fileID: 11436990}
   m_Layer: 0
   m_Name: PanelBase
   m_TagString: Untagged
@@ -73,7 +71,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d969a37832933b8499202ffe33587f67, type: 2}
+  - {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -141,26 +139,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0025, y: 0.05, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11436990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efd4e64a355d6041b6b9f59dee51c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  ListenEventName:
-    EventName: InitializeEvent
-  ListenTarget: {fileID: 161008}
-  DispatchEvents: 0
-  DispatchEventName:
-    EventName: DefaultEvent
-  DispatchTarget: {fileID: 161008}
-  TargetMaterial: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
 --- !u!114 &11441394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,23 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BendVector: {x: 0, y: 0, z: 0}
---- !u!114 &11496622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 161008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b22b18a5ddece43933eb794b5ae00f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  MouseEvents: 0
-  InstantiationEvents: 1
-  UpdateEvents: 0
-  CollisionEvents: 0
-  GameEvents: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -239,6 +200,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TargetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 999a24f569b910d428f58f3177c61423, type: 2}
     m_RemovedComponents: []
