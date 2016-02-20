@@ -16,6 +16,7 @@ public class PullTab : MonoBehaviour
     bool NearPlayer = false;
     GameObject Player = null;
 
+    public bool StartPoppedUp = false;
     public bool LockX = true;
     public bool LockY = true;
     public bool LockZ = false;
@@ -37,6 +38,19 @@ public class PullTab : MonoBehaviour
         StartingPos = transform.parent.position;
         //transform.root.GetComponentsInChildren<PullTabChild>();
         Root = transform.root;
+
+
+        if(StartPoppedUp)
+        {
+            if (LockX == false)
+            {
+                    transform.parent.position = new Vector3(StartingPos.x + distance, StartingPos.y, StartingPos.z);
+            }
+            if (LockZ == false)
+            {
+                    transform.parent.position = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + distance);
+            }
+        }
     }
 
     // Update is called once per frame

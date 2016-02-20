@@ -37,7 +37,6 @@ public class PlayerSpawner : EventHandler
     // the last level that was loaded
     string PreviousLevel = "";
 
-
     public PlayerSpawner()
     {
 
