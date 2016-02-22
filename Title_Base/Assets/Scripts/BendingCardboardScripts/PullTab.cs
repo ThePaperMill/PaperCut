@@ -50,7 +50,11 @@ public class PullTab : MonoBehaviour
             {
                     transform.parent.position = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + distance);
             }
-        }
+
+            LerpPos = 0.99f;
+            LerpData.value = LerpPos;
+            Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+       }
     }
 
     // Update is called once per frame
