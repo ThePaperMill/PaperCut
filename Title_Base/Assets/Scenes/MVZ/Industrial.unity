@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 8e369f91687283f41b35605228007a51, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -788,8 +788,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515921195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 4.5, z: -4}
-  m_LocalScale: {x: 8, y: 0.1, z: 12}
+  m_LocalPosition: {x: -5, y: 4.5, z: -8}
+  m_LocalScale: {x: 8, y: 0.1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 31
@@ -1373,8 +1373,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 883361387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 19.98}
+  m_LocalScale: {x: 5, y: 1, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1476,9 +1476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5888348d9a3e6d04697ca20556fbb2eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetObject: {fileID: 779208100}
   FollowDistance: {x: 0, y: 1.5, z: -5}
   LerpSpeed: 2
+  TargetObject: {fileID: 779208100}
+  StartingLookTarget: {fileID: 0}
 --- !u!1001 &893344476
 Prefab:
   m_ObjectHideFlags: 0
@@ -2507,7 +2508,7 @@ Transform:
   m_GameObject: {fileID: 1284983788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.55, y: 4.5, z: -2.25}
-  m_LocalScale: {x: 5, y: 0.1, z: 4.5}
+  m_LocalScale: {x: 5.1, y: 0.1, z: 4.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 21
