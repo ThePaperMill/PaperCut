@@ -6,6 +6,8 @@ public class TheMusicNeverEnds : MonoBehaviour
     FMODAsset tunez = null;
     FMOD_StudioEventEmitter bbox;
 
+    bool forcedStop = false;
+
     // Use this for initial initialization (thanks Unity)
     void Awake()
     {
@@ -73,11 +75,49 @@ public class TheMusicNeverEnds : MonoBehaviour
     {
         if((bbox.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING
         || bbox.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-        && tunez != null)
+        && tunez != null && !forcedStop)
         {
             bbox.Stop();
             //bbox.CacheEventInstance(tuneGet.levelMusic, true);
             bbox.Play();
         }
+    }
+
+    // Manually shut off the music.  Must use StartMusic() to turn it back on!
+    public void StopMusic()
+    {
+        if(tunez)
+        {
+            bbox.Stop();
+        }
+
+        // Even if there's no music currently playing, this will prevent it from starting once there is music to play
+        forcedStop = true;
+    }
+
+    // Manually turn on the music.
+    public void StartMusic()
+    {
+        if (tunez)
+        {
+            bbox.Play();
+        }
+
+        // Even if there's no music currently loaded, this will make it start once there is music to play
+        forcedStop = false;
+    }
+
+    // Manually shut off the music & SFX.  Both can be turned on & off individually
+    public void StopAllSound()
+    {
+        StopMusic();
+        //StopSFX();
+    }
+
+    // Manually turn on the music & SFX.  Both can be turned on & off individually
+    public void StartAllSound()
+    {
+        StartMusic();
+        //StartSFX();
     }
 }
