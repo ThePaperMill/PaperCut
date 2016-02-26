@@ -4,7 +4,6 @@ using System.Collections;
 
 public class HoverSpin : MonoBehaviour
 {
-    private bool JumpPressed;
     private bool JumpReleased;
     private bool Grounded;
     private bool JumpHeld;
@@ -15,7 +14,7 @@ public class HoverSpin : MonoBehaviour
 
     float JumpTimer;
     ActionGroup grp = new ActionGroup();
-    Rigidbody RB = new Rigidbody();
+    //Rigidbody RB = new Rigidbody();
 
     // Use this for initialization
     void Start ()
@@ -29,7 +28,6 @@ public class HoverSpin : MonoBehaviour
 	void Update ()
     {
         Grounded = this.GetComponent<CustomDynamicController>().OnGround;
-        JumpPressed = InputManager.GetSingleton.IsInputTriggered(GlobalControls.JumpKeys);
         JumpReleased = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
 
         Spin();

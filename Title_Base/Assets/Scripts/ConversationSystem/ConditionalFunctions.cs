@@ -17,6 +17,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             return true;
         }
+
         static public bool DefaultFunctionFalse()
         {
             return false;
@@ -59,6 +60,7 @@ namespace Assets.Scripts.ConversationSystem
         {
             return !HasUsedCrate;
         }
+
         static public bool UseCrate()
         {
             HasUsedCrate = true;
