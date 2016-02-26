@@ -94,7 +94,7 @@ namespace CustomInspector
         GameObject BaseArch { get { return Comp.PanelBaseArch; } set { Comp.PanelBaseArch = value; } }
         int Row = 0;
         int Column = 0;
-        Vector3 CenterPos = new Vector3(0, -0.025f, 1.375f);
+        Vector3 CenterPos = new Vector3(0, 0.025f, 1.375f);
         //float TileWidth = 1;
         SerializedProperty FoldInProp;
         bool Confirmation = false;
@@ -124,7 +124,7 @@ namespace CustomInspector
             }
             if(!BaseArch)
             {
-                BaseArch = Resources.Load<GameObject>("PanelBase");
+                BaseArch = Resources.Load<GameObject>("PanelBasePrefabs/PanelBase");
             }
             if(!SmallPanelArch)
             {

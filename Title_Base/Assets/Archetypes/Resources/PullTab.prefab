@@ -3793,7 +3793,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161400}
   m_LocalRotation: {x: 0.49999985, y: 0.49999982, z: -0.50000006, w: -0.50000024}
-  m_LocalPosition: {x: 0, y: -0.025241598, z: 0.82426566}
+  m_LocalPosition: {x: 0, y: 0.025, z: 0.82426566}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 492508}
@@ -3892,7 +3892,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178860}
   m_LocalRotation: {x: 0, y: 0.707106, z: 0, w: 0.7071076}
-  m_LocalPosition: {x: 0, y: 0, z: -0.29999998}
+  m_LocalPosition: {x: 0, y: 0.05, z: -0.374}
   m_LocalScale: {x: 1.4910685, y: 2.2946908, z: 0.8936276}
   m_Children:
   - {fileID: 418494}
@@ -5377,7 +5377,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109306}
   m_LocalRotation: {x: 0, y: -0.707106, z: 0, w: 0.7071076}
-  m_LocalPosition: {x: 14.67, y: 0.096, z: -4.65}
+  m_LocalPosition: {x: 20.371048, y: 0.1, z: -16.102877}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 410466}
@@ -12859,7 +12859,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68949340d970854ebfcc79790a49c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PopUp: 1
+  FoldIn: 0
+  RotationAmount: 90
+  LargeBendyArch: {fileID: 174918, guid: 36dbc65003d0e1f4cb5b2e2bca923ee9, type: 2}
+  SmallBendyArch: {fileID: 121430, guid: 011cd4bd8e4987440924a2d690fd4e19, type: 2}
+  PanelBaseArch: {fileID: 187550, guid: 4cca790b8de8a6b4ba13429b176fd9a5, type: 2}
   CurrentTile: {fileID: 0}
+  PoppedUp: 1
 --- !u!114 &11472378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12873,6 +12880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocksIntoPlace: 1
   LerpBackSpeed: 1000
+  StartPoppedUp: 0
   LockX: 0
   LockY: 1
   LockZ: 1
