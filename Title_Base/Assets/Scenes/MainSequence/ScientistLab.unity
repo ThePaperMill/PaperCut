@@ -3049,11 +3049,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 644027250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 916704a20ab57244ca3121d821cec1b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5888348d9a3e6d04697ca20556fbb2eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AimTarget: {fileID: 0}
-  PosTarget: {fileID: 0}
+  FollowDistance: {x: 0, y: 1.5, z: -3}
+  LerpSpeed: 2
+  TargetObject: {fileID: 0}
+  StartingLookTarget: {fileID: 0}
 --- !u!1001 &652882207
 Prefab:
   m_ObjectHideFlags: 0
