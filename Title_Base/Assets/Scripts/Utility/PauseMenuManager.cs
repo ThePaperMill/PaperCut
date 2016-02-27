@@ -15,11 +15,12 @@ using ActionSystem;
 
 public class PauseMenuManager : EventHandler 
 {
-  GUITexture Gtxt = null;
-  GameObject GtxtObj = null;
-  ActionGroup grp = new ActionGroup();
+    GUITexture Gtxt = null;
+    GameObject GtxtObj = null;
+    TheMusicNeverEnds FMODSound = null;
+    ActionGroup grp = new ActionGroup();
 
-  public float alpha { get; set; }
+    public float alpha { get; set; }
 
 	// Use this for initialization
   void Start () 
@@ -29,6 +30,8 @@ public class PauseMenuManager : EventHandler
     GtxtObj.transform.position = new Vector3(0,0,-50);
 
     alpha = 0.0f;
+    
+    FMODSound = GameObject.Find("UndyingMusic").GetComponent<TheMusicNeverEnds>();
 
     if (GtxtObj != null)
     {
@@ -53,6 +56,8 @@ public class PauseMenuManager : EventHandler
 
       ActionSequence temp = Action.Sequence(grp);
       Action.Property(temp, this.GetProperty(o => o.alpha), 0.38f, 0.5, Ease.Linear);
+      
+      FMODSound.PauseSound();
     }
   }
 
@@ -64,6 +69,8 @@ public class PauseMenuManager : EventHandler
 
       ActionSequence temp = Action.Sequence(grp);
       Action.Property(temp, this.GetProperty(o => o.alpha), 0.0f, 0.5, Ease.Linear);
+      
+      FMODSound.UnpauseSound();
     }
   }
 

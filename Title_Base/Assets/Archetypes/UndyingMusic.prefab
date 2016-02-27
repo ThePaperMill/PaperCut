@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &144862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 474676}
+  - 114: {fileID: 11464640}
+  m_Layer: 0
+  m_Name: FMOD_Listener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &191184
 GameObject:
   m_ObjectHideFlags: 0
@@ -8,7 +24,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447792}
-  - 114: {fileID: 11496506}
   - 114: {fileID: 11406070}
   - 114: {fileID: 11471838}
   m_Layer: 0
@@ -25,10 +40,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.016583, y: -5.413233, z: 18.198046}
+  m_LocalPosition: {x: -0.87283003, y: 3.9788003, z: -12.79762}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 474676}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &474676
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 447792}
   m_RootOrder: 0
 --- !u!114 &11406070
 MonoBehaviour:
@@ -44,6 +72,18 @@ MonoBehaviour:
   asset: {fileID: 11400000, guid: 2fa279b3a2f8e1b42a4020ed69d4c140, type: 2}
   path: '{4a82b278-597f-45ac-9bd2-7bdfb9bf4c07}'
   startEventOnAwake: 1
+--- !u!114 &11464640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8336b22d6d3af4da2712827e9ad333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pluginPaths: []
 --- !u!114 &11471838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,18 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c8fccc36e5bc44fb24f9e17245ddb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11496506
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8336b22d6d3af4da2712827e9ad333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pluginPaths: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

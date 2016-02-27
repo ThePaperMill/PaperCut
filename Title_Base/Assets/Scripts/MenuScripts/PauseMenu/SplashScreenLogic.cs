@@ -44,6 +44,7 @@ public class SplashScreenLogic : MonoBehaviour
     }
 
     TransitionTimer += Time.deltaTime;
+    //Debug.Log(TransitionTimer);
 
     if (TransitionTimer > ScreenTime)
     {

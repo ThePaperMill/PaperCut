@@ -1,4 +1,15 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   TheMusicNeverEnds.cs
+\author Troy
+\brief  
+    Controls the persistent music object.
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class TheMusicNeverEnds : MonoBehaviour
@@ -7,18 +18,21 @@ public class TheMusicNeverEnds : MonoBehaviour
     FMOD_StudioEventEmitter bbox;
 
     bool forcedStop = false;
+    GameObject listener = null;
+    HORRIBLESCRIPT tuneGet = null;
 
     // Use this for initial initialization (thanks Unity)
     void Awake()
     {
         DontDestroyOnLoad(this);
+        listener = gameObject.transform.Find("FMOD_Listener").gameObject;
     }
            
     // Use this for initialization (but only once, because code effeciency)
 	void Start()
     {
         bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
-        HORRIBLESCRIPT tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
+        tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
 
         if (tuneGet.levelMusic == null)
         {
@@ -47,7 +61,7 @@ public class TheMusicNeverEnds : MonoBehaviour
         //DontDestroyOnLoad(this);
 
         bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
-        HORRIBLESCRIPT tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
+        tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
 
         if (tuneGet.levelMusic == null)
         {
@@ -119,5 +133,25 @@ public class TheMusicNeverEnds : MonoBehaviour
     {
         StartMusic();
         //StartSFX();
+    }
+
+    // Reduced sound for the pause menu
+    public void PauseSound()
+    {
+        // Only pause if this level allows pausing
+        if(tuneGet.canPause)
+        {
+            listener.transform.localPosition = new Vector3(0, 0, 10);
+        }
+    }
+
+    // Make the sound "unpause" (i.e. go back to normal)
+    public void UnpauseSound()
+    {
+        // Only unpause if this level allows pausing
+        if (tuneGet.canPause)
+        {
+            listener.transform.localPosition = Vector3.zero;
+        }
     }
 }
