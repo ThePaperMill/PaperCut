@@ -3,7 +3,7 @@
 \file   CharacterController3d.cs
 \author Steven Gallwas
 \brief  
-    This file contains the immplementation of the character controller.
+    This file contains the implementation of the character controller.
     this was designed to be used with the mysweptcontroller class.
  
   © 2015 DigiPen, All Rights Reserved.

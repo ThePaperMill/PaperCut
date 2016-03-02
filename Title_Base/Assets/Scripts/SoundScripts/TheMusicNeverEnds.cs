@@ -19,7 +19,12 @@ public class TheMusicNeverEnds : MonoBehaviour
 
     bool forcedStop = false;
     GameObject listener = null;
+    GameObject Camera = null;
+    GameObject Player = null;
+    GameObject goTo = null;
     HORRIBLESCRIPT tuneGet = null;
+
+    bool lastPlayerCheckDone = false;
 
     // Use this for initial initialization (thanks Unity)
     void Awake()
@@ -33,6 +38,21 @@ public class TheMusicNeverEnds : MonoBehaviour
     {
         bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        // If there's a player in this level, go to them
+        Player = null;
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        if (Player != null)
+        {
+            goTo = Player;
+        }
+
+        else // Use the camera, which is guarenteed to exist (but may result in reduced SFX due to distance)
+        {
+            goTo = Camera;
+        }
 
         if (tuneGet.levelMusic == null)
         {
@@ -58,10 +78,23 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Use this as Start because this calls at the Start of each level AFTER the first
     void OnLevelWasLoaded(int level)
     {
-        //DontDestroyOnLoad(this);
-
         bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        // If there's a player in this level, go to them
+        Player = null;
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        if (Player != null)
+        {
+            goTo = Player;
+        }
+
+        else // Use the camera, which is guarenteed to exist (but may result in reduced SFX due to distance)
+        {
+            goTo = Camera;
+        }
 
         if (tuneGet.levelMusic == null)
         {
@@ -87,6 +120,20 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Update is called once per frame, unlike the other three functions.  They're slackers.
     void Update()
     {
+        // Make one last check for the player if they weren't found
+        if(!lastPlayerCheckDone && Player == null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+
+            if (Player != null)
+            {
+                goTo = Player;
+            }
+        }
+
+        // Go to the assigned position object
+        gameObject.transform.position = goTo.transform.position;
+
         if((bbox.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING
         || bbox.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED)
         && tunez != null && !forcedStop)

@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file   HoverSpin.cs
+\author Jerry Nacier
+\brief  
+    The best feature of the game.  4 out of 4 instructors approve.
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using ActionSystem;
 using System.Collections;
 
@@ -12,6 +22,7 @@ public class HoverSpin : MonoBehaviour
     public Vector3 Prone = new Vector3();
     public float HoverDelay = 0.0f;
 
+    private FMOD_StudioEventEmitter HoverSounds;
     float JumpTimer;
     ActionGroup grp = new ActionGroup();
     //Rigidbody RB = new Rigidbody();
@@ -21,8 +32,10 @@ public class HoverSpin : MonoBehaviour
     {
         JumpTimer = 0.0f;
         Grounded = this.GetComponent<CustomDynamicController>().OnGround;
-        
-	}
+
+        HoverSounds = gameObject.transform.Find("HoverSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -31,12 +44,16 @@ public class HoverSpin : MonoBehaviour
         JumpReleased = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
 
         Spin();
-        
-        //print(Spinning);
             
         if (Grounded == true || JumpReleased) // cancel spin when we land or when jump is released with addition of "|| JumpReleased"
         {
             JumpTimer = 0.0f;
+        }
+
+        // Stop any sounds when not spinning
+        if(!Spinning)
+        {
+            HoverSounds.Stop();
         }
     }
 
@@ -58,6 +75,9 @@ public class HoverSpin : MonoBehaviour
             var seq = ActionSystem.Action.Sequence(grp);
             Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
             Spinning = true;
+
+            // Play whooshing sounds
+            HoverSounds.Play();
         }
 
         grp.Update(Time.deltaTime);
