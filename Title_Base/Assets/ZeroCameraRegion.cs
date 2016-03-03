@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\author 
+© 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class ZeroCameraRegion : MonoBehaviour

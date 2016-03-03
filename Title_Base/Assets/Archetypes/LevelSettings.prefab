@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.1822739, y: 3.3094244, z: -10.0416603}
+  m_LocalPosition: {x: 3.6437976, y: 7.9497285, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153112}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -53,8 +53,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -77,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f236cec52d02a94f8024083c17a7b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultPosition: {x: 21.5, y: -1.20000005, z: 2.45000005}
+  DefaultPosition: {x: 21.5, y: -1.2, z: 2.45}
   UseDefaultPosition: 0
   SetCameraTarget: 1
   PlayerPrefab: {fileID: 178700, guid: bbb86bd70586088459168fd8d7160f7e, type: 2}
@@ -92,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2802ce74ab1c142a1148f330c7ea83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainMenu: 0
 --- !u!114 &11433952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8873c9afb64629041a175c263a66f5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllInteractableObjects: []
   HighlightArchetype: {fileID: 195702, guid: 1eec2eb9ed111304e92877791e45a6ec, type: 2}
   HighlightHeight: 1
-  EaseSpeed: .5
+  EaseSpeed: 0.5
 --- !u!114 &11493386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,6 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218b4dc2bc3a2cc49bd9ef17fffc5684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelMusic: {fileID: 11400000, guid: 612bb1b9954fcce4cb0b057ed6c33659, type: 2}
+  doIt: 1
+  canPause: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

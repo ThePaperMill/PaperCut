@@ -6,6 +6,9 @@
     This file contains the implementation of a physics based controller
     this was based on the dynamic character controller by the zero engine
     team.  Thanks to all those who died to make this possible.
+
+    ~IN OTHER WORDS~ This is the one we're using!
+        ~Troy, after being lost in the Great Forest of Character Controllers
   
     © 2015 DigiPen, All Rights Reserved.
 */
@@ -27,13 +30,17 @@ public class CustomDynamicController : MonoBehaviour
 {
 	[SerializeField] private int m_WalkSoundCycle;
 	[SerializeField] private int m_RunSoundCycle;
-	[SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
-	[SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
-	[SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+	//[SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+	//[SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
+	//[SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 	[SerializeField] private float m_StepInterval;
 
-	// Sound-control variables
-	private AudioSource m_AudioSource;
+    private FMOD_StudioEventEmitter FootSounds;
+    private FMOD_StudioEventEmitter JumpSounds;
+    private FMOD_StudioEventEmitter LandSounds;
+
+    // Sound-control variables
+    private AudioSource m_AudioSource;
 	private int walkCycle = 0;
 	private float m_StepCycle = 0f;
 	private float m_NextStep = 0f;
@@ -214,7 +221,12 @@ public class CustomDynamicController : MonoBehaviour
         CastFilter = 1 << 10;
         CastFilter = ~CastFilter;
 
-		m_AudioSource = GetComponent<AudioSource>();
+		//m_AudioSource = GetComponent<AudioSource>();
+        
+        // Get Audio Sources
+        FootSounds = (FMOD_StudioEventEmitter)GetComponent<FMOD_StudioEventEmitter>();
+        JumpSounds = gameObject.transform.Find("JumpSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
+        LandSounds = gameObject.transform.Find("LandSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
     }
 
     /****************************************************************************/
@@ -282,7 +294,7 @@ public class CustomDynamicController : MonoBehaviour
 
         if (OpenInventory)
         {
-            print("Hello");
+            //print("Hello");
 
             if (!InventoryStatus)
                 InventorySystem.GetSingleton.OpenInventory(InventoryState.INVENTORY_VIEW);
@@ -329,13 +341,6 @@ public class CustomDynamicController : MonoBehaviour
         {
             RBody.velocity = new Vector3(RBody.velocity.x, RBody.velocity.y * HoverReduction, RBody.velocity.z);
         }
-
-		// When landing from being in the air, play a sound effect
-		if (!PrevGroundState && OnGround)
-		{
-			PlayLandingSound();
-            spinTimer = 0.0f;
-		}
 
         // update the direction we want to move in
         UpdateMoveVector();
@@ -419,6 +424,14 @@ public class CustomDynamicController : MonoBehaviour
         {
             RBody.velocity = RBody.velocity - MoveDirection * Vector3.Dot(RBody.velocity, MoveDirection);
         }
+
+        // When landing from being in the air, play a sound effect
+        if (!PrevGroundState && OnGround)
+        {
+            PlayLandingSound();
+            spinTimer = 0.0f;
+        }
+
         PrevGroundState = OnGround;
     }
 
@@ -1007,32 +1020,27 @@ public class CustomDynamicController : MonoBehaviour
 		{
 			return;
 		}
-		// pick & play a random footstep sound from the array,
-		// excluding sound at index 0
-        if(m_FootstepSounds.Length == 0)
-        {
-            return;
-        }
 
-		int n = Random.Range(1, m_FootstepSounds.Length);
-		m_AudioSource.clip = m_FootstepSounds[n];
-		m_AudioSource.PlayOneShot(m_AudioSource.clip);
-		// move picked sound to index 0 so it's not picked next time
-		m_FootstepSounds[n] = m_FootstepSounds[0];
-		m_FootstepSounds[0] = m_AudioSource.clip;
-		}
+        if(FootSounds)
+            FootSounds.StartEvent();
+	}
 		
 		private void PlayLandingSound()
-		{
-			m_AudioSource.clip = m_LandSound;
-			m_AudioSource.Play();
-			m_NextStep = m_StepCycle + .5f;
+        {
+         if(LandSounds && LandSounds.asset != null)
+            LandSounds.StartEvent();
+
+            // Edit walkcycle accordingly
+            m_NextStep = m_StepCycle + .5f;
 		}
 		
 		private void PlayJumpingSound()
 		{
-			m_AudioSource.clip = m_LandSound;
-			m_AudioSource.Play();
+        if (JumpSounds && JumpSounds.asset != null)
+        {
+            JumpSounds.StartEvent();
+        }
+            // Edit walkcycle accordingly
 			m_NextStep = 0;
 			m_StepCycle = 0;
 		}

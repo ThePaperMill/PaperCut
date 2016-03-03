@@ -78,7 +78,7 @@ public class PlayerSpawner : EventHandler
 
     void Start()
     {
-
+        //print(gameObject.name);
     }
 	
     Vector3 ChoosePosition()
@@ -97,12 +97,12 @@ public class PlayerSpawner : EventHandler
             // iterate through all level is each spawn point
             foreach (var lvl in SP.PreviousLevel)
             {
-            // if the spawn point has the previous level, use that spawn positon
-            if (lvl == PreviousLevel)
-            {
-                pos = SP.Position;
-                return pos;
-            }
+                // if the spawn point has the previous level, use that spawn positon
+                if (lvl == PreviousLevel)
+                {
+                    pos = SP.Position;
+                    return pos;
+                }
             }
         }
 

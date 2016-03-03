@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\author 
+© 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+
+using UnityEngine;
 using System.Collections;
 
 public class TurnOnFire : MonoBehaviour {
@@ -22,7 +29,7 @@ public class TurnOnFire : MonoBehaviour {
         //GetComponent<Animation>().Play();
         //myanim.SetBool("turnson", true);
         GameObject tempgame = (GameObject)Instantiate(Myparticlastieytstm, transform.position, Quaternion.identity);
-        print("hello");
+        //print("hello");
 
     }
 }

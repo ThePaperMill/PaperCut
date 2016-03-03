@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+
 namespace Assets.Scripts.ConversationSystem
 {
 
@@ -30,7 +31,8 @@ namespace Assets.Scripts.ConversationSystem
         //public Vector3 WindowOffsetInitial = new Vector3(0, 5, 0);
         //public Vector3 WindowOffsetFinal = new Vector3(0, 1, 0);
         //public Vector3 WindowRotation = new Vector3(0, 0, 0);
-        public AudioClip SoundClip = null;
+		private FMOD_StudioEventEmitter SoundClip = null;
+		//private FMOD_StudioEventEmitter DialogueSFX = null;
         public float AudioDelay = 0.5f;
 
         private ActionSequence seq = new ActionSequence();
@@ -46,6 +48,9 @@ namespace Assets.Scripts.ConversationSystem
               CurrentAction.Disconnect(Events.NextAction, OnNextAction);
             }
             
+			SoundClip = (FMOD_StudioEventEmitter)GetComponent<FMOD_StudioEventEmitter>();
+			//DialogueSFX = gameObject.transform.Find("ExtraSFX").gameObject.GetComponent<FMOD_StudioEventEmitter>();
+
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
         }
 
@@ -112,7 +117,7 @@ namespace Assets.Scripts.ConversationSystem
         void OnNextAction(EventData data)
         {
             if (Engaged)
-            {
+			{
                 NextAction();
             }
         }
@@ -129,7 +134,9 @@ namespace Assets.Scripts.ConversationSystem
                 CurrentAction.Disconnect(Events.NextAction, OnNextAction);
                 if (CurrentAction.Next != null)
                 {
-                    CurrentAction = CurrentAction.Next;
+					CurrentAction = CurrentAction.Next;
+
+					ActionSystem.Action.Call(seq, PlaySound);
                 }
                 else
                 {
@@ -180,17 +187,16 @@ namespace Assets.Scripts.ConversationSystem
 
         public void PlaySound()
         {
-            if (!SoundClip.Equals(null))
-            {
-                AudioSource temp = GetComponent<AudioSource>();
+			if(SoundClip != null)
+			{
+				SoundClip.StartEvent();
+			}
+		}
 
-                if (temp)
-                {
-                    temp.clip = SoundClip;
-                    temp.PlayOneShot(SoundClip);
-                }
-            }
-        }
+		/*public void PlayDialogueSFX()
+		{
+			DialogueSFX.StartEvent();
+		}*/
 
         // Update is called once per frame
         void Update()

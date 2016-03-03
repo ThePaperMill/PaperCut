@@ -19,6 +19,7 @@ public class HORRIBLESCRIPT : MonoBehaviour
     // Horrible public variable for horrible script!
     public FMODAsset levelMusic;
     public bool doIt = true;
+    public bool canPause = true;
 
 	// Use this for initialization
 	void Start ()

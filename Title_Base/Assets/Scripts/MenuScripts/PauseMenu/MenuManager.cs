@@ -56,7 +56,7 @@ public class MenuManager : EventHandler
   bool StickTriggered = false;
   bool Escape         = false;
 
-    bool OverlayActive = false;
+  bool OverlayActive = false;
   int CurrentMenu   = 0;
   int CurrentButton = 0;
 
