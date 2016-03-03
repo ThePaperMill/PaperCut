@@ -31,6 +31,7 @@ namespace Assets.Scripts.ConversationSystem
             // Play a sound if there is one
             AudioSource sounde = gameObject.GetComponent<AudioSource>();
 
+			// Note: FMOD will handle sound elsewhere
             if(sounde != null)
             {
                 sounde.Play();

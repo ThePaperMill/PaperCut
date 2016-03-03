@@ -51,7 +51,7 @@ public class HoverSpin : MonoBehaviour
         }
 
         // Stop any sounds when not spinning
-        if(!Spinning)
+		if(!Spinning && HoverSounds != null)
         {
             HoverSounds.Stop();
         }
@@ -76,7 +76,7 @@ public class HoverSpin : MonoBehaviour
 			Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
 
 			// Start playing whooshing sounds if we aren't already
-			if (!Spinning)
+			if (!Spinning && HoverSounds != null)
 			{
 				HoverSounds.Play();
 			}

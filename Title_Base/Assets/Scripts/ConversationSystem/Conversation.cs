@@ -187,7 +187,10 @@ namespace Assets.Scripts.ConversationSystem
 
         public void PlaySound()
         {
-			SoundClip.StartEvent();
+			if(SoundClip != null)
+			{
+				SoundClip.StartEvent();
+			}
 		}
 
 		/*public void PlayDialogueSFX()

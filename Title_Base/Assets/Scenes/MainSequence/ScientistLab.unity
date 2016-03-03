@@ -1438,7 +1438,28 @@ Prefab:
       propertyPath: m_Text
       value: '
 
-        Thats how it started...'
+        That''s how it started...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347688, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5071d48aeaa525144b847a096b9f1a2e, type: 3}
+    - target: {fileID: 10239176, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5071d48aeaa525144b847a096b9f1a2e,
+        type: 3}
+    - target: {fileID: 10239176, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_Color.rgba
+      value: 2936012800
+      objectReference: {fileID: 0}
+    - target: {fileID: 402240, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.02145
+      objectReference: {fileID: 0}
+    - target: {fileID: 402240, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.00848
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
@@ -1664,108 +1685,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 422044, guid: fab9639e4e8cc734cbfb978adfbe1f36, type: 2}
   m_PrefabInternal: {fileID: 380966877}
---- !u!1 &396737690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 396737692}
-  - 82: {fileID: 396737691}
-  m_Layer: 0
-  m_Name: PaperConcept_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &396737691
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396737690}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!4 &396737692
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396737690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69365406, y: 0.04987049, z: -4.507518}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 39
 --- !u!1001 &399510426
 Prefab:
   m_ObjectHideFlags: 0
@@ -2850,7 +2769,7 @@ Transform:
   m_Children:
   - {fileID: 1924525613}
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 40
 --- !u!1001 &613862447
 Prefab:
   m_ObjectHideFlags: 0
@@ -3938,7 +3857,7 @@ Transform:
   m_Children:
   - {fileID: 1804316965}
   m_Father: {fileID: 0}
-  m_RootOrder: 40
+  m_RootOrder: 39
 --- !u!54 &914051416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6348,7 +6267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 63
+  m_RootOrder: 62
 --- !u!114 &1627523268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6710,6 +6629,20 @@ MonoBehaviour:
   UseDefaultPosition: 0
   SetCameraTarget: 1
   PlayerPrefab: {fileID: 178700, guid: bbb86bd70586088459168fd8d7160f7e, type: 2}
+--- !u!114 &1679612282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1679612280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7160aec47319845a01d4863bcf883a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelNumber: 0
+  LevelName: Scientist's Lab
+  IsFinalLevel: 0
 --- !u!1001 &1686149969
 Prefab:
   m_ObjectHideFlags: 0
