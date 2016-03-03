@@ -1020,11 +1020,14 @@ public class CustomDynamicController : MonoBehaviour
 		{
 			return;
 		}
+
+        if(FootSounds)
             FootSounds.StartEvent();
-		}
+	}
 		
 		private void PlayLandingSound()
         {
+         if(LandSounds)
             LandSounds.StartEvent();
 
             // Edit walkcycle accordingly
@@ -1033,6 +1036,7 @@ public class CustomDynamicController : MonoBehaviour
 		
 		private void PlayJumpingSound()
 		{
+           if(JumpSounds)
             JumpSounds.StartEvent();
         
             // Edit walkcycle accordingly
