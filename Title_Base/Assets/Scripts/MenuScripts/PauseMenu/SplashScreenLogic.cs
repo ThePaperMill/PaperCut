@@ -28,6 +28,8 @@ public class SplashScreenLogic : MonoBehaviour
 
   Image SplashImage = null;
 
+    bool finished = false;
+
 	// Use this for initialization
     void Start () 
     {
@@ -38,13 +40,19 @@ public class SplashScreenLogic : MonoBehaviour
 	// Update is called once per frame
   void Update () 
   {
-    if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
+
+    if (finished == true)
     {
-      SceneManager.LoadScene(LevelToLoad);
+        return;
+    }
+
+    if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
+    {
+        LevelTransitionManager.GetSingleton.ChangeLevel(LevelToLoad, true, 1.0f);
+        finished = true;
     }
 
     TransitionTimer += Time.deltaTime;
-    //Debug.Log(TransitionTimer);
 
     if (TransitionTimer > ScreenTime)
     {
@@ -54,7 +62,8 @@ public class SplashScreenLogic : MonoBehaviour
       if (CurImage >= Sprites.Count)
       {
         // load level 
-        SceneManager.LoadScene(LevelToLoad);
+        LevelTransitionManager.GetSingleton.ChangeLevel(LevelToLoad, true, 1.0f);
+        finished = true;
       }
       else
       {
