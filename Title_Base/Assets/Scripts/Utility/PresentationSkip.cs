@@ -5,22 +5,18 @@ using UnityEngine.SceneManagement;
 public class PresentationSkip : Singleton<PresentationSkip>
 {
     string FirstLevel = "Player_House";
-
-    string SecondLevel = "Jerry's_PrettyLevel";
-    string ThirdLevel  = "MilestonePretest";
-    string FourthLevel = "HighRiseApartments";
+    string SecondLevel = "PlayerStreet";
+    string ThirdLevel  = "CityCenter";
+    string FourthLevel = "ScientistStreet";
 
     // mechanics test
-    string FifthLevel = "Sewer";
+    string FifthLevel = "ScientistLab";
+    string SixthLevel = "Sewer";
+    string SeventhLevel = "WaterWorks";
+    string EighthLevel = "Jerry's_Level1";
 
-    string SixthLevel = "NewCityCenter";
-    string SeventhLevel = "HighRiseApartments";
-    string EighthLevel = "HighRiseApartments";
-
-
-
-    string NinthLevel = "CityCenter";
-    string LastLevel = "ScientistStreet";
+    string NinthLevel = "Jerry's_Level1";
+    string LastLevel = "Jerry's_Level1";
 
     // Use this for initialization
     public void Initialize()
@@ -39,43 +35,45 @@ public class PresentationSkip : Singleton<PresentationSkip>
     {
 	    if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene(FirstLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(FirstLevel, true, 1.0f);
+            //SceneManager.LoadScene(FirstLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene(SecondLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(SecondLevel, true, 1.0f);
+            //SceneManager.LoadScene(SecondLevel);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha3))
         {
-            SceneManager.LoadScene(ThirdLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(ThirdLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha4))
         {
-            SceneManager.LoadScene(FourthLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(FourthLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha5))
         {
-            SceneManager.LoadScene(FifthLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(FifthLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha6))
         {
-            SceneManager.LoadScene(SixthLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(SixthLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha7))
         {
-            SceneManager.LoadScene(SeventhLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(SeventhLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha8))
         {
-            SceneManager.LoadScene(EighthLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(EighthLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha9))
         {
-            SceneManager.LoadScene(NinthLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(NinthLevel, true, 1.0f);
         }
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha0))
         {
-            SceneManager.LoadScene(LastLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(LastLevel, true, 1.0f);
         }
     }
 }
