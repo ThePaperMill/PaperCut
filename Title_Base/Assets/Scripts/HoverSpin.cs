@@ -73,11 +73,15 @@ public class HoverSpin : MonoBehaviour
         {
             Prone = new Vector3(90.0f, 0, 0);
             var seq = ActionSystem.Action.Sequence(grp);
-            Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
-            Spinning = true;
+			Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
 
-            // Play whooshing sounds
-            HoverSounds.Play();
+			// Start playing whooshing sounds if we aren't already
+			if (!Spinning)
+			{
+				HoverSounds.Play();
+			}
+
+            Spinning = true;
         }
 
         grp.Update(Time.deltaTime);
