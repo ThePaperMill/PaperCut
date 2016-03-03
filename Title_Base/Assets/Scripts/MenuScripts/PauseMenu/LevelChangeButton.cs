@@ -19,7 +19,8 @@ public class LevelChangeButton : MenuButton
 
   public override void Activate()
   {
-    SceneManager.LoadScene(Level);
+    LevelTransitionManager.GetSingleton.ChangeLevel(Level, true, 1.5f);
+    //SceneManager.LoadScene(Level);
   }
 	
 	// Update is called once per frame

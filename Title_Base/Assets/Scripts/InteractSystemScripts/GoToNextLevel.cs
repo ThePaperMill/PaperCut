@@ -42,7 +42,8 @@ public class GoToNextLevel : MonoBehaviour
 		// If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
 		if(collision.gameObject.GetComponent("CustomDynamicController") != null && !delay)
 		{
-			SceneManager.LoadScene(NextLevel);
+            LevelTransitionManager.GetSingleton.ChangeLevel(NextLevel, true, 1.5f);
+            //SceneManager.LoadScene(NextLevel);
 		}
 	}
 }

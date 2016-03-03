@@ -1027,7 +1027,7 @@ public class CustomDynamicController : MonoBehaviour
 		
 		private void PlayLandingSound()
         {
-         if(LandSounds)
+         if(LandSounds && LandSounds.asset != null)
             LandSounds.StartEvent();
 
             // Edit walkcycle accordingly
@@ -1036,9 +1036,10 @@ public class CustomDynamicController : MonoBehaviour
 		
 		private void PlayJumpingSound()
 		{
-           if(JumpSounds)
+        if (JumpSounds && JumpSounds.asset != null)
+        {
             JumpSounds.StartEvent();
-        
+        }
             // Edit walkcycle accordingly
 			m_NextStep = 0;
 			m_StepCycle = 0;

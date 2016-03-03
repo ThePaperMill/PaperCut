@@ -7,7 +7,7 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FirstLevel = "Player_House";
 
     string SecondLevel = "Jerry's_PrettyLevel";
-    string ThirdLevel = "MilestonePretest";
+    string ThirdLevel  = "MilestonePretest";
     string FourthLevel = "HighRiseApartments";
 
     // mechanics test
