@@ -204,8 +204,8 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     void Start()
     {
-      EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
-      EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+        EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
+        EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
 
         RBody     = (Rigidbody)GetComponent<Rigidbody>();
         CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
