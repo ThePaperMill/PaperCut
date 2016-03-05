@@ -13,10 +13,10 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FifthLevel = "WaterWorks";
     string SixthLevel = "ScientistStreet";
     string SeventhLevel =  "ScientistLab";
-    string EighthLevel = "HighRiseApartments";
+    string EighthLevel = "Jerry's_Level1";
 
-    string NinthLevel = "Jerry's_Level1";
-    string LastLevel = "Jerry's_Level1";
+    string NinthLevel = "HighRiseApartments";
+    string LastLevel = "Ian'sTestingPlane";
 
     // Use this for initialization
     public void Initialize()
