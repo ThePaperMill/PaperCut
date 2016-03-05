@@ -36,10 +36,10 @@ public class PlayerModelMovement : MonoBehaviour
     //var that will be used to put Its grandparent's Prone var into
     public Vector3 AlsoProne = new Vector3();
     // Vec3 var that will access the PlayerModel's euler angles
-    Vector3 ModelRotation = new Vector3();
+    //Vector3 ModelRotation = new Vector3();
     // Vec3 var that will be used to rotate the model
-    Vector3 RotationAngle = new Vector3();
-    ActionGroup grp2 = new ActionGroup();
+    //Vector3 RotationAngle = new Vector3();
+    //ActionGroup grp2 = new ActionGroup();
 
     void Start () 
 	{
@@ -51,9 +51,9 @@ public class PlayerModelMovement : MonoBehaviour
        // AlsoProne = new Vector3(0, 0, 0);
         
         //
-        ModelRotation = new Vector3 (0, 0, 0);
+        //ModelRotation = new Vector3 (0, 0, 0);
 
-        RotationAngle = new Vector3(0, Mathf.Rad2Deg * 360, 0);
+        //RotationAngle = new Vector3(0, Mathf.Rad2Deg * 360, 0);
         
     }
 

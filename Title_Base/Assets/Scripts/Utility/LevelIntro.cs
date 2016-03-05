@@ -8,7 +8,7 @@ public class LevelIntro : MonoBehaviour
     LevelInfo LInfo = null;
     TextMesh TMesh = null;
     ActionSequence Seq = new ActionSequence();
-    Color StartColor = Color.clear;
+    //Color StartColor = Color.clear;
 
     public float Alpha { get; set; }
 
@@ -18,7 +18,7 @@ void Start()
         LSettings = GameObject.FindGameObjectWithTag("LevelSettings");
         TMesh = GetComponent<TextMesh>();
 
-        StartColor = TMesh.color;
+        //StartColor = TMesh.color;
         Alpha = 0;
 
         if (LSettings)

@@ -28,7 +28,7 @@ public class TurnOnFire : MonoBehaviour {
         //Animator myanim = gameObject.GetComponent<Animator>();
         //GetComponent<Animation>().Play();
         //myanim.SetBool("turnson", true);
-        GameObject tempgame = (GameObject)Instantiate(Myparticlastieytstm, transform.position, Quaternion.identity);
+        Instantiate(Myparticlastieytstm, transform.position, Quaternion.identity);
         //print("hello");
 
     }
