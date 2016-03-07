@@ -4,24 +4,34 @@ using ActionSystem;
 
 public class LevelIntro : MonoBehaviour
 {
-    
-
     GameObject LSettings = null;
     LevelInfo LInfo = null;
     TextMesh TMesh = null;
     ActionSequence Seq = new ActionSequence();
     ActionSequence Seq2 = new ActionSequence();
-    bool UseUnderline = false;
+    public bool UseUnderline = false;
     GameObject UnderLineChild = null;
 
     public float Alpha { get; set; }
-
 
     // Use this for initialization
     void Start()
     {
         LSettings = GameObject.FindGameObjectWithTag("LevelSettings");
         TMesh = GetComponent<TextMesh>();
+
+        var childtemp = transform.FindChild("Underline");
+
+        if (childtemp)
+        {
+            UnderLineChild = childtemp.gameObject;
+        }
+
+        if (UnderLineChild)
+        {
+            UnderLineChild.GetComponent<MeshRenderer>().material.color = TMesh.color;
+            UnderLineChild.transform.localScale = new Vector3(0, UnderLineChild.transform.localScale.y, UnderLineChild.transform.localScale.z);
+        }
 
         //StartColor = TMesh.color;
         Alpha = 0;
