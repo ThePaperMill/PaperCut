@@ -119,7 +119,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         nothing to initialize 
     */
     /*************************************************************************/
-    void Start ()
+    void Awake ()
     {
         InventorySystem.GetSingleton.Initialize();
         GamestateManager.GetSingleton.Initialize();
