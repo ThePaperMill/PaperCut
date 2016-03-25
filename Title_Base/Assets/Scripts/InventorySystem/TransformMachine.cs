@@ -95,6 +95,8 @@ public class TransformMachine : EventHandler
     void ResetCamera()
     {
         GamestateManager.GetSingleton.CurState = GAME_STATE.GS_GAME;
+        GameInfo.GetSingleton.LabDestroyed = true;
+        LevelTransitionManager.GetSingleton.ChangeLevel("ScientistLabDestroyed");
     }
 
     void CreatePointBlast()
