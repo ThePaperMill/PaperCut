@@ -110,7 +110,10 @@ namespace CustomInspector
                 Comp.CurrentTile = value;
             }
         }
-
+        void PullTabEditor()
+        {
+            SetCurrentPanel(null);
+        }
         PullTabEditor Comp = null;
         public void OnEnable()
         {
@@ -130,13 +133,13 @@ namespace CustomInspector
             {
                 SmallPanelArch = Resources.Load<GameObject>("SmallTabChild");
             }
-            
+            SetCurrentPanel(null);
             Comp.TileGrid.Clear();
 
             foreach (Transform i in Comp.GetComponentInChildren<Transform>())
             {
                 //Debug.Log(i.name);
-                SetCurrentPanel(null);
+                
                 //Column
                 if (i.gameObject.name[0] == 'C')
                 {

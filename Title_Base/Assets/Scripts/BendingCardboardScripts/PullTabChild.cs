@@ -11,7 +11,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class PullTabChild : MonoBehaviour {
+public class PullTabChild : MonoBehaviour
+{
 
     //public bool AdditiveRotation = true;
     public Vector3 BendVector = Vector3.zero;
@@ -24,7 +25,7 @@ public class PullTabChild : MonoBehaviour {
         //{
         //    BendVector += StartVector;
         //}
-        transform.root.Connect(Events.TabUpdatedEvent, UpdateRot);
+        transform.root.gameObject.Connect(Events.TabUpdatedEvent, UpdateRot);
 	}
     public void UpdateRot(EventData slerptimer)
     {
@@ -33,5 +34,6 @@ public class PullTabChild : MonoBehaviour {
         //transform.localRotation.eulerAngles.Set(vector.x, vector.y, vector.z); //Vector3.LerpUnclamped(Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), slerptimer);
         //transform.rotation = Quaternion.Euler(ActionSystem.ActionMath<Vector3>.QuadInOut(((FloatEvent)slerptimer).value, StartVector, BendVector, 1));
         transform.localRotation = ActionSystem.ActionMath.QuadInOut<Quaternion>(((FloatEvent)slerptimer).value, Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), 1);
+        this.gameObject.DispatchEvent("RotUpdated");
     }
 }
