@@ -53,7 +53,7 @@ public class PullTab : MonoBehaviour
 
             LerpPos = 0.99f;
             LerpData.value = LerpPos;
-            Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+            Root.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
        }
     }
 
@@ -118,7 +118,7 @@ public class PullTab : MonoBehaviour
                 if (LerpData.value != LerpPos)
                 {
                     LerpData.value = LerpPos;
-                    Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+                    Root.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
                 }
                 //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
                 //#SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME #SHAME
@@ -165,7 +165,7 @@ public class PullTab : MonoBehaviour
             if(LerpData.value != LerpPos)
             {
                 LerpData.value = LerpPos;
-                Root.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+                Root.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
             }
             
             

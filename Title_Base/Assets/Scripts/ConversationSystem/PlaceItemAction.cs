@@ -49,7 +49,7 @@ namespace Assets.Scripts.ConversationSystem
                     Next = NextIfTrue;
 
                     // create the item here
-                    GameObject Temp = (GameObject)Instantiate(data.Info.ItemPrefab, transform.position, Quaternion.identity);
+                    Instantiate(data.Info.ItemPrefab, transform.position, Quaternion.identity);
                 }
                 else
                 {

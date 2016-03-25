@@ -38,7 +38,7 @@ public class TransformMachine : EventHandler
     public float CamDuration = 1.0f;
 
     Vector3 CamStart = new Vector3();
-    Quaternion CamRotation = new Quaternion();
+    //Quaternion CamRotation = new Quaternion();
     Light LightScript = null;
 
     float ExplosionRadius = 15.0f;
@@ -95,6 +95,8 @@ public class TransformMachine : EventHandler
     void ResetCamera()
     {
         GamestateManager.GetSingleton.CurState = GAME_STATE.GS_GAME;
+        GameInfo.GetSingleton.LabDestroyed = true;
+        LevelTransitionManager.GetSingleton.ChangeLevel("ScientistLabDestroyed");
     }
 
     void CreatePointBlast()

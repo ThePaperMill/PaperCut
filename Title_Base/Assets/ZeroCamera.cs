@@ -17,7 +17,7 @@ public class ZeroCamera : MonoBehaviour
     private GameObject DefaultTarget;       // Variable for storing default value of TargetObject
     private Vector3 DefaultFollow;          // Variable for storing default value of FollowDistance
     private float DefaultLerp;              // Variable for storing default value of LerpSpeed
-    private Vector3 velocity = Vector3.zero;
+    //private Vector3 velocity = Vector3.zero;
     private Vector3 LookAtPoint;
 
     public GameObject StartingLookTarget = null;

@@ -19,6 +19,7 @@ public class TheMusicNeverEnds : MonoBehaviour
 
     bool forcedStop = false;
     GameObject listener = null;
+    GameObject musicBox = null;
     GameObject Camera = null;
     GameObject Player = null;
     GameObject goTo = null;
@@ -31,12 +32,13 @@ public class TheMusicNeverEnds : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         listener = gameObject.transform.Find("FMOD_Listener").gameObject;
+        musicBox = gameObject.transform.Find("MusicSource").gameObject;
     }
            
     // Use this for initialization (but only once, because code effeciency)
 	void Start()
     {
-        bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
+        bbox = musicBox.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
 
@@ -66,10 +68,10 @@ public class TheMusicNeverEnds : MonoBehaviour
             bbox.CacheEventInstance(tuneGet.levelMusic, true);
             bbox.Play();
 
-            if (tunez != null)
+            /*if (tunez != null)
             {
                 Debug.Log(tuneGet.levelMusic.name + " and " + tunez.name);
-            }
+            }*/
 
             tunez = tuneGet.levelMusic;
         }
@@ -78,7 +80,7 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Use this as Start because this calls at the Start of each level AFTER the first
     void OnLevelWasLoaded(int level)
     {
-        bbox = gameObject.GetComponent<FMOD_StudioEventEmitter>();
+        bbox = musicBox.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
 
@@ -108,10 +110,10 @@ public class TheMusicNeverEnds : MonoBehaviour
             bbox.CacheEventInstance(tuneGet.levelMusic, true);
             bbox.Play();
 
-            if (tunez != null)
+            /*if (tunez != null)
             {
                 Debug.Log(tuneGet.levelMusic.name + " and " + tunez.name);
-            }
+            }*/
 
             tunez = tuneGet.levelMusic;
         }

@@ -21,6 +21,7 @@ public enum GAME_STATE
   GS_PAUSE,
   GS_CINEMATIC,
   GS_GAME,
+  GS_MENU,
 }
 
 public class GamestateManager : Singleton<GamestateManager>

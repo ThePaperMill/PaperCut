@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class SplashScreenTransitions : MonoBehaviour 
 {
     public List<GameObject> Screens = new List<GameObject>();
@@ -17,6 +21,14 @@ public class SplashScreenTransitions : MonoBehaviour
     void Start () 
     {
         InputManager.GetSingleton.Initialize();
+
+        Cursor.visible = false;
+
+        #if UNITY_EDITOR
+        Cursor.visible = true;
+        #endif
+
+
 
         if (Screens.Count > 0)
         {

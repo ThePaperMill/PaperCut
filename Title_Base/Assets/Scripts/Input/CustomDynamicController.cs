@@ -204,8 +204,8 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     void Start()
     {
-      EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
-      EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+        EventSystem.GlobalHandler.Connect(Events.ActivateTextWindow, OnActivateWindowEvent);
+        EventSystem.GlobalHandler.Connect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
 
         RBody     = (Rigidbody)GetComponent<Rigidbody>();
         CCollider = (CapsuleCollider)GetComponent<CapsuleCollider>();
@@ -1021,28 +1021,46 @@ public class CustomDynamicController : MonoBehaviour
 			return;
 		}
 
-        if(FootSounds)
-            FootSounds.StartEvent();
-	}
-		
-		private void PlayLandingSound()
+        if (FootSounds)
         {
-         if(LandSounds && LandSounds.asset != null)
-            LandSounds.StartEvent();
+            FootSounds.StartEvent();
+        }
+	}
 
-            // Edit walkcycle accordingly
-            m_NextStep = m_StepCycle + .5f;
-		}
-		
-		private void PlayJumpingSound()
-		{
+    /*************************************************************************/
+    /*!
+      \brief
+
+    */
+    /*************************************************************************/
+    private void PlayLandingSound()
+    {
+        if (LandSounds && LandSounds.asset != null)
+        {
+            LandSounds.StartEvent();
+        }
+
+        // Edit walkcycle accordingly
+        m_NextStep = m_StepCycle + .5f;
+	}
+
+    /*************************************************************************/
+    /*!
+      \brief
+
+    */
+    /*************************************************************************/
+    private void PlayJumpingSound()
+	{
         if (JumpSounds && JumpSounds.asset != null)
         {
+            //JumpSounds.
             JumpSounds.StartEvent();
         }
-            // Edit walkcycle accordingly
-			m_NextStep = 0;
-			m_StepCycle = 0;
-		}
+
+        // Edit walkcycle accordingly
+		m_NextStep = 0;
+		m_StepCycle = 0;
+	}
 }
 
