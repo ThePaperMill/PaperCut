@@ -66,7 +66,10 @@ public class MenuManager : EventHandler
 
   GameObject Selector = null;
 
-    public bool MainMenu = false;
+  public bool MainMenu = false;
+
+    [HideInInspector]
+    public int PrevMenu = -1;
 
   MenuManager()
   {
@@ -243,13 +246,15 @@ public class MenuManager : EventHandler
     Buttons[CurrentButton].Activate();
   }
 
-  void ActivateMenu(int Menu)
+  public void ActivateMenu(int Menu)
   {
     if (Menus.ContainsKey(Menu))
     {
+      //Menus[CurrentMenu].MenuActive = false;
       CurrentMenu = Menu;
       CurrentButton = 0;
       Menus[Menu].MenuActive = true;
+      PrevMenu = Menu;
 
       List<MenuButton> Buttons = Menus[CurrentMenu].Buttons;
 

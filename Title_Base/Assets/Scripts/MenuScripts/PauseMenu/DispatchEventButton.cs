@@ -4,24 +4,37 @@ using System.Collections.Generic;
 
 public class DispatchEventButton : MenuButton
 {
-  public List<string> DispatchEvents = new List<string>();
-	
-  void Start () 
-  {
-	
-	}
-	
+    public List<string> DispatchEvents = new List<string>();
 
-	void Update () 
-  {
-	
-	}
+    public bool ChangeMenu = false;
+    public int NewMenu = 0;
 
-  public override void Activate()
-  {
-    foreach (var Event in DispatchEvents)
+
+    void Start () 
     {
-      EventSystem.GlobalHandler.DispatchEvent(Event);
+	
     }
-  }
+	
+
+    void Update () 
+    {
+	
+    }
+
+    public override void Activate()
+    {
+        foreach (var Event in DispatchEvents)
+        {
+            EventSystem.GlobalHandler.DispatchEvent(Event);
+        }
+
+        if(ChangeMenu)
+        {
+           var test =  GameObject.FindGameObjectWithTag("LevelSettings");
+            if(test)
+            {
+                test.GetComponent<MenuManager>().ActivateMenu(NewMenu);
+            }
+        }
+    }
 }

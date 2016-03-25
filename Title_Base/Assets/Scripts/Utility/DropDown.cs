@@ -77,7 +77,6 @@ public class DropDown : MonoBehaviour
                 UITextManager.ConversationText.Disappear();
         }
 
-
         ActionSequence temp = Action.Sequence(grp);
 
         Vector3 pos = StartingPosition;
