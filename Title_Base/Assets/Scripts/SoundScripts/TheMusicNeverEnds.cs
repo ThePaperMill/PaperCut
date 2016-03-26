@@ -17,7 +17,8 @@ public class TheMusicNeverEnds : MonoBehaviour
     FMODAsset tunez = null;
     FMOD_StudioEventEmitter bbox;
 
-    bool forcedStop = false;
+    [HideInInspector]
+    public bool forcedStop = false;
     GameObject listener = null;
     GameObject musicBox = null;
     GameObject Camera = null;
@@ -66,7 +67,10 @@ public class TheMusicNeverEnds : MonoBehaviour
         {
             bbox.Stop();
             bbox.CacheEventInstance(tuneGet.levelMusic, true);
-            bbox.Play();
+
+
+            if (forcedStop == false)
+                bbox.Play();
 
             /*if (tunez != null)
             {
@@ -108,7 +112,9 @@ public class TheMusicNeverEnds : MonoBehaviour
         {
             bbox.Stop();
             bbox.CacheEventInstance(tuneGet.levelMusic, true);
-            bbox.Play();
+
+            if(forcedStop == false)
+                bbox.Play();
 
             /*if (tunez != null)
             {

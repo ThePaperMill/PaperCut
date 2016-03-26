@@ -43,7 +43,7 @@ GameObject:
   - 114: {fileID: 11471838}
   m_Layer: 0
   m_Name: UndyingMusic
-  m_TagString: Untagged
+  m_TagString: PersistentMusic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c8fccc36e5bc44fb24f9e17245ddb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forcedStop: 0
 --- !u!114 &11492134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,7 +130,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: PersistentMusic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 191184}
