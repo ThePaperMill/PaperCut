@@ -122,6 +122,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &107058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401880}
+  - 65: {fileID: 6511542}
+  m_Layer: 0
+  m_Name: ColliderTail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &107390
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +243,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &118946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496160}
+  - 65: {fileID: 6588200}
+  m_Layer: 0
+  m_Name: ColliderHead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &119278
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +267,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462338}
+  - 65: {fileID: 6550818}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -1289,6 +1322,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 452836}
   m_RootOrder: 0
+--- !u!4 &401880
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0284, y: -0.0016, z: 0.0021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462338}
+  m_RootOrder: 41
 --- !u!4 &402124
 Transform:
   m_ObjectHideFlags: 1
@@ -1843,9 +1888,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119278}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.0813704, y: 0.125, z: 1.6893582}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalRotation: {x: 0, y: 0.99916166, z: 0, w: -0.04093934}
+  m_LocalPosition: {x: 16.904, y: 0.847, z: 16.415}
+  m_LocalScale: {x: 22, y: 22, z: 22}
   m_Children:
   - {fileID: 462054}
   - {fileID: 419366}
@@ -1887,6 +1932,8 @@ Transform:
   - {fileID: 483364}
   - {fileID: 400276}
   - {fileID: 400210}
+  - {fileID: 496160}
+  - {fileID: 401880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &462840
@@ -2266,6 +2313,18 @@ Transform:
   - {fileID: 414738}
   m_Father: {fileID: 462338}
   m_RootOrder: 24
+--- !u!4 &496160
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0254, y: 0.0209, z: 0.0021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462338}
+  m_RootOrder: 40
 --- !u!4 &496912
 Transform:
   m_ObjectHideFlags: 1
@@ -2428,6 +2487,42 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105762}
   m_Mesh: {fileID: 4300004, guid: 25c9b2528f452e947b11acd10d5d863b, type: 3}
+--- !u!65 &6511542
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.045, z: -0.0025}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6550818
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.075, z: -0.0025}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6588200
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.032, z: -0.0025}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
