@@ -176,18 +176,16 @@ public class TheMusicNeverEnds : MonoBehaviour
         forcedStop = false;
     }
 
-    // Manually shut off the music & SFX.  Both can be turned on & off individually
+    // Manually shut off the music & SFX.  Indpendent from just turning off the music
     public void StopAllSound()
     {
-        StopMusic();
-        //StopSFX();
+		listener.SetActive(false);
     }
 
-    // Manually turn on the music & SFX.  Both can be turned on & off individually
+	// Manually turn on the music & SFX.  Indpendent from just turning on the music
     public void StartAllSound()
-    {
-        StartMusic();
-        //StartSFX();
+	{
+		listener.SetActive(true);
     }
 
     // Reduced sound for the pause menu

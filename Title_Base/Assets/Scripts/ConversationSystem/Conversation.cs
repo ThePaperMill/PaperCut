@@ -136,7 +136,7 @@ namespace Assets.Scripts.ConversationSystem
                 {
 					CurrentAction = CurrentAction.Next;
 
-					ActionSystem.Action.Call(seq, PlaySound);
+					//ActionSystem.Action.Call(seq, PlaySound);
                 }
                 else
                 {
