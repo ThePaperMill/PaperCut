@@ -57,7 +57,7 @@ public class CameraRotator : MonoBehaviour {
                 if (hit.collider.tag != "IgnorebyCamera")
                 {
                     CamChild.transform.position = hit.point + VecFromPlay.normalized * -1.0f * 0.1f;
-                    print(hit.collider.gameObject.name + "Is blocking camera currently");
+                    //print(hit.collider.gameObject.name + "Is blocking camera currently");
                     //print("IgnorebyCamera");
                 }
 

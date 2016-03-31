@@ -23,34 +23,42 @@ public class PullTab : MonoBehaviour
     bool Engaged = false;
     Rigidbody RBody = null;
 
-    Vector3 StartingPos = Vector3.zero;
+    Vector3 StartingPos = Vector3.zero; //where this object spawns at in the level at the start
     public float distance = 1.0f;
 
     public float LerpPos = 0.0f;
 
     Vector3 PosOnStartLock = Vector3.zero;
 
-    Transform Root;
+    Transform Root; // the utmost parent of this game object
+
     // Use this for initialization
     FloatEvent LerpData = new FloatEvent();
+
+
     void Start()
     {
+        //Save the starting position of this game object
         StartingPos = transform.parent.position;
-        //transform.root.GetComponentsInChildren<PullTabChild>();
+        //Save the Root of this game object
         Root = transform.root;
 
-
+        //If the object is supposed to start popped up,
         if(StartPoppedUp)
         {
+            //If the lockx boolean is false,
             if (LockX == false)
             {
+                //move my parent to a new position, equal to the starting position plus distance on the X axis
                     transform.parent.position = new Vector3(StartingPos.x + distance, StartingPos.y, StartingPos.z);
             }
+            //if the lock Z boolean is false,
             if (LockZ == false)
             {
+                //move hte parent to starting position plus distance on the x axis
                     transform.parent.position = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + distance);
             }
-
+            //set a lerp position
             LerpPos = 0.99f;
             LerpData.value = LerpPos;
             Root.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
@@ -77,7 +85,7 @@ public class PullTab : MonoBehaviour
             }
             if (InputManager.GetSingleton.IsInputReleased(GlobalControls.TabControls))
             {
-                print("released a");
+                //print("released a");
                 OnUnlockBody();
             }
 
@@ -177,7 +185,7 @@ public class PullTab : MonoBehaviour
         if (other.tag == "Player")
         {
             Player = other.gameObject;
-            print(other.gameObject);
+            //print(other.gameObject);
             NearPlayer = true;
         }
     }
