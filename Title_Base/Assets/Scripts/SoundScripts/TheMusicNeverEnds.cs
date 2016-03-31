@@ -19,6 +19,10 @@ public class TheMusicNeverEnds : MonoBehaviour
 
     [HideInInspector]
     public bool forcedStop = false;
+
+    [HideInInspector]
+    public bool AllStop = false;
+
     GameObject listener = null;
     GameObject musicBox = null;
     GameObject Camera = null;
@@ -180,12 +184,14 @@ public class TheMusicNeverEnds : MonoBehaviour
     public void StopAllSound()
     {
 		listener.SetActive(false);
+        AllStop = true;
     }
 
 	// Manually turn on the music & SFX.  Indpendent from just turning on the music
     public void StartAllSound()
 	{
 		listener.SetActive(true);
+        AllStop = false;
     }
 
     // Reduced sound for the pause menu
