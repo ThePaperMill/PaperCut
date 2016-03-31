@@ -1401,6 +1401,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.00848
       objectReference: {fileID: 0}
+    - target: {fileID: 170922, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
+      propertyPath: m_Name
+      value: no
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0e5c365607d9e54d97a3cdee06a2258, type: 2}
   m_IsPrefabParent: 0
@@ -1943,11 +1947,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'A piece flew off into the Industrial
+  Text: 'A piece flew off into the
 
-    Complex. Do you think you could
+    Industrial Complex. Do you think
 
-    get it back for me?'
+    you could get it back for me?'
   NextAction: {fileID: 486153553}
 --- !u!1 &445578028 stripped
 GameObject:
@@ -2214,7 +2218,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: 'I can''t believe that happened!
 
-    At least it''s not as bad as last time.'
+    At least it''s not as bad as
+
+    last time.'
   NextAction: {fileID: 440973983}
 --- !u!4 &462174176
 Transform:
@@ -2950,7 +2956,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

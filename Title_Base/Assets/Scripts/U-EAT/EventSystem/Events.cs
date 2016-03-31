@@ -109,6 +109,8 @@ public class Events
     public static readonly String LightOff = "LightOff";
     public static readonly String LightOn = "LightOn";
     public static readonly String CatchFire = "CatchFire";
+    public static readonly String OptionsDropDown = "OptionsDropDown";
+    public static readonly String OptionsRaise = "OptionsRaise";
     //Nonstatic
     public string EventName = DefaultEvent;
 
