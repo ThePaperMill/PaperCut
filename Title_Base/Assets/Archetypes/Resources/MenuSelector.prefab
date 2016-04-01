@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3336902}
   - 23: {fileID: 2348080}
   - 95: {fileID: 9566804}
+  - 114: {fileID: 11489014}
   m_Layer: 5
   m_Name: MenuSelector
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.7796593, y: 16.9390812, z: -4.71707916}
+  m_LocalPosition: {x: -20.77966, y: 16.939081, z: -4.717079}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,8 +49,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -78,6 +81,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11489014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528ed627ab7a10b4f9c927aa803de36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 6b555f7d7b66c0f49b6f8b62c7a7d938, type: 2}
+  path: '{8e315c54-c75a-4d32-a7bf-4565f0dc9242}'
+  startEventOnAwake: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -92,6 +109,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_ReceiveShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: asset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bbbbade568f96845bfc43b503cf8b0f,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: path
+      value: '{5497179c-62da-4f93-9a51-819a60bb381b}'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

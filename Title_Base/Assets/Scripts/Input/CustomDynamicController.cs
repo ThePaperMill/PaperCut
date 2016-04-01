@@ -447,14 +447,18 @@ public class CustomDynamicController : MonoBehaviour
         Vector3 movement = new Vector3();
         RawInput = movement;
 
+        Vector3 CamForward = Vector3.Scale(Cam.transform.forward, new Vector3(1, 0, 1)).normalized;
+
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
-            movement += Cam.transform.forward;
+            //movement += Cam.transform.forward;
+            movement += CamForward;
         }
 
         else if (MoveBack || LeftStickPosition.YPos < -0.2)
         {
-            movement -= Cam.transform.forward;
+            movement -= CamForward;
+            //movement -= Cam.transform.forward;
         }
 
         // store the raw input, so we can turn the model
