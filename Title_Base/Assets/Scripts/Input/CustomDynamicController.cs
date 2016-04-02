@@ -284,7 +284,7 @@ public class CustomDynamicController : MonoBehaviour
         // advance dialog
         if (MenuActive)
         {
-            if (InteractPressed == true)
+            if (InteractPressed == true || JumpPressed)
             {
                 EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
             }
