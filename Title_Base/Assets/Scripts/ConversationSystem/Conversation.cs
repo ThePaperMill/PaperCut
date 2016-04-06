@@ -187,7 +187,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void PlaySound()
         {
-			if(SoundClip != null)
+			if(SoundClip != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
 			{
 				SoundClip.StartEvent();
 			}

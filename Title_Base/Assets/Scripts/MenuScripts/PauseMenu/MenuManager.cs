@@ -207,11 +207,9 @@ public class MenuManager : EventHandler
     {
       ++CurrentButton;
 
-      if(SoundEmitter)
+      if(SoundEmitter && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
       {
-        print(SoundEmitter.asset);
         SoundEmitter.StartEvent();
-        print(SoundEmitter.getPlaybackState());
       }
 
       if (CurrentButton == Menus[CurrentMenu].Buttons.Count)
@@ -226,7 +224,6 @@ public class MenuManager : EventHandler
 
       if (SoundEmitter)
       {
-        print(SoundEmitter.asset);
         SoundEmitter.StartEvent();
       }
 

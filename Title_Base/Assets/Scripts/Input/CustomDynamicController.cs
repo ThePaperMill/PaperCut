@@ -1025,7 +1025,7 @@ public class CustomDynamicController : MonoBehaviour
 			return;
 		}
 
-        if (FootSounds)
+        if (FootSounds && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             FootSounds.StartEvent();
         }
@@ -1039,7 +1039,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     private void PlayLandingSound()
     {
-        if (LandSounds && LandSounds.asset != null)
+        if (LandSounds && LandSounds.asset != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             LandSounds.StartEvent();
         }
@@ -1056,7 +1056,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     private void PlayJumpingSound()
 	{
-        if (JumpSounds && JumpSounds.asset != null)
+        if (JumpSounds && JumpSounds.asset != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             //JumpSounds.
             JumpSounds.StartEvent();

@@ -125,8 +125,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         GamestateManager.GetSingleton.Initialize();
         PresentationSkip.GetSingleton.Initialize();
         LevelTransitionManager.GetSingleton.Initialize();
-
-        GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("UndyingMusic"));
+        GlobalSoundInitializer.GetSingleton.Initialize();
     }
 
     /*************************************************************************/
