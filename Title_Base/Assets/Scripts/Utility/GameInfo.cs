@@ -12,6 +12,11 @@ public class GameInfo : Singleton<GameInfo>
 	
 	}
 	
+    public void ResetBools()
+    {
+        LabDestroyed = false;
+    }
+
 	// Update is called once per frame
 	void Update ()
     {

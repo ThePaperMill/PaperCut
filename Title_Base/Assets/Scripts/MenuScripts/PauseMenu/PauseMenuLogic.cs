@@ -24,7 +24,8 @@ public class PauseMenuLogic : EventHandler
         EventSystem.GlobalHandler.Connect(Events.ResumeGameEvent, OnResumeGameEvent);
         EventSystem.GlobalHandler.Connect(Events.InitiateQuitEvent, OnResumeGameEvent);
         EventSystem.GlobalHandler.Connect(Events.CancelQuitEvent, OnPauseGameEvent);
-
+        
+        EventSystem.GlobalHandler.Connect("RestartConfirmation", OnResumeGameEvent);
         EventSystem.GlobalHandler.Connect(Events.OptionsRaise, OnPauseGameEvent);
         EventSystem.GlobalHandler.Connect(Events.OptionsDropDown, OnResumeGameEvent);
 
@@ -58,7 +59,7 @@ public class PauseMenuLogic : EventHandler
         EventSystem.GlobalHandler.Disconnect(Events.ResumeGameEvent, OnResumeGameEvent);
         EventSystem.GlobalHandler.Disconnect(Events.InitiateQuitEvent, OnResumeGameEvent);
         EventSystem.GlobalHandler.Disconnect(Events.CancelQuitEvent, OnPauseGameEvent);
-
+        EventSystem.GlobalHandler.Disconnect("RestartConfirmation", OnPauseGameEvent);
         EventSystem.GlobalHandler.Disconnect(Events.OptionsRaise, OnPauseGameEvent);
         EventSystem.GlobalHandler.Disconnect(Events.OptionsDropDown, OnResumeGameEvent);
     }
