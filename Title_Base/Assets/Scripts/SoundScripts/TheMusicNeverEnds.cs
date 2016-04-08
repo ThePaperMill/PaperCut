@@ -27,6 +27,9 @@ public class TheMusicNeverEnds : MonoBehaviour
     [HideInInspector]
     public bool AllStop = false;
 
+    [HideInInspector]
+    public bool IsPaused = false;
+
     GameObject listener = null;
     GameObject musicBox = null;
     GameObject Camera = null;
@@ -194,14 +197,22 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Manually shut off the music & SFX.  Indpendent from just turning off the music
     public void StopAllSound()
     {
-		    listener.SetActive(false);
+        listener.transform.localPosition = new Vector3(0, 0, 9001);
         AllStop = true;
     }
 
 	// Manually turn on the music & SFX.  Indpendent from just turning on the music
     public void StartAllSound()
-	{
-		listener.SetActive(true);
+    {
+        if (!IsPaused)
+        {
+            listener.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            listener.transform.localPosition = new Vector3(0, 0, 10);
+        }
+
         AllStop = false;
     }
 
@@ -209,8 +220,9 @@ public class TheMusicNeverEnds : MonoBehaviour
     public void PauseSound()
     {
         // Only pause if this level allows pausing
-        if(tuneGet.canPause)
+        if (tuneGet.canPause && !AllStop)
         {
+            IsPaused = true;
             listener.transform.localPosition = new Vector3(0, 0, 10);
         }
     }
@@ -219,8 +231,9 @@ public class TheMusicNeverEnds : MonoBehaviour
     public void UnpauseSound()
     {
         // Only unpause if this level allows pausing
-        if (tuneGet.canPause)
+        if (tuneGet.canPause && !AllStop)
         {
+            IsPaused = false;
             listener.transform.localPosition = Vector3.zero;
         }
     }
