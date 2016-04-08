@@ -8,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine;
 namespace Assets.Scripts.ConversationSystem
 {
     static class ConditionalFunctions
     {
+        static bool CanEndGame = false;
+
         static public bool DefaultFunctionTrue()
         {
             return true;
@@ -65,6 +67,13 @@ namespace Assets.Scripts.ConversationSystem
         {
             HasUsedCrate = true;
             return HasUsedCrate;
+        }
+
+        static public bool HasPart(string PartName)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            var invin = player.GetComponent<InventorySystem>();
+            return invin.HasItem(new ItemInfo(PartName));
         }
     }
 }
