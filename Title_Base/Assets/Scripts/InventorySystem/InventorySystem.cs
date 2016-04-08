@@ -212,7 +212,7 @@ public class InventorySystem : Singleton<InventorySystem>
       *  The Basic structure representing each item in our inventory
     */
     /****************************************************************************/
-    bool HasItem(ItemInfo item)
+    public bool HasItem(ItemInfo item)
     {
         foreach (var i in Inventory)
         {
