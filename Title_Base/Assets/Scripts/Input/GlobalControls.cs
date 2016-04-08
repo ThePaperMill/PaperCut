@@ -25,6 +25,7 @@ class GlobalControls
     public static List<InputCodes> MoveInventoryLeft = new List<InputCodes> { KeyCode.LeftArrow, KeyCode.A , XINPUT_BUTTONS.BUTTON_DPAD_LEFT };
     public static List<InputCodes> MoveInventoryRight = new List<InputCodes> { KeyCode.RightArrow, KeyCode.D, XINPUT_BUTTONS.BUTTON_DPAD_RIGHT };
     public static List<InputCodes> InventorySelectItem = new List<InputCodes> { KeyCode.Space, XINPUT_BUTTONS.BUTTON_A, XINPUT_BUTTONS.BUTTON_X, KeyCode.E };
+    public static List<InputCodes> AnyMovement = new List<InputCodes> { KeyCode.LeftArrow, KeyCode.A, KeyCode.RightArrow, KeyCode.D, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.W, KeyCode.S, XINPUT_BUTTONS.BUTTON_DPAD_DOWN, XINPUT_BUTTONS.BUTTON_DPAD_LEFT, XINPUT_BUTTONS.BUTTON_DPAD_RIGHT, XINPUT_BUTTONS.BUTTON_DPAD_UP };
 }
 
 public enum InputTypes
