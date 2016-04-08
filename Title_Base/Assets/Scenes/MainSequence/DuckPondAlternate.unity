@@ -1497,6 +1497,19 @@ Prefab:
       propertyPath: DefaultPosition.z
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fa279b3a2f8e1b42a4020ed69d4c140,
+        type: 2}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: doIt
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
   m_IsPrefabParent: 0
@@ -14892,6 +14905,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 525313730}
+--- !u!1 &527425291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 527425293}
+  - 114: {fileID: 527425292}
+  m_Layer: 0
+  m_Name: I don't trust those horses. (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &527425292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 527425291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: I want to get a better view of the ducks.
+  NextAction: {fileID: 0}
+--- !u!4 &527425293
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 527425291}
+  m_LocalRotation: {x: 0, y: 0.38268334, z: 0, w: 0.9238796}
+  m_LocalPosition: {x: -1.2603651, y: -0.016530683, z: 0.3553472}
+  m_LocalScale: {x: 0.050000012, y: 0.05, z: 0.05000001}
+  m_Children: []
+  m_Father: {fileID: 753307919}
+  m_RootOrder: 1
 --- !u!4 &527495144 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -17749,6 +17803,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1661261459}
   m_RootOrder: 0
+--- !u!1 &623709191 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153112, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_PrefabInternal: {fileID: 57893548}
+--- !u!114 &623709201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 623709191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218b4dc2bc3a2cc49bd9ef17fffc5684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelMusic: {fileID: 11400000, guid: 26b4c39391477db488dac139070f1d24, type: 2}
+  doIt: 1
+  canPause: 1
 --- !u!4 &624035354 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -18321,7 +18393,7 @@ Transform:
   - {fileID: 822065773}
   - {fileID: 1059331389}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 26
 --- !u!1001 &640970269
 Prefab:
   m_ObjectHideFlags: 0
@@ -19854,7 +19926,7 @@ Transform:
   - {fileID: 1049853225}
   - {fileID: 430878421}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 27
 --- !u!1001 &720019098
 Prefab:
   m_ObjectHideFlags: 0
@@ -20717,8 +20789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: I don't trust those horses...
-  NextAction: {fileID: 0}
+  Text: Hey kid, pull that tab over there.
+  NextAction: {fileID: 527425292}
 --- !u!4 &747289983
 Transform:
   m_ObjectHideFlags: 0
@@ -20872,15 +20944,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 475858, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.17
+      value: -11.39
       objectReference: {fileID: 0}
     - target: {fileID: 475858, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.435
+      value: 0.59
       objectReference: {fileID: 0}
     - target: {fileID: 475858, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 11.56
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 475858, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -20902,7 +20974,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9559702, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &753307912 stripped
@@ -23975,8 +24048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Get off my lawn!
-  NextAction: {fileID: 0}
+  Text: 'They don''t let me race anymore
+
+    since the accident...'
+  NextAction: {fileID: 1917801760}
 --- !u!4 &876081372
 Transform:
   m_ObjectHideFlags: 0
@@ -43321,22 +43396,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.031522136, y: 0.026509874, z: 0.0025000009}
   m_Center: {x: 0, y: 0, z: -0.000000013038516}
---- !u!1 &1633675719 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 155302, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-  m_PrefabInternal: {fileID: 1922140949}
---- !u!65 &1633675724
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1633675719}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.031522136, y: 0.026509874, z: 0.0025000009}
-  m_Center: {x: 0, y: 0, z: -0.000000018626451}
 --- !u!1 &1633699241
 GameObject:
   m_ObjectHideFlags: 0
@@ -44423,7 +44482,7 @@ Transform:
   m_LocalScale: {x: 7.016438, y: 4.9357486, z: 6.8197}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
 --- !u!1 &1663487820
 GameObject:
   m_ObjectHideFlags: 0
@@ -50984,7 +51043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Respect your elders!
+  Text: "But they're sending me to the \nglue factory! \nI'll be good as new!"
   NextAction: {fileID: 0}
 --- !u!4 &1917801761
 Transform:
@@ -51191,64 +51250,6 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 0e4a2664491f81e4eac589dd7b454d6b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1922140949
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 5.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.29999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 13.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.38268346
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9238795
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_RootOrder
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 155302, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
-      propertyPath: m_Name
-      value: Fence (9)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1927778681 stripped
 Transform:
