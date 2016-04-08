@@ -594,6 +594,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03862957, y: 0.033387836, z: 0.0027473634}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &112158973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 112158974}
+  - 114: {fileID: 112158975}
+  m_Layer: 0
+  m_Name: ScientistTalk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &112158974
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112158973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_Children: []
+  m_Father: {fileID: 2033643602}
+  m_RootOrder: 0
+--- !u!114 &112158975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112158973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: You found both parts! This is wonderful!
+  NextAction: {fileID: 1785544935}
 --- !u!1001 &117897818
 Prefab:
   m_ObjectHideFlags: 0
@@ -1458,6 +1499,51 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 345947104}
+--- !u!1 &357297833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 357297834}
+  - 114: {fileID: 357297835}
+  m_Layer: 0
+  m_Name: ScientistTalk (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357297834
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357297833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
+  m_Children: []
+  m_Father: {fileID: 2033643602}
+  m_RootOrder: 2
+--- !u!114 &357297835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357297833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 'SPACE!SPAAACE!SPACE!SPACE!!!SPAAACE!!
+
+    SPAAACE!SPAACE!!SPACE!!!SPAAAAAAA
+
+    AAAAAACE!!!'
+  NextAction: {fileID: 0}
 --- !u!1001 &357411807
 Prefab:
   m_ObjectHideFlags: 0
@@ -1931,10 +2017,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 440973981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0149123445, y: 0.07876302, z: -0.07900912}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
   m_LocalScale: {x: 0.050000004, y: 0.05, z: 0.050000004}
   m_Children: []
-  m_Father: {fileID: 1312897463}
+  m_Father: {fileID: 866673566}
   m_RootOrder: 1
 --- !u!114 &440973983
 MonoBehaviour:
@@ -1947,11 +2033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'A piece flew off into the
-
-    Industrial Complex. Do you think
-
-    you could get it back for me?'
+  Text: "A piece flew off into the Waterworks \nbeneath the city. Do you think\nyou
+    could get it back for me?"
   NextAction: {fileID: 486153553}
 --- !u!1 &445578028 stripped
 GameObject:
@@ -2229,10 +2312,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 462174174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.079009116}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
-  m_Father: {fileID: 1312897463}
+  m_Father: {fileID: 866673566}
   m_RootOrder: 0
 --- !u!1001 &471750553
 Prefab:
@@ -2307,7 +2390,7 @@ Transform:
   m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
   m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
   m_Children: []
-  m_Father: {fileID: 1312897463}
+  m_Father: {fileID: 866673566}
   m_RootOrder: 2
 --- !u!114 &486153553
 MonoBehaviour:
@@ -2322,9 +2405,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: 'To get there, go back to the
 
-    City Center and head past
+    City Center and head down the
 
-    the Water Works.'
+    sewer grate.'
   NextAction: {fileID: 0}
 --- !u!1001 &504653563
 Prefab:
@@ -3658,6 +3741,67 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 426b6f7c5949a744a9ae416492ffc385, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &859989880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 859989881}
+  m_Layer: 0
+  m_Name: HasPart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &859989881
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 859989880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2033643602}
+  - {fileID: 1842501272}
+  - {fileID: 1810951119}
+  - {fileID: 1349907857}
+  m_Father: {fileID: 1107549757}
+  m_RootOrder: 1
+--- !u!1 &866673565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 866673566}
+  m_Layer: 0
+  m_Name: DoesNotHavePart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &866673566
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 866673565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462174176}
+  - {fileID: 440973982}
+  - {fileID: 486153552}
+  m_Father: {fileID: 1107549757}
+  m_RootOrder: 0
 --- !u!1001 &890163956
 Prefab:
   m_ObjectHideFlags: 0
@@ -4512,6 +4656,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03171769, y: 0.021077674, z: 0.0027473634}
   m_Center: {x: 0.000000029802322, y: 0, z: -0.000000007450581}
+--- !u!1 &1107549756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1107549757}
+  - 114: {fileID: 1107549758}
+  m_Layer: 0
+  m_Name: HasPart1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1107549757
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1107549756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 866673566}
+  - {fileID: 859989881}
+  m_Father: {fileID: 1312897463}
+  m_RootOrder: 0
+--- !u!114 &1107549758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1107549756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84eb88ea84d2ff94aa41382d8969cda4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FunctionName: HasPart
+  Param1: MachinePart1
+  NextIfTrue: {fileID: 2033643603}
+  NextIfFalse: {fileID: 462174175}
 --- !u!1001 &1116450124
 Prefab:
   m_ObjectHideFlags: 0
@@ -5149,6 +5338,49 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 467852, guid: ba719c6da4a52aa48aa19eaca4d02892, type: 2}
   m_PrefabInternal: {fileID: 800215270}
+--- !u!1 &1349907856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1349907857}
+  - 114: {fileID: 1349907858}
+  m_Layer: 0
+  m_Name: ScientistTalk (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1349907857
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349907856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
+  m_Children: []
+  m_Father: {fileID: 859989881}
+  m_RootOrder: 3
+--- !u!114 &1349907858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349907856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 'I''d be careful though, I''ve heard things about
+
+    her dogs...'
+  NextAction: {fileID: 0}
 --- !u!1001 &1361396731
 Prefab:
   m_ObjectHideFlags: 0
@@ -6920,6 +7152,49 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 407082, guid: 6e5e33d1b9cbdf744a87e4632547a456, type: 2}
   m_PrefabInternal: {fileID: 1774539358}
+--- !u!1 &1785544933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1785544934}
+  - 114: {fileID: 1785544935}
+  m_Layer: 0
+  m_Name: ScientistTalk (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1785544934
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785544933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.050000004, y: 0.05, z: 0.050000004}
+  m_Children: []
+  m_Father: {fileID: 2033643602}
+  m_RootOrder: 1
+--- !u!114 &1785544935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785544933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 'Head to the Duck Pond north-west of the city,
+
+    I have something to show you.'
+  NextAction: {fileID: 357297835}
 --- !u!1001 &1797121438
 Prefab:
   m_ObjectHideFlags: 0
@@ -7049,6 +7324,89 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 422044, guid: fab9639e4e8cc734cbfb978adfbe1f36, type: 2}
   m_PrefabInternal: {fileID: 1809160302}
+--- !u!1 &1810951118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1810951119}
+  - 114: {fileID: 1810951120}
+  m_Layer: 0
+  m_Name: ScientistTalk (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1810951119
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810951118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.050000004, y: 0.05, z: 0.050000004}
+  m_Children: []
+  m_Father: {fileID: 859989881}
+  m_RootOrder: 2
+--- !u!114 &1810951120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810951118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: "The other piece landed around Rachel's house.\nYou should know how to get
+    there, \nshe's you're neighbor."
+  NextAction: {fileID: 1349907858}
+--- !u!1 &1842501271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1842501272}
+  - 114: {fileID: 1842501273}
+  m_Layer: 0
+  m_Name: ScientistTalk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1842501272
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1842501271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_Children: []
+  m_Father: {fileID: 859989881}
+  m_RootOrder: 1
+--- !u!114 &1842501273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1842501271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: Amazing! You found the first part!
+  NextAction: {fileID: 1810951120}
 --- !u!1001 &1850487490
 Prefab:
   m_ObjectHideFlags: 0
@@ -7561,6 +7919,52 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.87, y: 5.02, z: 0.04}
   m_Center: {x: -0.06, y: 0, z: 0.12}
+--- !u!1 &2033643601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2033643602}
+  - 114: {fileID: 2033643603}
+  m_Layer: 0
+  m_Name: HasPart2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033643602
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2033643601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 112158974}
+  - {fileID: 1785544934}
+  - {fileID: 357297834}
+  m_Father: {fileID: 859989881}
+  m_RootOrder: 0
+--- !u!114 &2033643603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2033643601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84eb88ea84d2ff94aa41382d8969cda4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FunctionName: HasPart
+  Param1: MachinePart2
+  NextIfTrue: {fileID: 112158975}
+  NextIfFalse: {fileID: 1842501273}
 --- !u!1001 &2044611420
 Prefab:
   m_ObjectHideFlags: 0
