@@ -284,7 +284,7 @@ public class CustomDynamicController : MonoBehaviour
         // advance dialog
         if (MenuActive)
         {
-            if (InteractPressed == true)
+            if (InteractPressed == true || JumpPressed)
             {
                 EventSystem.GlobalHandler.DispatchEvent(Events.NextAction);
             }
@@ -447,14 +447,18 @@ public class CustomDynamicController : MonoBehaviour
         Vector3 movement = new Vector3();
         RawInput = movement;
 
+        Vector3 CamForward = Vector3.Scale(Cam.transform.forward, new Vector3(1, 0, 1)).normalized;
+
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
-            movement += Cam.transform.forward;
+            //movement += Cam.transform.forward;
+            movement += CamForward;
         }
 
         else if (MoveBack || LeftStickPosition.YPos < -0.2)
         {
-            movement -= Cam.transform.forward;
+            movement -= CamForward;
+            //movement -= Cam.transform.forward;
         }
 
         // store the raw input, so we can turn the model
@@ -1021,7 +1025,7 @@ public class CustomDynamicController : MonoBehaviour
 			return;
 		}
 
-        if (FootSounds)
+        if (FootSounds && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             FootSounds.StartEvent();
         }
@@ -1035,7 +1039,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     private void PlayLandingSound()
     {
-        if (LandSounds && LandSounds.asset != null)
+        if (LandSounds && LandSounds.asset != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             LandSounds.StartEvent();
         }
@@ -1052,7 +1056,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     private void PlayJumpingSound()
 	{
-        if (JumpSounds && JumpSounds.asset != null)
+        if (JumpSounds && JumpSounds.asset != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
         {
             //JumpSounds.
             JumpSounds.StartEvent();

@@ -12,6 +12,10 @@
 using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class TheMusicNeverEnds : MonoBehaviour
 {
     FMODAsset tunez = null;
@@ -19,6 +23,10 @@ public class TheMusicNeverEnds : MonoBehaviour
 
     [HideInInspector]
     public bool forcedStop = false;
+
+    [HideInInspector]
+    public bool AllStop = false;
+
     GameObject listener = null;
     GameObject musicBox = null;
     GameObject Camera = null;
@@ -39,6 +47,13 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Use this for initialization (but only once, because code effeciency)
 	void Start()
     {
+        #if UNITY_EDITOR
+        if (EditorUtility.audioMasterMute)
+        {
+          StopAllSound();
+        }
+        #endif
+
         bbox = musicBox.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -176,18 +191,18 @@ public class TheMusicNeverEnds : MonoBehaviour
         forcedStop = false;
     }
 
-    // Manually shut off the music & SFX.  Both can be turned on & off individually
+    // Manually shut off the music & SFX.  Indpendent from just turning off the music
     public void StopAllSound()
     {
-        StopMusic();
-        //StopSFX();
+		    listener.SetActive(false);
+        AllStop = true;
     }
 
-    // Manually turn on the music & SFX.  Both can be turned on & off individually
+	// Manually turn on the music & SFX.  Indpendent from just turning on the music
     public void StartAllSound()
-    {
-        StartMusic();
-        //StartSFX();
+	{
+		listener.SetActive(true);
+        AllStop = false;
     }
 
     // Reduced sound for the pause menu

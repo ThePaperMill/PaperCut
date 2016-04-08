@@ -136,7 +136,7 @@ namespace Assets.Scripts.ConversationSystem
                 {
 					CurrentAction = CurrentAction.Next;
 
-					ActionSystem.Action.Call(seq, PlaySound);
+					//ActionSystem.Action.Call(seq, PlaySound);
                 }
                 else
                 {
@@ -187,7 +187,7 @@ namespace Assets.Scripts.ConversationSystem
 
         public void PlaySound()
         {
-			if(SoundClip != null)
+			if(SoundClip != null && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
 			{
 				SoundClip.StartEvent();
 			}

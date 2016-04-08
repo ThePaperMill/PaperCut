@@ -60,6 +60,8 @@ public class MenuManager : EventHandler
   int CurrentMenu   = 0;
   int CurrentButton = 0;
 
+  FMOD_StudioEventEmitter SoundEmitter = null;
+
   Vector3 ButtonOffset = new Vector3(0,-0.075f, -0.045f);
 
   Dictionary<int, MenuInfo> Menus = new Dictionary<int, MenuInfo>();
@@ -105,6 +107,12 @@ public class MenuManager : EventHandler
       EventSystem.GlobalHandler.Connect(Events.OverlayActive, OnOverlayActive);
 
       Selector = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("MenuSelector"));
+      
+      if(Selector)
+      {
+        SoundEmitter = Selector.GetComponent<FMOD_StudioEventEmitter>();
+      }
+    
       if(MainMenu)
       {
           ActivateMenu(0);
@@ -199,6 +207,11 @@ public class MenuManager : EventHandler
     {
       ++CurrentButton;
 
+      if(SoundEmitter && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
+      {
+        SoundEmitter.StartEvent();
+      }
+
       if (CurrentButton == Menus[CurrentMenu].Buttons.Count)
       {
         CurrentButton = 0;
@@ -208,6 +221,11 @@ public class MenuManager : EventHandler
     else if (MoveUp || (StickTriggered && (leftStickInfo.YPos > 0.0f || rightStickInfo.YPos > 0.0f)))
     {
       --CurrentButton;
+
+      if (SoundEmitter)
+      {
+        SoundEmitter.StartEvent();
+      }
 
       if (CurrentButton < 0)
       {

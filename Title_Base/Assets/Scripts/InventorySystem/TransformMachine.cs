@@ -101,7 +101,7 @@ public class TransformMachine : EventHandler
 
     void CreatePointBlast()
     {
-        EventSystem.GlobalHandler.DispatchEvent(Events.CatchFire);
+        //EventSystem.GlobalHandler.DispatchEvent(Events.CatchFire);
 
         Vector3 ExplosionPoint = ItemPosition;
 

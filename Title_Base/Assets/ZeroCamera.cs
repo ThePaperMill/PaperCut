@@ -39,7 +39,12 @@ public class ZeroCamera : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        if(TargetObject == null)
+        if (GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+        {
+            return;
+        }
+
+        if (TargetObject == null)
         {
             TargetObject = GameObject.FindGameObjectWithTag("Player");
 
