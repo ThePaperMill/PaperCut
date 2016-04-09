@@ -401,8 +401,6 @@ public class CustomDynamicController : MonoBehaviour
                 // if the object doesn't have a hinge
                 if (hingecheck == false)
                 {
-                    print("okay");
-
                     // if we are going to move into a static gameobject, adjust out movement vector.
                     MoveDirection = MoveDirection - Test.normal * Vector3.Dot(MoveDirection, Test.normal);
 
@@ -410,15 +408,12 @@ public class CustomDynamicController : MonoBehaviour
                 }
                 else
                 {
-                    print("does this ever happen");
-
                     transform.position += MoveDirection * maxSpeed * Time.deltaTime;
 
                     var test = Test.collider.gameObject.GetComponentInParent<Rigidbody>();
 
                     if (test)
                     {
-                        print("trying to shove thing");
                         test.AddForceAtPosition(MoveDirection, Test.point,ForceMode.Impulse);
                     }
                 }
