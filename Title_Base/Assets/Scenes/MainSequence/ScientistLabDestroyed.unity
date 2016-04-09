@@ -633,7 +633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: You found both parts! This is wonderful!
+  Text: 'You found both parts!
+
+    This is wonderful!'
   NextAction: {fileID: 1785544935}
 --- !u!1001 &117897818
 Prefab:
@@ -1280,6 +1282,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 322694995}
+--- !u!1 &327488022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 327488023}
+  - 114: {fileID: 327488024}
+  m_Layer: 0
+  m_Name: ScientistTalk (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327488023
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327488022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
+  m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
+  m_Children: []
+  m_Father: {fileID: 859989881}
+  m_RootOrder: 3
+--- !u!114 &327488024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327488022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: "You should know how to get there, \nshe's your neighbor."
+  NextAction: {fileID: 0}
 --- !u!1001 &333586287
 Prefab:
   m_ObjectHideFlags: 0
@@ -1499,51 +1542,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 345947104}
---- !u!1 &357297833
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 357297834}
-  - 114: {fileID: 357297835}
-  m_Layer: 0
-  m_Name: ScientistTalk (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &357297834
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 357297833}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
-  m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
-  m_Children: []
-  m_Father: {fileID: 2033643602}
-  m_RootOrder: 2
---- !u!114 &357297835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 357297833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: 'SPACE!SPAAACE!SPACE!SPACE!!!SPAAACE!!
-
-    SPAAACE!SPAACE!!SPACE!!!SPAAAAAAA
-
-    AAAAAACE!!!'
-  NextAction: {fileID: 0}
 --- !u!1001 &357411807
 Prefab:
   m_ObjectHideFlags: 0
@@ -2078,7 +2076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: 462174175}
+  - {fileID: 1107549758}
   AudioDelay: 0.5
 --- !u!114 &445578033
 MonoBehaviour:
@@ -2405,9 +2403,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: 'To get there, go back to the
 
-    City Center and head down the
+    City Center and head to the
 
-    sewer grate.'
+    right. The Sewer also leads there.'
   NextAction: {fileID: 0}
 --- !u!1001 &504653563
 Prefab:
@@ -2682,6 +2680,95 @@ Transform:
   - {fileID: 2114073277}
   m_Father: {fileID: 0}
   m_RootOrder: 34
+--- !u!1001 &589358990
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.192
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.363
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.29489312
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9555303
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_RootOrder
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 179892, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_Name
+      value: CrateBase (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &589358991 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 179892, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+  m_PrefabInternal: {fileID: 589358990}
+--- !u!114 &589358992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 589358991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883fea4f1535c8d44b9c340bd41abb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemToGive:
+    Transformable: 1
+    CurStatus: 1
+    CardboardItemDescription: Part 1
+    RealItemDescription: Part 1
+    ItemName: Default
+    ItemPrefab: {fileID: 0}
+    ItemDescription: 
+    CardboardItemPrefab: {fileID: 160750, guid: e7f8487af6a2abe48be65c9f891c77df,
+      type: 2}
+    RealItemPrefab: {fileID: 154072, guid: 1b4ac48bdd7e607448d7e61531f85a86, type: 2}
+    RealItemName: Part 1
+    CardboardItemName: Part 1
+    Explode: 1
+--- !u!114 &589358993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 589358991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
 --- !u!1001 &592542023
 Prefab:
   m_ObjectHideFlags: 0
@@ -3769,7 +3856,7 @@ Transform:
   - {fileID: 2033643602}
   - {fileID: 1842501272}
   - {fileID: 1810951119}
-  - {fileID: 1349907857}
+  - {fileID: 327488023}
   m_Father: {fileID: 1107549757}
   m_RootOrder: 1
 --- !u!1 &866673565
@@ -4640,6 +4727,95 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 422044, guid: fab9639e4e8cc734cbfb978adfbe1f36, type: 2}
   m_PrefabInternal: {fileID: 1077173720}
+--- !u!1001 &1078632687
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.442
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.363
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.29489312
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9555303
+      objectReference: {fileID: 0}
+    - target: {fileID: 467170, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_RootOrder
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 179892, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_Name
+      value: CrateBase (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1078632688 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 179892, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+  m_PrefabInternal: {fileID: 1078632687}
+--- !u!114 &1078632689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078632688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883fea4f1535c8d44b9c340bd41abb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemToGive:
+    Transformable: 1
+    CurStatus: 1
+    CardboardItemDescription: Part 2
+    RealItemDescription: Part 2
+    ItemName: Default
+    ItemPrefab: {fileID: 0}
+    ItemDescription: 
+    CardboardItemPrefab: {fileID: 160750, guid: e7f8487af6a2abe48be65c9f891c77df,
+      type: 2}
+    RealItemPrefab: {fileID: 154072, guid: 1b4ac48bdd7e607448d7e61531f85a86, type: 2}
+    RealItemName: Part 2
+    CardboardItemName: Part 2
+    Explode: 1
+--- !u!114 &1078632690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1078632688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
 --- !u!1 &1095612124 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 148550, guid: 426b6f7c5949a744a9ae416492ffc385, type: 2}
@@ -4698,7 +4874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FunctionName: HasPart
-  Param1: MachinePart1
+  Param1: Part 1
   NextIfTrue: {fileID: 2033643603}
   NextIfFalse: {fileID: 462174175}
 --- !u!1001 &1116450124
@@ -5338,49 +5514,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 467852, guid: ba719c6da4a52aa48aa19eaca4d02892, type: 2}
   m_PrefabInternal: {fileID: 800215270}
---- !u!1 &1349907856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1349907857}
-  - 114: {fileID: 1349907858}
-  m_Layer: 0
-  m_Name: ScientistTalk (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1349907857
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1349907856}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.014912344, y: 0.07876302, z: -0.07900913}
-  m_LocalScale: {x: 0.05000001, y: 0.05, z: 0.05000001}
-  m_Children: []
-  m_Father: {fileID: 859989881}
-  m_RootOrder: 3
---- !u!114 &1349907858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1349907856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: 'I''d be careful though, I''ve heard things about
-
-    her dogs...'
-  NextAction: {fileID: 0}
 --- !u!1001 &1361396731
 Prefab:
   m_ObjectHideFlags: 0
@@ -7191,10 +7324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'Head to the Duck Pond north-west of the city,
+  Text: 'Head to the Duck Pond
 
-    I have something to show you.'
-  NextAction: {fileID: 357297835}
+    outside of the City Center,
+
+    We can test it there this time.'
+  NextAction: {fileID: 0}
 --- !u!1001 &1797121438
 Prefab:
   m_ObjectHideFlags: 0
@@ -7363,9 +7498,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: "The other piece landed around Rachel's house.\nYou should know how to get
-    there, \nshe's you're neighbor."
-  NextAction: {fileID: 1349907858}
+  Text: 'The other piece landed near
+
+    Rachel''s house.'
+  NextAction: {fileID: 327488024}
 --- !u!1 &1842501271
 GameObject:
   m_ObjectHideFlags: 0
@@ -7947,7 +8083,6 @@ Transform:
   m_Children:
   - {fileID: 112158974}
   - {fileID: 1785544934}
-  - {fileID: 357297834}
   m_Father: {fileID: 859989881}
   m_RootOrder: 0
 --- !u!114 &2033643603
@@ -7962,7 +8097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FunctionName: HasPart
-  Param1: MachinePart2
+  Param1: Part 2
   NextIfTrue: {fileID: 112158975}
   NextIfFalse: {fileID: 1842501273}
 --- !u!1001 &2044611420
