@@ -9374,6 +9374,7 @@ GameObject:
   - 95: {fileID: 926312660}
   - 114: {fileID: 926312659}
   - 114: {fileID: 926312658}
+  - 114: {fileID: 926312664}
   m_Layer: 0
   m_Name: MailBox
   m_TagString: Untagged
@@ -9477,6 +9478,20 @@ Transform:
   - {fileID: 1125718879}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &926312664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 926312657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528ed627ab7a10b4f9c927aa803de36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 18f1c876533804d4fa84f526a2d68806, type: 2}
+  path: '{b98c021c-4619-4e82-bc1d-6722cbe66191}'
+  startEventOnAwake: 0
 --- !u!1001 &936023889
 Prefab:
   m_ObjectHideFlags: 0
@@ -11351,7 +11366,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: It's empty
+  Text: 'It''s empty.  Wasn''t I supposed
+
+    supposed to stop checking other
+
+    people''s mail?'
   NextAction: {fileID: 0}
 --- !u!4 &1125718879
 Transform:
@@ -20814,6 +20833,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04108583, y: 0.031622857, z: 0.0025000006}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1979498267 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153112, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_PrefabInternal: {fileID: 576349203}
+--- !u!114 &1979498268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1979498267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7160aec47319845a01d4863bcf883a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelNumber: 0
+  LevelName: Rachel's Street
+  IsFinalLevel: 0
 --- !u!1001 &1991404082
 Prefab:
   m_ObjectHideFlags: 0
