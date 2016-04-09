@@ -54,13 +54,6 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Use this for initialization (but only once, because code effeciency)
 	void Start()
     {
-        #if UNITY_EDITOR
-        if (EditorUtility.audioMasterMute)
-        {
-          StopAllSound();
-        }
-        #endif
-
         // Get the system bus so that we can control volume
         System.Guid guid;
         FMOD.Studio.System deepSys = FMOD_StudioSystem.instance.System;
@@ -109,6 +102,13 @@ public class TheMusicNeverEnds : MonoBehaviour
 
             tunez = tuneGet.levelMusic;
         }
+
+        #if UNITY_EDITOR
+                if (EditorUtility.audioMasterMute)
+                {
+                    StopAllSound();
+                }
+        #endif
     }
 
     // Use this as Start because this calls at the Start of each level AFTER the first
