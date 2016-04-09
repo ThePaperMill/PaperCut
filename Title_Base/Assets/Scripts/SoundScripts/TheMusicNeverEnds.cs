@@ -242,7 +242,7 @@ public class TheMusicNeverEnds : MonoBehaviour
         if (tuneGet.canPause && !AllStop)
         {
             IsPaused = true;
-            mainBus.setFaderLevel(0);
+            mainBus.setFaderLevel(Volume/2);
         }
     }
 

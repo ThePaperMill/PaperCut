@@ -13390,7 +13390,7 @@ Transform:
   - {fileID: 133996375}
   - {fileID: 261342231}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 26
 --- !u!1001 &465147696
 Prefab:
   m_ObjectHideFlags: 0
@@ -19761,8 +19761,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 717441124}
   - 65: {fileID: 717441123}
-  - 114: {fileID: 717441122}
-  - 114: {fileID: 717441121}
   m_Layer: 0
   m_Name: Horse (4)
   m_TagString: Untagged
@@ -19770,33 +19768,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &717441121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 717441120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b0670568284614e986ebe79afcb528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Actions: []
-  AudioDelay: 0.5
---- !u!114 &717441122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 717441120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
-  InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
-  InteractSizeScalar: 0.9
 --- !u!65 &717441123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20929,6 +20900,20 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 475858, guid: 4eedab2915159b443a4f99a6f0dadf8e, type: 2}
   m_PrefabInternal: {fileID: 753307911}
+--- !u!114 &753307920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 753307912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528ed627ab7a10b4f9c927aa803de36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: dcada98aeab5e754bad8e13d5bd1de43, type: 2}
+  path: '{465f23e2-6571-4d94-bb22-ce0aa1321a7c}'
+  startEventOnAwake: 0
 --- !u!1 &757434295
 GameObject:
   m_ObjectHideFlags: 0
@@ -31252,7 +31237,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
 --- !u!1 &1144001650
 GameObject:
   m_ObjectHideFlags: 0
@@ -41469,6 +41454,20 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+--- !u!114 &1542584392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1542584388}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528ed627ab7a10b4f9c927aa803de36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: 81dc03128ff54ff4b9c9237cc12d8025, type: 2}
+  path: '{20001efd-4449-4a35-9e13-9fd58878e982}'
+  startEventOnAwake: 0
 --- !u!1001 &1544897969
 Prefab:
   m_ObjectHideFlags: 0
@@ -42079,7 +42078,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 456576, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 13.25
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 456576, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: m_LocalPosition.y
@@ -42107,7 +42106,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456576, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11435634, guid: 11b7512affe07e643893f545dde89d20, type: 2}
       propertyPath: IsDefault
@@ -42500,8 +42499,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1602491106}
   - 65: {fileID: 1602491105}
-  - 114: {fileID: 1602491108}
-  - 114: {fileID: 1602491107}
   m_Layer: 0
   m_Name: Horse (2)
   m_TagString: Untagged
@@ -42543,33 +42540,6 @@ Transform:
   - {fileID: 1640671399}
   m_Father: {fileID: 0}
   m_RootOrder: 19
---- !u!114 &1602491107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1602491104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b0670568284614e986ebe79afcb528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Actions: []
-  AudioDelay: 0.5
---- !u!114 &1602491108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1602491104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
-  InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
-  InteractSizeScalar: 0.9
 --- !u!1001 &1602638395
 Prefab:
   m_ObjectHideFlags: 0
@@ -44204,7 +44174,7 @@ Transform:
   m_LocalScale: {x: 7.016438, y: 4.9357486, z: 6.8197}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
 --- !u!1 &1663487820
 GameObject:
   m_ObjectHideFlags: 0
@@ -49878,7 +49848,7 @@ Transform:
   - {fileID: 608086208}
   - {fileID: 457444702}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!1001 &1870573585
 Prefab:
   m_ObjectHideFlags: 0
@@ -55663,6 +55633,64 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 449417608}
+--- !u!1001 &2112676563
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 17.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 486116, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 187652, guid: 609298b188a74094d97d366955214584, type: 2}
+      propertyPath: m_Name
+      value: LevelChangeTrigger (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 609298b188a74094d97d366955214584, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2112718821
 GameObject:
   m_ObjectHideFlags: 0
