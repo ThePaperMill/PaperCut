@@ -702,7 +702,7 @@ Transform:
   m_Children:
   - {fileID: 498343529}
   m_Father: {fileID: 717441124}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &25596541 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -1500,6 +1500,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &57893549 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153112, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_PrefabInternal: {fileID: 57893548}
+--- !u!114 &57893550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 57893549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7160aec47319845a01d4863bcf883a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelNumber: 99
+  LevelName: Duck Pond
+  IsFinalLevel: 0
 --- !u!1001 &59427637
 Prefab:
   m_ObjectHideFlags: 0
@@ -5847,7 +5865,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_LocalScale.x
@@ -7029,7 +7047,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!65 &231404504
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7655,7 +7673,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 717441124}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!65 &245609172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8167,49 +8185,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 619704814}
---- !u!1 &270507764
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 270507766}
-  - 114: {fileID: 270507765}
-  m_Layer: 0
-  m_Name: Like duck like duckling
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &270507765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 270507764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: 'I don''t want to be like them
-
-    when I grow up.'
-  NextAction: {fileID: 0}
---- !u!4 &270507766
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 270507764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1732359630}
-  m_RootOrder: 2
 --- !u!1 &271308942
 GameObject:
   m_ObjectHideFlags: 0
@@ -9176,7 +9151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 717441124}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!23 &301524458
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10197,7 +10172,7 @@ Transform:
   m_Children:
   - {fileID: 1359884473}
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &339854754
 GameObject:
   m_ObjectHideFlags: 0
@@ -12133,7 +12108,7 @@ MonoBehaviour:
   Text: 'Hi, I''m a duck!
 
 '
-  NextAction: {fileID: 1102462733}
+  NextAction: {fileID: 0}
 --- !u!1001 &422102319
 Prefab:
   m_ObjectHideFlags: 0
@@ -12322,7 +12297,7 @@ Transform:
   m_Children:
   - {fileID: 551019117}
   m_Father: {fileID: 717441124}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!4 &433315029 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -14100,8 +14075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: "My parents have subjected me \nto a life of punishment..."
-  NextAction: {fileID: 270507765}
+  Text: 'When I grow up,
+
+    I want to be a mallard.'
+  NextAction: {fileID: 0}
 --- !u!4 &494726757
 Transform:
   m_ObjectHideFlags: 0
@@ -14113,7 +14090,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 1732359630}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &497077407
 GameObject:
   m_ObjectHideFlags: 0
@@ -14923,7 +14900,7 @@ Transform:
   m_Children:
   - {fileID: 579786120}
   m_Father: {fileID: 717441124}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &528753208
 GameObject:
   m_ObjectHideFlags: 0
@@ -15439,7 +15416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!23 &549218377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18478,7 +18455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!23 &650930380
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18607,7 +18584,7 @@ Transform:
   m_Children:
   - {fileID: 106028646}
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &655686316 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -19843,7 +19820,6 @@ Transform:
   m_LocalPosition: {x: 9.137593, y: 0.847, z: 16.28}
   m_LocalScale: {x: 22, y: 22, z: 22}
   m_Children:
-  - {fileID: 2130568149}
   - {fileID: 527747297}
   - {fileID: 1123102568}
   - {fileID: 23855243}
@@ -21238,7 +21214,7 @@ Transform:
   m_Children:
   - {fileID: 1045512992}
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &777440648
 GameObject:
   m_ObjectHideFlags: 0
@@ -28931,7 +28907,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 717441124}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!65 &1049853226
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30212,47 +30188,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04529402, y: 0.040687334, z: 0.0024999997}
   m_Center: {x: -0.000000014901161, y: 0, z: 0}
---- !u!1 &1102462731
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1102462732}
-  - 114: {fileID: 1102462733}
-  m_Layer: 0
-  m_Name: Duck You!
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1102462732
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1102462731}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1636175099}
-  m_RootOrder: 1
---- !u!114 &1102462733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1102462731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: <b>Duck you!</b>
-  NextAction: {fileID: 1145138509}
 --- !u!1 &1102728883
 GameObject:
   m_ObjectHideFlags: 0
@@ -30692,7 +30627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 717441124}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!23 &1123102569
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31409,48 +31344,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1144226054}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1145138508
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1145138510}
-  - 114: {fileID: 1145138509}
-  m_Layer: 0
-  m_Name: TurnOnDuck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1145138509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1145138508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce229d19a0b65c74d90f525741961381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FunctionName: SetHasTalkedToDuckFunc
-  NextIfTrue: {fileID: 0}
-  NextIfFalse: {fileID: 0}
---- !u!4 &1145138510
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1145138508}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1636175099}
-  m_RootOrder: 2
 --- !u!4 &1148880736 stripped
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
@@ -31895,47 +31788,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 1164154563}
---- !u!1 &1164186369
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1164186370}
-  - 114: {fileID: 1164186371}
-  m_Layer: 0
-  m_Name: I'm sorry for this ;)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1164186370
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1164186369}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1542584389}
-  m_RootOrder: 2
---- !u!114 &1164186371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1164186369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: "You'll have to excuse his \n<b>quackery</b>."
-  NextAction: {fileID: 0}
 --- !u!1001 &1166446501
 Prefab:
   m_ObjectHideFlags: 0
@@ -33804,7 +33656,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 1542584389}
-  m_RootOrder: 3
+  m_RootOrder: 0
 --- !u!114 &1226660702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34776,7 +34628,7 @@ Transform:
   m_Children:
   - {fileID: 1477667234}
   m_Father: {fileID: 717441124}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1001 &1270483311
 Prefab:
   m_ObjectHideFlags: 0
@@ -41560,7 +41412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_LocalScale.x
@@ -41601,8 +41453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Actions:
-  - {fileID: 2135251096}
-  - {fileID: 1960003362}
+  - {fileID: 1226660702}
   AudioDelay: 0.5
 --- !u!114 &1542584391
 MonoBehaviour:
@@ -41957,48 +41808,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1565668119}
   m_Mesh: {fileID: 4300000, guid: 141ab2687c478ed4793ef0d80144e331, type: 3}
---- !u!1 &1567732385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1567732386}
-  - 114: {fileID: 1567732387}
-  m_Layer: 0
-  m_Name: SplitDuckKid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1567732386
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1567732385}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1732359630}
-  m_RootOrder: 0
---- !u!114 &1567732387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1567732385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce229d19a0b65c74d90f525741961381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FunctionName: HasTalkedToDuckFunc
-  NextIfTrue: {fileID: 0}
-  NextIfFalse: {fileID: 494726756}
 --- !u!1001 &1567880732
 Prefab:
   m_ObjectHideFlags: 0
@@ -42723,7 +42532,6 @@ Transform:
   m_LocalPosition: {x: 13.9, y: 0.847, z: 11.81}
   m_LocalScale: {x: 22, y: 22, z: 22}
   m_Children:
-  - {fileID: 1631136327}
   - {fileID: 653960680}
   - {fileID: 549218376}
   - {fileID: 339839084}
@@ -43274,33 +43082,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 214304774}
   m_RootOrder: 0
---- !u!1 &1631136326
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 185006, guid: f1ac468bdbf4716488d7a00b42890385, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1631136327}
-  m_Layer: 0
-  m_Name: Conversation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1631136327
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 462054, guid: f1ac468bdbf4716488d7a00b42890385, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1631136326}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.4210107e-22, z: 0.0000020000018}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1602491106}
-  m_RootOrder: 0
 --- !u!1 &1631306442 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 155302, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
@@ -43475,7 +43256,7 @@ Transform:
   m_Children:
   - {fileID: 901542268}
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1 &1641507367
 GameObject:
   m_ObjectHideFlags: 0
@@ -45255,47 +45036,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1700099619
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1700099621}
-  - 114: {fileID: 1700099620}
-  m_Layer: 0
-  m_Name: I'm sorry about my husband.
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1700099620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1700099619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: I'm sorry about my husband...
-  NextAction: {fileID: 1164186371}
---- !u!4 &1700099621
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1700099619}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1542584389}
-  m_RootOrder: 1
 --- !u!1 &1700320339
 GameObject:
   m_ObjectHideFlags: 0
@@ -46241,7 +45981,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 457768, guid: 42de4b72422344747890da5bfa0c6b15, type: 2}
       propertyPath: m_LocalScale.x
@@ -46490,7 +46230,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!23 &1737694314
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -48070,7 +47810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1602491106}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!65 &1811398459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52225,49 +51965,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1955002628}
   m_Mesh: {fileID: 4300000, guid: 141ab2687c478ed4793ef0d80144e331, type: 3}
---- !u!1 &1960003360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1960003361}
-  - 114: {fileID: 1960003362}
-  m_Layer: 0
-  m_Name: Race
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1960003361
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960003360}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1542584389}
-  m_RootOrder: 4
---- !u!114 &1960003362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960003360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: 'The race is starting soon.
-
-    I''m so excited!'
-  NextAction: {fileID: 0}
 --- !u!1 &1962249176
 GameObject:
   m_ObjectHideFlags: 0
@@ -55918,7 +55615,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 717441124}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!23 &2110533903
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -56380,33 +56077,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2130128700}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2130568148
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 185006, guid: f1ac468bdbf4716488d7a00b42890385, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2130568149}
-  m_Layer: 0
-  m_Name: Conversation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2130568149
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 462054, guid: f1ac468bdbf4716488d7a00b42890385, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2130568148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.4210107e-22, z: 0.0000020000018}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 717441124}
-  m_RootOrder: 0
 --- !u!1 &2130990602
 GameObject:
   m_ObjectHideFlags: 0
@@ -56557,48 +56227,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2135251095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2135251097}
-  - 114: {fileID: 2135251096}
-  m_Layer: 0
-  m_Name: SplitDuck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2135251096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2135251095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce229d19a0b65c74d90f525741961381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FunctionName: HasTalkedToDuckFunc
-  NextIfTrue: {fileID: 1700099620}
-  NextIfFalse: {fileID: 1226660702}
---- !u!4 &2135251097
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2135251095}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06843112, y: -0.017280683, z: 0.00020613671}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children: []
-  m_Father: {fileID: 1542584389}
-  m_RootOrder: 0
 --- !u!1 &2137071088
 GameObject:
   m_ObjectHideFlags: 0
