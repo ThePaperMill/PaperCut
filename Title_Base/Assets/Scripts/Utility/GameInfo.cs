@@ -15,6 +15,7 @@ public class GameInfo : Singleton<GameInfo>
 	
     public void ResetBools()
     {
+        PresentationSkip.GetSingleton.cheatUsed = false;
         LabDestroyed = false;
         FinaleReady = false;
     }
