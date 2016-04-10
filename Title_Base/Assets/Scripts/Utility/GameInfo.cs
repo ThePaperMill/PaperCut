@@ -5,9 +5,10 @@ public class GameInfo : Singleton<GameInfo>
 {
    public Material PlayerColor = null;
     public bool LabDestroyed = false;
+    public bool FinaleReady = false;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 	
 	}
