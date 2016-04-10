@@ -477,7 +477,7 @@ Prefab:
     - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: levelMusic
       value: 
-      objectReference: {fileID: 11400000, guid: 612bb1b9954fcce4cb0b057ed6c33659,
+      objectReference: {fileID: 11400000, guid: bdcad2affff61ea4b9c7a467225031b9,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
@@ -1007,7 +1007,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.248
+      value: 3.248
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1015,7 +1015,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.95
+      value: -1.95
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1035,7 +1035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_RootOrder
-      value: 54
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 3396022, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Mesh
@@ -3534,7 +3534,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: Move along.
+  Text: 'Move along.
+
+    There''s nothing to see here.'
   NextAction: {fileID: 0}
 --- !u!4 &389308799
 Transform:
@@ -4427,7 +4429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496138, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.9750001
+      value: 3.939
       objectReference: {fileID: 0}
     - target: {fileID: 496138, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8333,6 +8335,7 @@ GameObject:
   - 33: {fileID: 1002412347}
   - 65: {fileID: 1002412346}
   - 23: {fileID: 1002412345}
+  - 114: {fileID: 1002412349}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -8397,6 +8400,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!114 &1002412349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002412344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d494b8a35ff524e9ffcddcb1d9bb82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1003585829
 GameObject:
   m_ObjectHideFlags: 0
@@ -9249,7 +9263,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496928, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 5.25
+      value: 5.179
       objectReference: {fileID: 0}
     - target: {fileID: 496928, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: m_LocalRotation.x
@@ -9269,7 +9283,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496928, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: m_RootOrder
-      value: 36
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 11445002, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: NextLevel
@@ -13152,7 +13166,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1540879531}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -2.5, y: 2.19, z: 3.976}
+  m_LocalPosition: {x: -2.5, y: 2.19, z: 3.97}
   m_LocalScale: {x: 5, y: 5, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}

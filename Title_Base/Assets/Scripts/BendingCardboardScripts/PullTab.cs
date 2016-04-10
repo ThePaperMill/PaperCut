@@ -5,8 +5,6 @@ using UnityEngine;
 using System.Collections;
 
 
-
-
 public class PullTab : MonoBehaviour
 {
     public bool LocksIntoPlace = true;
@@ -35,6 +33,9 @@ public class PullTab : MonoBehaviour
     // Use this for initialization
     FloatEvent LerpData = new FloatEvent();
 
+    GameObject InteractableHightlight = null; 
+
+    public bool CreateHighlight = true;
 
     void Start()
     {
@@ -43,8 +44,16 @@ public class PullTab : MonoBehaviour
         //Save the Root of this game object
         Root = transform.root;
 
+        if(CreateHighlight)
+            InteractableHightlight = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("PullTabHighlight"));
+
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(false);
+        }
         //If the object is supposed to start popped up,
-        if(StartPoppedUp)
+        if (StartPoppedUp)
         {
             //If the lockx boolean is false,
             if (LockX == false)
@@ -70,6 +79,11 @@ public class PullTab : MonoBehaviour
     {
         if (NearPlayer == true && Player != null)
         {
+            if (InteractableHightlight)
+            {
+               InteractableHightlight.transform.position = new Vector3(transform.position.x, InteractableHightlight.transform.position.y, transform.position.z);
+            }
+
             if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)
             {
                 //print("Pressed a");
@@ -184,6 +198,12 @@ public class PullTab : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            if(InteractableHightlight)
+            {
+                InteractableHightlight.SetActive(true);
+                InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            }
+
             Player = other.gameObject;
             //print(other.gameObject);
             NearPlayer = true;
@@ -193,6 +213,12 @@ public class PullTab : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            if (InteractableHightlight)
+            {
+                InteractableHightlight.SetActive(false);
+                InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            }
+
             NearPlayer = false;
         }
     }

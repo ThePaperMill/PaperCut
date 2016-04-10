@@ -54,9 +54,9 @@ public class ItemInfo
 
     public bool Explode = false;
 
-  public ItemInfo()
+  public ItemInfo( string name = "Insert Witty Name Here")
   {
-
+        ItemName = name;
   }
 
   public void InitializeItem()

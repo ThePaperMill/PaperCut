@@ -147,7 +147,7 @@ public class CharacterController3d : MonoBehaviour
 
       if (SController != null)
       {
-        SController.SweepUpdate(movement, Time.fixedDeltaTime);
+        SController.SweepUpdate(movement, Time.deltaTime);
       }
       
     }
