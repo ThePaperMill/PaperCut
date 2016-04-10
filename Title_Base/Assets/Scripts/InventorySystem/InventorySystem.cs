@@ -470,6 +470,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
         // add the item logic script
         Temp.AddComponent<ItemLogic>();
+        Temp.AddComponent<HideDuringPause>();
 
         // add the item to the list
         Inventory_Items.Add(Temp);
