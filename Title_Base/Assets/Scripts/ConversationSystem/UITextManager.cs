@@ -18,6 +18,7 @@ namespace Assets.Scripts.ConversationSystem
 
         private TextMesh SpriteText;
         public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        public AnimationCurve LeavingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         public double ScrollSpeed = 10;
         public int MaxLineLength = 20;
 
@@ -78,7 +79,7 @@ namespace Assets.Scripts.ConversationSystem
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
             
-            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, EaseTime, Curve);
+            Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), finalPos, EaseTime, LeavingCurve);
             //Action.Call(seq, gameObject.Destroy);
             WindowActive = false;
         }

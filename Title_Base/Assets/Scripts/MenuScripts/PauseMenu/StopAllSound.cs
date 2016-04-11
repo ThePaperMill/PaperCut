@@ -19,14 +19,22 @@ public class StopAllSound : MenuButton
 
     public override void Activate()
     {
+        if(SoundPlayer == null || MusicPlayer == null)
+        {
+            SoundPlayer = GameObject.FindGameObjectWithTag("PersistentMusic");
+
+            if (SoundPlayer)
+            {
+                MusicPlayer = SoundPlayer.GetComponent<TheMusicNeverEnds>();
+            }
+        }
+
         if (MusicPlayer && MusicPlayer.AllStop == true)
         {
-            print("starting all");
             MusicPlayer.StartAllSound();
         }
         else if (MusicPlayer && MusicPlayer.AllStop == false)
         {
-            print("stopping all");
             MusicPlayer.StopAllSound();
         }
     }

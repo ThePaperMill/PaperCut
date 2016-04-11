@@ -7,16 +7,23 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FirstLevel = "Player_House";
     string SecondLevel = "PlayerStreet";
     string ThirdLevel  = "CityCenter";
-    string FourthLevel =  "Sewer";
+    string FourthLevel = "ScientistStreet";
 
     // mechanics test
-    string FifthLevel = "WaterWorks";
-    string SixthLevel = "ScientistStreet";
-    string SeventhLevel =  "ScientistLab";
-    string EighthLevel = "Jerry's_Level1";
+    string FifthLevel = "Sewer";
+    string SixthLevel = "WaterWorks";
+    string SeventhLevel = "RachelsStreet";
+    string EighthLevel = "Jerry_RachelHouse";
 
-    string NinthLevel = "HighRiseApartments";
-    string LastLevel = "Ian'sTestingPlane";
+    string NinthLevel = "DuckPondAlternate";
+    string LastLevel = "DuckPondAlternate";
+
+    GameObject Item1 = null;
+    GameObject Item2 = null;
+    ItemInfo ItemToGive = null;
+    ItemInfo ItemToGive2 = null;
+
+    public bool cheatUsed = false;
 
     // Use this for initialization
     public void Initialize()
@@ -30,9 +37,43 @@ public class PresentationSkip : Singleton<PresentationSkip>
 
 	}
 	
+    void GiveItems()
+    {
+        if(cheatUsed)
+        {
+            return;
+        }
+
+        cheatUsed = true;
+
+        Item1 = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("FinalObject1"));
+        Item2 = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("FinalObject2"));
+
+        ItemToGive = Item1.GetComponent<CollectableObject>().ItemToGive;
+        ItemToGive2 = Item2.GetComponent<CollectableObject>().ItemToGive;
+
+        // we have to init the item we want to give because of unity 
+        ItemToGive.InitializeItem();
+        ItemToGive2.InitializeItem();
+
+        RecievedItemEvent test = new RecievedItemEvent(ItemToGive);
+        EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test);
+
+        RecievedItemEvent test2 = new RecievedItemEvent(ItemToGive2);
+        EventSystem.GlobalHandler.DispatchEvent(Events.RecievedItem, test2);
+
+        GameObject.Destroy(Item1);
+        GameObject.Destroy(Item2);
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
+        if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Return))
+        {
+            GiveItems();
+        }
+
 	    if(InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha1))
         {
             LevelTransitionManager.GetSingleton.ChangeLevel(FirstLevel, true, 1.0f);

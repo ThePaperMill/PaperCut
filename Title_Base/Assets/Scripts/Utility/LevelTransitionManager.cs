@@ -14,7 +14,7 @@ public class LevelTransitionManager : Singleton<LevelTransitionManager>
   GUITexture Gtxt = null;
   public GameObject GtxtObj = null;
 
-  bool Fading = false;
+  public bool Fading = false;
   bool FTB = false;
   bool FTC = false;
   bool loadLevel;
@@ -30,6 +30,11 @@ public class LevelTransitionManager : Singleton<LevelTransitionManager>
   Color TargetColor = Color.clear;
 
   string LevelToLoad = "";
+
+    GameObject HudCam = null;
+    Camera CamScriptHud = null;
+    int StartingMaskHud = 0;
+
 
   public void Initialize()
   {
@@ -94,6 +99,15 @@ public class LevelTransitionManager : Singleton<LevelTransitionManager>
     FTB = true;
     FTC = false;
     Gtxt.color = StartColor;
+
+    HudCam = GameObject.FindGameObjectWithTag("HudCamera");
+
+    if (HudCam)
+    {
+        CamScriptHud = HudCam.GetComponent<Camera>();
+        StartingMaskHud = CamScriptHud.cullingMask;
+        CamScriptHud.cullingMask = (1 << LayerMask.NameToLayer("TransitionObject"));
+    }
   }
 
   void FadeIn(float Timelimit)
@@ -106,7 +120,7 @@ public class LevelTransitionManager : Singleton<LevelTransitionManager>
     FTB = false;
     FTC = true;
     Gtxt.color = StartColor;
-  }
+ }
 
   void FadeUpdate()
   {
@@ -175,6 +189,13 @@ public class LevelTransitionManager : Singleton<LevelTransitionManager>
         }
         else if(FadeComplete && LoadLevelOnComplete)
         {
+            if (HudCam)
+            {
+                CamScriptHud = HudCam.GetComponent<Camera>();
+                StartingMaskHud = CamScriptHud.cullingMask;
+                CamScriptHud.cullingMask = (1 << LayerMask.NameToLayer("TransitionObject"));
+            }
+
             FadeComplete = false;
             LoadLevelOnComplete = false;
             LoadLevel(LevelToLoad);

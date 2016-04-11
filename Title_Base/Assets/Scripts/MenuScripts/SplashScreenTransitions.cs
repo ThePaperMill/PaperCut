@@ -42,7 +42,7 @@ public class SplashScreenTransitions : MonoBehaviour
 	// Update is called once per frame
     void Update () 
     {
-        if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape))
+        if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape) && complete == false)
         {
             LevelTransitionManager.GetSingleton.ChangeLevel("MainMenu", true, 1.0f);
             complete = true;

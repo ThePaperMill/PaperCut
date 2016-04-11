@@ -31,7 +31,7 @@ public class PauseMenuManager : EventHandler
 
     alpha = 0.0f;
 
-    GameObject temp = GameObject.Find("UndyingMusic");
+    GameObject temp = GameObject.FindGameObjectWithTag("PersistentMusic");
 
     if(temp)
         FMODSound = temp.GetComponent<TheMusicNeverEnds>();
@@ -61,7 +61,9 @@ public class PauseMenuManager : EventHandler
       Action.Property(temp, this.GetProperty(o => o.alpha), 0.38f, 0.5, Ease.Linear);
 
       if (FMODSound)
-        FMODSound.PauseSound();
+      {
+            FMODSound.PauseSound();
+      }
     }
   }
 
@@ -82,12 +84,21 @@ public class PauseMenuManager : EventHandler
 
 	// Update is called once per frame
 	void Update () 
-  {
-    grp.Update(Time.unscaledDeltaTime);
-    var col = Gtxt.color;
+    {
+        grp.Update(Time.unscaledDeltaTime);
+        var col = Gtxt.color;
 
-    Gtxt.color = new Vector4(col.r, col.g, col.b, alpha);
-	}
+        Gtxt.color = new Vector4(col.r, col.g, col.b, alpha);
+
+        // Make sure we actually found the UndyingMusic
+        if(!FMODSound)
+        {
+            GameObject temp = GameObject.FindGameObjectWithTag("PersistentMusic");
+
+            if (temp)
+                FMODSound = temp.GetComponent<TheMusicNeverEnds>();
+        }
+    }
 
     void OnDestroy()
     {

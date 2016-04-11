@@ -396,12 +396,26 @@ public class CustomDynamicController : MonoBehaviour
 
             if (check && Test.collider.isTrigger == false)
             {
-                // if we are going to move into a static gameobject, adjust out movement vector.
-                if (check && Test.collider.isTrigger == false)
+                var hingecheck = Test.collider.gameObject.GetComponentInParent<HingeJoint>();
+
+                // if the object doesn't have a hinge
+                if (hingecheck == false)
                 {
+                    // if we are going to move into a static gameobject, adjust out movement vector.
                     MoveDirection = MoveDirection - Test.normal * Vector3.Dot(MoveDirection, Test.normal);
 
                     transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    transform.position += MoveDirection * maxSpeed * Time.deltaTime;
+
+                    var test = Test.collider.gameObject.GetComponentInParent<Rigidbody>();
+
+                    if (test)
+                    {
+                        test.AddForceAtPosition(MoveDirection, Test.point,ForceMode.Impulse);
+                    }
                 }
             }
             else
@@ -674,22 +688,22 @@ public class CustomDynamicController : MonoBehaviour
             {
                 //print("standing on a trigger");
 
-                //// Update the timer for late jumps
-                //TimeSinceLastDirectContact += dt;
+                // Update the timer for late jumps
+                TimeSinceLastDirectContact += dt;
 
-                ////if (TimeSinceLastDirectContact > JumpLagTimer)
-                ////{
-                ////    // Reset all values
-                ////    OnGround = false;
-                ////    VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
-                ////    GroundNormal = WorldUp;
-                ////}
+                //if (TimeSinceLastDirectContact > JumpLagTimer)
+                //{
+                //    // Reset all values
+                //    OnGround = false;
+                //    VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                //    GroundNormal = WorldUp;
+                //}
 
-                //OnGround = false;
-                //VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
-                //GroundNormal = WorldUp;
+                OnGround = false;
+                VelocityOfGround = new Vector3(0.0f, 0.0f, 0.0f);
+                GroundNormal = WorldUp;
 
-                //return;
+                return;
             }
 
             // Get the object we're in contact with
@@ -998,7 +1012,7 @@ public class CustomDynamicController : MonoBehaviour
 	/*************************************************************************/
 	private void WalkNoise()
 	{
-		m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.fixedDeltaTime);
+		m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.deltaTime);
 		
 		if ((m_StepCycle > m_NextStep))
 		{

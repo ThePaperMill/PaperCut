@@ -9,6 +9,7 @@ public class RestartButton : MenuButton
     {
         LevelTransitionManager.GetSingleton.ChangeLevel(StartingLevel, true, 1.5f);
         GameInfo.GetSingleton.ResetBools();
+        InventorySystem.GetSingleton.ClearInventory();
     }
 
     // Update is called once per frame

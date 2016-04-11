@@ -20,6 +20,8 @@ public class TheMusicNeverEnds : MonoBehaviour
 {
     FMODAsset tunez = null;
     FMOD_StudioEventEmitter bbox;
+    //FMOD_StudioSystem MainSys;
+    FMOD.Studio.Bus mainBus;
 
     [HideInInspector]
     public bool forcedStop = false;
@@ -39,6 +41,8 @@ public class TheMusicNeverEnds : MonoBehaviour
 
     bool lastPlayerCheckDone = false;
 
+    float Volume = 1.0f;
+
     // Use this for initial initialization (thanks Unity)
     void Awake()
     {
@@ -50,13 +54,14 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Use this for initialization (but only once, because code effeciency)
 	void Start()
     {
-        #if UNITY_EDITOR
-        if (EditorUtility.audioMasterMute)
-        {
-          StopAllSound();
-        }
-        #endif
+        // Get the system bus so that we can control volume
+        System.Guid guid;
+        FMOD.Studio.System deepSys = FMOD_StudioSystem.instance.System;
+        deepSys.lookupID("bus:/", out guid);
+        deepSys.getBusByID(guid, out mainBus);
 
+        // Get the everything else that we need to manage in-game sound
+        //MainSys = gameObject.transform.Find("FMOD_StudioSystem").gameObject.GetComponent<FMOD_StudioSystem>();
         bbox = musicBox.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -97,11 +102,33 @@ public class TheMusicNeverEnds : MonoBehaviour
 
             tunez = tuneGet.levelMusic;
         }
+
+        #if UNITY_EDITOR
+                if (EditorUtility.audioMasterMute)
+                {
+                    StopAllSound();
+                }
+        #endif
     }
 
     // Use this as Start because this calls at the Start of each level AFTER the first
     void OnLevelWasLoaded(int level)
     {
+        #if UNITY_EDITOR
+        if (EditorUtility.audioMasterMute)
+        {
+            StopAllSound();
+        }
+        #endif
+
+        // Get the system bus so that we can control volume
+        System.Guid guid;
+        FMOD.Studio.System deepSys = FMOD_StudioSystem.instance.System;
+        deepSys.lookupID("bus:/", out guid);
+        deepSys.getBusByID(guid, out mainBus);
+
+        // Get the everything else that we need to manage in-game sound
+        //MainSys = gameObject.transform.Find("FMOD_StudioSystem").gameObject.GetComponent<FMOD_StudioSystem>();
         bbox = musicBox.GetComponent<FMOD_StudioEventEmitter>();
         tuneGet = GameObject.FindGameObjectWithTag("LevelSettings").GetComponent<HORRIBLESCRIPT>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -197,22 +224,14 @@ public class TheMusicNeverEnds : MonoBehaviour
     // Manually shut off the music & SFX.  Indpendent from just turning off the music
     public void StopAllSound()
     {
-        listener.transform.localPosition = new Vector3(0, 0, 9001);
+        mainBus.setMute(true);
         AllStop = true;
     }
 
 	// Manually turn on the music & SFX.  Indpendent from just turning on the music
     public void StartAllSound()
     {
-        if (!IsPaused)
-        {
-            listener.transform.localPosition = Vector3.zero;
-        }
-        else
-        {
-            listener.transform.localPosition = new Vector3(0, 0, 10);
-        }
-
+        mainBus.setMute(false);
         AllStop = false;
     }
 
@@ -223,7 +242,7 @@ public class TheMusicNeverEnds : MonoBehaviour
         if (tuneGet.canPause && !AllStop)
         {
             IsPaused = true;
-            listener.transform.localPosition = new Vector3(0, 0, 10);
+            mainBus.setFaderLevel(Volume/2);
         }
     }
 
@@ -234,7 +253,7 @@ public class TheMusicNeverEnds : MonoBehaviour
         if (tuneGet.canPause && !AllStop)
         {
             IsPaused = false;
-            listener.transform.localPosition = Vector3.zero;
+            mainBus.setFaderLevel(Volume);
         }
     }
 }

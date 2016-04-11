@@ -19,6 +19,16 @@ public class MuteMusic : MenuButton
 
     public override void Activate()
     {
+        if(SoundPlayer == null || MusicPlayer == null)
+        {
+            SoundPlayer = GameObject.FindGameObjectWithTag("PersistentMusic");
+
+            if (SoundPlayer)
+            {
+                MusicPlayer = SoundPlayer.GetComponent<TheMusicNeverEnds>();
+            }
+        }
+
         if (MusicPlayer && MusicPlayer.forcedStop == false)
         {
             MusicPlayer.StopMusic();
