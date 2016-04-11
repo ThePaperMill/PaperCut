@@ -48,8 +48,8 @@ public class CustomDynamicController : MonoBehaviour
     // basic move booleans 
     public bool MoveForward { get; private set; }
     public bool MoveBack { get; private set; }
-    private bool MoveLeft;
-    private bool MoveRight;
+    public bool MoveLeft { get; private set; }
+    public bool MoveRight { get; private set; }
     private bool InteractPressed;
 
     private bool OpenInventory;

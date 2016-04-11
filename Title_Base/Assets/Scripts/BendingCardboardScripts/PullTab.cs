@@ -42,6 +42,7 @@ public class PullTab : MonoBehaviour
     //FlIP THIS IF THE TAB IS MOVING IN THE WRONG DIRECTION
     public bool DirModPositive = true;
     public bool FlipControls = false;
+    public bool UseLeftRightControls = false;
     float DirMulti = 1;
     float YOffset = 1;
     void Start()
@@ -63,7 +64,24 @@ public class PullTab : MonoBehaviour
         //If the object is supposed to start popped up,
         if(StartPoppedUp)
         {
-            transform.parent.localPosition = new Vector3(StartingPos.x + MaxDistance * DirMulti, StartingPos.y, StartingPos.z);
+            switch (Axis)
+            {
+                case (LockedAxis.LocalX):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x + MaxDistance * DirMulti, StartingPos.y, StartingPos.z);
+                    }
+                    break;
+                case (LockedAxis.LocalY):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x, StartingPos.y + MaxDistance * DirMulti, StartingPos.z);
+                    }
+                    break;
+                case (LockedAxis.LocalZ):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + MaxDistance * DirMulti);
+                    }
+                    break;
+            }
             //set a lerp position
             LerpPos = 0.99f;
             LerpData.value = LerpPos;
@@ -94,8 +112,39 @@ public class PullTab : MonoBehaviour
         }
         if(Engaged)
         {
+            bool pushIn;
+            bool pushOut;
+
+            if (FlipControls)
+            {
+                if(UseLeftRightControls)
+                {
+                    pushIn = controller.MoveLeft;
+                    pushOut = controller.MoveRight;
+                }
+                else
+                {
+                    pushIn = controller.MoveBack;
+                    pushOut = controller.MoveForward;
+                }
+            }
+            else
+            {
+                if (UseLeftRightControls)
+                {
+                    pushIn = controller.MoveRight;
+                    pushOut = controller.MoveLeft;
+                }
+                else
+                {
+                    pushIn = controller.MoveForward;
+                    pushOut = controller.MoveBack;
+                }
+            }
+
+
             float speed = 0;
-            if((controller.MoveForward && !FlipControls) || (controller.MoveBack && FlipControls))
+            if(pushIn)
             {
                 bool move = false;
                 if(DirModPositive)
@@ -111,7 +160,7 @@ public class PullTab : MonoBehaviour
                     speed = LerpSpeed * DirMulti;
                 }
             }
-            else if ((controller.MoveForward && FlipControls) || (controller.MoveBack && !FlipControls))
+            else if (pushOut)
             {
                 bool move = false;
                 if (DirModPositive)
