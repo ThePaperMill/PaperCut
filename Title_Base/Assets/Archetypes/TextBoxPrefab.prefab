@@ -42,8 +42,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0200004578, y: 5.5, z: 3.81999969}
-  m_LocalScale: {x: 59.0674438, y: 59.0674438, z: 59.0674438}
+  m_LocalPosition: {x: 2.845, y: 2.76, z: -0.44}
+  m_LocalScale: {x: 59.067444, y: 59.067444, z: 59.067444}
   m_Children:
   - {fileID: 476380}
   m_Father: {fileID: 0}
@@ -55,8 +55,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0236799996, y: .00704000005, z: -.00135999999}
-  m_LocalScale: {x: .00719858473, y: .00719858101, z: .00719858101}
+  m_LocalPosition: {x: -0.02368, y: 0.00704, z: -0.00136}
+  m_LocalScale: {x: 0.0071985847, y: 0.007198581, z: 0.007198581}
   m_Children: []
   m_Father: {fileID: 472806}
   m_RootOrder: 0
@@ -70,7 +70,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 834426c8d7801c447b15bbf741c68faa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -78,8 +78,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -102,8 +104,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -124,7 +128,7 @@ TextMesh:
   m_GameObject: {fileID: 152860}
   m_Text: Hellow
   m_OffsetZ: 0
-  m_CharacterSize: .0199999996
+  m_CharacterSize: 0.02
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
@@ -132,10 +136,10 @@ TextMesh:
   m_FontSize: 250
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 5071d48aeaa525144b847a096b9f1a2e, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
 --- !u!114 &11470326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +166,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
   LerpPosition: {x: 0, y: -1.5, z: 0}
 --- !u!1001 &100100000
 Prefab:
