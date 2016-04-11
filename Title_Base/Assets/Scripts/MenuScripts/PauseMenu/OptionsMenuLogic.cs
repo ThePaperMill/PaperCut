@@ -6,6 +6,7 @@ public class OptionsMenuLogic : MonoBehaviour
 {
     ActionGroup grp = new ActionGroup();
     Vector3 StartingPosition = new Vector3();
+    public float FinalPositionZModifier = 0.5f;
 
     // Use this for initialization
     void Start()
@@ -18,7 +19,7 @@ public class OptionsMenuLogic : MonoBehaviour
     void OnOptionsDropDown(EventData data)
     {
         ActionSequence temp = Action.Sequence(grp);
-        Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), new Vector3(0, 0, 0.5f * StartingPosition.z), 1.0f, Ease.Linear);
+        Action.Property(temp, this.gameObject.transform.GetProperty(o => o.localPosition), new Vector3(0, 0, FinalPositionZModifier * StartingPosition.z), 1.0f, Ease.Linear);
     }
 
     void OnOptionsRaise(EventData data)
