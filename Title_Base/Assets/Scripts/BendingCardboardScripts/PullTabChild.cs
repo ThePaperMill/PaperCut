@@ -18,7 +18,7 @@ public class PullTabChild : MonoBehaviour
     public Vector3 BendVector = Vector3.zero;
     Vector3 StartVector = Vector3.zero;
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         StartVector = transform.localRotation.eulerAngles;
         //if(AdditiveRotation)
@@ -29,7 +29,6 @@ public class PullTabChild : MonoBehaviour
 	}
     public void UpdateRot(EventData slerptimer)
     {
-
         //var vector = Vector3.LerpUnclamped(StartVector, BendVector, ((FloatEvent)slerptimer).value);
         //transform.localRotation.eulerAngles.Set(vector.x, vector.y, vector.z); //Vector3.LerpUnclamped(Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), slerptimer);
         //transform.rotation = Quaternion.Euler(ActionSystem.ActionMath<Vector3>.QuadInOut(((FloatEvent)slerptimer).value, StartVector, BendVector, 1));

@@ -22,6 +22,8 @@ public class CreditsScroll : MonoBehaviour
 
     bool escape = false;
 
+    bool CreditsComplete = false;
+
 	// Use this for initialization
 	void Start () 
   {
@@ -29,17 +31,24 @@ public class CreditsScroll : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+  void Update () 
   {
+    if (CreditsComplete)
+        return;
+
         UpdateInput();
 
     if (Timer > Delay || escape)
-      SceneManager.LoadScene("MainMenu");
+    {
+        CreditsComplete = true;
+        LevelTransitionManager.GetSingleton.ChangeLevel("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+    }
 
     Timer += Time.deltaTime;
 
       transform.position += Vector3.up * ScrollSpeed * Time.deltaTime;
-	}
+  }
 
     void UpdateInput()
     {
