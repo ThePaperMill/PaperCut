@@ -46,8 +46,8 @@ public class CustomDynamicController : MonoBehaviour
 	private float m_NextStep = 0f;
 
     // basic move booleans 
-    private bool MoveForward;
-    private bool MoveBack;
+    public bool MoveForward { get; private set; }
+    public bool MoveBack { get; private set; }
     private bool MoveLeft;
     private bool MoveRight;
     private bool InteractPressed;
