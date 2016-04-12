@@ -48,6 +48,7 @@ public class PullTab : MonoBehaviour
 
     GameObject InteractableHightlight = null; 
 
+    //Abandon hope all ye who enter here...
     public bool CreateHighlight = true;
 
     void Start()
