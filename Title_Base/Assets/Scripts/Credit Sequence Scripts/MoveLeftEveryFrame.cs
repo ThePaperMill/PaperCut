@@ -29,7 +29,6 @@ public class MoveLeftEveryFrame : MonoBehaviour {
 
     public bool RandomizedStart = true;
 
-
     // Use this for initialization
     void Start () {
         InitialPos = this.gameObject.transform.localPosition;
