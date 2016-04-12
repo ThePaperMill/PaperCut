@@ -90,7 +90,6 @@ void Update () {
 
     void JoshIHopeThisWorksOrYoureFired()
     {
-        print("It works!");
         //gameObject.GetComponent<Shake>().enabled = true;
         transform.FindChild("GameObject").GetComponent<Shake>().enabled = true;
         transform.FindChild("Fire").gameObject.SetActive(true);
@@ -98,7 +97,7 @@ void Update () {
     }
     void LoadCreditLevel()
     {
-        SceneManager.LoadScene(SceneName);
-
+        //SceneManager.LoadScene(SceneName);
+        LevelTransitionManager.GetSingleton.ChangeLevel(SceneName);
     }
 }
