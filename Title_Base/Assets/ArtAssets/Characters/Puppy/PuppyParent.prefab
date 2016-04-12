@@ -520,8 +520,7 @@ GameObject:
   - 4: {fileID: 449556}
   - 65: {fileID: 6563872}
   - 54: {fileID: 5440572}
-  - 114: {fileID: 11456304}
-  - 114: {fileID: 11497248}
+  - 114: {fileID: 11448730}
   m_Layer: 0
   m_Name: PuppyParent
   m_TagString: Untagged
@@ -8369,7 +8368,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.088972, y: -2.734, z: 3.8821137}
+  m_LocalPosition: {x: 20.988, y: -2.734, z: 2.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 413870}
@@ -10629,7 +10628,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9f385f58dfc63494ca93e1419d5fc933, type: 2}
+  - {fileID: 2100000, guid: 6bc1f3e1aae785446b1ab54250cfc6e7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -10723,7 +10722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: Arf!
   NextAction: {fileID: 0}
---- !u!114 &11456304
+--- !u!114 &11448730
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -10731,26 +10730,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 109250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b0670568284614e986ebe79afcb528, type: 3}
+  m_Script: {fileID: 11500000, guid: 179cc86efe98e784186d224c8fff9205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Actions:
-  - {fileID: 11416080}
-  AudioDelay: 0.5
---- !u!114 &11497248
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelSettings: {fileID: 0}
-  InteractCollider: {fileID: 0}
-  InteractSizeScalar: 1.5
+  FreeAreaDistance: 6
+  MoveSpeed: 3
+  WanderTarget: {x: 0, y: 0, z: 0}
+  Active: 1
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  ObjectImage: {fileID: 135090}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
