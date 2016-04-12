@@ -10,7 +10,8 @@ public class ItemSpin : MonoBehaviour
 
     float BounceAmount = 0.015f;
 
-    Vector3 StartingPostion = new Vector3();
+    [HideInInspector]
+    public Vector3 StartingPostion = new Vector3();
 
     public float HeightOffset { get; set; }
 
