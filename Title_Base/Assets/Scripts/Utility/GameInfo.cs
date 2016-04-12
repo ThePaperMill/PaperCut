@@ -39,6 +39,13 @@ public class GameInfo : Singleton<GameInfo>
 
     }
 
+    public void TriggerBools()
+    {
+        PresentationSkip.GetSingleton.cheatUsed = false;
+        LabDestroyed = false;
+        FinaleReady = false;
+    }
+
     public void ResetBools()
     {
         PresentationSkip.GetSingleton.cheatUsed = false;
