@@ -465,12 +465,14 @@ public class CustomDynamicController : MonoBehaviour
 
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
+            MoveForward = true;
             //movement += Cam.transform.forward;
             movement += CamForward;
         }
 
         else if (MoveBack || LeftStickPosition.YPos < -0.2)
         {
+            MoveBack = true;
             movement -= CamForward;
             //movement -= Cam.transform.forward;
         }
@@ -478,12 +480,14 @@ public class CustomDynamicController : MonoBehaviour
         // store the raw input, so we can turn the model
         if (MoveLeft || LeftStickPosition.XPos < -0.2)
         {
+            MoveLeft = true;
             movement -= Cam.transform.right;
             RawInput += new Vector3(-1, 0, 0);
         }
 
         else if (MoveRight || LeftStickPosition.XPos > 0.2)
         {
+            MoveRight = true;
             movement += Cam.transform.right;
             RawInput += new Vector3(1, 0, 0);
         }
