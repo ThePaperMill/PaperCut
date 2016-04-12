@@ -147,13 +147,13 @@ public class TransformMachine : EventHandler
         Action.Delay(test, 0.45f);
 
         // create the new object
-        Action.Call(test, CreateNewItem);
-        Action.Delay(test, 0.45f);
+        //Action.Call(test, CreateNewItem);
+        //Action.Delay(test, 0.45f);
 
 
-        Action.Call(test, MachineFinished);
-        Action.Call(test, ReturnCamera);
-        Action.Delay(test, CamDuration);
+        //Action.Call(test, MachineFinished);
+        //Action.Call(test, ReturnCamera);
+        //Action.Delay(test, CamDuration);
 
         Action.Call(test, ResetCamera);
     }
