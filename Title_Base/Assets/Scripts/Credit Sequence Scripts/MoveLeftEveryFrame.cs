@@ -1,4 +1,14 @@
-﻿using ActionSystem;
+﻿/****************************************************************************/
+/*!
+\file  MoveLeftEveryFrame.cs
+\author Ian Aemmer
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using ActionSystem;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +27,25 @@ public class MoveLeftEveryFrame : MonoBehaviour {
     public float EaseTime = 5.0f;
     private ActionGroup grp = new ActionGroup();
 
+    public bool RandomizedStart = true;
+
 
     // Use this for initialization
     void Start () {
         InitialPos = this.gameObject.transform.localPosition;
         finalPos = transform.position + FinalPosOffset;
 
-        //I need a random value between -1 and 1, to add to the finalpos offset
-        finalPos += new Vector3(Random.Range(-4, 2.5f), 0, 0);
-        //I need a random value between 0 and 2 to add to the speed
-        EaseTime += Random.Range(0, 2);
+        if(RandomizedStart)
+        {
+            //I need a random value between -1 and 1, to add to the finalpos offset
+            finalPos += new Vector3(Random.Range(-4, 0.5f), 0, 0);
+            //I need a random value between 0 and 2 to add to the speed
+            EaseTime += Random.Range(0, 2);
+        }
 
-        print("remove me before submit");
-        AnimationDelay -= 8;
+
+        //print("remove me before submit");
+        //AnimationDelay -= 8;
         //ActivateAnimation();
         
     }

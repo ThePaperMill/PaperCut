@@ -1,4 +1,14 @@
-﻿using System;
+﻿/****************************************************************************/
+/*!
+\file  Reactive.cs
+\author Joshus Biggs 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
