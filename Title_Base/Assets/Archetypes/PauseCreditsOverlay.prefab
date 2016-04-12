@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 497580}
   - 212: {fileID: 21201160}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: PauseCreditsOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,8 +23,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.4502335, y: 20.2622757, z: -7.64239407}
-  m_LocalScale: {x: .425198585, y: .425198674, z: .425198674}
+  m_LocalPosition: {x: -12.450233, y: 20.262276, z: -7.642394}
+  m_LocalScale: {x: 0.42519858, y: 0.42519867, z: 0.42519867}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,14 +46,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e21906c8425f3384aaf7e9f3229f8c22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -63,7 +67,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -61,7 +61,6 @@ public class HoverSpin : MonoBehaviour
     void Spin()
     {
         bool JumpHeld = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
-        Spinning = false;
 
         if (Grounded == false && JumpHeld == true) 
         {
@@ -81,6 +80,12 @@ public class HoverSpin : MonoBehaviour
 				HoverSounds.Play();
 			}
 
+			/*if (Spinning && HoverSounds != null && HoverSounds.HasFinished())
+			{
+				HoverSounds.Stop();
+				HoverSounds.Play();
+			}*/
+
             Spinning = true;
         }
 
@@ -89,7 +94,8 @@ public class HoverSpin : MonoBehaviour
         if (JumpTimer == 0)
         {
             Prone = new Vector3(0, 0, 0);
-            this.transform.localEulerAngles = Prone;
+			this.transform.localEulerAngles = Prone;
+			Spinning = false;
         }
     }
 

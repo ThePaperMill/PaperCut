@@ -20,17 +20,18 @@ public class ZeroCameraRegion : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-	
-	}
+       
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-	
+	    
 	}
 
     void OnTriggerEnter(Collider otherObj)
     {
+        
         if(!NewTarget)
         {
             NewTarget = GameObject.FindGameObjectWithTag("Player");

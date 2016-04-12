@@ -42,15 +42,31 @@ public class PullTab : MonoBehaviour
     //FlIP THIS IF THE TAB IS MOVING IN THE WRONG DIRECTION
     public bool DirModPositive = true;
     public bool FlipControls = false;
+    public bool UseLeftRightControls = false;
     float DirMulti = 1;
     float YOffset = 1;
+
+    GameObject InteractableHightlight = null; 
+
+    //Abandon hope all ye who enter here...
+    public bool CreateHighlight = true;
+
     void Start()
     {
         if(!DirModPositive)
         {
             DirMulti = -1;
         }
-        
+
+        if (CreateHighlight)
+            InteractableHightlight = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("PullTabHighlight"));
+
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(false);
+        }
+
         //Save the starting position of this game object
         StartingPos = transform.parent.localPosition;
         //Save the Root of this game object
@@ -63,7 +79,24 @@ public class PullTab : MonoBehaviour
         //If the object is supposed to start popped up,
         if(StartPoppedUp)
         {
-            transform.parent.localPosition = new Vector3(StartingPos.x + MaxDistance * DirMulti, StartingPos.y, StartingPos.z);
+            switch (Axis)
+            {
+                case (LockedAxis.LocalX):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x + MaxDistance * DirMulti, StartingPos.y, StartingPos.z);
+                    }
+                    break;
+                case (LockedAxis.LocalY):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x, StartingPos.y + MaxDistance * DirMulti, StartingPos.z);
+                    }
+                    break;
+                case (LockedAxis.LocalZ):
+                    {
+                        transform.parent.localPosition = new Vector3(StartingPos.x, StartingPos.y, StartingPos.z + MaxDistance * DirMulti);
+                    }
+                    break;
+            }
             //set a lerp position
             LerpPos = 0.99f;
             LerpData.value = LerpPos;
@@ -78,6 +111,13 @@ public class PullTab : MonoBehaviour
         {
             return;
         }
+
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.transform.position = new Vector3(transform.position.x, InteractableHightlight.transform.position.y, transform.position.z);
+        }
+
         var controller = Player.GetComponent<CustomDynamicController>();
         if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && controller.IsGrounded() == true)
         {
@@ -94,8 +134,39 @@ public class PullTab : MonoBehaviour
         }
         if(Engaged)
         {
+            bool pushIn;
+            bool pushOut;
+
+            if (FlipControls)
+            {
+                if(UseLeftRightControls)
+                {
+                    pushIn = controller.MoveLeft;
+                    pushOut = controller.MoveRight;
+                }
+                else
+                {
+                    pushIn = controller.MoveBack;
+                    pushOut = controller.MoveForward;
+                }
+            }
+            else
+            {
+                if (UseLeftRightControls)
+                {
+                    pushIn = controller.MoveRight;
+                    pushOut = controller.MoveLeft;
+                }
+                else
+                {
+                    pushIn = controller.MoveForward;
+                    pushOut = controller.MoveBack;
+                }
+            }
+
+
             float speed = 0;
-            if((controller.MoveForward && !FlipControls) || (controller.MoveBack && FlipControls))
+            if(pushIn)
             {
                 bool move = false;
                 if(DirModPositive)
@@ -111,7 +182,7 @@ public class PullTab : MonoBehaviour
                     speed = LerpSpeed * DirMulti;
                 }
             }
-            else if ((controller.MoveForward && FlipControls) || (controller.MoveBack && !FlipControls))
+            else if (pushOut)
             {
                 bool move = false;
                 if (DirModPositive)
@@ -338,6 +409,12 @@ public class PullTab : MonoBehaviour
             //print(other.gameObject);
             NearPlayer = true;
         }
+
+        if(InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(true);
+        }
     }
     void OnTriggerExit(Collider other)
     {
@@ -351,7 +428,12 @@ public class PullTab : MonoBehaviour
             Engaged = false;
         }
 
-        
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(false);
+            InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
+        }
     }
 
     void ContrainRBody()

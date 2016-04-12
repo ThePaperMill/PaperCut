@@ -32,14 +32,15 @@ public class TheMusicNeverEnds : MonoBehaviour
     [HideInInspector]
     public bool IsPaused = false;
 
-    GameObject listener = null;
+    //GameObject listener = null;
     GameObject musicBox = null;
     GameObject Camera = null;
     GameObject Player = null;
     GameObject goTo = null;
     HORRIBLESCRIPT tuneGet = null;
 
-    bool lastPlayerCheckDone = false;
+	bool lastPlayerCheckDone = false;
+	bool outOfFocus = false;
 
     float Volume = 1.0f;
 
@@ -47,7 +48,7 @@ public class TheMusicNeverEnds : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        listener = gameObject.transform.Find("FMOD_Listener").gameObject;
+        //listener = gameObject.transform.Find("FMOD_Listener").gameObject;
         musicBox = gameObject.transform.Find("MusicSource").gameObject;
     }
            
@@ -168,7 +169,12 @@ public class TheMusicNeverEnds : MonoBehaviour
 
             tunez = tuneGet.levelMusic;
         }
-    }
+	}
+
+	void OnApplicationFocus(bool focusStatus)
+	{
+		outOfFocus = !(focusStatus);
+	}
 
     // Update is called once per frame, unlike the other three functions.  They're slackers.
     void Update()
@@ -195,6 +201,20 @@ public class TheMusicNeverEnds : MonoBehaviour
             //bbox.CacheEventInstance(tuneGet.levelMusic, true);
             bbox.Play();
         }
+
+		// Temporarily stop all sound if the game is not in-focus (minimized, ALT-TAB'd, et cetera) 
+		if(outOfFocus)
+		{
+			mainBus.setPaused(true);
+		}
+
+		bool outPaused;
+		mainBus.getPaused(out outPaused);
+
+		if(!outOfFocus && outPaused == true)
+		{
+			mainBus.setPaused(false);
+		}
     }
 
     // Manually shut off the music.  Must use StartMusic() to turn it back on!

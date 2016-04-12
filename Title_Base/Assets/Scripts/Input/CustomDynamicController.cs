@@ -48,8 +48,8 @@ public class CustomDynamicController : MonoBehaviour
     // basic move booleans 
     public bool MoveForward { get; private set; }
     public bool MoveBack { get; private set; }
-    private bool MoveLeft;
-    private bool MoveRight;
+    public bool MoveLeft { get; private set; }
+    public bool MoveRight { get; private set; }
     private bool InteractPressed;
 
     private bool OpenInventory;
@@ -145,7 +145,7 @@ public class CustomDynamicController : MonoBehaviour
 
     public Vector3 MoveDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
-    int CastFilter = 0;
+    public LayerMask CastFilter = 0;
 
     Vector3 GroundNormal = Vector3.up;
 
@@ -218,8 +218,8 @@ public class CustomDynamicController : MonoBehaviour
         }
 
         // we want to ignore the player layer
-        CastFilter = 1 << 10;
-        CastFilter = ~CastFilter;
+        //CastFilter = 1 << 10;
+        //CastFilter = ~CastFilter;
 
 		//m_AudioSource = GetComponent<AudioSource>();
         

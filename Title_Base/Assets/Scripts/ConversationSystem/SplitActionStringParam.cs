@@ -58,6 +58,7 @@ namespace Assets.Scripts.ConversationSystem
                 return;
             }
             var del = (Func<string, bool>) Delegate.CreateDelegate(typeof(Func<string, bool>), methodInfo);
+
             if(del(Param1))
             {
                 Next = NextIfTrue;

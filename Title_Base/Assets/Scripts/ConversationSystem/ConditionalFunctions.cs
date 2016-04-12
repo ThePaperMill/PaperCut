@@ -71,8 +71,11 @@ namespace Assets.Scripts.ConversationSystem
 
         static public bool HasPart(string PartName)
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            var invin = player.GetComponent<InventorySystem>();
+            /*var player = GameObject.FindGameObjectWithTag("Player");
+            var invin = player.GetComponent<InventorySystem>();*/
+
+			var invin = InventorySystem.GetSingleton;
+
             return invin.HasItem(new ItemInfo(PartName));
         }
     }

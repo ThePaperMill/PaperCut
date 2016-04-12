@@ -3,7 +3,8 @@
 \file   PullTabChild.cs
 \author Ian Aemmer and Joshua Biggs.
 \brief  
-    Description of script
+    Description of script, left abandoned by its creators to never properly
+    describe the script it was left in, for fate is cruel and unforgiving.
   
     © 2015 DigiPen, All Rights Reserved.
 */
@@ -29,6 +30,7 @@ public class PullTabChild : MonoBehaviour
 	}
     public void UpdateRot(EventData slerptimer)
     {
+        //Debug.Log("SASAD");
         //var vector = Vector3.LerpUnclamped(StartVector, BendVector, ((FloatEvent)slerptimer).value);
         //transform.localRotation.eulerAngles.Set(vector.x, vector.y, vector.z); //Vector3.LerpUnclamped(Quaternion.Euler(StartVector), Quaternion.Euler(BendVector), slerptimer);
         //transform.rotation = Quaternion.Euler(ActionSystem.ActionMath<Vector3>.QuadInOut(((FloatEvent)slerptimer).value, StartVector, BendVector, 1));
