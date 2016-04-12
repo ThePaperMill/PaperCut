@@ -10,6 +10,7 @@
 /****************************************************************************/
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameInfo : Singleton<GameInfo>
 {
@@ -22,7 +23,22 @@ public class GameInfo : Singleton<GameInfo>
     {
 	
 	}
-	
+
+    public void Initialize()
+    {
+
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            print("Resetting Game");
+            ResetBools();
+        }
+
+    }
+
     public void ResetBools()
     {
         PresentationSkip.GetSingleton.cheatUsed = false;
