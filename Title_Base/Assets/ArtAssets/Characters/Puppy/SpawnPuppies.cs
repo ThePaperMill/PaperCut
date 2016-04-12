@@ -23,7 +23,7 @@ public class SpawnPuppies : MonoBehaviour
         var TestData = data as FloatEvent;
         //print(TestData.value); Value is from 1 to almost 0
 
-        if (TestData.value < 0.05 && PuppiesAreSpawned == false)
+        if (TestData.value > 0.95 && PuppiesAreSpawned == false)
         {
             PuppyCannon();
             PuppiesAreSpawned = true;
