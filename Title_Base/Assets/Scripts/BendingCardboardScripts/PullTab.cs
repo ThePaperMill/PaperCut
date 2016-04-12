@@ -46,15 +46,27 @@ public class PullTab : MonoBehaviour
     float DirMulti = 1;
     float YOffset = 1;
 
+    GameObject InteractableHightlight = null; 
 
     //Abandon hope all ye who enter here...
+    public bool CreateHighlight = true;
+
     void Start()
     {
         if(!DirModPositive)
         {
             DirMulti = -1;
         }
-        
+
+        if (CreateHighlight)
+            InteractableHightlight = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("PullTabHighlight"));
+
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(false);
+        }
+
         //Save the starting position of this game object
         StartingPos = transform.parent.localPosition;
         //Save the Root of this game object
@@ -99,6 +111,13 @@ public class PullTab : MonoBehaviour
         {
             return;
         }
+
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.transform.position = new Vector3(transform.position.x, InteractableHightlight.transform.position.y, transform.position.z);
+        }
+
         var controller = Player.GetComponent<CustomDynamicController>();
         if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && controller.IsGrounded() == true)
         {
@@ -390,6 +409,12 @@ public class PullTab : MonoBehaviour
             //print(other.gameObject);
             NearPlayer = true;
         }
+
+        if(InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(true);
+        }
     }
     void OnTriggerExit(Collider other)
     {
@@ -403,7 +428,12 @@ public class PullTab : MonoBehaviour
             Engaged = false;
         }
 
-        
+        if (InteractableHightlight)
+        {
+            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+            InteractableHightlight.SetActive(false);
+            InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
+        }
     }
 
     void ContrainRBody()
