@@ -45,6 +45,9 @@ public class PullTab : MonoBehaviour
     public bool UseLeftRightControls = false;
     float DirMulti = 1;
     float YOffset = 1;
+
+
+    //Abandon hope all ye who enter here...
     void Start()
     {
         if(!DirModPositive)
