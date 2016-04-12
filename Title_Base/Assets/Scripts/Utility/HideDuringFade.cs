@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file  HideDuringFade.cs
+\author Steven Gallwas 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class HideDuringFade : MonoBehaviour

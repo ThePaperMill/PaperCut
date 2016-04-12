@@ -1,4 +1,14 @@
-﻿using ActionSystem;
+﻿/****************************************************************************/
+/*!
+\file  MoveLeftEveryFrame.cs
+\author Ian Aemmer
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using ActionSystem;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file  SetPlayerColor.cs
+\author Steven Gallwas 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 
 public class SetPlayerColor : MonoBehaviour

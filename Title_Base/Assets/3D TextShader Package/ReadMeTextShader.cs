@@ -1,3 +1,13 @@
+/****************************************************************************/
+/*!
+\file  ReadMeTextShader.cs
+\author Joshua Biggs probably 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
 /*
 Create a New empty gameobject. (Do not start with a UI Text Object)
 Attach a Text Mesh to the Game Object. This allows it to function as Text in 3D space, instead of UI space.

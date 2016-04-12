@@ -1,4 +1,14 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file  RandomWander.cs
+\author Steven Gallwas 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
 using ActionSystem;
 
@@ -24,8 +34,6 @@ public class RandomWander : MonoBehaviour
     public LayerMask GroundMask = 0;
 
     public GameObject ObjectImage = null;
-
-    float BounceAmount = 0.015f;
 
     public float HeightOffset { get; set; }
 
