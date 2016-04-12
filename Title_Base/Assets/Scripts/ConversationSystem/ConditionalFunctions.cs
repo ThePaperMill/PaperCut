@@ -74,7 +74,7 @@ namespace Assets.Scripts.ConversationSystem
             /*var player = GameObject.FindGameObjectWithTag("Player");
             var invin = player.GetComponent<InventorySystem>();*/
 
-			var invin = GameObject.Find("(singleton) InventorySystem").GetComponent<InventorySystem>();
+			var invin = InventorySystem.GetSingleton;
 
             return invin.HasItem(new ItemInfo(PartName));
         }
