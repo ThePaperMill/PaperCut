@@ -55,11 +55,12 @@ public class SplashScreenTransitions : MonoBehaviour
 		Unfocused = !(focusStatus);
 		ScreenTimer += Time.deltaTime;
 	}
-	
+
+
 	// Update is called once per frame
     void Update () 
     {
-        if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Escape) && complete == false)
+        if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.SkipButtons) && complete == false)
         {
             LevelTransitionManager.GetSingleton.ChangeLevel("MainMenu", true, 1.0f);
             complete = true;

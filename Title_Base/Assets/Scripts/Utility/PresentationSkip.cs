@@ -23,7 +23,7 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FifthLevel = "Sewer";
     string SixthLevel = "WaterWorks";
     string SeventhLevel = "RachelsStreet";
-    string EighthLevel = "Jerry_RachelHouse";
+    string EighthLevel = "RachelHouse";
 
     string NinthLevel = "DuckPondAlternate";
     string LastLevel = "DuckPondAlternate";

@@ -103,6 +103,8 @@ public class TransformMachine : EventHandler
     {
         //EventSystem.GlobalHandler.DispatchEvent(Events.CatchFire);
 
+        GetComponent<FMOD_StudioEventEmitter>().StartEvent();
+
         Vector3 ExplosionPoint = ItemPosition;
 
         var colliders = Physics.OverlapSphere(ExplosionPoint, ExplosionRadius);
@@ -144,7 +146,7 @@ public class TransformMachine : EventHandler
         {
             Action.Call(test, CreatePointBlast);
         }
-        Action.Delay(test, 0.45f);
+        //Action.Delay(test, 0.45f);
 
         // create the new object
         //Action.Call(test, CreateNewItem);
