@@ -1797,7 +1797,7 @@ Prefab:
     - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: levelMusic
       value: 
-      objectReference: {fileID: 11400000, guid: 2fa279b3a2f8e1b42a4020ed69d4c140,
+      objectReference: {fileID: 11400000, guid: 612bb1b9954fcce4cb0b057ed6c33659,
         type: 2}
     - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_Enabled
@@ -1809,7 +1809,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11438790, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
@@ -30089,6 +30089,24 @@ Transform:
   - {fileID: 599408332}
   m_Father: {fileID: 1073262024}
   m_RootOrder: 35
+--- !u!1 &871301399 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153112, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_PrefabInternal: {fileID: 57893548}
+--- !u!114 &871301400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871301399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7160aec47319845a01d4863bcf883a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelNumber: 0
+  LevelName: Duck Pond
+  IsFinalLevel: 0
 --- !u!1 &873515882
 GameObject:
   m_ObjectHideFlags: 0

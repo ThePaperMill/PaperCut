@@ -151,7 +151,7 @@ public class InteractManager : MonoBehaviour
 
             if(!obj)
             {
-                print("God Dammit");
+                //print("I guess nothing happens?");
                 continue;
             }
 
