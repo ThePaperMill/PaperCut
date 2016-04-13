@@ -1,3 +1,13 @@
+/****************************************************************************/
+/*!
+\file  FMODEventInspector.cs
+\author Troy
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
 using UnityEngine;
 using UnityEditor;
 

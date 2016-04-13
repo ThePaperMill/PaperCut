@@ -126,6 +126,7 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
         PresentationSkip.GetSingleton.Initialize();
         LevelTransitionManager.GetSingleton.Initialize();
         GlobalSoundInitializer.GetSingleton.Initialize();
+        GameInfo.GetSingleton.Initialize();
     }
 
     /*************************************************************************/

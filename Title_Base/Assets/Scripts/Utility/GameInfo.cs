@@ -1,5 +1,16 @@
-﻿using UnityEngine;
+﻿/****************************************************************************/
+/*!
+\file  GameInfo.cs
+\author Steven Gallwas 
+\brief  
+ 
+  
+    © 2016 DigiPen, All Rights Reserved.
+*/
+/****************************************************************************/
+using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameInfo : Singleton<GameInfo>
 {
@@ -12,7 +23,29 @@ public class GameInfo : Singleton<GameInfo>
     {
 	
 	}
-	
+
+    public void Initialize()
+    {
+
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            print("Resetting Game");
+            ResetBools();
+        }
+
+    }
+
+    public void TriggerBools()
+    {
+        PresentationSkip.GetSingleton.cheatUsed = false;
+        LabDestroyed = false;
+        FinaleReady = false;
+    }
+
     public void ResetBools()
     {
         PresentationSkip.GetSingleton.cheatUsed = false;

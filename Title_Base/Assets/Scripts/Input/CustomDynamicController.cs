@@ -465,12 +465,14 @@ public class CustomDynamicController : MonoBehaviour
 
         if (MoveForward || LeftStickPosition.YPos > 0.2)
         {
+            MoveForward = true;
             //movement += Cam.transform.forward;
             movement += CamForward;
         }
 
         else if (MoveBack || LeftStickPosition.YPos < -0.2)
         {
+            MoveBack = true;
             movement -= CamForward;
             //movement -= Cam.transform.forward;
         }
@@ -478,12 +480,14 @@ public class CustomDynamicController : MonoBehaviour
         // store the raw input, so we can turn the model
         if (MoveLeft || LeftStickPosition.XPos < -0.2)
         {
+            MoveLeft = true;
             movement -= Cam.transform.right;
             RawInput += new Vector3(-1, 0, 0);
         }
 
         else if (MoveRight || LeftStickPosition.XPos > 0.2)
         {
+            MoveRight = true;
             movement += Cam.transform.right;
             RawInput += new Vector3(1, 0, 0);
         }
@@ -1012,19 +1016,31 @@ public class CustomDynamicController : MonoBehaviour
 	/*************************************************************************/
 	private void WalkNoise()
 	{
-		m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.deltaTime);
-		
-		if ((m_StepCycle > m_NextStep))
-		{
-			m_NextStep = m_StepCycle + m_StepInterval;
-			++walkCycle;
-			if(walkCycle >= m_WalkSoundCycle)
-			{
-				walkCycle = 0;
-				PlayFootStepAudio();
-			}
-		}
-	}
+        // hard coded value for now.
+        m_StepCycle += Time.deltaTime;
+
+        if ((m_StepCycle > 0.35))
+        {
+            m_StepCycle = 0.0f;
+            PlayFootStepAudio();
+        }
+
+
+        //m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.deltaTime);
+
+        //if ((m_StepCycle > m_NextStep))
+        //{
+        //    m_NextStep = m_StepCycle + m_StepInterval;
+        //    ++walkCycle;
+        //    if (walkCycle >= m_WalkSoundCycle)
+        //    {
+        //        m_StepCycle = 0.0f;
+        //        m_NextStep = 0.0f;
+        //        walkCycle = 0;
+        //        PlayFootStepAudio();
+        //    }
+        //}
+    }
 
     /*************************************************************************/
     /*!
