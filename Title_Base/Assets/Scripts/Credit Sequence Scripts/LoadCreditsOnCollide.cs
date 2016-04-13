@@ -90,6 +90,13 @@ void Update () {
 
     void JoshIHopeThisWorksOrYoureFired()
     {
+        var soundEmitter = GetComponent<FMOD_StudioEventEmitter>();
+
+        if (soundEmitter)
+        {
+            soundEmitter.StartEvent();
+        }
+
         //gameObject.GetComponent<Shake>().enabled = true;
         transform.FindChild("GameObject").GetComponent<Shake>().enabled = true;
         transform.FindChild("Fire").gameObject.SetActive(true);
