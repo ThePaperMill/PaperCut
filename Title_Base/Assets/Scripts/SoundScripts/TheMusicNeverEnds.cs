@@ -41,6 +41,7 @@ public class TheMusicNeverEnds : MonoBehaviour
 
 	bool lastPlayerCheckDone = false;
 	bool outOfFocus = false;
+	bool holdFocus = false;
 
     float Volume = 1.0f;
 
@@ -174,6 +175,13 @@ public class TheMusicNeverEnds : MonoBehaviour
 	void OnApplicationFocus(bool focusStatus)
 	{
 		outOfFocus = !(focusStatus);
+		//print("Unfocused:  " + outOfFocus);
+	}
+
+	void OnApplicationPause(bool focusStatus)
+	{
+		holdFocus = focusStatus;
+		//print("<<Paused>>:  " + holdFocus);
 	}
 
     // Update is called once per frame, unlike the other three functions.  They're slackers.
@@ -203,15 +211,15 @@ public class TheMusicNeverEnds : MonoBehaviour
         }
 
 		// Temporarily stop all sound if the game is not in-focus (minimized, ALT-TAB'd, et cetera) 
-		if(outOfFocus)
+		if(outOfFocus || holdFocus)
 		{
 			mainBus.setPaused(true);
 		}
 
-		bool outPaused;
+		bool outPaused = false;
 		mainBus.getPaused(out outPaused);
 
-		if(!outOfFocus && outPaused == true)
+		if(!outOfFocus && !holdFocus && outPaused)
 		{
 			mainBus.setPaused(false);
 		}

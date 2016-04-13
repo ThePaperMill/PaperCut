@@ -22,7 +22,8 @@ public class HoverSpin : MonoBehaviour
     public Vector3 Prone = new Vector3();
     public float HoverDelay = 0.0f;
 
-    private FMOD_StudioEventEmitter HoverSounds;
+	private FMOD_StudioEventEmitter HoverSounds;
+	private FMOD_StudioEventEmitter DelaySounds;
     float JumpTimer;
     ActionGroup grp = new ActionGroup();
     //Rigidbody RB = new Rigidbody();
@@ -33,7 +34,8 @@ public class HoverSpin : MonoBehaviour
         JumpTimer = 0.0f;
         Grounded = this.GetComponent<CustomDynamicController>().OnGround;
 
-        HoverSounds = gameObject.transform.Find("HoverSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
+		HoverSounds = gameObject.transform.Find("HoverSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
+		DelaySounds = gameObject.transform.Find("HoverSounds2").gameObject.GetComponent<FMOD_StudioEventEmitter>();
 
     }
 	
@@ -53,7 +55,8 @@ public class HoverSpin : MonoBehaviour
         // Stop any sounds when not spinning
 		if(!Spinning && HoverSounds != null)
         {
-            HoverSounds.Stop();
+			HoverSounds.Stop();
+			DelaySounds.Stop();
         }
     }
 
@@ -78,13 +81,24 @@ public class HoverSpin : MonoBehaviour
 			if (!Spinning && HoverSounds != null)
 			{
 				HoverSounds.Play();
+				Invoke("PlayDelayedSound", 0.5f);
 			}
 
-			/*if (Spinning && HoverSounds != null && HoverSounds.HasFinished())
+			if (Spinning && HoverSounds != null &&
+				(HoverSounds.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING
+				|| HoverSounds.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED))
 			{
 				HoverSounds.Stop();
 				HoverSounds.Play();
-			}*/
+			}
+
+			if (Spinning && HoverSounds != null &&
+				(DelaySounds.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING
+				|| DelaySounds.getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED))
+			{
+				DelaySounds.Stop();
+				DelaySounds.Play();
+			}
 
             Spinning = true;
         }
@@ -103,4 +117,9 @@ public class HoverSpin : MonoBehaviour
     {
         return Spinning;
     }
+
+	void PlayDelayedSound()
+	{
+		DelaySounds.Play();
+	}
 }

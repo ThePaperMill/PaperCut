@@ -25,7 +25,8 @@ public class SplashScreenTransitions : MonoBehaviour
     float ScreenTimer = 0.0f;
     int CurrentScreen = 0;
     bool complete = false;
-    bool Faded = false;
+	bool Faded = false;
+	bool Unfocused = false;
 
 	// Use this for initialization
     void Start () 
@@ -48,6 +49,12 @@ public class SplashScreenTransitions : MonoBehaviour
             Screens[CurrentScreen].SetActive(true);
         }
     }
+
+	void OnApplicationFocus(bool focusStatus)
+	{
+		Unfocused = !(focusStatus);
+		ScreenTimer += Time.deltaTime;
+	}
 	
 	// Update is called once per frame
     void Update () 
@@ -62,33 +69,35 @@ public class SplashScreenTransitions : MonoBehaviour
 
         if (complete == true)
             return;
+		
+		ScreenTimer += Time.deltaTime;
 
-    ScreenTimer += Time.deltaTime;
+	    if (ScreenTimer > ScreenDelay - 0.5f && Faded == false && CurrentScreen < Screens.Count - 1)
+	    {
+	      Faded = true;
+	      LevelTransitionManager.GetSingleton.FadeOutIn(0.5f);
+	    }
 
-    if (ScreenTimer > ScreenDelay - 0.5f && Faded == false && CurrentScreen < Screens.Count - 1)
-    {
-      Faded = true;
-      LevelTransitionManager.GetSingleton.FadeOutIn(0.5f);
+		//print(ScreenTimer);
+
+	    if(ScreenTimer > ScreenDelay)
+	    {
+	      int prevScreen = CurrentScreen;
+	      CurrentScreen++;
+	      ScreenTimer = 0.0f;
+	      Faded = false;
+
+	      if (CurrentScreen >= Screens.Count)
+	      {
+	        complete = true;
+	        LevelTransitionManager.GetSingleton.ChangeLevel("MainMenu", true, 1.5f);
+	        return;
+	      }
+	      else
+	      {
+	        Screens[prevScreen].SetActive(false);
+	        Screens[CurrentScreen].SetActive(true);
+	      }
+	    }
     }
-
-    if(ScreenTimer > ScreenDelay)
-    {
-      int prevScreen = CurrentScreen;
-      CurrentScreen++;
-      ScreenTimer = 0.0f;
-      Faded = false;
-
-      if (CurrentScreen >= Screens.Count)
-      {
-        complete = true;
-        LevelTransitionManager.GetSingleton.ChangeLevel("MainMenu", true, 1.5f);
-        return;
-      }
-      else
-      {
-        Screens[prevScreen].SetActive(false);
-        Screens[CurrentScreen].SetActive(true);
-      }
-    }
-  }
 }
