@@ -115,11 +115,14 @@ public class GamestateManager : Singleton<GamestateManager>
         Time.timeScale = 1.0f;
         CurState = GAME_STATE.GS_GAME;
     }
-
-
-	// Update is called once per frame
-    void Update ()
+		
+	// Pause the game if we lose focus, and resume if we gain it
+	/*void OnApplicationFocus(bool focusStatus)
     {
-
-    }
+		if (!focusStatus)
+			PauseGame();
+		
+		else
+			ResumeGame();
+    }*/
 }
