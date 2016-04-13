@@ -126,6 +126,7 @@ public class PresentationSkip : Singleton<PresentationSkip>
         else if (InputManager.GetSingleton.IsKeyTriggered(KeyCode.Alpha0))
         {
             GiveItems();
+            GameInfo.GetSingleton.TriggerBools();
             LevelTransitionManager.GetSingleton.ChangeLevel(LastLevel, true, 1.0f);
 
         }

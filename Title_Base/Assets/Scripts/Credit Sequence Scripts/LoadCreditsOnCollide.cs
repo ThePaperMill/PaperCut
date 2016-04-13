@@ -8,6 +8,7 @@
     © 2015 DigiPen, All Rights Reserved.
 */
 /****************************************************************************/
+using ActionSystem;
 
 using UnityEngine;
 using System.Collections;
@@ -23,6 +24,11 @@ public class LoadCreditsOnCollide : MonoBehaviour {
 
     bool Activate = false;
 
+    public AnimationCurve Curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    private ActionGroup grp = new ActionGroup();
+    public float EaseTime = 5.0f;
+    public Vector3 finalPos = new Vector3(0, 0, 0);//.zero;
+
     // Use this for initialization
     void Start ()
     {
@@ -37,28 +43,19 @@ void Update () {
         if(Activate)
         {
             //I need to enable my shake script
+            //print("I am activated");
 
+            //I want my
 
+            
 
-
-
-
-
-
-        }
-	}
-    /*
-    void OnCollisionEnter(Collision col)
-    {
-        //print(col.gameObject.name);
-        if(col.gameObject.name == "DynamicPlayer(Clone)")
-        {
-            //LoadSceneMode.)
-            //SceneManager.LoadScene(SceneName);
+            grp.Update(Time.smoothDeltaTime);
 
         }
 
-    }*/
+        
+
+    }
 
     void OnInteractedWith(EventData myevent)
     {
@@ -68,6 +65,39 @@ void Update () {
             passenger.SetActive(true);
             GameObject.Find("DynamicPlayer(Clone)").SetActive(false);
             this.Activate = true;
+            //Destroy(gameObject.GetComponent<Interactable>());
+            GameObject.Find("Highlight(Clone)").SetActive(false);//.GetComponent<MeshRenderer>().enabled = false;
+            //Destroy(GameObject.Find("Highlight(Clone)").GetComponent<MeshRenderer>())
+;            ActivateAnimation();
         }
+    }
+
+    void ActivateAnimation()
+    {
+        Vector3 startpos = transform.localPosition;
+
+        var seq = Action.Sequence(grp);
+        //var grp = Action.Group(grp);
+        
+        Action.Property(seq, passenger.transform.GetProperty(ObjTransform => ObjTransform.localPosition), passenger.transform.localPosition + new Vector3(0,0.4f,0), EaseTime, Curve);
+        //this is getting called, but it never ends or moves onto the next function
+        Action.Call(seq, JoshIHopeThisWorksOrYoureFired);
+        Action.Property(seq, gameObject.transform.GetProperty(ObjTransform => ObjTransform.localPosition), startpos + new Vector3(0, 5, 0), 5, Curve);
+        Action.Call(seq, LoadCreditLevel);
+
+        //Action.Property(seq, gameObject.transform.GetProperty(o => o.localPosition), startpos + new Vector3(0, 5, 0), 5, Curve);
+    }
+
+    void JoshIHopeThisWorksOrYoureFired()
+    {
+        //gameObject.GetComponent<Shake>().enabled = true;
+        transform.FindChild("GameObject").GetComponent<Shake>().enabled = true;
+        transform.FindChild("Fire").gameObject.SetActive(true);
+
+    }
+    void LoadCreditLevel()
+    {
+        //SceneManager.LoadScene(SceneName);
+        LevelTransitionManager.GetSingleton.ChangeLevel(SceneName);
     }
 }

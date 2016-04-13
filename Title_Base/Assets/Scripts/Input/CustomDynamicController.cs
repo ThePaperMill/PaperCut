@@ -1016,19 +1016,31 @@ public class CustomDynamicController : MonoBehaviour
 	/*************************************************************************/
 	private void WalkNoise()
 	{
-		m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.deltaTime);
-		
-		if ((m_StepCycle > m_NextStep))
-		{
-			m_NextStep = m_StepCycle + m_StepInterval;
-			++walkCycle;
-			if(walkCycle >= m_WalkSoundCycle)
-			{
-				walkCycle = 0;
-				PlayFootStepAudio();
-			}
-		}
-	}
+        // hard coded value for now.
+        m_StepCycle += Time.deltaTime;
+
+        if ((m_StepCycle > 0.35))
+        {
+            m_StepCycle = 0.0f;
+            PlayFootStepAudio();
+        }
+
+
+        //m_StepCycle += (MoveDirection.sqrMagnitude + MovePower * Time.deltaTime);
+
+        //if ((m_StepCycle > m_NextStep))
+        //{
+        //    m_NextStep = m_StepCycle + m_StepInterval;
+        //    ++walkCycle;
+        //    if (walkCycle >= m_WalkSoundCycle)
+        //    {
+        //        m_StepCycle = 0.0f;
+        //        m_NextStep = 0.0f;
+        //        walkCycle = 0;
+        //        PlayFootStepAudio();
+        //    }
+        //}
+    }
 
     /*************************************************************************/
     /*!
