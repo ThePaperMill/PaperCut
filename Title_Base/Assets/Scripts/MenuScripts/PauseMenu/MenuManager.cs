@@ -94,7 +94,7 @@ public class MenuManager : EventHandler
 
   void OnResumeGameEvent(EventData data)
   {
-    DeactivateMenu(0);
+    	DeactivateMenu(0);
   }
 
   	// Use this for initialization
