@@ -198,6 +198,18 @@ public class TheMusicNeverEnds : MonoBehaviour
             }
         }
 
+        if(GamestateManager.GetSingleton.IsPaused)
+        {
+            var hudcam = GameObject.FindGameObjectWithTag("HudCamera");
+
+            if (hudcam)
+                goTo = hudcam; 
+        }
+        else if(Player)
+        {
+            goTo = Player;
+        }
+
         // Go to the assigned position object
         gameObject.transform.position = goTo.transform.position;
 
