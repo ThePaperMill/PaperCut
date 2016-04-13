@@ -42,8 +42,8 @@ public class LoadSceneOnButtonPress : MonoBehaviour {
 
     void LoadSCene()
     {
-
+        LevelTransitionManager.GetSingleton.ChangeLevel(SceneName);
         //LoadSceneMode.)
-        SceneManager.LoadScene(SceneName);
+        //SceneManager.LoadScene(SceneName);
     }
 }
