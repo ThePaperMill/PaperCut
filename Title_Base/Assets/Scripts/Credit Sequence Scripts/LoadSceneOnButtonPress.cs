@@ -42,6 +42,7 @@ public class LoadSceneOnButtonPress : MonoBehaviour {
 
     void LoadSCene()
     {
+
         //LoadSceneMode.)
         SceneManager.LoadScene(SceneName);
     }

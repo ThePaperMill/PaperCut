@@ -357,6 +357,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &71488022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &84457029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +477,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &98622589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,9 +732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e3baa3ff06f1b4fad69ceacbf63748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   amount: 1
   decelerating: 0
+  turnrate: 10
 --- !u!114 &162829755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,6 +824,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &206020289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +925,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &236712199 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 159702, guid: 8bc0790af1d94dd42a92347725fabf3f, type: 2}
@@ -1014,6 +1020,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &243396015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,6 +1080,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &245264178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,7 +1399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &428208490 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 108290, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
@@ -1451,6 +1459,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &450573370 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 108290, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
@@ -1510,6 +1519,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &476571930 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100038, guid: a2aa0746350934f49a1c9416117324a6, type: 2}
@@ -1747,6 +1757,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &511758740
 Prefab:
   m_ObjectHideFlags: 0
@@ -1827,6 +1838,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &518107305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,6 +2335,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &583655304 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 108290, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
@@ -2341,6 +2354,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &583655306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2460,6 +2474,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &595265371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2713,6 +2728,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &682805725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3062,6 +3078,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &749721847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3162,6 +3179,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &765323418
 Prefab:
   m_ObjectHideFlags: 0
@@ -3238,6 +3256,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &779487723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3377,6 +3396,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &810011271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3519,7 +3539,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10223878, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
       propertyPath: m_Text
-      value: 'Leo Saikali,
+      value: 'Kazutoyo Yamamoto and
+
+        Leo Saikali:
 
         Additional Art Assets'
       objectReference: {fileID: 0}
@@ -3701,6 +3723,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &898211772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3987,6 +4010,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &973773999 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 159702, guid: 8bc0790af1d94dd42a92347725fabf3f, type: 2}
@@ -4041,6 +4065,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &990420485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4120,6 +4145,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1035849801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4179,6 +4205,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1035856870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4279,6 +4306,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &1045405941
 Prefab:
   m_ObjectHideFlags: 0
@@ -4351,6 +4379,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1059038604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4546,6 +4575,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1129309804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,6 +4811,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1261005628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,6 +4972,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &1284843389
 Prefab:
   m_ObjectHideFlags: 0
@@ -5054,6 +5086,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1294003206 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100038, guid: a2aa0746350934f49a1c9416117324a6, type: 2}
@@ -5102,6 +5135,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1300295456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5278,6 +5312,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1354748529
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,6 +5622,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1388385634
 GameObject:
   m_ObjectHideFlags: 0
@@ -5617,7 +5653,7 @@ Transform:
   - {fileID: 35408214}
   - {fileID: 1354748530}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1001 &1403425848
 Prefab:
   m_ObjectHideFlags: 0
@@ -5702,6 +5738,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1403425851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5906,6 +5943,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1478701183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6027,6 +6065,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1504405523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6127,6 +6166,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1548304197 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 130660, guid: 59382f9bfa71bf04d8f23d6728045657, type: 2}
@@ -6202,6 +6242,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1626508562 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 159702, guid: 8bc0790af1d94dd42a92347725fabf3f, type: 2}
@@ -6358,6 +6399,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1650623580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6399,6 +6441,64 @@ MonoBehaviour:
   FinalPosOffset: {x: -19, y: 0, z: 0}
   EaseTime: 10
   RandomizedStart: 1
+--- !u!1001 &1653377467
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.903054
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.5154402
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.8124952
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412558, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430860, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: canPause
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493386, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 11400000, guid: 26b4c39391477db488dac139070f1d24,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 11430860, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+    - {fileID: 11404572, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+    - {fileID: 11438790, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 8c53988d1a58838419704e941a90bf79, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1656113697
 Prefab:
   m_ObjectHideFlags: 0
@@ -6544,6 +6644,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1689586363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6603,6 +6704,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1692325401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6722,6 +6824,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1719615362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7011,7 +7114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &1773187971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7395,6 +7498,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1873421950 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 108290, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
@@ -7444,6 +7548,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1873421957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7455,7 +7560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0824324a1a7a50f498a21f6724dc5538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: 
+  SceneName: MainMenu
 --- !u!1001 &1893157592
 Prefab:
   m_ObjectHideFlags: 0
@@ -7739,6 +7844,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1 &1958967832 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 108290, guid: 54ad7c260318b4e43b4b357c174acf2c, type: 2}
@@ -7757,6 +7863,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1958967834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7816,6 +7923,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1969843054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7933,6 +8041,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &1999070774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7992,6 +8101,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &2001313239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8287,6 +8397,7 @@ MonoBehaviour:
   speed: 2
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &2044370865
 Prefab:
   m_ObjectHideFlags: 0
@@ -8514,6 +8625,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &2076510587
 Prefab:
   m_ObjectHideFlags: 0
@@ -8598,6 +8710,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!114 &2091367600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8698,6 +8811,7 @@ MonoBehaviour:
   speed: 0.1
   amount: 0
   decelerating: 0
+  turnrate: 10
 --- !u!1001 &2147371487
 Prefab:
   m_ObjectHideFlags: 0
