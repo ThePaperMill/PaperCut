@@ -3663,7 +3663,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_RootOrder
-      value: 52
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 199256, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Name
@@ -3995,6 +3995,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!1 &852654327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 852654329}
+  - 114: {fileID: 852654328}
+  m_Layer: 0
+  m_Name: RunnerTalkAlt (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &852654328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 852654327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: "If you need help getting over \nthe staircase try jumping."
+  NextAction: {fileID: 0}
+--- !u!4 &852654329
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 852654327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 739152131}
+  m_RootOrder: 3
 --- !u!1001 &856786999
 Prefab:
   m_ObjectHideFlags: 0
@@ -6023,7 +6064,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 51
+  m_RootOrder: 48
 --- !u!1 &1291855902
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,7 +6164,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 2.8, z: 3.4560003}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 70
+  m_RootOrder: 66
 --- !u!1001 &1300508070
 Prefab:
   m_ObjectHideFlags: 0
@@ -6521,7 +6562,7 @@ Transform:
   m_LocalScale: {x: 4, y: 6, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 61
+  m_RootOrder: 58
 --- !u!1 &1393304134
 GameObject:
   m_ObjectHideFlags: 0
@@ -7266,7 +7307,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 24}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 72
+  m_RootOrder: 71
 --- !u!1001 &1658687621
 Prefab:
   m_ObjectHideFlags: 0
@@ -7627,7 +7668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: "Go ahead and head uptown.\nThese flaps are supposed to \nkeep cars out, not
     people."
-  NextAction: {fileID: 0}
+  NextAction: {fileID: 852654328}
 --- !u!4 &1704933227
 Transform:
   m_ObjectHideFlags: 0

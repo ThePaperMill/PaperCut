@@ -125,11 +125,11 @@ public class DynamicTeaching : MonoBehaviour
             {
                 HideText();          
             }
-            if (CheckJump && Jumped == false)
+            if (CheckJump && Jumped == true)
             {
                 HideText();
             }
-            if (CheckInteract && Interacted == false)
+            if (CheckInteract && Interacted == true)
             {
                 HideText();
             }

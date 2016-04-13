@@ -1699,22 +1699,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &157943894 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
-  m_PrefabInternal: {fileID: 157943893}
---- !u!114 &157943895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 157943894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestroyWithLab: 0
 --- !u!1 &158373587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2044,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_RootOrder
-      value: 47
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 3396022, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Mesh
@@ -3068,6 +3052,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 202962365}
   m_RootOrder: 2
+--- !u!1 &311695761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 311695763}
+  - 114: {fileID: 311695762}
+  m_Layer: 0
+  m_Name: RunnerTalk (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &311695762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311695761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 'If you hold down X and move
+
+    while standing next to those,
+
+    it will change the world.'
+  NextAction: {fileID: 1829197845}
+--- !u!4 &311695763
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311695761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1149215381}
+  m_RootOrder: 2
 --- !u!1 &311760726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,6 +4008,60 @@ Transform:
   - {fileID: 572180900}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1001 &451984627
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 202962365}
+    m_Modifications:
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.017259514
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.01415
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.002805638
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.021197544
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.07542386
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.26973173
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.959743
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &459468866
 GameObject:
   m_ObjectHideFlags: 0
@@ -13561,7 +13644,7 @@ MonoBehaviour:
   Text: 'See those red tabs around
 
     the corner?'
-  NextAction: {fileID: 1829197845}
+  NextAction: {fileID: 311695762}
 --- !u!4 &1555839925
 Transform:
   m_ObjectHideFlags: 0
@@ -14175,7 +14258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: 'The Scientist is lying to you!
 
-    The Highluminnati are in control!'
+    The Paper Masons are in control!'
   NextAction: {fileID: 1589537956}
 --- !u!4 &1626444392
 Transform:
@@ -15102,22 +15185,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1734216658 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
-  m_PrefabInternal: {fileID: 1734216657}
---- !u!114 &1734216659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1734216658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestroyWithLab: 0
 --- !u!1 &1753486254
 GameObject:
   m_ObjectHideFlags: 0
@@ -15685,11 +15752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'If you hold down X and move
-
-    while standing next to those,
-
-    it will change the world.'
+  Text: But really, it'll make things move.
   NextAction: {fileID: 0}
 --- !u!1001 &1872036752
 Prefab:
