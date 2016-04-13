@@ -45,12 +45,12 @@ public class PullTab : MonoBehaviour
     public bool UseLeftRightControls = false;
     float DirMulti = 1;
     float YOffset = 1;
-
+    
     GameObject InteractableHightlight = null; 
 
     //Abandon hope all ye who enter here...
     public bool CreateHighlight = true;
-
+    public bool PoppedUp { get; private set; }
     void Start()
     {
         if(!DirModPositive)
@@ -79,6 +79,7 @@ public class PullTab : MonoBehaviour
         //If the object is supposed to start popped up,
         if(StartPoppedUp)
         {
+            PoppedUp = true;
             switch (Axis)
             {
                 case (LockedAxis.LocalX):
@@ -222,7 +223,19 @@ public class PullTab : MonoBehaviour
                 LerpData.value = LerpPos;
                 EventTarget.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
             }
+
+            if (LerpPos >= 0.99 && !PoppedUp)
+            {
+                PoppedUp = true;
+                transform.root.DispatchEvent("TabOut");
+            }
+            else if (LerpPos <= 0.01 && PoppedUp)
+            {
+                PoppedUp = false;
+                transform.root.DispatchEvent("TabIn");
+            }
         }
+        
         //if (NearPlayer == true && Player != null)
         //{
         //    if (InputManager.GetSingleton.IsInputTriggered(GlobalControls.TabControls) && Player.GetComponent<CustomDynamicController>().IsGrounded() == true)

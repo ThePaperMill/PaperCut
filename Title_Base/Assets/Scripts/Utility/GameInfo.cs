@@ -33,7 +33,7 @@ public class GameInfo : Singleton<GameInfo>
     {
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            print("Resetting Game");
+            //print("Resetting Game");
             ResetBools();
         }
 
