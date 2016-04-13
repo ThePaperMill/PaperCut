@@ -421,12 +421,12 @@ public class PullTab : MonoBehaviour
             Player = other.gameObject;
             //print(other.gameObject);
             NearPlayer = true;
-        }
 
-        if(InteractableHightlight)
-        {
-            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
-            InteractableHightlight.SetActive(true);
+            if (InteractableHightlight)
+            {
+                InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+                InteractableHightlight.SetActive(true);
+            }
         }
     }
     void OnTriggerExit(Collider other)
@@ -434,18 +434,18 @@ public class PullTab : MonoBehaviour
         if (other.tag == "Player")
         {
             NearPlayer = false;
+
+            if (InteractableHightlight)
+            {
+                InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
+                InteractableHightlight.SetActive(false);
+                InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
+            }
         }
         if (Engaged)
         {
             OnUnlockBody();
             Engaged = false;
-        }
-
-        if (InteractableHightlight)
-        {
-            InteractableHightlight.transform.position = transform.position + new Vector3(0, 1, 0);
-            InteractableHightlight.SetActive(false);
-            InteractableHightlight.GetComponent<ItemSpin>().StartingPostion = transform.position + new Vector3(0, 1, 0);
         }
     }
 
