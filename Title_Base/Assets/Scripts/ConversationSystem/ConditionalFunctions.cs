@@ -13,7 +13,7 @@ namespace Assets.Scripts.ConversationSystem
 {
     static class ConditionalFunctions
     {
-        static bool CanEndGame = false;
+        //static bool CanEndGame = false;
 
         static public bool DefaultFunctionTrue()
         {
@@ -77,6 +77,12 @@ namespace Assets.Scripts.ConversationSystem
 			var invin = InventorySystem.GetSingleton;
 
             return invin.HasItem(new ItemInfo(PartName));
+        }
+
+        static public bool IsTabIn(GameObject obj)
+        {
+            var Comp = obj.GetComponent<PullTab>();
+            return Comp.PoppedUp;
         }
     }
 }
