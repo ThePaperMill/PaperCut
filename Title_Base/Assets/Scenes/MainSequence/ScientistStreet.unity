@@ -1670,7 +1670,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_RootOrder
-      value: 50
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_LocalScale.x
@@ -1687,7 +1687,7 @@ Prefab:
     - target: {fileID: 2300002, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b89648ba35b1ed84698fc8ce1b6602c4, type: 2}
+      objectReference: {fileID: 2100000, guid: 242edc47fb1df6a4c825c59f5cd45924, type: 2}
     - target: {fileID: 2300000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1699,22 +1699,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &157943894 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
-  m_PrefabInternal: {fileID: 157943893}
---- !u!114 &157943895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 157943894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestroyWithLab: 0
 --- !u!1 &158373587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2044,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425456, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_RootOrder
-      value: 47
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3396022, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Mesh
@@ -3068,6 +3052,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 202962365}
   m_RootOrder: 2
+--- !u!1 &311695761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 311695763}
+  - 114: {fileID: 311695762}
+  m_Layer: 0
+  m_Name: RunnerTalk (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &311695762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311695761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 'If you hold down X and move
+
+    while standing next to those,
+
+    it will change the world.'
+  NextAction: {fileID: 1829197845}
+--- !u!4 &311695763
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311695761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1149215381}
+  m_RootOrder: 2
 --- !u!1 &311760726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,9 +3582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'Move along.
+  Text: 'Sometimes I feel like the
 
-    There''s nothing to see here.'
+    world has lost all its color.'
   NextAction: {fileID: 0}
 --- !u!4 &389308799
 Transform:
@@ -3979,6 +4008,64 @@ Transform:
   - {fileID: 572180900}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1001 &451984627
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 202962365}
+    m_Modifications:
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.017259514
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.01415
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.002805638
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.021197544
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.07542386
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.26973173
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.959743
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346954, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ae13943a40fb3af4ead8905fcf7a0a44, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &459468866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4557,6 +4644,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2387608, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c73e4146e7f842d40befaaf2d6add0fb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
   m_IsPrefabParent: 0
@@ -12142,7 +12233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'Be careful, the Highluminnati
+  Text: 'Be careful, the Paper Masons
 
     will be after you now.'
   NextAction: {fileID: 0}
@@ -12966,7 +13057,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496928, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: m_RootOrder
-      value: 30
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 11445002, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
       propertyPath: NextLevel
@@ -13263,6 +13354,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1537636512}
   m_Mesh: {fileID: 4300000, guid: 141ab2687c478ed4793ef0d80144e331, type: 3}
+--- !u!1001 &1539849971
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 119823859}
+    m_Modifications:
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0158
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.01415
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.0034
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.021197544
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.075423874
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.26973173
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.959743
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408998, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346954, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ae13943a40fb3af4ead8905fcf7a0a44, type: 2}
+    - target: {fileID: 182988, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+      propertyPath: m_Name
+      value: Sign (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1540879531
 GameObject:
   m_ObjectHideFlags: 0
@@ -13561,7 +13714,7 @@ MonoBehaviour:
   Text: 'See those red tabs around
 
     the corner?'
-  NextAction: {fileID: 1829197845}
+  NextAction: {fileID: 311695762}
 --- !u!4 &1555839925
 Transform:
   m_ObjectHideFlags: 0
@@ -14175,7 +14328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: 'The Scientist is lying to you!
 
-    The Highluminnati are in control!'
+    The Paper Masons are in control!'
   NextAction: {fileID: 1589537956}
 --- !u!4 &1626444392
 Transform:
@@ -15073,7 +15226,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_RootOrder
-      value: 51
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_LocalScale.x
@@ -15090,7 +15243,7 @@ Prefab:
     - target: {fileID: 2300002, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b89648ba35b1ed84698fc8ce1b6602c4, type: 2}
+      objectReference: {fileID: 2100000, guid: 242edc47fb1df6a4c825c59f5cd45924, type: 2}
     - target: {fileID: 2300000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -15102,22 +15255,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1734216658 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100000, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
-  m_PrefabInternal: {fileID: 1734216657}
---- !u!114 &1734216659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1734216658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestroyWithLab: 0
 --- !u!1 &1753486254
 GameObject:
   m_ObjectHideFlags: 0
@@ -15685,11 +15822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'If you hold down X and move
-
-    while standing next to those,
-
-    it will change the world.'
+  Text: But really, it'll make things move.
   NextAction: {fileID: 0}
 --- !u!1001 &1872036752
 Prefab:
