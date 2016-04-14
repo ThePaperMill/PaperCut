@@ -23,7 +23,9 @@ public class DelayRotate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        rotationtracker += AddVector;
+
+        // if anyone cares that this is hacky let it be known that I asked before doing this.
+        rotationtracker += 60.0f * AddVector * Time.deltaTime;
 
         transform.localRotation = Quaternion.Euler(rotationtracker);
 	}
