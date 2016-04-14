@@ -72,7 +72,7 @@ Source: .\GAMEDIRECTORY\*; DestDir: {app}; Flags: ignoreversion recursesubdirs c
 ;   {commondesktop} is your Windows desktop directory.
 [Icons]
 Name: {group}\PaperCut; Filename: {app}\PaperCut.exe; WorkingDir: {app}
-Name: {group}\{cm:UninstallProgram,PaperCut}; Filename: {uninstallexe}
+Name: {group}\{cm:UninstallProgram,PaperCut}; IconFilename: "{app}\PaperCut.ico"; Filename: {uninstallexe}
 Name: {commondesktop}\PaperCut; Filename: {app}\PaperCut.exe; Tasks: desktopicon; WorkingDir: {app}
 
 ; List of items to execute in the installer.
