@@ -35,6 +35,7 @@ public class GameInfo : Singleton<GameInfo>
         {
             //print("Resetting Game");
             ResetBools();
+            InventorySystem.GetSingleton.ClearInventory();
         }
 
     }
