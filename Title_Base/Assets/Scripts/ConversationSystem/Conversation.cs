@@ -36,6 +36,13 @@ namespace Assets.Scripts.ConversationSystem
         public float AudioDelay = 0.5f;
 
         private ActionSequence seq = new ActionSequence();
+        private ActionSequence Testseq = new ActionSequence();
+
+        private Vector3 StartScale = new Vector3();
+
+        public bool UseSquidgy = true;
+        public int SquigyCount = 2;
+
 
         // Use this for initialization
         void Start()
@@ -52,6 +59,8 @@ namespace Assets.Scripts.ConversationSystem
 			//DialogueSFX = gameObject.transform.Find("ExtraSFX").gameObject.GetComponent<FMOD_StudioEventEmitter>();
 
             EventSystem.GlobalHandler.Connect(Events.NextAction, OnNextAction);
+
+            StartScale = transform.localScale;
         }
 
         void OnDestroy()
@@ -77,8 +86,13 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
-            
-            if(ConversationWindow == null)
+
+            if (UseSquidgy)
+            {
+                Squidgy();
+            }
+
+            if (ConversationWindow == null)
             {
                 ConversationWindow = UITextManager.ConversationText.gameObject;
                 //    ConversationWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("TextBackgroundTest"));
@@ -118,6 +132,11 @@ namespace Assets.Scripts.ConversationSystem
         {
             if (Engaged)
 			{
+                if (UseSquidgy)
+                {
+                    Squidgy();
+                }
+
                 NextAction();
             }
         }
@@ -193,15 +212,28 @@ namespace Assets.Scripts.ConversationSystem
 			}
 		}
 
-		/*public void PlayDialogueSFX()
+        /*public void PlayDialogueSFX()
 		{
 			DialogueSFX.StartEvent();
 		}*/
+
+        public void Squidgy()
+        {
+           Vector3 ModifiedScale = new Vector3(1.25f * StartScale.x, 0.9f * StartScale.y, StartScale.z);
+
+            for (int i = 0; i < SquigyCount; ++i)
+            {
+                ActionSystem.Action.Property(Testseq, gameObject.transform.GetProperty(o => o.localScale), ModifiedScale, 0.05f, Ease.Linear);
+                ActionSystem.Action.Delay(Testseq, 0.05f);
+                ActionSystem.Action.Property(Testseq, gameObject.transform.GetProperty(o => o.localScale), StartScale, 0.05f, Ease.Linear);
+            }
+        }
 
         // Update is called once per frame
         void Update()
         {
             seq.Update(Time.deltaTime);
+            Testseq.Update(Time.deltaTime);
             //if (ConversationAction.MoveNextInputRecieved() && Engaged)
             //{
             //    this.NextAction();

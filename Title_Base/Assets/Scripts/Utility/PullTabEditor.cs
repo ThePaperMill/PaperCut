@@ -41,7 +41,7 @@ public class PullTabEditor : MonoBehaviour
     [HideInInspector]
     public bool PoppedUp = true;
     
-    void Start ()
+    void Awake ()
     {
 	    if(!PopUp)
         {
@@ -104,7 +104,7 @@ namespace CustomInspector
         GameObject BaseArch { get { return Comp.PanelBaseArch; } set { Comp.PanelBaseArch = value; } }
         int Row = 0;
         int Column = 0;
-        Vector3 CenterPos = new Vector3(0, 0.025f, 1.375f);
+        Vector3 CenterPos = new Vector3(0, -0.0001f, 0);
         //float TileWidth = 1;
         SerializedProperty FoldInProp;
         bool Confirmation = false;
@@ -605,7 +605,7 @@ namespace CustomInspector
 
 
             
-            panel.transform.eulerAngles = new Vector3(0, -270, 90);
+            panel.transform.eulerAngles = new Vector3(90, -270, 0);
             panel.transform.SetParent(parent.Tab.transform, true);
             panel.transform.localPosition = new Vector3(0, 0, 10);
             panel.transform.localEulerAngles = new Vector3(0, 0, 0);
