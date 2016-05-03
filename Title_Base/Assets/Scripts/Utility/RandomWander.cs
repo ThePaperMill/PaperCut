@@ -134,6 +134,8 @@ public class RandomWander : MonoBehaviour
                 WaitTime = Random.Range(1.0f, 3.0f);
                 GetRandomDirection();
             }
+
+            return;
         }
 
 
@@ -165,6 +167,7 @@ public class RandomWander : MonoBehaviour
             if (Vector3.Distance(transform.position, WanderTarget) <= 0.5f)
             {
                 wait = true;
+                return;
             }
 
             seq.Update(Time.deltaTime);

@@ -60,7 +60,7 @@ public class PlayerModelMovement : MonoBehaviour
     void Update () 
 	{
         /*Added by steven to stop during certain events.*/
-        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState != GAME_STATE.GS_GAME)
         {
             return;
         }

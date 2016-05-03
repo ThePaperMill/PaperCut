@@ -54,8 +54,8 @@ public class Bounce : MonoBehaviour
 	
 	void Update ()
     {
-        /*Added by stven to stop during certain events.*/
-        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState == GAME_STATE.GS_CINEMATIC)
+        /*Added by steven to stop during certain events.*/
+        if (GamestateManager.GetSingleton.IsPaused == true || GamestateManager.GetSingleton.CurState != GAME_STATE.GS_GAME)
         {
             return;
         }
