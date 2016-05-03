@@ -57,7 +57,8 @@ public class ItemLogic : EventHandler
 
   void OnActivateSelector(EventData data)
   {
-    // lerp down to the camera.
+        // lerp down to the camera.
+    Seq.Clear();
     var test = ActionSystem.Action.Sequence(Seq);
     var finalPos = new Vector3(0.0f, -1.0f, 0.0f);
     finalPos.z = transform.localPosition.z;

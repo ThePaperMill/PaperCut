@@ -119,10 +119,11 @@ namespace Assets.Scripts.ConversationSystem
                 return;
             }
             CurrentAction.Connect(Events.NextAction, OnNextAction);
-            CurrentAction.StartAction();
+            //CurrentAction.StartAction();
 
             seq.Clear();
             ActionSystem.Action.Delay(seq, AudioDelay);
+            ActionSystem.Action.Call(seq, StartFirstAction);
             ActionSystem.Action.Call(seq, PlaySound);
         }
 
@@ -132,6 +133,17 @@ namespace Assets.Scripts.ConversationSystem
         {
             if (Engaged)
 			{
+                if(ConversationWindow)
+                {
+                    var test = ConversationWindow.GetComponent<ScrollingText>();
+
+                    if(test && test.TextStatus == TEXT_STATUS.TEXT_IN_PROGRESS)
+                    {
+                        test.SkipToEnd();
+                        return;
+                    }
+                }
+
                 if (UseSquidgy)
                 {
                     Squidgy();
@@ -202,6 +214,11 @@ namespace Assets.Scripts.ConversationSystem
             {
                 return;
             }
+        }
+
+        public void StartFirstAction()
+        {
+            CurrentAction.StartAction();
         }
 
         public void PlaySound()
