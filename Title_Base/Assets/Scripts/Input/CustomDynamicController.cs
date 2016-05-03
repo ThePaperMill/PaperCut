@@ -36,6 +36,7 @@ public class CustomDynamicController : MonoBehaviour
 	[SerializeField] private float m_StepInterval;
 
     private FMOD_StudioEventEmitter FootSounds;
+    private FMOD_StudioEventEmitter SplashSounds;
     private FMOD_StudioEventEmitter JumpSounds;
     private FMOD_StudioEventEmitter LandSounds;
 
@@ -56,6 +57,7 @@ public class CustomDynamicController : MonoBehaviour
     private bool JumpPressed;
     private bool JumpReleased;
     private bool JumpHeld;
+    private bool InSplashZone = false;
 
     public bool Active = true;
 
@@ -225,6 +227,7 @@ public class CustomDynamicController : MonoBehaviour
         
         // Get Audio Sources
         FootSounds = (FMOD_StudioEventEmitter)GetComponent<FMOD_StudioEventEmitter>();
+		SplashSounds = gameObject.transform.Find("SplashSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
         JumpSounds = gameObject.transform.Find("JumpSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
         LandSounds = gameObject.transform.Find("LandSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
     }
@@ -442,7 +445,16 @@ public class CustomDynamicController : MonoBehaviour
         // When landing from being in the air, play a sound effect
         if (!PrevGroundState && OnGround)
         {
-            PlayLandingSound();
+			// Splash or regular step?
+			if(InSplashZone)
+			{
+				PlaySplashStepAudio();
+			}
+			
+			else
+			{
+                PlayLandingSound();
+			}
             spinTimer = 0.0f;
         }
 
@@ -616,10 +628,41 @@ public class CustomDynamicController : MonoBehaviour
     /****************************************************************************/
     /*!
         \brief
+            Used to determine when we've entered a splashing zone.
+    */
+    /****************************************************************************/
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.name == "SplashZone")
+		{
+			InSplashZone = true;
+		}
+	}
+
+    /****************************************************************************/
+    /*!
+        \brief
+            Used to determine when we've exited a splashing zone.
+    */
+    /****************************************************************************/
+	
+	void OnTriggerExit(Collider other)
+	{
+		if(other.gameObject.name == "SplashZone")
+		{
+			InSplashZone = false;
+		}
+	}
+
+    /****************************************************************************/
+    /*!
+        \brief
             I use OnCollisionStay, because it is the only reliable way to
             determine everything we're in contact with.
     */
     /****************************************************************************/
+	
     void OnCollisionStaytest(Collision collisionInfo)
     {
       foreach (ContactPoint contact in collisionInfo.contacts)
@@ -1022,7 +1065,17 @@ public class CustomDynamicController : MonoBehaviour
         if ((m_StepCycle > 0.35))
         {
             m_StepCycle = 0.0f;
-            PlayFootStepAudio();
+			
+			// Splash or regular step?
+			if(InSplashZone)
+			{
+				PlaySplashStepAudio();
+			}
+			
+			else
+			{
+                PlayFootStepAudio();
+			}
         }
 
 
@@ -1037,7 +1090,17 @@ public class CustomDynamicController : MonoBehaviour
         //        m_StepCycle = 0.0f;
         //        m_NextStep = 0.0f;
         //        walkCycle = 0;
-        //        PlayFootStepAudio();
+			
+		//		// Splash or regular step?
+		//		if(SplashZone)
+		//		{
+		//			PlaySplashStepAudio();
+		//		}
+			
+		//		else
+		//		{
+		//			PlayFootStepAudio();
+		//		}
         //    }
         //}
     }
@@ -1045,7 +1108,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     /*!
       \brief
-        clamps the players velocity to the max value
+        Plays standard walking sounds
     */
     /*************************************************************************/
     private void PlayFootStepAudio()
@@ -1064,6 +1127,26 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     /*!
       \brief
+        Plays walking sounds for when the player is in "liquid"
+    */
+    /*************************************************************************/
+    private void PlaySplashStepAudio()
+	{
+		if (!OnGround)
+		{
+			return;
+		}
+
+        if (FootSounds && GlobalSoundInitializer.GetSingleton.FmodSoundInitialzied == true)
+        {
+            SplashSounds.StartEvent();
+        }
+	}
+
+    /*************************************************************************/
+    /*!
+      \brief
+        Plays sound for landing on the ground from midair
 
     */
     /*************************************************************************/
@@ -1081,7 +1164,7 @@ public class CustomDynamicController : MonoBehaviour
     /*************************************************************************/
     /*!
       \brief
-
+        Plays sound for jumping off of the ground
     */
     /*************************************************************************/
     private void PlayJumpingSound()
