@@ -39,6 +39,7 @@ public class ItemTextBox : EventHandler
   void OnActivateSelector(EventData data)
   {
     // lerp down to the camera
+    Seq.Clear();
     var test = ActionSystem.Action.Sequence(Seq);
     LerpPosition.z = transform.localPosition.z;
 
@@ -47,6 +48,7 @@ public class ItemTextBox : EventHandler
 
   void OnDeactivateSelector(EventData data)
   {
+        Seq.Clear();
     // lerp up away from the camera
     var test = ActionSystem.Action.Sequence(Seq);
     var finalPos = new Vector3(0.0f, 5.0f, 0.0f);

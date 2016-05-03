@@ -79,6 +79,11 @@ public class DynamicTeaching : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if(GamestateManager.GetSingleton.IsPaused || InventorySystem.GetSingleton.isInventoryOpen())
+        {
+            return;
+        }
+
         WaitTimer += Time.deltaTime;
 
         if (CheckMove)
