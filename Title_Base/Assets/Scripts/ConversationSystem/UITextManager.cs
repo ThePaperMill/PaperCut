@@ -29,6 +29,8 @@ namespace Assets.Scripts.ConversationSystem
         public bool WindowActive = false;
 
         public Vector3 FinalPos = new Vector3();
+        ScrollingText SText = null;
+
         // Use this for initialization
         public UITextManager()
         {
@@ -44,7 +46,7 @@ namespace Assets.Scripts.ConversationSystem
             //TextBackground.transform.localScale = InitialTextScale;
             //UITextManager.ConversationText = this;
             Connect();
-
+            SText = GetComponent<ScrollingText>();
 
 
         }
@@ -64,7 +66,6 @@ namespace Assets.Scripts.ConversationSystem
         {
             grp.Clear();
             var seq = ActionSystem.Action.Sequence(grp);
-            
 
             Action.Property(seq, this.gameObject.transform.GetProperty(o => o.localPosition), FinalPos, EaseTime, Curve);
             WindowActive = true;
@@ -72,9 +73,10 @@ namespace Assets.Scripts.ConversationSystem
 
         public void Disappear()
         {
-          //EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
-          //EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
-          //EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+            //EventSystem.GlobalHandler.Disconnect(Events.UpdateText, OnUpdateText);
+            //EventSystem.GlobalHandler.Disconnect(Events.ActivateTextWindow, OnActivateWindowEvent);
+            //EventSystem.GlobalHandler.Disconnect(Events.DeactivateTextWindow, OnDeactivateWindowEvent);
+            SText.ClearText();
 
             var seq = ActionSystem.Action.Sequence(grp);
             var finalPos = InitialPos;
@@ -117,7 +119,14 @@ namespace Assets.Scripts.ConversationSystem
 
         void UpdateText()
         {
-            SpriteText.text = NextPhrase;
+            if(SText)
+            {
+                SText.ChangeText(NextPhrase);
+            }
+            else
+            {
+                SpriteText.text = NextPhrase;
+            }
             //SpriteText.text = "";
 
             //var seq = Action.Sequence(grp);
