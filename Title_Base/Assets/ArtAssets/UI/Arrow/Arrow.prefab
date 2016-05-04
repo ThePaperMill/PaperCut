@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 413150}
   - 33: {fileID: 3346882}
   - 23: {fileID: 2385878}
+  - 114: {fileID: 11486778}
   m_Layer: 0
   m_Name: pCube38
   m_TagString: Untagged
@@ -27,6 +28,7 @@ GameObject:
   - 4: {fileID: 489806}
   - 33: {fileID: 3356886}
   - 23: {fileID: 2304114}
+  - 114: {fileID: 11427914}
   m_Layer: 0
   m_Name: group45_pasted__group36_pasted__pasted__pCube18
   m_TagString: Untagged
@@ -42,6 +44,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457358}
+  - 114: {fileID: 11427440}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -67,8 +70,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193426}
-  m_LocalRotation: {x: -0.70710665, y: 0, z: 0, w: 0.70710695}
-  m_LocalPosition: {x: 12.9274845, y: 0.206, z: 0.36}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5000001, w: 0.49999994}
+  m_LocalPosition: {x: 8.6, y: 0.025000107, z: -3.31}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 489806}
@@ -123,7 +126,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: b89648ba35b1ed84698fc8ce1b6602c4, type: 2}
+  - {fileID: 2100000, guid: 242edc47fb1df6a4c825c59f5cd45924, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -153,6 +156,93 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122776}
   m_Mesh: {fileID: 4300002, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
+--- !u!114 &11427440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193426}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddd90141b294bd4bb642a3ac3d1fe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timelength: 1
+  Curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  endPos: {x: 0, y: 0, z: 0}
+--- !u!114 &11427914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddd90141b294bd4bb642a3ac3d1fe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timelength: 1
+  Curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  endPos: {x: 0, y: -0.01, z: 0}
+--- !u!114 &11486778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddd90141b294bd4bb642a3ac3d1fe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timelength: 1
+  Curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  endPos: {x: 0, y: -0.01, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
