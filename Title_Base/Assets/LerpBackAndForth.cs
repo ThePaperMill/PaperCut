@@ -35,7 +35,7 @@ public class LerpBackAndForth : MonoBehaviour {
         }
 
        // yield return new WaitForSeconds(timelength);
-        print("yes");
+        //print("yes");
 
         StartCoroutine("LerpDown");
     }
