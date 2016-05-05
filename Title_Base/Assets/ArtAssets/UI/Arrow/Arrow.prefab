@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3346882}
   - 23: {fileID: 2385878}
   - 114: {fileID: 11486778}
+  - 65: {fileID: 6509584}
   m_Layer: 0
   m_Name: pCube38
   m_TagString: Untagged
@@ -44,7 +45,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457358}
-  - 114: {fileID: 11427440}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -70,8 +70,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193426}
-  m_LocalRotation: {x: 0.000000115202326, y: 0.7071067, z: 0.7071068, w: -0.00000011520231}
-  m_LocalPosition: {x: -4.997, y: 0.128, z: 0.01}
+  m_LocalRotation: {x: 0.49999994, y: 0.49999994, z: 0.5000001, w: -0.50000006}
+  m_LocalPosition: {x: 9.47, y: 0.13, z: -3.06}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 489806}
@@ -156,35 +156,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122776}
   m_Mesh: {fileID: 4300002, guid: 23bb8f5bf86ddd641bb73693eccb9f16, type: 3}
---- !u!114 &11427440
-MonoBehaviour:
+--- !u!65 &6509584
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193426}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ddd90141b294bd4bb642a3ac3d1fe30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timelength: 1
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  endPos: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 101226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.025488881, y: 0.030638969, z: 0.0025000032}
+  m_Center: {x: 0, y: 0, z: -4.656613e-10}
 --- !u!114 &11427914
 MonoBehaviour:
   m_ObjectHideFlags: 1

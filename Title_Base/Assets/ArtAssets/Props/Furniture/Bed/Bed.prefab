@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 478700}
   - 33: {fileID: 3353062}
   - 23: {fileID: 2336018}
+  - 65: {fileID: 6507812}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -23,8 +24,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 585.84259, y: 122.891861, z: 588.570374}
+  m_LocalRotation: {x: 0, y: -0.70710725, z: 0, w: -0.70710635}
+  m_LocalPosition: {x: -0.093, y: 0.31499994, z: -0.17499995}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,8 +48,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -60,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117456}
   m_Mesh: {fileID: 4300000, guid: 21dca9e2da651364da8e23a17311fbe9, type: 3}
+--- !u!65 &6507812
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06819998, y: 0.031280454, z: 0.0027473634}
+  m_Center: {x: -0.000000014901161, y: -0.000000007450581, z: 0.00000011920929}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(EditorWiggle))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(HingeJoint))]
 public class WiggleOnHit : MonoBehaviour {
 
 
     Rigidbody rig = null;
+    HingeJoint hin = null;
     public float force = 1000f;
 
 
@@ -14,10 +17,39 @@ public class WiggleOnHit : MonoBehaviour {
     void Start () {
 	
         rig = gameObject.GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        /*
+        hin = gameObject.GetComponent<HingeJoint>();
+        if(hin.anchor.y >= 0)
+        {
+            //print(gameObject.name);
+            hin.anchor = new Vector3(hin.anchor.x, -hin.anchor.y, hin.anchor.z);
+        }
+
+        if (hin.useSpring == false)
+        {
+            hin.useSpring = true;
+        }
+
+        JointSpring hingeSpring = hin.spring;
+
+
+        if (hingeSpring.spring <= 0)
+        {
+            hingeSpring.spring = 20f;
+        }
+        if(hingeSpring.damper <= 0)
+        {
+            hingeSpring.damper = 1;
+        }
+
+
+        hin.spring = hingeSpring;
+        */
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
