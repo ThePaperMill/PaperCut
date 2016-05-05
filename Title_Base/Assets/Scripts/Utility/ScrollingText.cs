@@ -73,11 +73,6 @@ public class ScrollingText : MonoBehaviour
 	    if(curCharacter < TargetText.Length)
         {
             TextStatus = TEXT_STATUS.TEXT_IN_PROGRESS;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SkipToEnd();
-                return;
-            }
 
             StringTimer += Time.deltaTime;
 

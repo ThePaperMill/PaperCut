@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 416442}
   - 33: {fileID: 3340258}
   - 23: {fileID: 2356036}
+  - 65: {fileID: 6502626}
   m_Layer: 0
   m_Name: KitchenTable
   m_TagString: Untagged
@@ -23,8 +24,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195642}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 586.311279, y: 123.425507, z: 588.293884}
+  m_LocalRotation: {x: 0, y: -0.49999937, z: 0, w: 0.8660258}
+  m_LocalPosition: {x: 22.167, y: -3.865, z: 3.096}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,7 +40,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d5ea1661bb7551e478f14ce0d36c6b5c, type: 2}
+  - {fileID: 2100000, guid: ba75fbfdc6f308d42a51fabea9734669, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -47,8 +48,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -60,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195642}
   m_Mesh: {fileID: 4300000, guid: 308ba9e127e20f749b61892eb2b8bd2d, type: 3}
+--- !u!65 &6502626
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.086105525, y: 0.03302441, z: 0.0027473688}
+  m_Center: {x: 0, y: 0, z: 0.000000059604645}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

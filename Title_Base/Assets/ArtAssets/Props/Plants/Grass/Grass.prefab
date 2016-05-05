@@ -12,9 +12,11 @@ GameObject:
   - 23: {fileID: 2356126}
   - 95: {fileID: 9527390}
   - 65: {fileID: 6562130}
-  - 54: {fileID: 5439424}
   - 114: {fileID: 11419562}
-  m_Layer: 11
+  - 54: {fileID: 5469062}
+  - 114: {fileID: 11413564}
+  - 59: {fileID: 5943034}
+  m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.79, y: 0.407, z: -1.085}
+  m_LocalPosition: {x: -5.163, y: 0.407, z: -1.088}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,7 +68,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160790}
   m_Mesh: {fileID: 4300000, guid: f319e5140966772459278b0f7792fe7b, type: 3}
---- !u!54 &5439424
+--- !u!54 &5469062
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -81,6 +83,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!59 &5943034
+HingeJoint:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160790}
+  m_ConnectedBody: {fileID: 0}
+  m_Anchor: {x: 0, y: -0.014, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -5.163, y: 0.127, z: -1.088}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 20
+    damper: 1
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
 --- !u!65 &6562130
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -110,6 +144,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11413564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229e93cd5383565489ec229a3ce3a703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11419562
 MonoBehaviour:
   m_ObjectHideFlags: 1
