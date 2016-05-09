@@ -300,7 +300,7 @@ namespace CustomInspector
             {
                 case EventType.KeyDown:
                     {
-
+                        Debug.Log(e);
                         if (e.character == '=' || e.character == '+')
                         {
                             if(Row != 0)
