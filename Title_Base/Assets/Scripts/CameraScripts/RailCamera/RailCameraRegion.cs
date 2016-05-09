@@ -19,7 +19,7 @@ public class RailCameraRegion : MonoBehaviour
         // If a new Distance is specified, change it on the main camera
         if (NewAngle != new Vector3(0, 0, 0))
         {
-            Camera.main.transform.eulerAngles = NewAngle;
+            cam.TargetLookAngle = NewAngle;
         }
         // if a new LerpSpeed is specified, change it on the main camera.
         if (NewSpeed != 0.0f)

@@ -11,16 +11,19 @@ public class RailCamera : MonoBehaviour
     public Rail CurrentRail;
     [HideInInspector]
     public float CurrentMoveSpeed;
+    [HideInInspector]
+    public Vector3 TargetLookAngle;
 
     private GameObject TargetObject;         // The object we want the camera to focus on
     private GameObject DefaultTarget;       // Variable for storing default value of TargetObject
+    private Vector3 CurrentLookAngle;
 
     // Use this for initialization
     void Start ()
     {
         CurrentRail = DefaultRail;
         CurrentMoveSpeed = DefaultMoveSpeed;
-        transform.eulerAngles = DefaultLookAngle;
+        TargetLookAngle = DefaultLookAngle;
     }
 	
 	// Update is called once per frame
@@ -36,12 +39,14 @@ public class RailCamera : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, CurrentRail.RailPosition(TargetObject.transform.position), Time.deltaTime * CurrentMoveSpeed);
+        
+        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, TargetLookAngle, Time.deltaTime * CurrentMoveSpeed);
     }
 
     public void ReturnToDefaults()
     {
         CurrentRail = DefaultRail;
         CurrentMoveSpeed = DefaultMoveSpeed;
-        transform.eulerAngles = DefaultLookAngle;
+        TargetLookAngle = DefaultLookAngle;
     }
 }
