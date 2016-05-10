@@ -6,6 +6,7 @@
 /****************************************************************************/
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnPuppies : MonoBehaviour
 {
@@ -22,10 +23,19 @@ public class SpawnPuppies : MonoBehaviour
     public Transform SpawnLocation = null;
 
     //Force applied to puppy objects
-    public Vector3 RandomVelocity = new Vector3 (0, 0, 0); 
+    public Vector3 RandomVelocity = new Vector3 (0, 0, 0);
 
-	void Start () //Initialize
+    public Material PuppyTex1 = null;
+    public Material PuppyTex2 = null;
+
+    public List<Material> PuppyTexArray = new List<Material>();
+
+    public GameObject SecondObject = null;
+
+    void Start () //Initialize
     {
+        PuppyTexArray.Add(PuppyTex1);
+        PuppyTexArray.Add(PuppyTex2);
         //this object that this script is being attached to(gameobject), gets connected to TabUpdated event
         gameObject.Connect(Events.TabUpdatedEvent, OnTabUpdated);
 	}
@@ -57,12 +67,42 @@ public class SpawnPuppies : MonoBehaviour
     */
     public void PuppyCannon()
     {
-        for(int i = 0; i < PuppyCounter; ++i)
+        
+        /*for(int i = 0; i < PuppyCounter; ++i)
         {
             //"GameObject.Instantiate" does not instantiate a gameobject ._. wut. I have to typecast result as gameobj
             var puppy = GameObject.Instantiate(Puppy, SpawnLocation.position, Quaternion.identity) as GameObject;
             //RandomVelocity = new Vector3(Random.Range(0, 5), Random.Range(0, 7), Random.Range(-5, 3));
             puppy.GetComponent<Rigidbody>().velocity = (RandomVelocity);
+        }*/
+
+        for(int i = 0; i < PuppyCounter; ++i)
+        {
+            print("SPAWNED!!!");
+            //"GameObject.Instantiate" does not instantiate a gameobject ._. wut. I have to typecast result as gameobj
+            var puppyParent = GameObject.Instantiate(Puppy, SpawnLocation.position, Quaternion.identity) as GameObject;
+            puppyParent.GetComponent<Rigidbody>().velocity = (RandomVelocity);
+
+            var puppy = puppyParent.transform.FindChild("puppy");
+
+            var FrontFace = puppy.transform.FindChild("PuppyFront");
+            var BackFace = puppy.transform.FindChild("PuppyBack");
+
+            if (FrontFace)
+            {
+                var puppyChildTex = FrontFace.GetComponent<MeshRenderer>();
+                puppyChildTex.sharedMaterial = PuppyTexArray[i];
+            }
+            if (BackFace)
+            {
+                var puppyChildTex = BackFace.GetComponent<MeshRenderer>();
+                puppyChildTex.sharedMaterial = PuppyTexArray[i];
+            }
+        }
+        if(SecondObject)
+        {
+            var puppyParent = GameObject.Instantiate(SecondObject, SpawnLocation.position, Quaternion.identity) as GameObject;
+            puppyParent.GetComponent<Rigidbody>().velocity = (RandomVelocity);
         }
     }
 }
