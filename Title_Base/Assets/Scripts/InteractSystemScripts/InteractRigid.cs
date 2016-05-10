@@ -93,8 +93,6 @@ public class InteractRigid : MonoBehaviour
 	{
 		foreach(Collider collision in past)
         {
-            //print("SFR!");
-
             // If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
             if ((collision.gameObject.name == PlayerName && !delay))
 			{
@@ -124,7 +122,7 @@ public class InteractRigid : MonoBehaviour
         // If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
         if (inCol)
         {
-            inCol = true;
+            //inCol = true;
 
             // If currently spinning, retry later
             if (player.GetComponent<HoverSpin>() && player.GetComponent<HoverSpin>().IsSpinning())
@@ -179,7 +177,7 @@ public class InteractRigid : MonoBehaviour
 	{
         inCol = false;
 
-        // If the object no longer colliding is the player, then remove the parent object from the interact mnager's array of currently colliding objects.
+        // If the object no longer colliding is the player, then remove the parent object from the interact manager's array of currently colliding objects.
         if (collision.gameObject.GetComponent<CustomDynamicController>() != null && !delay)
 		{
 			if(this.LevelSettings != null)
@@ -193,12 +191,13 @@ public class InteractRigid : MonoBehaviour
 
     void HoverExit()
     {
-        // If the object no longer colliding is the player, then remove the parent object from the interact mnager's array of currently colliding objects.
+        // If the object no longer colliding is the player, then remove the parent object from the interact manager's array of currently colliding objects.
         if (player.GetComponent<CustomDynamicController>() != null && !delay)
         {
             if (this.LevelSettings != null)
             {
                 toAdd.RemoveInteractableObject(Parent);
+                past.Clear();
             }
         }
         // And send a "Disinteract event" to this object's owner (Never Done?) 

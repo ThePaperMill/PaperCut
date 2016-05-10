@@ -50,17 +50,17 @@ public class InteractManager : MonoBehaviour
 		if(AllInteractableObjects.Count > 0 && Highlight == null)
 		{
 			Closest = closestobj;
-			Vector3 pos = closestobj.transform.position;
-			pos += new Vector3(0, HighlightHeight, 0);
+			//Vector3 pos = closestobj.transform.position;
+			//pos += new Vector3(0, HighlightHeight, 0);
 
 			// We'll need a new highlight 
-			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
+			Highlight = Instantiate(HighlightArchetype, closestobj.transform.position, Quaternion.identity) as GameObject;
 		}
 		
 		//otherwise, If there are no objects in the array and the highlight object exists,
 		else if(AllInteractableObjects.Count <= 0 && Highlight != null)
 		{
-			Destroy(Highlight);
+            Highlight.GetComponent<HighlightController>().setDeath(true);
 			closestobj = null;
 			Closest = null;
 		}
@@ -79,7 +79,7 @@ public class InteractManager : MonoBehaviour
 		}
 
 		//if the currently closest object is being interacted with, then hide the icon
-		if(closestobj != null)
+		if(closestobj != null && Highlight != null)
 		{
 			Interactable toCheck = closestobj.GetComponent("Interactable") as Interactable;
 			MeshRenderer visible = Highlight.GetComponent("MeshRenderer") as MeshRenderer;
@@ -95,8 +95,7 @@ public class InteractManager : MonoBehaviour
 		}
 		
 		// Remove all of the null objects (done here in case objects are destroyed in level)
-
-    //print ("Can talk with " + AllInteractableObjects.Count + " people.");
+        //print ("Can talk with " + AllInteractableObjects.Count + " people.");
   }
 
     public GameObject GetClosestObj()
