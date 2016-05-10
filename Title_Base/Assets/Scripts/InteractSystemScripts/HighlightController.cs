@@ -15,8 +15,9 @@ public class HighlightController : MonoBehaviour
 	public float EasePercent = 1f;
 	public float RotateSpeedDegrees = 40.0f;
 	public Vector3 GoToPos = new Vector3(0,0,0);
-	
-	Vector3 goingTo = new Vector3(1,1,1);
+    public GameObject CurrObj;
+
+    Vector3 goingTo = new Vector3(1,1,1);
 	Vector3 lerpSpeed = new Vector3(0,0,0);
 	float speed = 0.0f;
 	float lastDist = float.MaxValue;
@@ -30,8 +31,6 @@ public class HighlightController : MonoBehaviour
 		{
 			EasePercent = 100.0f;
 		}
-
-		//print("Work on making the Highlight drop out of the sky");
 	}
 
 	void Update()

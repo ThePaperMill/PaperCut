@@ -52,6 +52,7 @@ public class InteractManager : MonoBehaviour
 			Closest = closestobj;
 			Vector3 pos = closestobj.transform.position;
 			pos += new Vector3(0, HighlightHeight, 0);
+
 			// We'll need a new highlight 
 			Highlight = Instantiate(HighlightArchetype, pos, Quaternion.identity) as GameObject;
 		}
@@ -62,7 +63,6 @@ public class InteractManager : MonoBehaviour
 			Destroy(Highlight);
 			closestobj = null;
 			Closest = null;
-			//print ("ded.");
 		}
 		//otherwise, interpolate the highlight to it's proper position. 
 		else if(AllInteractableObjects.Count > 0 && closestobj != Closest && closestobj != null)
@@ -70,7 +70,6 @@ public class InteractManager : MonoBehaviour
 			Closest = closestobj;
 			Vector3 pos = closestobj.transform.position;
 			pos += new Vector3(0, HighlightHeight, 0);
-			//print (closestobj.name + " is king of team");
 
 			// Setup the interpolation
 			HighlightController getAG = Highlight.GetComponent("HighlightController") as HighlightController;

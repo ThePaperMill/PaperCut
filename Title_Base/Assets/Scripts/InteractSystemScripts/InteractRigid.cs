@@ -93,7 +93,7 @@ public class InteractRigid : MonoBehaviour
 	{
 		foreach(Collider collision in past)
         {
-            print("SFR!");
+            //print("SFR!");
 
             // If the object colliding is the player, then add the parent object to the interact manager's array of currently colliding objects. 
             if ((collision.gameObject.name == PlayerName && !delay))
