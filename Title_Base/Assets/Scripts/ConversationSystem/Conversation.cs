@@ -218,7 +218,8 @@ namespace Assets.Scripts.ConversationSystem
 
         public void StartFirstAction()
         {
-            CurrentAction.StartAction();
+            if(CurrentAction)
+                CurrentAction.StartAction();
         }
 
         public void PlaySound()
