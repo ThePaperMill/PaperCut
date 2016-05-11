@@ -312,8 +312,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123384}
-  m_LocalRotation: {x: 0, y: 0.0000012218952, z: 0, w: 1}
-  m_LocalPosition: {x: 14.8, y: 0.15, z: 12.85}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.375645, y: 0.125, z: -0.7518654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 479998}
@@ -473,7 +473,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438160}
@@ -917,12 +917,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d1696c8964144f97da6d1e43cce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoppedUp: 1
+  StartPoppedUp: 0
   PullingDistance: 0.75
-  LocksIntoPlace: 1
-  LerpBackSpeed: 4
-  PlayerLerpScalar: 1
-  EventTarget: {fileID: 131128}
+  LocksIntoPlace: 0
+  LerpBackSpeed: 2
+  PlayerLerpScalar: 0.75
+  EventTarget: {fileID: 123384}
+  ac:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.0069521414
+      inSlope: -2.5045688
+      outSlope: -2.5045688
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: -2.4876468
+      outSlope: -2.4876468
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
