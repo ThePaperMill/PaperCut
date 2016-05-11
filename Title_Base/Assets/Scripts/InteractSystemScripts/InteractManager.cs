@@ -43,32 +43,35 @@ public class InteractManager : MonoBehaviour
         AllInteractableObjects.RemoveAll(GameObject => GameObject == null);
 
         //grab the position of the closest object
-        GameObject closestobj = FindClosestObjectToPlayer();
-		//if(closestobj){print (closestobj.name + " is closest");}
+        GameObject closestObj = FindClosestObjectToPlayer();
+		//if(closestObj){print (closestObj.name + " is closest");}
 
 		//If there are objects in the array and there is no highlight object,
 		if(AllInteractableObjects.Count > 0 && Highlight == null)
 		{
-			Closest = closestobj;
-			//Vector3 pos = closestobj.transform.position;
+			Closest = closestObj;
+			//Vector3 pos = closestObj.transform.position;
 			//pos += new Vector3(0, HighlightHeight, 0);
 
 			// We'll need a new highlight 
-			Highlight = Instantiate(HighlightArchetype, closestobj.transform.position, Quaternion.identity) as GameObject;
-		}
+			Highlight = Instantiate(HighlightArchetype, closestObj.transform.position, Quaternion.identity) as GameObject;
+
+            // Tell the Highlight what it's following
+            Highlight.GetComponent<HighlightController>().CurrObj = closestObj;
+        }
 		
 		//otherwise, If there are no objects in the array and the highlight object exists,
 		else if(AllInteractableObjects.Count <= 0 && Highlight != null)
 		{
             Highlight.GetComponent<HighlightController>().setDeath(true);
-			closestobj = null;
+			closestObj = null;
 			Closest = null;
 		}
 		//otherwise, interpolate the highlight to it's proper position. 
-		else if(AllInteractableObjects.Count > 0 && closestobj != Closest && closestobj != null)
+		else if(AllInteractableObjects.Count > 0 && closestObj != Closest && closestObj != null)
 		{
-			Closest = closestobj;
-			Vector3 pos = closestobj.transform.position;
+			Closest = closestObj;
+			Vector3 pos = closestObj.transform.position;
 			pos += new Vector3(0, HighlightHeight, 0);
 
 			// Setup the interpolation
@@ -76,12 +79,15 @@ public class InteractManager : MonoBehaviour
 			getAG.setUp(true);
 			getAG.GoToPos = pos;
 
-		}
+            // Tell the Highlight what it's following
+            Highlight.GetComponent<HighlightController>().CurrObj = closestObj;
+
+        }
 
 		//if the currently closest object is being interacted with, then hide the icon
-		if(closestobj != null && Highlight != null)
+		if(closestObj != null && Highlight != null)
 		{
-			Interactable toCheck = closestobj.GetComponent("Interactable") as Interactable;
+			Interactable toCheck = closestObj.GetComponent("Interactable") as Interactable;
 			MeshRenderer visible = Highlight.GetComponent("MeshRenderer") as MeshRenderer;
 
 			if(toCheck.GetIsInInteraction() == true)

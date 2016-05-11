@@ -15,10 +15,11 @@ public class HighlightController : MonoBehaviour
 	public float EasePercent = 1f;
 	public float RotateSpeedDegrees = 40.0f;
     public float fullSize = 20.0f;
+    public bool follows = true;
     public Vector3 GoToPos = new Vector3(0,0,0);
     public GameObject CurrObj;
 
-    Vector3 growToPos;
+    //Vector3 growToPos;
     Vector3 shrinkToPos;
     Vector3 fullSizeVec;
     Vector3 goingTo = new Vector3(1,1,1);
@@ -41,7 +42,7 @@ public class HighlightController : MonoBehaviour
 		}
 
         fullSizeVec = new Vector3(fullSize, fullSize, fullSize);
-        growToPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + Height, gameObject.transform.position.z);
+        GoToPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + Height, gameObject.transform.position.z);
         shrinkToPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
     }
 
@@ -62,6 +63,13 @@ public class HighlightController : MonoBehaviour
         else if(newBorn && !dying)
         {
             Birth();
+
+            // Presets for objects to follow go here (if follows is not set to true by default)
+            if (CurrObj.name == "PuppyParent(Clone)"
+            ||  CurrObj.name == "DogParent")
+            {
+                follows = true;
+            }
         }
 
         // Or kill if we're done with this Highlight
@@ -74,8 +82,17 @@ public class HighlightController : MonoBehaviour
         else if (updating)
 		{
 			UpdatePos();
-		}
-	}
+        }
+
+        // Follow the object if requested
+        if (follows && CurrObj != null && !(GoToPos.x == CurrObj.transform.position.x && GoToPos.y == (CurrObj.transform.position.y + Height) && GoToPos.z == CurrObj.transform.position.z))// && (goingTo == GoToPos))
+        {
+            GoToPos = new Vector3(CurrObj.transform.position.x, CurrObj.transform.position.y + Height, CurrObj.transform.position.z);
+            shrinkToPos = CurrObj.transform.position;
+
+            updating = true;
+        }
+    }
 
 	void UpdatePos()
 	{
@@ -131,7 +148,7 @@ public class HighlightController : MonoBehaviour
         Vector3 lerpGrow = Vector3.Lerp(gameObject.transform.localScale, fullSizeVec, speed * 4) - gameObject.transform.localScale;
         gameObject.transform.localScale += lerpGrow;
 
-        Vector3 lerpRise = Vector3.Lerp(gameObject.transform.position, growToPos, speed * 4) - gameObject.transform.position;
+        Vector3 lerpRise = Vector3.Lerp(gameObject.transform.position, GoToPos, speed * 4) - gameObject.transform.position;
         gameObject.transform.position += lerpRise;
     }
 
