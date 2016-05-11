@@ -92,12 +92,12 @@ public class HighlightController : MonoBehaviour
 			{
 				speed = 1.0f;
 			}
+        }
 
-			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed) - gameObject.transform.position;
-		}
+        lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed * 4) - gameObject.transform.position;
 
-		// Always move to the requested location
-		gameObject.transform.position += lerpSpeed;
+        // Always move to the requested location
+        gameObject.transform.position += lerpSpeed;
 		lastDist = Vector3.Distance(gameObject.transform.position, GoToPos) - speed;
 
 		// If we get close, prepare to stop (necessary for if the game is running at a lower FPS)
@@ -109,7 +109,7 @@ public class HighlightController : MonoBehaviour
 		// Stupidity Counter:  At a low FPS the Highlight can overshoot its mark, so reverse & lessen its speed
 		if(lastDist > 0.2f && nearApocynthion)
 		{
-			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed) - gameObject.transform.position;
+			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed * 4) - gameObject.transform.position;
 			nearApocynthion = false;
 		}
 
@@ -171,4 +171,49 @@ public class HighlightController : MonoBehaviour
     {
         dying = toSet;
     }
+
+    /*** The old UpdatePos, before smoothing was added.  Kept here incase we need to cut the CPU processes that badly! ***\
+    void UpdatePos()
+	{
+		// Determine our destination if it has changed
+		if(goingTo != GoToPos)
+		{        
+			goingTo = GoToPos;
+			speed = EasePercent * Time.smoothDeltaTime;
+
+			// Sanity check:  Don't go over 100% of the distance at any time!
+			if(speed > 1.0f)
+			{
+				speed = 1.0f;
+			}
+
+			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed) - gameObject.transform.position;
+		}
+
+		// Always move to the requested location
+		gameObject.transform.position += lerpSpeed;
+		lastDist = Vector3.Distance(gameObject.transform.position, GoToPos) - speed;
+
+		// If we get close, prepare to stop (necessary for if the game is running at a lower FPS)
+		if(lastDist < 0.2f)
+		{
+			nearApocynthion = true;
+		}
+
+		// Stupidity Counter:  At a low FPS the Highlight can overshoot its mark, so reverse & lessen its speed
+		if(lastDist > 0.2f && nearApocynthion)
+		{
+			lerpSpeed = Vector3.Lerp(gameObject.transform.position, GoToPos, speed) - gameObject.transform.position;
+			nearApocynthion = false;
+		}
+
+		// Lock into place if we're close enough (we are NOT using Epsilon because it's too small of a distance)
+		if(Vector3.Distance(gameObject.transform.position, GoToPos) < speed * 1.1f)
+		{
+			gameObject.transform.position = GoToPos;
+			updating = false;
+			lastDist = float.MaxValue;
+			nearApocynthion = false;
+		}
+	}*/
 }
