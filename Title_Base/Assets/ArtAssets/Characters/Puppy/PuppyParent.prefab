@@ -31,7 +31,7 @@ GameObject:
   - 33: {fileID: 3327848}
   - 23: {fileID: 2393412}
   m_Layer: 0
-  m_Name: pasted__pCube38
+  m_Name: PuppyBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ GameObject:
   - 33: {fileID: 3375114}
   - 23: {fileID: 2374014}
   m_Layer: 0
-  m_Name: pCube43
+  m_Name: PuppyFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,8 +153,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109250}
-  m_LocalRotation: {x: 0, y: -0.38268292, z: 0, w: 0.9238798}
-  m_LocalPosition: {x: 23.471489, y: -3.92, z: 2.9135776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.765293, y: -1.3578135, z: 1.2363539}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 413870}
@@ -379,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - {fileID: 11457840}
+  - {fileID: 11416080}
   AudioDelay: 0.5
   UseSquidgy: 1
   SquigyCount: 2
@@ -407,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c413d35f7fb8a2e4695dffbab4e62e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: 'Bark
+  Text: 'Bark!
 
 '
   NextAction: {fileID: 0}
@@ -450,7 +451,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109250}

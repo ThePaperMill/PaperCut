@@ -2,13 +2,14 @@
  * Interactable.cs
  * Troy
  * Created 9/11/2015
+ *
+ * Attach to objects that can be interacted with by the player!
+ *
  * Copyright © 2015 DigiPen Institute of Technology, All Rights Reserved
  *********************************/
 
 using UnityEngine;
 using System.Collections;
-
-//Interactable ~ attached to objects that can be interacted with by the player?
 
 public class Interactable : MonoBehaviour
 {
@@ -24,9 +25,14 @@ public class Interactable : MonoBehaviour
 	
 	void Start()
 	{
+        // If the devs were too lazy to give us the InteractCollider script, get it
+        if (!InteractCollider)
+        {
+            InteractCollider = Resources.Load("InteractCollider", typeof(GameObject)) as GameObject;
+        }
 
-        // if the user didn't set the level settings, find it.
-        if(!LevelSettings)
+        // If the user didn't set the level settings, find it
+        if (!LevelSettings)
         {
             LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
         }
@@ -37,9 +43,9 @@ public class Interactable : MonoBehaviour
         gameObject.Connect(Events.Interact, OnInteractEvent);
 		
         if(initial == null)
-		{
-			LevelSettings.AddComponent<InteractManager>();
-			print("ERROR: LEVELSETTINGS DOES NOT HAVE INTERACTMANAGER COMPONENT. Adding to component list");
+        {
+            print("ERROR: LEVELSETTINGS DOES NOT HAVE INTERACTMANAGER COMPONENT. Adding to component list");
+            LevelSettings.AddComponent<InteractManager>();
 		}
 		
         childRigid = null;
@@ -48,6 +54,7 @@ public class Interactable : MonoBehaviour
         if (InteractCollider)
         {
             childRigid = Instantiate(InteractCollider, gameObject.transform.position, Quaternion.identity) as GameObject;
+            childRigid.transform.parent = gameObject.transform;
         }
         // resouce load it if we don't have it set.
         else

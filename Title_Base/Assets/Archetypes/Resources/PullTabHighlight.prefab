@@ -40,7 +40,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 21d4135d8afa56348af8025443ac647d, type: 2}
+  - {fileID: 2100000, guid: c2609e3d53aa3954d8a492e6c1729d58, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bounce: 1
   speed: 45
-  BounceAmount: 1.35
+  StartingPostion: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -100,6 +100,10 @@ Prefab:
       propertyPath: BounceAmount
       value: 1.35
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2609e3d53aa3954d8a492e6c1729d58, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 158710}
