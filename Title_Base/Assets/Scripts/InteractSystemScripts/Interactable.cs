@@ -25,9 +25,14 @@ public class Interactable : MonoBehaviour
 	
 	void Start()
 	{
+        // If the devs were too lazy to give us the InteractCollider script, get it
+        if (!InteractCollider)
+        {
+            InteractCollider = Resources.Load("InteractCollider", typeof(GameObject)) as GameObject;
+        }
 
-        // if the user didn't set the level settings, find it.
-        if(!LevelSettings)
+        // If the user didn't set the level settings, find it
+        if (!LevelSettings)
         {
             LevelSettings = GameObject.FindGameObjectWithTag("LevelSettings");
         }
