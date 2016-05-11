@@ -26,6 +26,7 @@ public class PullTabParent : MonoBehaviour
     float UnegagedTimeElapsed = 0;
     bool NearPlayer = false;
     GameObject Player = null;
+    Animator PlayerAnim = null;
     float PlayerYOffset = 1;
     bool Engaged = false;
     Vector3 StartingPos = Vector3.zero; //where this object spawns at in the level at the start
@@ -39,6 +40,10 @@ public class PullTabParent : MonoBehaviour
             return StartingPos.x + PullingDistance;
         }
     }
+    [Tooltip("This is used to play make the ease for the cardboard.")]
+    [SerializeField]
+    AnimationCurve ac;
+
     // Use this for initialization
     FloatEvent LerpData = new FloatEvent();
     GameObject InteractableHightlight = null; 
@@ -46,6 +51,7 @@ public class PullTabParent : MonoBehaviour
     
     void Start()
     {
+
         if(!transform.parent)
         {
             throw new System.Exception("YO, THE PULL-TAB PARENT NEEDS A PARENT, DUMBO!");
@@ -82,9 +88,11 @@ public class PullTabParent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //If my collider doesn't have a player in it
         if (!NearPlayer)
         {
             LerpBack();
+            //skip the update loop
             return;
         }
         if (InteractableHightlight)
@@ -106,15 +114,47 @@ public class PullTabParent : MonoBehaviour
         {
             OnUnlockBody();
         }
+//here
         if(Engaged)
         {
+            //print(controller.MoveForward);
             UnegagedTimeElapsed = 0;
             Vector3 playerMoveDirection = new Vector3();
-            if(controller.MoveForward)
+
+            
+            Vector2 Lstick = new Vector2(InputManager.GetSingleton.GetLeftStickValues().XPos, InputManager.GetSingleton.GetLeftStickValues().YPos);
+            if(Lstick == Vector2.zero)
+            {
+
+                if (controller.MoveForward)
+                {
+                    playerMoveDirection += Player.transform.forward;
+                }
+                else if (controller.MoveBack)
+                {
+                    playerMoveDirection -= Player.transform.forward;
+                }
+                if (controller.MoveLeft)
+                {
+                    playerMoveDirection -= Player.transform.right;
+                }
+                else if (controller.MoveRight)
+                {
+                    playerMoveDirection += Player.transform.right;
+                }
+            }
+            else
+            {
+                playerMoveDirection = new Vector3(Lstick.x, 0, Lstick.y);
+            }
+            //playerMoveDirection.Normalize();
+            
+            /*
+            if (controller.MoveForward)
             {
                 playerMoveDirection += Player.transform.forward;
             }
-            else if(controller.MoveBack)
+            else if (controller.MoveBack)
             {
                 playerMoveDirection -= Player.transform.forward;
             }
@@ -125,18 +165,75 @@ public class PullTabParent : MonoBehaviour
             else if (controller.MoveRight)
             {
                 playerMoveDirection += Player.transform.right;
+            }*/
+
+            //print (InputManager.GetSingleton.GetLeftStickValues().XPos) ;
+
+            //I need to raycast the direction the stick is pushing from the player
+            // I need to raycast the direction(s) of the pull tab
+            Vector3 forward = transform.TransformDirection(Vector3.right);
+            Debug.DrawRay(transform.position, forward, Color.green);
+
+            Vector3 backward = transform.TransformDirection(Vector3.left);
+            Debug.DrawRay(transform.position, backward, Color.blue);
+
+            //Debug.DrawRay(transform.position, playerMoveDirection, Color.yellow);
+            Vector3 direction = Camera.main.transform.TransformDirection(playerMoveDirection);
+
+            //direction = transform.TransformDirection(direction);
+            //Debug.DrawRay(transform.position, direction, Color.white);
+
+            //I need to swap the color of the stick pushing from the player if it's closer betwen the two directions
+
+            /*
+            I have the vector and the inverse
+            I can grab the screentopoint of the the center and the end position
+
+
+
+            I need an accurate move vector to test against
+
+            Dot/cross product to determine if my move vector is more towards one angle or another
+
+            The end goal: Determine if the vector my leftstick is in is more towards one angle or the other
+            */
+
+            float ford = Vector3.Dot(direction, forward);
+            float bacd = Vector3.Dot(direction, backward);
+            //print(ford + " is the forward vector " + bacd + " is the backward vector");
+            //print(playerMoveDirection);
+            if(playerMoveDirection != Vector3.zero && Mathf.Abs(ford - bacd) > 0.5)
+            {
+                //print(Mathf.Abs(ford - bacd));
+                if (ford > bacd)
+                {
+                    Debug.DrawRay(transform.position, direction, Color.green);
+                    playerMoveDirection = new Vector3(1, 0, 0);//we don't need the other vectors
+                }
+                else if(bacd > ford)
+                {
+                    Debug.DrawRay(transform.position, direction, Color.blue);
+                    playerMoveDirection = new Vector3(-1, 0, 0); // we dont need the other vectors
+
+                }
             }
-            //Get the players movement direction according to our parent's local coordinates.
-            playerMoveDirection = transform.parent.InverseTransformDirection(playerMoveDirection);
-            playerMoveDirection.z = 0; //We don't need the Z anymore.
+            else
+            {
+                playerMoveDirection = Vector3.zero;
+            }
             
+
+            
+            playerMoveDirection.Normalize();
+            playerMoveDirection *= PlayerLerpScalar;
+
             //The x value of the playerMoveDIrection vector tells us whether or not the tab is getting pushed in. (Positive is out negative is in)
-            float speed = playerMoveDirection.x * LerpSpeed * Time.smoothDeltaTime;
+            float speed = playerMoveDirection.x * PlayerLerpScalar * Time.smoothDeltaTime;
             //Modify the player's world position to move along OUR local x axis.
             var dir = transform.parent.TransformDirection(new Vector3(1, 0, 0));
             dir *= speed;
             var pos = Player.transform.position;
-            pos += dir * PlayerLerpScalar;
+            pos += dir;// * PlayerLerpScalar;
             pos.y = transform.parent.position.y + PlayerYOffset;
             
             transform.position += dir;
@@ -180,44 +277,59 @@ public class PullTabParent : MonoBehaviour
 
     void LerpBack()
     {
+        //if less time has passed than the time until unengaged
         if (UnegagedTimeElapsed <= UnengagedTimer)
         {
+            //progress the time
             UnegagedTimeElapsed += Time.deltaTime;
+            //Escape
             return;
         }
         var localPos = transform.localPosition;
+
+        //If I want the object to slide back
         if (!LocksIntoPlace)
         {
-            float startingPosX;
-            if (StartPoppedUp)
+            //If I haven't pulled all of the way, I want to slip backwards (This if check prevents the thing from sliding back if it's reached the full pull)
+            if (LerpPos <1)
             {
-                startingPosX = PulledOutDistance;
+                float startingPosX;
+                if (StartPoppedUp)
+                {
+                    startingPosX = PulledOutDistance;
+                }
+                else
+                {
+                    startingPosX = StartingPos.x;
+                }
+                localPos.x = Mathf.Lerp(localPos.x, startingPosX, LerpBackSpeed * Time.smoothDeltaTime);
+                SendTabUpdatedMessage();
             }
-            else
-            {
-                startingPosX = StartingPos.x;
-            }
-            localPos.x = Mathf.Lerp(localPos.x, startingPosX, LerpBackSpeed * Time.smoothDeltaTime);
             SendTabUpdatedMessage();
         }
         transform.localPosition = localPos;
     }
-
+    //this function sends a message to all of the objects in the fold patter to rotate.
     void SendTabUpdatedMessage()
     {
+
         LerpPos = Mathf.Clamp01(1 - (PulledOutDistance - transform.localPosition.x) / PullingDistance);
+
         if (LerpData.value != LerpPos)
-        {
-            LerpData.value = LerpPos;
+        {         
+            LerpData.value = ac.Evaluate(LerpPos);
             EventTarget.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
         }
     }
-
+    //On trigger enter happens when the player walks into the interactive zone
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             Player = other.gameObject;
+//            PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<Animator>();
+
+
             NearPlayer = true;
 
             if (InteractableHightlight)
@@ -227,6 +339,7 @@ public class PullTabParent : MonoBehaviour
             }
         }
     }
+    //On trigger exit happens when the player walks away from the interactible zone
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
@@ -246,9 +359,16 @@ public class PullTabParent : MonoBehaviour
             Engaged = false;
         }
     }
-
+    //OnLockBody triggeres when the player holds down the interact button
     void OnLockBody()
     {
+        print(PlayerAnim);
+        if(PlayerAnim != null)
+        {
+            PlayerAnim.SetBool("PullLeft", true);
+
+        }
+
         Engaged = true;
         //lock all player positions that are supposed to be locked
         var body = Player.GetComponent<Rigidbody>();
@@ -256,8 +376,15 @@ public class PullTabParent : MonoBehaviour
         PlayerYOffset = Player.transform.position.y - transform.parent.position.y;
         
     }
+    //OnUnlockBody is run when the player lets go of the interact button. Its job is to remove all of the constraints given to it on lock
     void OnUnlockBody()
     {
+        if (PlayerAnim != null)
+        {
+            PlayerAnim.SetBool("PullLeft", false);
+
+        }
+
         UnengagedTimer = 1;
         Engaged = false;
         var body = Player.GetComponent<Rigidbody>();
