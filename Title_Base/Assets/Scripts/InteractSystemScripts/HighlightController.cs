@@ -83,7 +83,9 @@ public class HighlightController : MonoBehaviour
 		if(goingTo != GoToPos)
 		{        
 			goingTo = GoToPos;
-			speed = EasePercent * Time.smoothDeltaTime;
+            shrinkToPos = GoToPos;
+            shrinkToPos.y -= Height;
+            speed = EasePercent * Time.smoothDeltaTime;
 
 			// Sanity check:  Don't go over 100% of the distance at any time!
 			if(speed > 1.0f)
