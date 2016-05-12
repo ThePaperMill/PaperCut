@@ -41,7 +41,7 @@ public class CustomDynamicController : MonoBehaviour
     private FMOD_StudioEventEmitter LandSounds;
 
     // Sound-control variables
-    private AudioSource m_AudioSource;
+    //private AudioSource m_AudioSource; (from pre-FMOD sound system)
 	private int walkCycle = 0;
 	private float m_StepCycle = 0f;
 	private float m_NextStep = 0f;
@@ -139,7 +139,7 @@ public class CustomDynamicController : MonoBehaviour
 
     CapsuleCollider CCollider = null;
 
-    GameObject Cam = null;
+    public GameObject Cam = null;
 
     GameObject LSettings = null;
 

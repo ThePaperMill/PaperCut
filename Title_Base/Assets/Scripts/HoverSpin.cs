@@ -32,17 +32,16 @@ public class HoverSpin : MonoBehaviour
     void Start ()
     {
         JumpTimer = 0.0f;
-        Grounded = this.GetComponent<CustomDynamicController>().OnGround;
+        Grounded = GetComponent<CustomDynamicController>().OnGround;
 
 		HoverSounds = gameObject.transform.Find("HoverSoundBank").gameObject.GetComponent<FMOD_StudioEventEmitter>();
 		DelaySounds = gameObject.transform.Find("HoverSounds2").gameObject.GetComponent<FMOD_StudioEventEmitter>();
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Grounded = this.GetComponent<CustomDynamicController>().OnGround;
+        Grounded = GetComponent<CustomDynamicController>().OnGround;
         JumpReleased = InputManager.GetSingleton.IsInputReleased(GlobalControls.JumpKeys);
 
         Spin();
@@ -60,7 +59,7 @@ public class HoverSpin : MonoBehaviour
         }
     }
 
-    //This should be renamed to Prone or something
+    //This should be renamed to Prone or something?
     void Spin()
     {
         bool JumpHeld = InputManager.GetSingleton.IsInputDown(GlobalControls.JumpKeys);
@@ -75,7 +74,7 @@ public class HoverSpin : MonoBehaviour
         {
             Prone = new Vector3(90.0f, 0, 0);
             var seq = ActionSystem.Action.Sequence(grp);
-			Action.Property(seq, this.transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
+			Action.Property(seq, transform.GetProperty(x => x.localEulerAngles), Prone, 0.05f, Ease.Linear);
 
 			// Start playing whooshing sounds if we aren't already
 			if (!Spinning && HoverSounds != null)
@@ -105,10 +104,12 @@ public class HoverSpin : MonoBehaviour
 
         grp.Update(Time.deltaTime);
 
+        // Check to see if we need to stop
         if (JumpTimer == 0)
         {
             Prone = new Vector3(0, 0, 0);
-			this.transform.localEulerAngles = Prone;
+			gameObject.transform.localEulerAngles = Prone;
+
 			Spinning = false;
         }
     }

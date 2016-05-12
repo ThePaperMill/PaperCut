@@ -125,7 +125,7 @@ public class InteractManager : MonoBehaviour
 		// Bring the actual closest object in		
 		if(closest != null)
 		{
-			// Create a ScriptEvent
+			// Tell it that it's the new closest object
 			Interactable inter = closest.GetComponent("Interactable") as Interactable;
 			inter.SetIsInInteraction(true);
 		}
