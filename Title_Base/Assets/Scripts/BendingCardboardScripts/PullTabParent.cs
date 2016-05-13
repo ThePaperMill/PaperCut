@@ -327,7 +327,8 @@ public class PullTabParent : MonoBehaviour
         if (other.tag == "Player")
         {
             Player = other.gameObject;
-//            PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<Animator>();
+            PlayerAnim = GameObject.Find("PlayerAnim").GetComponent<Animator>();
+
 
 
             NearPlayer = true;
@@ -362,12 +363,22 @@ public class PullTabParent : MonoBehaviour
     //OnLockBody triggeres when the player holds down the interact button
     void OnLockBody()
     {
-        print(PlayerAnim);
         if(PlayerAnim != null)
         {
-            PlayerAnim.SetBool("PullLeft", true);
+            PlayerAnim.SetBool("PullRight", true);
 
         }
+        //CustomDynamicController sController = Player.GetComponent<CustomDynamicController>();
+        //sController.enabled = false;
+        PlayerModelMovement jController = Player.GetComponentInChildren<PlayerModelMovement>();
+        jController.enabled = false;
+        StartCoroutine("MovePlayer", new Vector3(transform.position.x, Player.transform.position.y, transform.position.z) + transform.right * 0.15f);
+
+
+        //snap the player's position
+        //Player.transform.position = new Vector3(transform.position.x, Player.transform.position.y, transform.position.z) + transform.right*1.15f;
+        //snap the player to the proper angle
+
 
         Engaged = true;
         //lock all player positions that are supposed to be locked
@@ -381,13 +392,34 @@ public class PullTabParent : MonoBehaviour
     {
         if (PlayerAnim != null)
         {
-            PlayerAnim.SetBool("PullLeft", false);
+            PlayerAnim.SetBool("PullRight", false);
 
         }
+        //CustomDynamicController sController = Player.GetComponent<CustomDynamicController>();
+        //sController.enabled = true;
+        PlayerModelMovement jController = Player.GetComponentInChildren<PlayerModelMovement>();
+        jController.enabled = true;
 
         UnengagedTimer = 1;
         Engaged = false;
         var body = Player.GetComponent<Rigidbody>();
         body.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    //Moves the player over the course of 0.5 seconds towards a certain position
+    IEnumerator MovePlayer(Vector3 endpos)
+    {
+        Vector3 startpos = Player.transform.position;
+        float length = 0.5f;
+
+        for (float f = 0f; f < length; f += Time.deltaTime)
+        {
+
+            Player.transform.position = Vector3.Lerp(startpos, endpos, f / length);
+            PlayerModelMovement jController = Player.GetComponentInChildren<PlayerModelMovement>();
+            jController.gameObject.transform.LookAt(new Vector3(transform.position.x, jController.gameObject.transform.position.y, transform.position.z));
+
+            yield return null;
+        }
     }
 }
