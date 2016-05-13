@@ -620,6 +620,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!59 &37677630
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -1274,6 +1275,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &220712983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1503,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!59 &277338039
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -1760,6 +1763,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &301098469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,6 +2069,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &354932169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3226,6 +3231,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &739152134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3865,6 +3871,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &929255566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4128,6 +4135,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1054473029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4808,6 +4816,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1200289870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5065,6 +5074,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1243019635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5330,7 +5340,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 53
+  m_RootOrder: 54
 --- !u!1 &1265835725
 GameObject:
   m_ObjectHideFlags: 0
@@ -5676,6 +5686,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!59 &1300508079
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -5985,6 +5996,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1363083171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5998,7 +6010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 11400000, guid: e90deed1463e199478dd49cff1d491b3, type: 2}
   path: '{096e26f8-92fc-4fc8-8993-a8dc83a77ded}'
-  startEventOnAwake: 1
+  startEventOnAwake: 0
 --- !u!1 &1365976590
 GameObject:
   m_ObjectHideFlags: 0
@@ -6674,6 +6686,40 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
+--- !u!1 &1552848709 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 164354, guid: 3df2ae3bbc7827740874260a5eac20cc, type: 2}
+  m_PrefabInternal: {fileID: 295536937}
+--- !u!114 &1552848715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1552848709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: DynamicPlayer(Clone)
+  LevelSettings: {fileID: 0}
+  Parent: {fileID: 1552848709}
+--- !u!114 &1552848716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1552848709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
+  CreateCollider: 0
 --- !u!1001 &1559338183
 Prefab:
   m_ObjectHideFlags: 0
@@ -6915,6 +6961,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 644671224}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1658687626
 MonoBehaviour:
   m_ObjectHideFlags: 0
