@@ -34,7 +34,10 @@ public class SpawnPuppies : MonoBehaviour
 
     void Start () //Initialize
     {
+        if(PuppyTex1)
         PuppyTexArray.Add(PuppyTex1);
+
+        if(PuppyTex2)
         PuppyTexArray.Add(PuppyTex2);
         //this object that this script is being attached to(gameobject), gets connected to TabUpdated event
         gameObject.Connect(Events.TabUpdatedEvent, OnTabUpdated);
@@ -88,12 +91,12 @@ public class SpawnPuppies : MonoBehaviour
             var FrontFace = puppy.transform.FindChild("PuppyFront");
             var BackFace = puppy.transform.FindChild("PuppyBack");
 
-            if (FrontFace)
+            if (FrontFace && PuppyTexArray.Count > i)
             {
                 var puppyChildTex = FrontFace.GetComponent<MeshRenderer>();
                 puppyChildTex.sharedMaterial = PuppyTexArray[i];
             }
-            if (BackFace)
+            if (BackFace && PuppyTexArray.Count > i)
             {
                 var puppyChildTex = BackFace.GetComponent<MeshRenderer>();
                 puppyChildTex.sharedMaterial = PuppyTexArray[i];
