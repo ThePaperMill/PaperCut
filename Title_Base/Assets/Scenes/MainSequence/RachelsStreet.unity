@@ -762,6 +762,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &101383788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,6 +3087,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &308557635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3118,6 +3120,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!95 &308557637
 Animator:
   serializedVersion: 3
@@ -5870,6 +5873,39 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 488864, guid: 97ece82a022117646a54651595ecc1aa, type: 2}
   m_PrefabInternal: {fileID: 591962728}
+--- !u!1 &597189859 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 164354, guid: 3df2ae3bbc7827740874260a5eac20cc, type: 2}
+  m_PrefabInternal: {fileID: 683198259}
+--- !u!114 &597189861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597189859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: DynamicPlayer(Clone)
+  LevelSettings: {fileID: 0}
+  Parent: {fileID: 597189859}
+--- !u!114 &597189862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597189859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
+  CreateCollider: 0
 --- !u!1001 &600657470
 Prefab:
   m_ObjectHideFlags: 0
@@ -7050,7 +7086,7 @@ Transform:
   m_LocalScale: {x: 40, y: 40, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 23
 --- !u!1001 &693006687
 Prefab:
   m_ObjectHideFlags: 0
@@ -10132,6 +10168,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!95 &992975908
 Animator:
   serializedVersion: 3
@@ -10761,6 +10798,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1056214904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21129,6 +21167,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1
+  CreateCollider: 1
 --- !u!23 &2039857801
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -11650,6 +11650,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!23 &286182641
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17933,6 +17934,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.9
+  CreateCollider: 1
 --- !u!65 &464786794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20775,6 +20777,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 0.9
+  CreateCollider: 1
 --- !u!1 &541199895
 GameObject:
   m_ObjectHideFlags: 0
@@ -27240,6 +27243,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.9
+  CreateCollider: 1
 --- !u!65 &717441123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27407,6 +27411,35 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 164354, guid: 3df2ae3bbc7827740874260a5eac20cc, type: 2}
   m_PrefabInternal: {fileID: 4322474}
+--- !u!114 &725306026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725306020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
+  CreateCollider: 1
+--- !u!114 &725306027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725306020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: DynamicPlayer(Clone)
+  LevelSettings: {fileID: 0}
+  Parent: {fileID: 725306020}
 --- !u!1001 &726178678
 Prefab:
   m_ObjectHideFlags: 0
@@ -28179,6 +28212,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!23 &742971771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28672,6 +28706,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.8
+  CreateCollider: 1
 --- !u!114 &753307915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35137,6 +35172,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &924943774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37688,6 +37724,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &976106414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40542,6 +40579,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.9
+  CreateCollider: 1
 --- !u!65 &1073262022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45346,6 +45384,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.8
+  CreateCollider: 1
 --- !u!65 &1201045066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46601,6 +46640,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1231243923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47756,6 +47796,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1265373605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48734,6 +48775,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1280406731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53918,7 +53960,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.32058015
+      value: 0.14632018
       objectReference: {fileID: 0}
     - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
       propertyPath: m_LocalRotation.z
@@ -53926,7 +53968,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.94722146
+      value: 0.98923737
       objectReference: {fileID: 0}
     - target: {fileID: 417332, guid: 9c0e9655fc7e5e143b2c33fb3dab32fa, type: 2}
       propertyPath: m_RootOrder
@@ -55967,6 +56009,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &1500998603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58758,6 +58801,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 122172, guid: 4832f6470927d814b8ef0e80ccb5ee70, type: 2}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 0.9
+  CreateCollider: 1
 --- !u!1001 &1602638395
 Prefab:
   m_ObjectHideFlags: 0
@@ -61776,6 +61820,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!23 &1692164962
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62768,6 +62813,8 @@ GameObject:
   - 65: {fileID: 1722193703}
   - 23: {fileID: 1722193702}
   - 114: {fileID: 1722193701}
+  - 114: {fileID: 1722193706}
+  - 114: {fileID: 1722193705}
   m_Layer: 0
   m_Name: Tab
   m_TagString: Untagged
@@ -62811,7 +62858,6 @@ MonoBehaviour:
   DirModPositive: 0
   FlipControls: 0
   UseLeftRightControls: 0
-  CreateHighlight: 1
 --- !u!23 &1722193702
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62860,6 +62906,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1722193699}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1722193705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1722193699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
+  CreateCollider: 0
+--- !u!114 &1722193706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1722193699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: DynamicPlayer(Clone)
+  LevelSettings: {fileID: 0}
+  Parent: {fileID: 1722193699}
 --- !u!1001 &1722745604
 Prefab:
   m_ObjectHideFlags: 0
@@ -74764,6 +74839,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!114 &2065758225
 MonoBehaviour:
   m_ObjectHideFlags: 0
