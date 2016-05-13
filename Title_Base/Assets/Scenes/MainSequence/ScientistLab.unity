@@ -2930,7 +2930,6 @@ GameObject:
   - 92: {fileID: 644027253}
   - 124: {fileID: 644027252}
   - 81: {fileID: 644027251}
-  - 114: {fileID: 644027256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2999,27 +2998,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 644027250}
-  m_LocalRotation: {x: 0.073241666, y: -0.09012738, z: -0.068462715, w: 0.99087113}
-  m_LocalPosition: {x: -1.315, y: 1.481, z: -6.082}
+  m_LocalRotation: {x: 0.17364822, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: -2.5, y: 2.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 37
---- !u!114 &644027256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 644027250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5888348d9a3e6d04697ca20556fbb2eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FollowDistance: {x: 0, y: 1.5, z: -3}
-  LerpSpeed: 2
-  TargetObject: {fileID: 0}
-  StartingLookTarget: {fileID: 1344051212}
 --- !u!1001 &652882207
 Prefab:
   m_ObjectHideFlags: 0
@@ -5147,10 +5131,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 467852, guid: ba719c6da4a52aa48aa19eaca4d02892, type: 2}
   m_PrefabInternal: {fileID: 800215270}
---- !u!1 &1344051212 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 128392, guid: 11b7512affe07e643893f545dde89d20, type: 2}
-  m_PrefabInternal: {fileID: 744889228}
 --- !u!1001 &1361396731
 Prefab:
   m_ObjectHideFlags: 0
@@ -5511,6 +5491,10 @@ Prefab:
       value: 0.169
       objectReference: {fileID: 0}
     - target: {fileID: 2304670, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c5b7441b5b6b39f479d68721bbe510ee, type: 2}
+    - target: {fileID: 2335184, guid: 923491b3f18c1744f81b293c9dfc1345, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5b7441b5b6b39f479d68721bbe510ee, type: 2}
@@ -6341,7 +6325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 61
+  m_RootOrder: 57
 --- !u!114 &1627523268
 MonoBehaviour:
   m_ObjectHideFlags: 0

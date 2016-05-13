@@ -78,7 +78,7 @@ public class SpawnPuppies : MonoBehaviour
 
         for(int i = 0; i < PuppyCounter; ++i)
         {
-            print("SPAWNED!!!");
+            //print("SPAWNED!!!");
             //"GameObject.Instantiate" does not instantiate a gameobject ._. wut. I have to typecast result as gameobj
             var puppyParent = GameObject.Instantiate(Puppy, SpawnLocation.position, Quaternion.identity) as GameObject;
             puppyParent.GetComponent<Rigidbody>().velocity = (RandomVelocity);
