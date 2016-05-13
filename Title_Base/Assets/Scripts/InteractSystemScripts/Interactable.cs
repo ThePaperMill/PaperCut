@@ -22,7 +22,9 @@ public class Interactable : MonoBehaviour
 	public float InteractSizeScalar = 1.5f;
 	
 	bool isInInteraction = false;
-	
+
+    public bool CreateCollider = true;
+
 	void Start()
 	{
         // If the devs were too lazy to give us the InteractCollider script, get it
@@ -49,24 +51,30 @@ public class Interactable : MonoBehaviour
 		}
 
         //Create a new interactable ghost collider for this object at it's position. if the player touches this, then this object can be interacted with
-        if (InteractCollider)
+        if (InteractCollider && CreateCollider)
         {
             childRigid = Instantiate(InteractCollider, gameObject.transform.position, Quaternion.identity) as GameObject;
             childRigid.transform.parent = gameObject.transform;
         }
         // resouce load it if we don't have it set.
-        else
+        else if(CreateCollider)
         {
+            print("this can never happen right???");
             childRigid = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("InteractCollider"));
         }
-    
-        //Increase the size of the bounding box based on property interactablesize scalar.
-		SphereCollider childSphere = childRigid.GetComponent("SphereCollider") as SphereCollider;
-		childSphere.radius *= InteractSizeScalar;
-		
-        //Tell the new rigidbody to keep track of this object
-		InteractRigid par = childRigid.GetComponent("InteractRigid") as InteractRigid;
-		par.SetParent(gameObject);
+
+
+        if (childRigid)
+        {
+            //Increase the size of the bounding box based on property interactablesize scalar.
+            SphereCollider childSphere = childRigid.GetComponent("SphereCollider") as SphereCollider;
+            if (childSphere)
+                childSphere.radius *= InteractSizeScalar;
+
+            //Tell the new rigidbody to keep track of this object
+            InteractRigid par = childRigid.GetComponent("InteractRigid") as InteractRigid;
+            par.SetParent(gameObject);
+        }
 	}
 
     public void OnInteractEvent(EventData eventData)
