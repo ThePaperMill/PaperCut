@@ -20,8 +20,8 @@ public class PresentationSkip : Singleton<PresentationSkip>
     string FourthLevel = "ScientistStreet";
 
     // mechanics test
-    string FifthLevel = "Sewer";
-    string SixthLevel = "WaterWorks";
+    string FifthLevel = "SewerAlternate";
+    string SixthLevel = "WaterWorksAlternate2";
     string SeventhLevel = "RachelsStreet";
     string EighthLevel = "RachelsHouse";
 

@@ -37,7 +37,7 @@ public class LightFade : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        print(gameObject.GetComponent<Light>().intensity);
+       // print(gameObject.GetComponent<Light>().intensity);
 
         Grp.Update(Time.smoothDeltaTime);
     }

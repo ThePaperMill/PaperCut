@@ -5500,7 +5500,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11414564, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+    - {fileID: 11440790, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+    - {fileID: 5955354, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+    - {fileID: 11407878, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
+    - {fileID: 5404622, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: faeda11cbfef2b349bde581cdd5420eb, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &480286745 stripped
@@ -5523,21 +5528,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyWithLab: 0
---- !u!114 &480286748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 480286745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelSettings: {fileID: 0}
-  InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
-  InteractSizeScalar: 1.5
-  CreateCollider: 1
 --- !u!114 &480286749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,20 +5544,6 @@ MonoBehaviour:
   AudioDelay: 0.5
   UseSquidgy: 1
   SquigyCount: 2
---- !u!114 &480286750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 480286745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 528ed627ab7a10b4f9c927aa803de36e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 18f1c876533804d4fa84f526a2d68806, type: 2}
-  path: '{b98c021c-4619-4e82-bc1d-6722cbe66191}'
-  startEventOnAwake: 0
 --- !u!1 &489520918
 GameObject:
   m_ObjectHideFlags: 0
@@ -14396,7 +14372,7 @@ Transform:
   - {fileID: 1102014970}
   - {fileID: 447888111}
   m_Father: {fileID: 0}
-  m_RootOrder: 83
+  m_RootOrder: 88
 --- !u!1 &1099334280
 GameObject:
   m_ObjectHideFlags: 0
@@ -21659,7 +21635,7 @@ Transform:
   - {fileID: 1870629201}
   - {fileID: 1428544188}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 19
 --- !u!1 &1590032661
 GameObject:
   m_ObjectHideFlags: 0
