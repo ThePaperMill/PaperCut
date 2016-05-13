@@ -14,10 +14,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
-
-
-public class LoadCreditsOnCollide : MonoBehaviour {
+public class LoadCreditsOnCollide : MonoBehaviour
+{
     public string SceneName;
 
     public GameObject passenger = null;
@@ -38,7 +36,8 @@ public class LoadCreditsOnCollide : MonoBehaviour {
     }
 
 // Update is called once per frame
-void Update () {
+void Update ()
+	{
 	
         if(Activate)
         {
@@ -82,10 +81,8 @@ void Update () {
         Action.Property(seq, passenger.transform.GetProperty(ObjTransform => ObjTransform.localPosition), passenger.transform.localPosition + new Vector3(0,0.4f,0), EaseTime, Curve);
         //this is getting called, but it never ends or moves onto the next function
         Action.Call(seq, JoshIHopeThisWorksOrYoureFired);
-        Action.Property(seq, gameObject.transform.GetProperty(ObjTransform => ObjTransform.localPosition), startpos + new Vector3(0, 5, 0), 5, Curve);
-        Action.Call(seq, LoadCreditLevel);
-
-        //Action.Property(seq, gameObject.transform.GetProperty(o => o.localPosition), startpos + new Vector3(0, 5, 0), 5, Curve);
+        Action.Property(seq, gameObject.transform.GetProperty(ObjTransform => ObjTransform.localPosition), startpos + new Vector3(0, 15, 0), 5, Curve);
+		Action.Call(seq, LoadCreditLevel);
     }
 
     void JoshIHopeThisWorksOrYoureFired()
