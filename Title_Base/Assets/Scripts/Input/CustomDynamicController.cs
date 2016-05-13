@@ -139,7 +139,7 @@ public class CustomDynamicController : MonoBehaviour
 
     CapsuleCollider CCollider = null;
 
-    public GameObject Cam = null;
+    GameObject Cam = null;
 
     GameObject LSettings = null;
 
