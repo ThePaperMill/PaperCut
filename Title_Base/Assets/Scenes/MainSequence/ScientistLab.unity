@@ -2149,6 +2149,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 170170, guid: b87da7352bbdba342b3e17dd83075c68, type: 2}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!1001 &457466724
 Prefab:
   m_ObjectHideFlags: 0
@@ -2930,6 +2931,7 @@ GameObject:
   - 92: {fileID: 644027253}
   - 124: {fileID: 644027252}
   - 81: {fileID: 644027251}
+  - 114: {fileID: 644027256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3004,6 +3006,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 37
+--- !u!114 &644027256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 644027250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5888348d9a3e6d04697ca20556fbb2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FollowDistance: {x: 0, y: 1.5, z: -4}
+  LerpSpeed: 2
+  TargetObject: {fileID: 0}
+  StartingLookTarget: {fileID: 0}
 --- !u!1001 &652882207
 Prefab:
   m_ObjectHideFlags: 0
@@ -3750,6 +3767,7 @@ MonoBehaviour:
   LevelSettings: {fileID: 0}
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
+  CreateCollider: 1
 --- !u!1001 &902152400
 Prefab:
   m_ObjectHideFlags: 0
