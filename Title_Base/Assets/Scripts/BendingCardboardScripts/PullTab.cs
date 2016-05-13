@@ -48,8 +48,10 @@ public class PullTab : MonoBehaviour
     
     GameObject InteractableHightlight = null; 
 
-    //Abandon hope all ye who enter here...
-    public bool CreateHighlight = true;
+    //if for some reason we want the pull tabs to create their own highlights again.
+    bool CreateHighlight = false;
+
+
     public bool PoppedUp { get; private set; }
     void Start()
     {
