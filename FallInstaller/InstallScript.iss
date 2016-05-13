@@ -74,6 +74,7 @@ Source: .\GAMEDIRECTORY\*; DestDir: {app}; Flags: ignoreversion recursesubdirs c
 Name: {group}\PaperCut; Filename: {app}\PaperCut.exe; WorkingDir: {app}
 Name: {group}\{cm:UninstallProgram,PaperCut}; IconFilename: "{app}\PaperCut.ico"; Filename: {uninstallexe}
 Name: {commondesktop}\PaperCut; Filename: {app}\PaperCut.exe; Tasks: desktopicon; WorkingDir: {app}
+SetupIconFile=IconFileName;
 
 ; List of items to execute in the installer.
 ; Note that this will run all executables in their silent versions as required by the TCRs.
