@@ -8,7 +8,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{AE83F501-6A01-411A-A17E-B89F478E44B5}
+AppId={F564A955-A34C-49D3-9498-8D40DE884FBA}
 ; Standard app data stuff
 ; Change PaperCut to your game name
 AppName=PaperCut
@@ -32,7 +32,7 @@ LicenseFile=EULA\DigiPen_EULA.txt
 Compression=lzma
 SolidCompression=yes
 ; Path to the icon for the installer (TCR check requires custom icon)
-;SetupIconFile=.\Files\SetupIcon.ico
+SetupIconFile=."{app}\PaperCut.ico"
 ; Prevents the installer asking for a reboot if certian Windows files are modified.
 RestartIfNeededByRun=no
 
@@ -74,7 +74,6 @@ Source: .\GAMEDIRECTORY\*; DestDir: {app}; Flags: ignoreversion recursesubdirs c
 Name: {group}\PaperCut; Filename: {app}\PaperCut.exe; WorkingDir: {app}
 Name: {group}\{cm:UninstallProgram,PaperCut}; IconFilename: "{app}\PaperCut.ico"; Filename: {uninstallexe}
 Name: {commondesktop}\PaperCut; Filename: {app}\PaperCut.exe; Tasks: desktopicon; WorkingDir: {app}
-SetupIconFile=IconFileName;
 
 ; List of items to execute in the installer.
 ; Note that this will run all executables in their silent versions as required by the TCRs.
