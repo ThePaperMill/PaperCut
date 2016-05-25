@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.163, y: 0.407, z: -1.088}
+  m_LocalPosition: {x: 0.39695823, y: 1.7919806, z: -4.622}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +45,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7b6ca9552e26fb64291afbfe7e65175b, type: 2}
+  - {fileID: 2100000, guid: 2b7b9007ff5ee7e4995dea0d22c0b309, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -93,7 +93,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: -0.014, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -5.163, y: 0.127, z: -1.088}
+  m_ConnectedAnchor: {x: 0.39695823, y: 1.5119807, z: -4.622}
   m_UseSpring: 1
   m_Spring:
     spring: 20
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e93cd5383565489ec229a3ce3a703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 1000
 --- !u!114 &11419562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e93cd5383565489ec229a3ce3a703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 1000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

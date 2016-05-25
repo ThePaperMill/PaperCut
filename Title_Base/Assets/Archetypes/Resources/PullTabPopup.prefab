@@ -75,6 +75,8 @@ GameObject:
   - 4: {fileID: 440474}
   - 65: {fileID: 6583396}
   - 114: {fileID: 11468886}
+  - 114: {fileID: 11496988}
+  - 114: {fileID: 11429490}
   m_Layer: 2
   m_Name: TabParent
   m_TagString: Untagged
@@ -313,7 +315,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.375645, y: 0.125, z: -0.7518654}
+  m_LocalPosition: {x: 2.81, y: 0.17, z: -1.117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 479998}
@@ -906,6 +908,21 @@ MonoBehaviour:
   PanelBaseArch: {fileID: 187550, guid: 4cca790b8de8a6b4ba13429b176fd9a5, type: 2}
   CurrentTile: {fileID: 0}
   PoppedUp: 1
+--- !u!114 &11429490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207ad0a2d04e9d5469dbaa08107570bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelSettings: {fileID: 0}
+  InteractCollider: {fileID: 0}
+  InteractSizeScalar: 1.5
+  CreateCollider: 0
 --- !u!114 &11468886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -939,6 +956,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &11496988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ed3772fbf4c646801354944952f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: DynamicPlayer(Clone)
+  LevelSettings: {fileID: 0}
+  Parent: {fileID: 121210}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

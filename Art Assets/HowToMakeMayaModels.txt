@@ -42,7 +42,7 @@ CUT OUT THE MODEL
 -Repeat previous step until all cardboard boxes have been "Cut out" of the original Cardboard Tubing Import. 
 -After all of your cutout objects have been deleted in this way, select the copies you pushed to a different Z layer. 
 -Move them back over the original object, and begin cutting out the other cardboard tubing layer with the same process.
-- select both the inner and outer Cardboard Tubing using left click and then Shift+Left Click.
+-Select both the inner and outer Cardboard Tubing using left click and then Shift+Left Click.
 -Under "Mesh"-> "COMBINE" -> click "Combine". this combined the two separate models into one. 
 -Ensure that there are no HOLES in the Model. If the inside of the model is visible from any of the sides, press ctrl + Z to undo ALL boolean cuts until you find which box cut out the improper section. Cut out a smaller bit of the model, one small peice at a time. 
 -Clean up any artifacts using more the boolean tool and more cubes from the cube tool. Artifacts are bits of the cardboard model that are outside of the cuts you made.
@@ -72,7 +72,7 @@ MAP THE UV'S
 -Minimize the UV Texture Editor, then select the perspective frame by clicking in the window and pressing CTRL + S to save the project
 
 EXPORT THE UNITY FILETYPE MODEL
--with any part of the Model highlighted, move your mouse over and Right Click to bring up the UNITY quick-tool menu
+-With any part of the Model highlighted, move your mouse over and Right Click to bring up the UNITY quick-tool menu
 -Drag-Select "Object Mode" and release to switch from face mode back to Object Mode (Where you can select an entire object)
 -Select said entire object
 -Select "File" -> "Export Selection" to open the Export Selection window
@@ -86,45 +86,45 @@ EXPORT THE UNITY FILETYPE MODEL
 -Close The Maya Project, but make sure all of the files you've saved (.mb, .TIF, .Fbx, .jpeg) are in the same directory folder named after the asset.
 
 OPEN PHOTOSHOP
-open Adobe PhotoshopCS5.1
-Double click the .TIF file to open it in photoshop in a new tab
-You should see a black screen with two white outlines- the shape of the outer faces of the cardboard model
-In photoshop on the right side of the screen, there should be a "Layers", Channels", and "Paths" tab. Click the Channels tab, then click back to the Layer's tab (Even if you started on the Layers tab)
-Double click the italicized "Background" layer in the "Layers" tab to open the New Layer Window.
-Click "Ok" in the layer tabs window to close the window and Unlock the layer for editing.
-Open the Asset Folder and click and drag the jpeg file into the new window.
-click the enter key to unlock the imported file
-In the layers tab, drag the jpeg layer down under "Layer 0" to "Disappear" the jpeg layer
-Make sure you have the TIFF layer selected (The black layer with the outlines)
-Under "Layers" should be a drop down menu that has "Normal" selected. Click the down arrow and scroll to "Screen" and select it to allow your outlines to shine through to the under layer
-Ctrl + A to select the current layer, Ctrl + C to copy the current layer, then CTRL + V to paste the current layer.
-Drag the layer down to the bottom of the list (Making it the background). Click the Eyeball to make it invisible.
+-Open Adobe PhotoshopCS5.1
+-Double click the .TIF file to open it in photoshop in a new tab
+-You should see a black screen with two white outlines- the shape of the outer faces of the cardboard model
+-In photoshop on the right side of the screen, there should be a "Layers", Channels", and "Paths" tab. Click the Channels tab, then click back to the Layer's tab (Even if you started on the Layers tab)
+-Double click the italicized "Background" layer in the "Layers" tab to open the New Layer Window.
+-Click "Ok" in the layer tabs window to close the window and Unlock the layer for editing.
+-Open the Asset Folder and click and drag the jpeg file into the new window.
+-Click the enter key to unlock the imported file
+-In the layers tab, drag the jpeg layer down under "Layer 0" to "Disappear" the jpeg layer
+-Make sure you have the TIFF layer selected (The black layer with the outlines)
+-Under "Layers" should be a drop down menu that has "Normal" selected. Click the down arrow and scroll to "Screen" and select it to allow your outlines to shine through to the under layer
+-Ctrl + A to select the current layer, Ctrl + C to copy the current layer, then CTRL + V to paste the current layer.
+-Drag the layer down to the bottom of the list (Making it the background). Click the Eyeball to make it invisible.
 
 MAP THE TEXTURE TO THE UVs
-Select the middle jpeg layer
-press M to select the "Select tool", then drag around the jpeg image
-Press v to select the "Move tool"
-click and drag inside of the selection to move the jpeg to the outline on the Screened TIFF layer, roughly where the image was when you created the model in Maya.
-Still in the Selection, press CTRL + T to open the "Transform tool". While holding SHIFT, you can click and drag on the edges of the selection to scale the layer to the size of the outline.
-MANUALLY click the move tool in the toolbar on the left side of the screen (The top tool).  You'll get a pop-up.  Click "Apply Transformation"
-Copy your current TIFF layer with CTRL C + CTRL V.
-With the copied layer selected, select "Edit" -> "Transform" -> "Flip horizontal" to flip the copied layer. 
-Use the move tool and move the flipped layer over to the flipped outline that's empty
-Manouvre to the file "DefaultCardboardTexture" and drag and drop the file onto the photoshop window
-Hit enter to unlock the layer for editing, then drag and drop the layer into the layer above the invisible background.
-Use the move tool in conjunction with Ctrl+c and Ctrl+V to paste multiple layers, and slowly fill in the black behind the scanned image.
-Use ctrl+E after selecting one of the cardboard background layers to merge downwards from the currently selected layer.
-Continue merging all of the BACKGROUND cardboard layers.
-Make top (screened) layer invisible.
-Ctrl + S to save the TFF file.  Don't change the TIFF Options that pop up.
-Press File -> Save as to open the save file dialogue once more. Before pressing ok, switch the file type to .PNG, and export it to the folder with all of the close assets.
-Close Photoshop
+-Select the middle jpeg layer
+-Press M to select the "Select tool", then drag around the jpeg image
+-Press v to select the "Move tool"
+-Click and drag inside of the selection to move the jpeg to the outline on the Screened TIFF layer, roughly where the image was when you created the model in Maya.
+-Still in the Selection, press CTRL + T to open the "Transform tool". While holding SHIFT, you can click and drag on the edges of the selection to scale the layer to the size of the outline.
+-MANUALLY click the move tool in the toolbar on the left side of the screen (The top tool).  You'll get a pop-up.  Click "Apply Transformation"
+-Copy your current TIFF layer with CTRL C + CTRL V.
+-With the copied layer selected, select "Edit" -> "Transform" -> "Flip horizontal" to flip the copied layer. 
+-Use the move tool and move the flipped layer over to the flipped outline that's empty
+-Manouvre to the file "DefaultCardboardTexture" and drag and drop the file onto the photoshop window
+-Hit enter to unlock the layer for editing, then drag and drop the layer into the layer above the invisible background.
+-Use the move tool in conjunction with Ctrl+c and Ctrl+V to paste multiple layers, and slowly fill in the black behind the scanned image.
+-Use ctrl+E after selecting one of the cardboard background layers to merge downwards from the currently selected layer.
+-Continue merging all of the BACKGROUND cardboard layers.
+-Make top (screened) layer invisible.
+-Ctrl + S to save the TFF file.  Don't change the TIFF Options that pop up.
+-Press File -> Save as to open the save file dialogue once more. Before pressing ok, switch the file type to .PNG, and export it to the folder with all of the close assets.
+-Close Photoshop
 
 IMPORT TO UNITY
-Open the Unity Project
-Create a new sub folder in the Assets folder, named after the new asset. 
-Drag and drop the .PNG and the .FBX file into the new folder
-Drag the new model into the gamespace, and drag the new material onto it.
-Drag the new game object into your asset folder to create an archetype out of it.
+-Open the Unity Project
+-Create a new sub folder in the Assets folder, named after the new asset. 
+-Drag and drop the .PNG and the .FBX file into the new folder
+-Drag the new model into the gamespace, and drag the new material onto it.
+-Drag the new game object into your asset folder to create an archetype out of it.
 
 Success!

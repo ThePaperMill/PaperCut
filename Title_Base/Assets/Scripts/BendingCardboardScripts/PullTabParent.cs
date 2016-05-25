@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider))]
 public class PullTabParent : MonoBehaviour
@@ -20,6 +20,11 @@ public class PullTabParent : MonoBehaviour
     public float PlayerLerpScalar = 1;
     [Tooltip("Where the \"TabUpdatedEvent\" messages are sent. Default: Root")]
     public GameObject EventTarget;
+
+    [Tooltip("Additional targets for the \"TabUpdatedEvent\"")]
+    public List<GameObject> AdditionalEventTargets = new List<GameObject>();
+
+
     public bool PoppedUp { get; private set; }
 
     float UnengagedTimer = 1.0f;
@@ -47,7 +52,7 @@ public class PullTabParent : MonoBehaviour
     // Use this for initialization
     FloatEvent LerpData = new FloatEvent();
     GameObject InteractableHightlight = null; 
-    bool CreateHighlight = true;
+    bool CreateHighlight = false;
     
     void Start()
     {
@@ -291,7 +296,7 @@ public class PullTabParent : MonoBehaviour
         if (!LocksIntoPlace)
         {
             //If I haven't pulled all of the way, I want to slip backwards (This if check prevents the thing from sliding back if it's reached the full pull)
-            if (LerpPos <1)
+            if (LerpPos <0.99f)
             {
                 float startingPosX;
                 if (StartPoppedUp)
@@ -319,6 +324,15 @@ public class PullTabParent : MonoBehaviour
         {         
             LerpData.value = ac.Evaluate(LerpPos);
             EventTarget.gameObject.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+
+            if(AdditionalEventTargets.Count > 0)
+            {
+                foreach(var o in AdditionalEventTargets)
+                {
+                    o.DispatchEvent(Events.TabUpdatedEvent, LerpData);
+                }
+            }
+
         }
     }
     //On trigger enter happens when the player walks into the interactive zone

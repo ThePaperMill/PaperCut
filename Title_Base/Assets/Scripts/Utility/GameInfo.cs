@@ -14,8 +14,12 @@ using UnityEngine.SceneManagement;
 
 public class GameInfo : Singleton<GameInfo>
 {
-   public Material PlayerColor = null;
+    public Material PlayerColor = null;
+
+    // Game State Bools
     public bool LabDestroyed = false;
+    public bool Part1PickedUp = false;
+    public bool Part2PickedUp = false;
     public bool FinaleReady = false;
 
     // Use this for initialization

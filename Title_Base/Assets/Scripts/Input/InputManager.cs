@@ -73,7 +73,9 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
     private float TriggerValue = 0.3f;
 
     bool playerIndexSet = false;
-  
+
+    public bool ControllerConnected = false;
+
     PlayerIndex playerIndex;
   
     GamePadState state;
@@ -147,9 +149,13 @@ public class InputManager : Singleton<InputManager> //MonoBehaviour
 
                 if (testState.IsConnected)
                 {
+                    ControllerConnected = true;
                     playerIndex = testPlayerIndex;
                     playerIndexSet = true;
+                    break;
                 }
+
+                ControllerConnected = false;
             }
         }
 

@@ -1006,7 +1006,7 @@ Prefab:
     - target: {fileID: 2359410, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c4999af8c4da8e144afa7835b7e0a906, type: 2}
+      objectReference: {fileID: 2100000, guid: 5be102d824eaf244fbae0e52f2200a5d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
   m_IsPrefabParent: 0
@@ -1026,10 +1026,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 119823858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cfe435c7dd5c4f46acf13726a500436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyWithLab: 0
+  CreationEvent: 1
+  DestructionEvent: 5
 --- !u!114 &119823861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,7 +1954,7 @@ Prefab:
     - target: {fileID: 2359410, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c4999af8c4da8e144afa7835b7e0a906, type: 2}
+      objectReference: {fileID: 2100000, guid: 5be102d824eaf244fbae0e52f2200a5d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
   m_IsPrefabParent: 0
@@ -1996,6 +1997,19 @@ MonoBehaviour:
   InteractCollider: {fileID: 0}
   InteractSizeScalar: 1.5
   CreateCollider: 1
+--- !u!114 &202962368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202962364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfe435c7dd5c4f46acf13726a500436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreationEvent: 0
+  DestructionEvent: 1
 --- !u!65 &202962369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2022,18 +2036,6 @@ MonoBehaviour:
   asset: {fileID: 11400000, guid: 3b892b1b4d1e1b442bdf0d6c9df3397b, type: 2}
   path: '{bca28707-c3c9-48f8-b3aa-0ca6b47ae7e0}'
   startEventOnAwake: 0
---- !u!114 &202962371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 202962364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52882f853edfa084498101d3896e46ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DestroyWithLab: 1
 --- !u!1 &210171856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4447,7 +4449,7 @@ Prefab:
     - target: {fileID: 2387608, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c73e4146e7f842d40befaaf2d6add0fb, type: 2}
+      objectReference: {fileID: 2100000, guid: 0f7cebcaa05f7ca49b88bad184e96173, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77e063f380c570d46a1afd1b13b0196c, type: 2}
   m_IsPrefabParent: 0
@@ -7098,7 +7100,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fdf92a8be4e851b4da55313e3363e891, type: 2}
+  - {fileID: 2100000, guid: a1e47245a7d3e774eb5db6bb687eafb7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -9187,7 +9189,7 @@ Prefab:
     - target: {fileID: 2359410, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d369456f9cc8888489f26b94b98c9bf4, type: 2}
+      objectReference: {fileID: 2100000, guid: 8f537c303d480b149a999c2e8d85fb04, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
   m_IsPrefabParent: 0
@@ -12893,7 +12895,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fdf92a8be4e851b4da55313e3363e891, type: 2}
+  - {fileID: 2100000, guid: a1e47245a7d3e774eb5db6bb687eafb7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -15986,6 +15988,10 @@ Prefab:
       propertyPath: m_Name
       value: Wino (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2359410, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2deacc57780ea184f999a050aee37f98, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
   m_IsPrefabParent: 0
@@ -17872,7 +17878,7 @@ Prefab:
     - target: {fileID: 2359410, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a79669a8bfcaeb1498b5f8e764ef1b88, type: 2}
+      objectReference: {fileID: 2100000, guid: c24a85345d384254bb4eb3178a99c40c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dfbab1f84ac33d44b0d477c96a10e6d, type: 2}
   m_IsPrefabParent: 0

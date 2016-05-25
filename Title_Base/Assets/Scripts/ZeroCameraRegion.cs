@@ -26,12 +26,20 @@ public class ZeroCameraRegion : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    
-	}
+        //allows us to see the vector during gameplay (only works in scene view)
+        if(Application.isEditor)
+        {
+            Debug.DrawLine(transform.position, transform.position + NewDistance, Color.red);
+
+        }
+    }
 
     void OnTriggerEnter(Collider otherObj)
     {
-        
+        if(otherObj.tag != "Player")
+        {
+            return;
+        }
         if(!NewTarget)
         {
             NewTarget = GameObject.FindGameObjectWithTag("Player");
@@ -59,6 +67,10 @@ public class ZeroCameraRegion : MonoBehaviour
 
     void OnTriggerExit(Collider otherObj)
     {
+        if (otherObj.tag != "Player")
+        {
+            return;
+        }
         var cam = Camera.main.GetComponent<ZeroCamera>();
         if (UseLastInfo)
         {

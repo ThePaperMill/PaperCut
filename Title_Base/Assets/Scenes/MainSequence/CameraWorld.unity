@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: bbc53257a819ec1428ca0f8655d05169,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
@@ -1270,6 +1271,18 @@ Prefab:
       propertyPath: LeavingCurve.m_Curve.Array.data[6].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2357964, guid: 902358eedbe86c14f81e14fbc7ea7242, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 42f638b7f7ae98e40804b80a5d9baf86, type: 2}
+    - target: {fileID: 438838, guid: 902358eedbe86c14f81e14fbc7ea7242, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0228
+      objectReference: {fileID: 0}
+    - target: {fileID: 10293782, guid: 902358eedbe86c14f81e14fbc7ea7242, type: 2}
+      propertyPath: m_Text
+      value: Hellow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 902358eedbe86c14f81e14fbc7ea7242, type: 2}
   m_IsPrefabParent: 0
@@ -1456,7 +1469,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1106209990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02368, y: 0.0076, z: -0.00136}
+  m_LocalPosition: {x: -0.0228, y: 0.0076, z: -0.00136}
   m_LocalScale: {x: 0.0071985847, y: 0.007198581, z: 0.007198581}
   m_Children: []
   m_Father: {fileID: 2117189463}
